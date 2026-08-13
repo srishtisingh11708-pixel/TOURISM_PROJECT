@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visa Policy | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* -- "Which e-Visa is right for you?" heading section -- */
+  #visa-policy .section-head{
+    background-color:#FF8E76 !important;
+    color:#fff !important;
+  }
+  #visa-policy .section-head .eyebrow,
+  #visa-policy .section-head h2,
+  #visa-policy .section-head h2 span{
+    color:#fff !important;
+  }
+
+  /* -- Tourist / Business / Medical / Conference panel text -- */
+  .vp-tab-panels .vp-panel-text h3,
+  .vp-tab-panels .vp-panel-text p,
+  .vp-tab-panels .vp-panel-text .vp-check-list li{
+    color:#fff !important;
+  }
+
+  /* -- FAQ accordion -- */
+  .faq-answer{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+  }
+  .faq-question{
+    width:100%;
+    text-align:left;
+    cursor:pointer;
+    background:none;
+    border:none;
+  }
+  .faq-icon{
+    display:inline-block;
+    transition:transform .3s ease;
+  }
+  .faq-item.open .faq-icon{
+    transform:rotate(45deg);
+  }
+</style>
+</head>
+<body style="background-color:#FFF8DC;">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html" class="active">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html" >Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html">Review</a>
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- ============ PAGE HERO ============ -->
+
+<!-- ============ VISA HERO — SPLIT WITH PASSPORT VISUAL ============ -->
+<section class="vp-hero">
+  <div class="vp-hero-grid">
+    <div class="vp-hero-text">
+      <p class="hero-eyebrow">✦ Before You Fly ✦</p>
+      <h1>Your Passport<br>to <span>Incredible India</span></h1>
+      <p>Everything you need to know about entering India — e-Visa categories, required documents, processing time, and a step-by-step video walkthrough.</p>
+      <div class="vp-hero-stats">
+        <div><strong>160+</strong><span>Eligible Nationalities</span></div>
+        <div><strong>24–72</strong><span>Hrs Avg. Approval</span></div>
+        <div><strong>5</strong><span>e-Visa Sub-Types</span></div>
+      </div>
+      <a href="#vp-apply" class="btn-plan">Start Your e-Visa →</a>
+    </div>
+    <div class="vp-hero-visual">
+      <img src="https://images.unsplash.com/photo-1544006659-f0b21884ce1d?auto=format&fit=crop&w=700&q=80" alt="Passport and travel documents">
+      <div class="vp-stamp">✓ e-Visa Approved</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VISA TYPES — TABBED INTERFACE ============ -->
+<section   class="vp-tabs-section" id="visa-policy">
+  <div style="background-color:#FF8E7;color:#fff" class="section-head">
+    <p class="eyebrow">Choose Your Category</p>
+    <h2>Which <span>e-Visa</span> is right for you?</h2>
+  </div>
+
+  <div class="vp-tabs">
+    <button class="vp-tab active" data-tab="tourist">🛂 Tourist</button>
+    <button class="vp-tab" data-tab="business">💼 Business</button>
+    <button class="vp-tab" data-tab="medical">🩺 Medical</button>
+    <button class="vp-tab" data-tab="conference">🎤 Conference</button>
+  </div>
+
+  <div class="vp-tab-panels">
+    <div class="vp-panel active" data-panel="tourist">
+      <div class="vp-panel-img">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=700&q=80" alt="Tourist visiting Taj Mahal">
+      </div>
+      <div class="vp-panel-text">
+        <h3>e-Tourist Visa</h3>
+        <p>Designed for sightseeing, casual visits to friends or family, and short recreational trips. This is the most common e-Visa issued to travelers from 160+ countries.</p>
+        <ul class="vp-check-list" style="color: white">
+          <li>Validity options: 30 days, 1 year, or 5 years</li>
+          <li>Double entry permitted on the 30-day version</li>
+          <li>Apply 4–120 days before your arrival date</li>
+          <li>Cannot be extended or converted to another visa type</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vp-panel" data-panel="business">
+      <div class="vp-panel-img">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=80" alt="Business meeting">
+      </div>
+      <div class="vp-panel-text">
+        <h3>e-Business Visa</h3>
+        <p>For attending trade meetings, setting up a business venture, recruiting, or delivering lectures under a government-recognized program.</p>
+        <ul class="vp-check-list">
+          <li>Valid for up to 1 year, multiple entries</li>
+          <li>Requires a business invitation or trade proof</li>
+          <li>Can be clubbed with tourist activities</li>
+          <li>Processing typically takes 3–4 working days</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vp-panel" data-panel="medical">
+      <div class="vp-panel-img">
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=700&q=80" alt="Hospital corridor">
+      </div>
+      <div class="vp-panel-text">
+        <h3>e-Medical Visa</h3>
+        <p>For patients seeking treatment at recognized Indian hospitals, including Ayurveda, homeopathy, and other traditional systems of medicine.</p>
+        <ul class="vp-check-list">
+          <li>Triple entry allowed, valid up to 60 days</li>
+          <li>One companion may apply for an e-Medical Attendant visa</li>
+          <li>Requires a letter from the treating hospital</li>
+          <li>Extendable locally at the hospital's district FRRO</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="vp-panel" data-panel="conference">
+      <div class="vp-panel-img">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=700&q=80" alt="Conference hall">
+      </div>
+      <div class="vp-panel-text">
+        <h3>e-Conference Visa</h3>
+        <p>For delegates attending a conference, seminar, or workshop hosted by a government ministry, department, or recognized public sector body.</p>
+        <ul class="vp-check-list">
+          <li>Single entry, valid for the conference duration</li>
+          <li>Requires official conference invitation letter</li>
+          <li>Can only be clubbed with tourist-visa activities</li>
+          <li>Apply at least 4 days before the conference date</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VIDEO GUIDE ============ -->
+<section class="vp-video-section">
+  <div class="vp-video-grid">
+    <div class="vp-video-text">
+      <p class="eyebrow">Watch &amp; Learn</p>
+      <h2>e-Visa application, <span>step by step</span></h2>
+      <p>Prefer watching over reading? This walkthrough covers the entire official e-Visa application from start to finish — form filling, document upload, and payment.</p>
+      <ul class="vp-check-list">
+        <li>Filling the online application correctly the first time</li>
+        <li>Photo &amp; passport-scan requirements that get rejected most</li>
+        <li>Payment, ETA status, and what to carry at the airport</li>
+      </ul>
+      <a href="https://indianvisaonline.gov.in/evisa/tvoa.html" target="_blank" rel="noopener" class="btn-outline">Go to Official e-Visa Portal ↗</a>
+    </div>
+    <div class="vp-video-embed">
+      <div class="vp-video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/n0nsN9MjpGo"
+          title="India e-Visa Tutorial — Full Guide"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <span class="vp-video-caption">Full walkthrough of the official India e-Visa application</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APPLICATION TIMELINE / PROCESS ============ -->
+<section class="vp-timeline-section" id="vp-apply">
+  <div class="section-head">
+    <p class="eyebrow">The Process</p>
+    <h2>Four steps <span>to your ETA</span></h2>
+  </div>
+
+  <div class="vp-timeline">
+    <div class="vp-timeline-item">
+      <div class="vp-timeline-num">01</div>
+      <h3>Apply Online</h3>
+      <p>Fill the form on the official portal with passport and personal details. Takes about 10–15 minutes.</p>
+    </div>
+    <div class="vp-timeline-item">
+      <div class="vp-timeline-num">02</div>
+      <h3>Upload Documents</h3>
+      <p>Submit a digital passport photo and your passport's data page as clear scans (JPG/PDF).</p>
+    </div>
+    <div class="vp-timeline-item">
+      <div class="vp-timeline-num">03</div>
+      <h3>Pay &amp; Wait</h3>
+      <p>Complete the processing fee payment; approval (ETA) usually arrives within 24–72 hours by email.</p>
+    </div>
+    <div class="vp-timeline-item">
+      <div class="vp-timeline-num">04</div>
+      <h3>Travel &amp; Land</h3>
+      <p>Carry a printout of your ETA — biometrics are captured on arrival at any designated airport or seaport.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOCUMENTS CHECKLIST WITH IMAGE ============ -->
+<section class="vp-docs-section">
+  <div class="vp-docs-grid">
+    <div class="vp-docs-img">
+      <img src="https://images.unsplash.com/photo-1554774853-719586f82d77?auto=format&fit=crop&w=700&q=80" alt="Passport and documents on a desk">
+    </div>
+    <div class="vp-docs-text">
+      <p class="eyebrow">Don't Get Rejected</p>
+      <h2>Documents you'll <span>actually need</span></h2>
+      <div class="vp-doc-item">
+        <span class="vp-doc-icon">📘</span>
+        <div><strong>Valid Passport</strong><p>At least 6 months validity from arrival date, with 2 blank pages for stamping.</p></div>
+      </div>
+      <div class="vp-doc-item">
+        <span class="vp-doc-icon">🖼️</span>
+        <div><strong>Passport-Style Photo</strong><p>Recent, plain white background — different from your passport photo.</p></div>
+      </div>
+      <div class="vp-doc-item">
+        <span class="vp-doc-icon">🎫</span>
+        <div><strong>Return Ticket Proof</strong><p>Confirmed onward or return travel booking, matching your e-Visa dates.</p></div>
+      </div>
+      <div class="vp-doc-item">
+        <span class="vp-doc-icon">🏨</span>
+        <div><strong>Accommodation Proof</strong><p>Hotel booking confirmation or an invitation letter if staying with family.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ACCORDION ============ -->
+<section class="faq-section">
+  <div class="section-head">
+    <p class="eyebrow">Still Have Questions?</p>
+    <h2>Visa <span>FAQs</span></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-question">Can I extend my e-Visa once I'm in India?<span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>No — e-Visas are non-extendable and non-convertible, except e-Medical visas which can be extended locally at the treating hospital's district FRRO office.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">What happens if my e-Visa application is rejected?<span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>The processing fee is non-refundable regardless of outcome. You may reapply, but should review your details carefully before resubmitting.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Which airports and ports accept e-Visa arrivals?<span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>Major international airports including Delhi, Mumbai, Bengaluru, Kochi and Chennai, plus five designated seaports: Mumbai, Chennai, Cochin, Goa and Mangalore.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">Do children need a separate e-Visa?<span class="faq-icon">+</span></button>
+      <div class="faq-answer"><p>Yes — every traveler, including infants, needs their own passport and individual e-Visa application; none can be endorsed on a parent's passport.</p></div>
+    </div>
+  </div>
+  <div class="section-cta">
+    <a href="Contact.html" class="btn-outline">Ask Us a Visa Question →</a>
+  </div>
+</section>
+    
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+
+<div class="fab-stack">
+  <a href="https://wa.me/919876543210" class="fab fab-whatsapp" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.39a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.14c-.24.68-1.4 1.32-1.93 1.36-.51.05-1.03.24-3.46-.72-2.93-1.16-4.78-4.16-4.92-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.26-.28.58-.35.77-.35.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.11.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.14-.29.29-.12.57.16.28.73 1.2 1.57 1.95 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.16-.19.7-.81.89-1.09.19-.28.37-.23.63-.14.26.1 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+  <a href="tel:+919876543210" class="fab fab-call" aria-label="Call us">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
+  <button class="fab fab-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+  </button>
+</div>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+  });
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 500);
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const revealTargets = document.querySelectorAll('.visa-card');
+  revealTargets.forEach(el => el.classList.add('reveal'));
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('revealed'), (i % 4) * 90);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealTargets.forEach(el => revealObserver.observe(el));
+
+  const hamburger = document.getElementById('hamburger');
+  const mainNav = document.getElementById('mainNav');
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  });
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
+  });
+  document.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      if (window.innerWidth <= 860) {
+        e.preventDefault();
+        trigger.parentElement.classList.toggle('dropdown-open');
+      }
+    });
+  });
+const tabs = document.querySelectorAll(".vp-tab");
+const panels = document.querySelectorAll(".vp-panel");
+
+tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+
+        tabs.forEach(t => t.classList.remove("active"));
+        panels.forEach(p => p.classList.remove("active"));
+
+        tab.classList.add("active");
+
+        const target = tab.getAttribute("data-tab");
+        document.querySelector(`[data-panel="${target}"]`).classList.add("active");
+    });
+});
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+
+</body>
+</html>

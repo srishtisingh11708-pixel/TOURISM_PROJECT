@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahyatri — Your Fellow Traveler Across Incredible India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color:#FFF8DC;">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+          <a href="Adminzone/dashboard.jsp">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Adminzone</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html" class="active">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html">Review</a>
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- ============ HERO SLIDER ============ -->
+<section class="hero" id="home">
+  <div class="hero-slider" id="heroSlider">
+    <div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1920&q=80')">
+      <div class="slide-tint"></div>
+    </div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1920&q=80')">
+      <div class="slide-tint"></div>
+    </div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1920&q=80')">
+      <div class="slide-tint"></div>
+    </div>
+    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=1920&q=80')">
+      <div class="slide-tint"></div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+      <p class="hero-eyebrow"><marquee>✦ Namaste, Traveler ✦</marquee></p>
+    <h1>Every road here <span>tells an epic.</span><br>Choose your chapter.</h1>
+    <p class="hero-sub">Hand-crafted journeys through deserts, backwaters, snow passes &amp; temple towns — designed around how <em>you</em> want to travel, not a fixed itinerary.</p>
+
+    <div class="hero-search">
+      <div class="hs-field">
+        <label>Where to</label>
+        <select>
+          <option>Rajasthan — Forts &amp; Deserts</option>
+          <option>Kerala — Backwaters</option>
+          <option>Himachal — Mountains</option>
+          <option>Ladakh — High Passes</option>
+          <option>Goa — Coastline</option>
+          <option>Uttarakhand — Char Dham</option>
+        </select>
+      </div>
+      <div class="hs-field">
+        <label>Trip type</label>
+        <select>
+          <option>Honeymoon</option>
+          <option>Family</option>
+          <option>Adventure</option>
+          <option>Pilgrimage</option>
+          <option>Solo</option>
+        </select>
+      </div>
+      <div class="hs-field">
+        <label>Duration</label>
+        <select>
+          <option>5–7 Days</option>
+          <option>8–10 Days</option>
+          <option>10+ Days</option>
+        </select>
+      </div>
+      <button class="hs-submit">Find Journeys</button>
+    </div>
+
+    <div class="hero-stats">
+      <div><strong>18+</strong><span>Years on the Road</span></div>
+      <div><strong>420+</strong><span>Curated Itineraries</span></div>
+      <div><strong>36K+</strong><span>Happy Travelers</span></div>
+      <div><strong>4.9★</strong><span>Traveler Rating</span></div>
+    </div>
+  </div>
+
+  <div class="slider-dots" id="sliderDots"></div>
+  <a href="#interest" class="scroll-cue" aria-label="Scroll down"><span></span></a>
+</section>
+
+<!-- ============ TRENDING NOW MARQUEE ============ -->
+<section class="trending-strip">
+  <div class="trending-label">
+    <span class="pulse-dot"></span> Trending Now
+  </div>
+  <div class="trending-track-wrap">
+    <div class="trending-track">
+      <a href="#regions" class="trend-chip"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTAG-wKsam6uHH9b8wI7cv8yUFJca0VC9olryhZ9NbSQ&s=10" alt="Ladakh"><span>Ladakh</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=200&q=60" alt="Kerala"><span>Kerala</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=200&q=60" alt="Rajasthan"><span>Rajasthan</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=200&q=60" alt="Goa"><span>Goa</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=200&q=60" alt="Uttarakhand"><span>Uttarakhand</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1544084944-15a021c19b67?auto=format&fit=crop&w=200&q=60" alt="Ranthambore"><span>Ranthambore</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=200&q=60" alt="Varanasi"><span>Varanasi</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=200&q=60" alt="Delhi Agra Jaipur"><span>Golden Triangle</span></a>
+      <!-- duplicate set for seamless loop -->
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1626621331169-5f34be280e9f?auto=format&fit=crop&w=200&q=60" alt="Ladakh"><span>Ladakh</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=200&q=60" alt="Kerala"><span>Kerala</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=200&q=60" alt="Rajasthan"><span>Rajasthan</span></a>
+      <a href="#regions" class="trend-chip"><img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=200&q=60" alt="Goa"><span>Goa</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRAVEL BY INTEREST STRIP ============ -->
+<section class="interest-strip" id="interest">
+  <div class="section-head">
+    <p class="eyebrow">Pick Your Trail</p>
+    <h2 style="color:red">Travel the way <span>your story</span> needs to go</h2>
+  </div>
+
+  <div class="interest-grid">
+    <a class="interest-card" href="#packages">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr7r8HrAcW4D54eA7_7387F_FstKZrErBJnDt3_5r1tg&s=10" alt="Tiger safari">
+      <div class="ic-overlay"><h3>Wildlife Safari</h3><span>85+ Journeys</span></div>
+    </a>
+    <a class="interest-card" href="#packages">
+      <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80" alt="Heritage forts">
+      <div class="ic-overlay"><h3>Heritage &amp; Forts</h3><span>60+ Journeys</span></div>
+    </a>
+    <a class="interest-card" href="#packages">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Xu0CtXY00Ox8ZeiLJg2sBjpPMxrr5JCn-bdpYJ8Esg&s=10" alt="Himalaya trekking">
+      <div class="ic-overlay"><h3>Himalayan Treks</h3><span>70+ Journeys</span></div>
+    </a>
+    <a class="interest-card" href="#packages">
+      <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" alt="Kerala backwaters">
+      <div class="ic-overlay"><h3>Backwater Bliss</h3><span>40+ Journeys</span></div>
+    </a>
+    <a class="interest-card" href="#packages">
+      <img src="https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=800&q=80" alt="Pilgrimage temple">
+      <div class="ic-overlay"><h3>Sacred Trails</h3><span>65+ Journeys</span></div>
+    </a>
+    <a class="interest-card" href="#packages">
+      <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80" alt="Goa beach">
+      <div class="ic-overlay"><h3>Coastal Escapes</h3><span>25+ Journeys</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ MAP SIGNATURE SECTION ============ -->
+<section class="map-signature">
+  <div class="map-signature-inner">
+    <div class="map-text">
+      <p class="eyebrow">One Subcontinent, Six Worlds</p>
+      <h2>From the Thar's <span>golden dunes</span> to the Nilgiri's <span>green cloud-forests</span></h2>
+      <p class="map-copy">India isn't one trip — it's six countries wearing one flag. Trace the pins to see where your journey could begin.</p>
+      <div class="map-legend">
+        <div><i style="background:#FF6B35"></i> North — Himalaya &amp; Deserts</div>
+        <div><i style="background:#D4A017"></i> West — Coastline &amp; Colour</div>
+        <div><i style="background:#0B3D3A"></i> South — Backwaters &amp; Temples</div>
+        <div><i style="background:#7A9E7E"></i> East &amp; Central — Forests &amp; Tribes</div>
+      </div>
+    </div>
+    <div class="map-visual">
+      <svg viewBox="0 0 300 340" class="india-svg" aria-hidden="true">
+        <path d="M110 10 L150 5 L175 25 L200 20 L215 45 L235 55 L230 80 L250 95 L245 120 L260 140 L255 165 L235 180 L240 210 L220 235 L225 260 L205 280 L195 310 L175 330 L160 300 L150 275 L130 260 L120 230 L100 215 L95 185 L75 170 L80 145 L65 125 L75 100 L65 75 L85 55 L80 30 Z" fill="none" stroke="#0B3D3A" stroke-width="2" opacity="0.35"/>
+        <circle class="pin" cx="150" cy="60" r="5"><title>Kashmir &amp; Ladakh</title></circle>
+        <circle class="pin" cx="120" cy="110" r="5"><title>Rajasthan</title></circle>
+        <circle class="pin" cx="105" cy="150" r="5"><title>Gujarat</title></circle>
+        <circle class="pin" cx="150" cy="130" r="5"><title>Uttar Pradesh</title></circle>
+        <circle class="pin" cx="185" cy="160" r="5"><title>Sikkim &amp; NE</title></circle>
+        <circle class="pin" cx="145" cy="200" r="5"><title>Madhya Pradesh</title></circle>
+        <circle class="pin" cx="120" cy="240" r="5"><title>Maharashtra &amp; Goa</title></circle>
+        <circle class="pin" cx="165" cy="260" r="5"><title>Odisha</title></circle>
+        <circle class="pin" cx="150" cy="300" r="5"><title>Karnataka</title></circle>
+        <circle class="pin" cx="165" cy="320" r="5"><title>Kerala &amp; Tamil Nadu</title></circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REGION GUIDE ============ -->
+<section class="region-section" id="regions">
+  <div class="section-head">
+    <p class="eyebrow">Region Guide</p>
+    <h2 style="color:red">Explore India by <span>region</span></h2>
+  </div>
+
+  <div class="region-grid">
+    <div class="region-card">
+      <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=700&q=80" alt="North India">
+      <div class="region-info">
+        <h3>North India</h3>
+        <p>Rajasthan's forts, Kashmir's valleys, Ladakh's high passes, the Golden Triangle.</p>
+        <span class="region-count">130+ Packages</span>
+      </div>
+    </div>
+    <div class="region-card">
+      <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=700&q=80" alt="South India">
+      <div class="region-info">
+        <h3>South India</h3>
+        <p>Kerala's backwaters, Tamil Nadu's temples, Karnataka's heritage capitals.</p>
+        <span class="region-count">95+ Packages</span>
+      </div>
+    </div>
+    <div class="region-card">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNWRKVdncJL7UqaoUZpo-w3t4lM-sv9uC2_I0VlLFlNg&s=10" alt="East & Northeast India">
+      <div class="region-info">
+        <h3>East &amp; Northeast</h3>
+        <p>Sikkim's monasteries, Assam's tea gardens, Meghalaya's living root bridges.</p>
+        <span class="region-count">70+ Packages</span>
+      </div>
+    </div>
+    <div class="region-card">
+      <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=700&q=80" alt="West India">
+      <div class="region-info">
+        <h3>West India</h3>
+        <p>Goa's coastline, Gujarat's wild sanctuaries, Maharashtra's caves &amp; coast.</p>
+        <span class="region-count">65+ Packages</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANIMATED COUNTER BAND ============ -->
+<section class="counter-band">
+  <div class="counter-grid">
+    <div class="counter-item">
+      <span class="counter-num" data-target="420">0</span><span class="counter-plus">+</span>
+      <p>Curated Itineraries</p>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" data-target="36" data-suffix="K">0</span><span class="counter-plus">+</span>
+      <p>Happy Travelers</p>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" data-target="28">0</span>
+      <p>States &amp; UTs Covered</p>
+    </div>
+    <div class="counter-item">
+      <span class="counter-num" data-target="18">0</span><span class="counter-plus">+</span>
+      <p>Years on the Road</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PACKAGES ============ -->
+<section class="packages" id="packages">
+  <div class="section-head">
+    <p class="eyebrow">All Journeys</p>
+    <h2 style="color:red">Pick a trip, <span>we'll handle the rest</span></h2>
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn active">All</button>
+    <button class="filter-btn" data-filter="Wildlife">Wildlife</button>
+    <button class="filter-btn" data-filter="Heritage">Heritage</button>
+    <button class="filter-btn" data-filter="Himalaya">Himalaya</button>
+    <button class="filter-btn" data-filter="Backwaters">Backwaters</button>
+    <button class="filter-btn" data-filter="Pilgrimage">Pilgrimage</button>
+    <button class="filter-btn" data-filter="Beach">Beach</button>
+  </div>
+
+  <div class="package-grid wide">
+    <div class="package-card" data-category="Heritage">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=800&q=80')">
+        <span class="pkg-tag">Bestseller</span>
+      </div>
+      <div class="pkg-body">
+        <span class="pkg-days">6N / 7D</span>
+        <h3>Golden Triangle Classic</h3>
+        <p>Delhi's Mughal grandeur, Agra's marble dream, Jaipur's pink ramparts.</p>
+        <div class="pkg-foot"><span class="price">₹24,999 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Backwaters">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80')">
+        <span class="pkg-tag">Honeymoon Pick</span>
+      </div>
+      <div class="pkg-body">
+        <span class="pkg-days">5N / 6D</span>
+        <h3>Kerala Backwater Romance</h3>
+        <p>Houseboat sunsets on the Vembanad, hill-grown spice trails, quiet beaches.</p>
+        <div class="pkg-foot"><span class="price">₹32,499 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Himalaya">
+      <div class="pkg-img" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxE44Fzfvv8CPC8yEi-yMQ3cw1UBQ6b9GJiVBlI2f4Dg&s=10')">
+        <span class="pkg-tag">Adventure</span>
+      </div>
+      <div class="pkg-body">
+        <span class="pkg-days">8N / 9D</span>
+        <h3>Ladakh High-Pass Circuit</h3>
+        <p>Pangong's blue silence, Nubra's sand dunes, monasteries above the clouds.</p>
+        <div class="pkg-foot"><span class="price">₹41,999 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Pilgrimage">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=800&q=80')">
+        <span class="pkg-tag">Pilgrimage</span>
+      </div>
+      <div class="pkg-body">
+        <span class="pkg-days">11N / 12D</span>
+        <h3>Chardham Yatra</h3>
+        <p>Yamunotri, Gangotri, Kedarnath &amp; Badrinath — the Himalaya's holiest circuit.</p>
+        <div class="pkg-foot"><span class="price">₹28,750 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Wildlife">
+      <div class="pkg-img" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTAG-wKsam6uHH9b8wI7cv8yUFJca0VC9olryhZ9NbSQ&s=10')"><span class="pkg-tag">Wildlife</span></div>
+      <div class="pkg-body">
+        <span class="pkg-days">4N / 5D</span>
+        <h3>Ranthambore Tiger Trail</h3>
+        <p>Track the royal Bengal tiger through Rajasthan's dry deciduous forest.</p>
+        <div class="pkg-foot"><span class="price">₹19,499 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Heritage">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=800&q=80')"><span class="pkg-tag">Heritage</span></div>
+      <div class="pkg-body">
+        <span class="pkg-days">9N / 10D</span>
+        <h3>Forts &amp; Palaces of Rajasthan</h3>
+        <p>Jaisalmer's golden ramparts to Udaipur's lake palaces, in one royal sweep.</p>
+        <div class="pkg-foot"><span class="price">₹36,999 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Himalaya">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=800&q=80')"><span class="pkg-tag">Himalaya</span></div>
+      <div class="pkg-body">
+        <span class="pkg-days">7N / 8D</span>
+        <h3>Kedarkantha Winter Trek</h3>
+        <p>Snow-laced pine forests leading to one of the Himalaya's finest summit views.</p>
+        <div class="pkg-foot"><span class="price">₹14,999 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Backwaters">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80')"><span class="pkg-tag">Backwaters</span></div>
+      <div class="pkg-body">
+        <span class="pkg-days">6N / 7D</span>
+        <h3>Alleppey &amp; Kumarakom Escape</h3>
+        <p>Slow houseboat mornings through Kerala's palm-lined water villages.</p>
+        <div class="pkg-foot"><span class="price">₹27,499 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Pilgrimage">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=800&q=80')"><span class="pkg-tag">Pilgrimage</span></div>
+      <div class="pkg-body">
+        <span class="pkg-days">5N / 6D</span>
+        <h3>Varanasi &amp; Ayodhya Circuit</h3>
+        <p>Dawn boat rituals on the Ganga and the sacred ghats of India's oldest city.</p>
+        <div class="pkg-foot"><span class="price">₹16,750 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+
+    <div class="package-card" data-category="Beach">
+      <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80')"><span class="pkg-tag">Beach</span></div>
+      <div class="pkg-body">
+        <span class="pkg-days">4N / 5D</span>
+        <h3>North Goa Coastal Break</h3>
+        <p>Beach shacks, Portuguese quarters, and sunsets over the Arabian Sea.</p>
+        <div class="pkg-foot"><span class="price">₹17,999 <small>/person</small></span><a href="#contact-form">View Trip →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEST TIME ============ -->
+<section class="besttime-section" id="best-time">
+  <div class="section-head">
+    <p class="eyebrow">Plan Around the Seasons</p>
+    <h2 style="color:darkorange">Best Time <span>to Visit</span></h2>
+  </div>
+  <div class="besttime-grid">
+    <div class="besttime-card">
+      <span class="bt-months">Oct – Mar</span>
+      <h3>Winter</h3>
+      <p>Ideal for Rajasthan, Delhi, Agra &amp; South India — cool, clear days perfect for sightseeing.</p>
+    </div>
+    <div class="besttime-card">
+      <span class="bt-months">Apr – Jun</span>
+      <h3>Summer</h3>
+      <p>Head to the Himalaya — Ladakh, Himachal &amp; Uttarakhand open up as snow clears from high passes.</p>
+    </div>
+    <div class="besttime-card">
+      <span class="bt-months">Jul – Sep</span>
+      <h3>Monsoon</h3>
+      <p>Kerala's backwaters and Ayurveda season — lush greenery and misty hill stations at their best.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section class="why-us">
+  <div class="section-head light">
+    <p class="eyebrow">Why Travel With Us</p>
+    <h2 style="color:darkorange">We don't sell tours. <span>We build memory.</span></h2>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🧭</div>
+      <h3>Local Route Experts</h3>
+      <p>Every itinerary is built by someone who has personally driven that road, not a template.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🏨</div>
+      <h3>Verified Stays</h3>
+      <p>Heritage havelis to jungle lodges — every property is inspected before it's listed.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🕰️</div>
+      <h3>24×7 On-Ground Support</h3>
+      <p>A real number to call, day or night, anywhere between Leh and Kanyakumari.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">💛</div>
+      <h3>Fair, Transparent Pricing</h3>
+      <p>No hidden mark-ups. What you see in the quote is what you pay at checkout.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="testimonials" id="testimonials">
+  <div class="section-head">
+    <p class="eyebrow">Traveler Stories</p>
+    <h2 style="color:darksalmon">Written by <span>people, not brochures</span></h2>
+  </div>
+
+  <div class="testi-track" id="testiTrack">
+    <div class="testi-card">
+      <p>"Our Ladakh driver knew every pass by name and every monastery's story. This wasn't a package tour — it felt like traveling with an old friend who happened to know everything."</p>
+      <div class="testi-person"><strong>Ritika Malhotra</strong><span>Ladakh Circuit, Sept 2025</span></div>
+    </div>
+    <div class="testi-card">
+      <p>"The Kerala houseboat sunset alone was worth the trip. But it was the small things — the fresh coconut water waiting each morning — that made it unforgettable."</p>
+      <div class="testi-person"><strong>Arjun &amp; Meera Iyer</strong><span>Kerala Honeymoon, Nov 2025</span></div>
+    </div>
+    <div class="testi-card">
+      <p>"Booked the Chardham Yatra for my parents. The team coordinated everything down to wheelchair access at Kedarnath's base. Genuinely caring service."</p>
+      <div class="testi-person"><strong>Sanjay Verma</strong><span>Chardham Yatra, June 2025</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCES BANNER ============ -->
+<section class="experiences" id="experiences">
+  <div class="section-head">
+    <p class="eyebrow">Beyond the Itinerary</p>
+    <h2 style="color:darksalmon">Experiences <span>worth flying for</span></h2>
+  </div>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=700&q=80" alt="Luxury train">
+      <div class="exp-text"><h3>Luxury Trains</h3><p>Palace on Wheels &amp; the Maharaja Express.</p></div>
+    </div>
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=80" alt="Destination wedding">
+      <div class="exp-text"><h3>Destination Weddings</h3><p>Palace lawns and desert-dune ceremonies.</p></div>
+    </div>
+    <div class="exp-card">
+      <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=700&q=80" alt="Ayurveda retreat">
+      <div class="exp-text"><h3>Ayurveda Retreats</h3><p>Kerala's centuries-old wellness traditions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="gallery-section" id="gallery">
+  <div class="section-head">
+    <p class="eyebrow">Traveler Lens</p>
+    <h2 style="color:darkorange" >Moments from <span>the road</span></h2>
+  </div>
+  <div class="gallery-grid">
+    <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=600&q=80" alt="Taj Mahal">
+    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=600&q=80" alt="Kerala backwaters">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5Xu0CtXY00Ox8ZeiLJg2sBjpPMxrr5JCn-bdpYJ8Esg&s=10" alt="Himalaya trek">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr7r8HrAcW4D54eA7_7387F_FstKZrErBJnDt3_5r1tg&s=10" alt="Tiger safari">
+    <img src="https://images.unsplash.com/photo-1571536802807-30451e3955d8?auto=format&fit=crop&w=600&q=80" alt="Temple pilgrimage">
+    <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=600&q=80" alt="Goa beach">
+    <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=600&q=80" alt="Chardham mountains">
+    <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=600&q=80" alt="Jaipur fort">
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact-section" id="contact-form">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p class="eyebrow">Let's Plan It</p>
+      <h2>Tell us your dates. <span>We'll do the rest.</span></h2>
+      <p class="contact-copy">Share a few details and one of our route experts will get back within 24 hours with a custom itinerary — no obligation, no spam.</p>
+
+      <div class="contact-items">
+        <div><strong>📍 Studio Address</strong><span>14 Marigold Lane, Connaught Place, New Delhi 110001</span></div>
+        <div><strong>📞 Call Us</strong><span>+91-98765-43210</span></div>
+        <div><strong>✉️ Email</strong><span>hello@sahyatri.in</span></div>
+      </div>
+    </div>
+
+    <form class="contact-form-box" onsubmit="submitForm(event);">
+      <div class="cf-row">
+        <div class="cf-field"><label>Full Name</label><input type="text" placeholder="Your name" required></div>
+        <div class="cf-field"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX" required></div>
+      </div>
+      <div class="cf-field"><label>Email</label><input type="email" placeholder="you@example.com" required></div>
+      <div class="cf-row">
+        <div class="cf-field"><label>Destination</label>
+          <select><option>Rajasthan</option><option>Kerala</option><option>Ladakh</option><option>Himachal</option><option>Goa</option><option>Uttarakhand</option></select>
+        </div>
+        <div class="cf-field"><label>Travelers</label><input type="number" min="1" value="2"></div>
+      </div>
+      <div class="cf-field"><label>Tell us about your trip</label><textarea rows="4" placeholder="Dates, interests, budget..."></textarea></div>
+      <button type="submit" class="cf-submit">Send Enquiry</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ NEWSLETTER / CTA BAND ============ -->
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <div>
+      <h2>Your next story starts with one email.</h2>
+      <p>Seasonal route drops, festival travel windows, and fare alerts — no spam, just the good stuff.</p>
+    </div>
+    <form class="cta-form" onsubmit="return false;">
+      <input type="email" placeholder="you@example.com" required>
+      <button type="submit">Notify Me</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+
+<!-- ============ FLOATING ACTION BUTTONS ============ -->
+<div class="fab-stack">
+  <a href="https://wa.me/919876543210" class="fab fab-whatsapp" aria-label="Chat on WhatsApp" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.39a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.14c-.24.68-1.4 1.32-1.93 1.36-.51.05-1.03.24-3.46-.72-2.93-1.16-4.78-4.16-4.92-4.35-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.01-2.41.26-.28.58-.35.77-.35.19 0 .38 0 .55.01.18.01.41-.07.64.49.24.58.81 2 .88 2.14.07.14.11.31.02.5-.09.19-.14.31-.28.48-.14.16-.29.36-.42.48-.14.14-.29.29-.12.57.16.28.73 1.2 1.57 1.95 1.08.96 1.99 1.26 2.27 1.4.28.14.44.12.61-.07.16-.19.7-.81.89-1.09.19-.28.37-.23.63-.14.26.1 1.65.78 1.94.92.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>
+  </a>
+  <a href="tel:+919876543210" class="fab fab-call" aria-label="Call us">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24 11.36 11.36 0 0 0 3.57.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.36 11.36 0 0 0 .57 3.57 1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
+  <button class="fab fab-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 4l-8 8h5v8h6v-8h5z"/></svg>
+  </button>
+</div>
+
+<script>
+  // Scroll-spy: highlight active nav link based on section in view
+  const navLinks = document.querySelectorAll('.main-nav a');
+  const spySections = ['home', 'contact-form', 'visa-policy', 'how-to-reach', 'regions', 'best-time']
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.main-nav a[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  spySections.forEach(sec => spyObserver.observe(sec));
+
+  // Header shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Back to top button visibility + action
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('show', window.scrollY > 500);
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Animated counters
+  const counters = document.querySelectorAll('.counter-num');
+  let countersStarted = false;
+  function animateCounters() {
+    if (countersStarted) return;
+    countersStarted = true;
+    counters.forEach(counter => {
+      const target = +counter.dataset.target;
+      const suffix = counter.dataset.suffix || '';
+      const duration = 1600;
+      const startTime = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        counter.textContent = Math.floor(eased * target) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+        else counter.textContent = target + suffix;
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+  const counterBand = document.querySelector('.counter-band');
+  if (counterBand) {
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) animateCounters(); });
+    }, { threshold: 0.4 });
+    counterObserver.observe(counterBand);
+  }
+
+  // Scroll-reveal for sections
+  const revealTargets = document.querySelectorAll('.interest-card, .package-card, .why-card, .region-card, .exp-card, .testi-card');
+  revealTargets.forEach(el => el.classList.add('reveal'));
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('revealed'), (i % 4) * 90);
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealTargets.forEach(el => revealObserver.observe(el));
+
+  // Package filter buttons (functional filtering)
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const packageCards = document.querySelectorAll('.package-card[data-category]');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      packageCards.forEach(card => {
+        if (!filter || card.dataset.category === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Mobile nav toggle
+  const hamburger = document.getElementById('hamburger');
+  const mainNav = document.getElementById('mainNav');
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  });
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
+  });
+
+  // Mobile dropdown tap-to-toggle (hover doesn't work on touch)
+  document.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      if (window.innerWidth <= 860) {
+        e.preventDefault();
+        trigger.parentElement.classList.toggle('dropdown-open');
+      }
+    });
+  });
+
+  // Hero slider
+  const slides = document.querySelectorAll('.hero .slide');
+  const dotsWrap = document.getElementById('sliderDots');
+  let current = 0;
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsWrap.appendChild(dot);
+  });
+  const dots = document.querySelectorAll('.dot');
+
+  function goToSlide(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  setInterval(() => {
+    goToSlide((current + 1) % slides.length);
+  }, 5000);
+
+  // Testimonial auto-scroll (simple loop)
+  const track = document.getElementById('testiTrack');
+  let testiIndex = 0;
+  const testiCards = document.querySelectorAll('.testi-card');
+  setInterval(() => {
+    testiIndex = (testiIndex + 1) % testiCards.length;
+    const cardWidth = testiCards[0].offsetWidth + 24;
+    track.scrollTo({ left: cardWidth * testiIndex, behavior: 'smooth' });
+  }, 4500);
+  function submitForm(event) {
+    event.preventDefault();
+
+    alert("✅ Enquiry Submitted Successfully!");
+
+    document.getElementById("enquiryForm").reset();
+
+    document.getElementById("formStatus").style.display = "block";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --teal-deep:#0F3D3E;
+    --teal-mid:#154C4D;
+    --sand:#F1E4C3;
+    --coral:#E8734A;
+    --white:#FBF8F2;
+    --gold:#C9A15C;
+    --ink:#0B2626;
+    --line:rgba(15,61,62,0.12);
+    --muted:#4d5f5b;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif;}
+  a{ text-decoration:none; color:inherit; }
+  img{ display:block; max-width:100%; }
+  button{ font-family:'Inter', sans-serif; cursor:pointer; border:none; }
+  input, select, textarea{ font-family:'Inter', sans-serif; }
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:0.72rem;
+    font-weight:600;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(160deg, var(--teal-deep) 0%, var(--teal-mid) 60%, #1c5758 100%);
+    color:var(--white);
+    padding:3.6rem 1.4rem 3rem;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(251,248,242,0.06) 1.5px, transparent 1.5px);
+    background-size:22px 22px;
+    opacity:0.6;
+  }
+  .hero-inner{ position:relative; z-index:2; max-width:640px; margin:0 auto; text-align:center; }
+  .hero .eyebrow{ color:var(--gold); display:block; margin-bottom:0.8rem; }
+  .hero h1{
+    font-size:clamp(1.9rem, 7vw, 2.7rem);
+    line-height:1.15;
+    font-weight:700;
+    margin-bottom:0.9rem;
+  }
+  .hero h1 em{ font-style:italic; color:var(--sand); font-weight:500; }
+  .hero p{
+    color:rgba(251,248,242,0.82);
+    font-size:0.94rem;
+    line-height:1.6;
+    max-width:460px;
+    margin:0 auto 1.6rem;
+  }
+  .hero-stats{
+    display:flex; justify-content:center; gap:2rem;
+    flex-wrap:wrap;
+  }
+  .hero-stats .stat b{ font-family:'Fraunces', serif; font-size:1.3rem; color:var(--gold); display:block; }
+  .hero-stats .stat span{ font-size:0.68rem; text-transform:uppercase; letter-spacing:0.06em; color:rgba(251,248,242,0.7); }
+
+  /* ---------- SECTION ---------- */
+  .section{ max-width:1040px; margin:0 auto; padding:4rem 1.4rem; }
+  .section-head{ text-align:center; margin-bottom:2.6rem; }
+  .section-head .eyebrow{ color:var(--coral); display:block; margin-bottom:0.6rem; }
+  .section-head h2{ font-size:clamp(1.6rem, 4vw, 2.2rem); font-weight:600; }
+  .section-head p{ color:var(--muted); font-size:0.9rem; margin-top:0.6rem; max-width:460px; margin-left:auto; margin-right:auto; }
+
+  /* ---------- PROCESS STEPS ---------- */
+  .process-strip{ background:var(--sand); }
+  .process-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.4rem;
+    position:relative;
+  }
+  .process-grid::before{
+    content:"";
+    position:absolute;
+    top:26px; left:16%; right:16%;
+    height:2px;
+    background-image:repeating-linear-gradient(to right, var(--teal-deep) 0 8px, transparent 8px 16px);
+  }
+  .process-step{ text-align:center; position:relative; z-index:1; }
+  .process-num{
+    width:54px; height:54px;
+    border-radius:50%;
+    background:var(--teal-deep);
+    color:var(--white);
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.2rem;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 0.9rem;
+    border:4px solid var(--sand);
+  }
+  .process-step.active .process-num{ background:var(--coral); }
+  .process-step h4{ font-size:0.98rem; font-weight:700; margin-bottom:0.4rem; }
+  .process-step p{ font-size:0.8rem; color:var(--muted); max-width:190px; margin:0 auto; }
+  @media(max-width:640px){
+    .process-grid{ grid-template-columns:1fr; gap:2rem; }
+    .process-grid::before{ display:none; }
+  }
+
+  /* ---------- ENQUIRY FORM ---------- */
+  .enquiry-wrap{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:2rem;
+  }
+  .form-card{
+    background:var(--white);
+    border:1.5px solid var(--line);
+    border-radius:20px;
+    padding:2rem 1.6rem;
+    box-shadow:0 20px 45px -28px rgba(15,61,62,0.4);
+    position:relative;
+  }
+  .form-card::before{
+    content:"✎";
+    position:absolute;
+    top:1.6rem; right:1.8rem;
+    font-size:1.3rem;
+    color:var(--gold);
+    opacity:0.7;
+  }
+  .form-card-head{ margin-bottom:1.6rem; }
+  .form-card-head .eyebrow{ color:var(--coral); }
+  .form-card-head h3{ font-size:1.3rem; margin-top:0.4rem; }
+
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.1rem;
+  }
+  .field{ margin-bottom:1.1rem; }
+  .field.full{ grid-column:1 / -1; }
+  .field label{
+    display:block;
+    font-size:0.82rem;
+    font-weight:600;
+    margin-bottom:0.4rem;
+    color:var(--teal-deep);
+  }
+  .field label .req{ color:var(--coral); }
+  .field input, .field select, .field textarea{
+    width:100%;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:0.75rem 0.9rem;
+    font-size:0.88rem;
+    background:var(--white);
+    color:var(--ink);
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+    border-color:var(--gold);
+  }
+  .field textarea{ min-height:90px; resize:vertical; }
+  .field.invalid input, .field.invalid select, .field.invalid textarea{
+    border-color:var(--coral);
+  }
+  .counter-field{
+    display:flex; align-items:center; justify-content:space-between;
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:0.5rem 0.7rem;
+  }
+  .counter-field span.count-label{ font-size:0.85rem; font-weight:500; }
+  .counter-btns{ display:flex; align-items:center; gap:0.7rem; }
+  .count-btn{
+    width:28px; height:28px; border-radius:50%;
+    background:var(--teal-deep); color:var(--white);
+    font-size:1.05rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .count-val{ font-weight:700; min-width:16px; text-align:center; font-size:0.9rem; }
+
+  .pill-select{ display:flex; gap:0.6rem; flex-wrap:wrap; }
+  .pill-option{
+    border:1.5px solid var(--line);
+    border-radius:20px;
+    padding:0.5rem 1rem;
+    font-size:0.82rem;
+    font-weight:600;
+    color:var(--teal-deep);
+    background:var(--white);
+    cursor:pointer;
+    user-select:none;
+  }
+  .pill-option.selected{
+    background:var(--teal-deep);
+    color:var(--white);
+    border-color:var(--teal-deep);
+  }
+
+  .hint-box{
+    background:#EFF6FF;
+    border:1px solid #BFE08A;
+    border-radius:12px;
+    padding:0.9rem 1.1rem;
+    font-size:0.82rem;
+    color:#2f4a44;
+    margin:1.2rem 0;
+    display:none;
+    align-items:flex-start;
+    gap:0.5rem;
+  }
+  .hint-box.visible{ display:flex; }
+  .hint-box .spark{ color:var(--coral); flex-shrink:0; }
+
+  .submit-btn{
+    width:100%;
+    background:var(--coral);
+    color:var(--white);
+    font-weight:700;
+    font-size:0.95rem;
+    padding:0.95rem;
+    border-radius:12px;
+    display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    margin-top:0.6rem;
+    transition:transform 0.15s ease;
+  }
+  .submit-btn:hover{ transform:translateY(-1px); }
+  .submit-btn svg{ width:16px; height:16px; stroke:var(--white); fill:none; stroke-width:2.4; }
+
+  @media(max-width:560px){
+    .form-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- PACKAGES SLIDER ---------- */
+  .packages-strip{ background:var(--white); }
+  .slider-track{
+    display:flex;
+    gap:1.2rem;
+    overflow-x:auto;
+    padding:0.5rem 0.2rem 1.2rem;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  .slider-track::-webkit-scrollbar{ display:none; }
+  .package-card{
+    flex:0 0 260px;
+    scroll-snap-align:start;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--line);
+    box-shadow:0 14px 30px -22px rgba(15,61,62,0.3);
+  }
+  .package-card .pkg-img{ height:150px; background-size:cover; background-position:center; position:relative; }
+  .package-card .pkg-tag{
+    position:absolute; top:0.7rem; left:0.7rem;
+    background:var(--gold); color:var(--teal-deep);
+    font-size:0.65rem; font-weight:700;
+    padding:0.3rem 0.6rem; border-radius:20px;
+  }
+  .package-card .pkg-body{ padding:1rem 1.1rem 1.2rem; }
+  .package-card h4{ font-size:1rem; font-weight:600; margin-bottom:0.3rem; }
+  .package-card .pkg-meta{ font-size:0.76rem; color:var(--muted); margin-bottom:0.7rem; }
+  .package-card .pkg-price{
+    display:flex; align-items:baseline; justify-content:space-between;
+  }
+  .package-card .pkg-price b{ font-size:1.05rem; color:var(--teal-deep); }
+  .package-card .pkg-price span{ font-size:0.7rem; color:var(--muted); }
+  .slider-hint{ text-align:center; font-size:0.76rem; color:var(--muted); margin-top:-0.6rem; }
+
+  /* ---------- REVIEWS ---------- */
+  .reviews-strip{ background:var(--sand); }
+  .review-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.2rem;
+  }
+  .review-card{
+    background:var(--white);
+    border-radius:16px;
+    padding:1.4rem;
+    border:1px solid var(--line);
+  }
+  .review-stars{ color:var(--gold); font-size:0.9rem; margin-bottom:0.6rem; letter-spacing:2px; }
+  .review-card p.quote{ font-size:0.85rem; color:var(--ink); line-height:1.6; margin-bottom:1rem; }
+  .review-person{ display:flex; align-items:center; gap:0.7rem; }
+  .review-avatar{
+    width:38px; height:38px; border-radius:50%;
+    background:var(--teal-deep); color:var(--white);
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-size:0.85rem; flex-shrink:0;
+  }
+  .review-person b{ font-size:0.85rem; display:block; }
+  .review-person span{ font-size:0.72rem; color:var(--muted); }
+  @media(max-width:800px){
+    .review-grid{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- CONSULTANT CARD ---------- */
+  .consultant-card{
+    max-width:1040px;
+    margin:0 auto;
+    padding:0 1.4rem 4rem;
+  }
+  .consultant-inner{
+    background:var(--teal-deep);
+    color:var(--white);
+    border-radius:20px;
+    padding:2.2rem;
+    display:flex;
+    align-items:center;
+    gap:1.8rem;
+  }
+  .consultant-photo{
+    width:110px; height:110px; border-radius:50%;
+    flex-shrink:0;
+    padding:4px;
+    background:linear-gradient(135deg, var(--gold), var(--coral));
+  }
+  .consultant-photo img{ width:100%; height:100%; border-radius:50%; object-fit:cover; background:var(--sand); }
+  .consultant-inner .eyebrow{ color:var(--gold); margin-bottom:0.3rem; display:block; }
+  .consultant-inner h3{ font-size:1.2rem; margin-bottom:0.4rem; }
+  .consultant-inner p{ font-size:0.85rem; color:rgba(251,248,242,0.8); line-height:1.6; margin-bottom:0.8rem; }
+  .consultant-contact{ display:flex; gap:0.8rem; flex-wrap:wrap; }
+  .consultant-contact a{
+    background:rgba(251,248,242,0.14);
+    border:1px solid rgba(251,248,242,0.4);
+    padding:0.5rem 1rem;
+    border-radius:20px;
+    font-size:0.78rem;
+    font-weight:600;
+  }
+  @media(max-width:640px){
+    .consultant-inner{ flex-direction:column; text-align:center; }
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{
+    border-bottom:1px solid var(--line);
+  }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.1rem 0.2rem;
+    font-weight:600;
+    font-size:0.92rem;
+    cursor:pointer;
+    color:blue;
+  }
+  .faq-q .plus{
+    font-size:1.2rem; color:var(--coral);
+    transition:transform 0.25s ease;
+    flex-shrink:0;
+    margin-left:1rem;
+  }
+  .faq-item.open .faq-q .plus{ transform:rotate(45deg); }
+  .faq-a{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height 0.3s ease;
+    font-size:0.85rem;
+    color:var(--muted);
+    line-height:1.6;
+    color: black;
+  }
+  .faq-item.open .faq-a{ max-height:200px; }
+  .faq-a p{ padding-bottom:1.1rem; }
+
+  footer{
+    text-align:center;
+    padding:2rem 1.4rem;
+    background:var(--teal-deep);
+    color:rgba(251,248,242,0.5);
+    font-size:0.8rem;
+    border-top:1px solid rgba(251,248,242,0.1);
+  }
+</style>
+</head>
+
+<body style="background-color:#FFF8DC;">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html" class="active">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html">Review</a>
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Tourism Enquiry</span>
+      <h1>Tell us your trip.<br><em>We'll do the rest.</em></h1>
+      <p>Share a few details about how you'd like to travel — we'll come back with a tailored quote and a plan built around your dates, your budget, and your people.</p>
+      <div class="hero-stats">
+        <div class="stat"><b>250+</b><span>Destinations</span></div>
+        <div class="stat"><b>12+ yrs</b><span>Experience</span></div>
+        <div class="stat"><b>4.9★</b><span>On Google</span></div>
+        <div class="stat"><b>&lt;24h</b><span>Quote Turnaround</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-strip">
+    <div class="section" style="padding-top:3rem; padding-bottom:3rem;">
+      <div class="section-head">
+        <span class="eyebrow" style="color:var(--teal-deep);">How It Works</span>
+        <h2>From enquiry to boarding pass</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-step active">
+          <div class="process-num">1</div>
+          <h4>Fill the Form</h4>
+          <p>Tell us who's travelling, when, and what kind of trip you're picturing.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">2</div>
+          <h4>Get a Quote</h4>
+          <p>Our consultants build a tailored itinerary and price within 24 hours.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">3</div>
+          <h4>Confirm Booking</h4>
+          <p>Happy with the plan? Lock it in and we'll handle the rest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRY FORM -->
+  <section class="section" id="enquiry-form">
+    <div class="section-head">
+      <span class="eyebrow">Step 1</span>
+      <h2>Tell us about your trip</h2>
+      <p>The more we know, the sharper your quote. Every field here helps us match you to the right package.</p>
+    </div>
+
+    <div class="enquiry-wrap">
+      <form class="form-card" id="enquiryForm" onsubmit="return handleSubmit(event)" action="codes/enquiryus.jsp" method="post">
+        <div class="form-card-head">
+          <span class="eyebrow">Enquiry Details</span>
+          <h3>Your travel requirements</h3>
+        </div>
+
+        <div class="form-grid">
+          <div class="field full" id="field_name">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" name="name" id="nameInput" required placeholder="Your full name">
+          </div>
+
+          <div class="field" id="field_mob">
+            <label>Phone Number <span class="req">*</span></label>
+            <input type="tel" name="mob" id="mobInput" required placeholder="98765 43210" pattern="[0-9]{10}" maxlength="10">
+          </div>
+          <div class="field" id="field_email">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" name="email" id="emailInput" required placeholder="you@email.com">
+          </div>
+
+          <div class="field" id="field_des">
+            <label>Destination <span class="req">*</span></label>
+            <input type="text" name="des" id="desInput" required placeholder="Where do you want to go?">
+          </div>
+
+          <div class="field">
+            <label>Travel Month</label>
+            <input type="hidden" name="mon" id="hidden_mon">
+            <select id="monthSelect" onchange="syncSelectValue('monthSelect','hidden_mon')">
+              <option value="">Select month</option>
+              <option>July</option><option>August</option><option>September</option>
+              <option>October</option><option>November</option><option>December</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Number of Adults</label>
+            <input type="hidden" name="adu" id="hidden_adu" value="2">
+            <div class="counter-field">
+              <span class="count-label">Adults</span>
+              <div class="counter-btns">
+                <button type="button" class="count-btn" onclick="adjustCount('adults',-1)">−</button>
+                <span class="count-val" id="adultsVal">2</span>
+                <button type="button" class="count-btn" onclick="adjustCount('adults',1)">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Number of Children</label>
+            <input type="hidden" name="child" id="hidden_child" value="0">
+            <div class="counter-field">
+              <span class="count-label">Children</span>
+              <div class="counter-btns">
+                <button type="button" class="count-btn" onclick="adjustCount('children',-1)">−</button>
+                <span class="count-val" id="childrenVal">0</span>
+                <button type="button" class="count-btn" onclick="adjustCount('children',1)">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>Tour Type</label>
+            <input type="hidden" name="tour" id="hidden_tour">
+            <div class="pill-select" id="tourTypeSelect">
+              <div class="pill-option" data-value="Family" onclick="selectPill(this,'hidden_tour')">Family</div>
+              <div class="pill-option" data-value="Honeymoon" onclick="selectPill(this,'hidden_tour')">Honeymoon</div>
+              <div class="pill-option" data-value="Solo" onclick="selectPill(this,'hidden_tour')">Solo</div>
+              <div class="pill-option" data-value="Group" onclick="selectPill(this,'hidden_tour')">Group</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Budget Range (per person)</label>
+            <input type="hidden" name="budg" id="hidden_budg">
+            <select id="budgetSelect" onchange="updateHint(); syncSelectValue('budgetSelect','hidden_budg')">
+              <option value="">Select budget</option>
+              <option value="budget">₹15,000 – ₹30,000</option>
+              <option value="mid">₹30,000 – ₹60,000</option>
+              <option value="premium">₹60,000 – ₹1,00,000</option>
+              <option value="luxury">₹1,00,000+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Hotel Preference</label>
+            <input type="hidden" name="hotel" id="hidden_hotel">
+            <div class="pill-select" id="hotelSelect">
+              <div class="pill-option" data-value="3★" onclick="selectPill(this,'hidden_hotel')">3★</div>
+              <div class="pill-option" data-value="4★" onclick="selectPill(this,'hidden_hotel')">4★</div>
+              <div class="pill-option" data-value="5★" onclick="selectPill(this,'hidden_hotel')">5★</div>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>Transportation</label>
+            <input type="hidden" name="trans" id="hidden_trans">
+            <div class="pill-select" id="transportSelect">
+              <div class="pill-option" data-value="Flight" onclick="selectPill(this,'hidden_trans')">✈ Flight</div>
+              <div class="pill-option" data-value="Train" onclick="selectPill(this,'hidden_trans')">🚆 Train</div>
+              <div class="pill-option" data-value="Bus" onclick="selectPill(this,'hidden_trans')">🚌 Bus</div>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>Special Requirements</label>
+            <textarea name="requir" id="requirInput" placeholder="Dietary needs, accessibility, celebration plans, anything else we should know..."></textarea>
+          </div>
+
+          <div class="field full">
+            <label>Preferred Contact Time</label>
+            <input type="hidden" name="con" id="hidden_con">
+            <select id="contactTimeSelect" onchange="syncSelectValue('contactTimeSelect','hidden_con')">
+              <option value="">Any time</option>
+              <option>Morning (9 AM – 12 PM)</option>
+              <option>Afternoon (12 PM – 4 PM)</option>
+              <option>Evening (4 PM – 8 PM)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="hint-box" id="hintBox">
+          <span class="spark">✦</span>
+          <span id="hintText"></span>
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Submit Enquiry
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- PACKAGES SLIDER -->
+  <section class="packages-strip">
+    <div class="section">
+      <div class="section-head">
+        <span class="eyebrow">While You Wait</span>
+        <h2>Popular packages travellers love</h2>
+        <p>A quick look at some of our best-loved trips — swipe to explore.</p>
+      </div>
+      <div class="slider-track">
+        <div class="package-card">
+          <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=400&q=70');"><span class="pkg-tag">Bestseller</span></div>
+          <div class="pkg-body">
+            <h4>Bali Honeymoon Escape</h4>
+            <div class="pkg-meta">5 Days · 4 Nights · Honeymoon</div>
+            <div class="pkg-price"><b>₹58,000</b><span>per couple</span></div>
+          </div>
+        </div>
+        <div class="package-card">
+          <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?w=400&q=70');"><span class="pkg-tag">Family Pick</span></div>
+          <div class="pkg-body">
+            <h4>Australia Family Adventure</h4>
+            <div class="pkg-meta">7 Days · 6 Nights · Family</div>
+            <div class="pkg-price"><b>₹1,12,000</b><span>per family of 4</span></div>
+          </div>
+        </div>
+        <div class="package-card">
+          <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&q=70');"><span class="pkg-tag">Trending</span></div>
+          <div class="pkg-body">
+            <h4>Japan Culture Trail</h4>
+            <div class="pkg-meta">6 Days · 5 Nights · Group</div>
+            <div class="pkg-price"><b>₹95,000</b><span>per person</span></div>
+          </div>
+        </div>
+        <div class="package-card">
+          <div class="pkg-img" style="background-image:url('https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=400&q=70');"><span class="pkg-tag">Solo Friendly</span></div>
+          <div class="pkg-body">
+            <h4>Switzerland Alpine Trail</h4>
+            <div class="pkg-meta">8 Days · 7 Nights · Solo</div>
+            <div class="pkg-price"><b>₹1,45,000</b><span>per person</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="slider-hint">← swipe to see more packages →</p>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-strip">
+    <div class="section">
+      <div class="section-head">
+        <span class="eyebrow" style="color:var(--teal-deep);">Traveller Stories</span>
+        <h2>What our customers say</h2>
+      </div>
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="quote">Every detail was planned exactly how we imagined our honeymoon — the resort in Bali was a dream come true.</p>
+          <div class="review-person">
+            <div class="review-avatar">R&amp;A</div>
+            <div><b>Riya &amp; Arjun</b><span>Bali Honeymoon</span></div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="quote">Travelling with two kids felt effortless. The consultant thought of things we hadn't even considered.</p>
+          <div class="review-person">
+            <div class="review-avatar">SK</div>
+            <div><b>Sanjay Kapoor</b><span>Australia Family Trip</span></div>
+          </div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="quote">Solo travel felt safe and exciting at the same time. Got a quote within a day of enquiring.</p>
+          <div class="review-person">
+            <div class="review-avatar">MN</div>
+            <div><b>Meera Nair</b><span>Switzerland Solo Trip</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONSULTANT CARD -->
+  <div class="consultant-card">
+    <div class="consultant-inner">
+        <div class="consultant-photo"><img src="image/imgsri.jpeg" alt="Travel consultant photo"></div>
+      <div>
+        <span class="eyebrow">Your Travel Consultant</span>
+        <h3>Srishti singh</h3>
+        <p>srishti has planned over 400 trips across 30+ countries and specialises in family and honeymoon itineraries. She'll be the one calling you back with your quote.</p>
+        <div class="consultant-contact">
+          <a href="tel:+918726597075">📞 Call srishti</a>
+          <a href="#">💬 WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently asked questions</h2>
+    </div>
+    <div id="faqList">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How long does it take to get a quote? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Most enquiries get a tailored quote within 24 hours. For complex multi-destination trips, it may take up to 48 hours.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Is submitting an enquiry free? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Yes, completely free with no obligation. You only pay once you confirm and book a package you're happy with.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I customise a package after receiving the quote? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Absolutely. Your consultant will refine the itinerary, hotels, or transport based on your feedback before you confirm.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What if I don't know my exact travel dates yet? <span class="plus">+</span></div>
+        <div class="faq-a"><p>No problem — just give us your preferred month, and we'll build flexible options around it.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you help with visas and travel insurance? <span class="plus">+</span></div>
+        <div class="faq-a"><p>Yes, our end-to-end trip management includes visa guidance and insurance options if you'd like us to handle it.</p></div>
+      </div>
+    </div>
+  </section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+
+<script>
+  // ---------- keeps custom widgets (select/pill/counter) in sync with their
+  // ---------- hidden <input> so the values actually reach the backend on submit ----------
+
+  // Adults/Children counters
+  var counts = { adults: 2, children: 0 };
+
+  function adjustCount(type, delta){
+    var min = (type === 'adults') ? 1 : 0;
+    var max = (type === 'adults') ? 20 : 10;
+    counts[type] = Math.min(max, Math.max(min, counts[type] + delta));
+
+    var valEl = document.getElementById(type + 'Val');
+    if(valEl) valEl.textContent = counts[type];
+
+    var hiddenId = (type === 'adults') ? 'hidden_adu' : 'hidden_child';
+    var hiddenEl = document.getElementById(hiddenId);
+    if(hiddenEl) hiddenEl.value = counts[type];
+  }
+
+  // Pill groups (Tour Type / Hotel Preference / Transportation)
+  function selectPill(el, hiddenId){
+    var group = el.parentElement;
+    var options = group.querySelectorAll('.pill-option');
+    options.forEach(function(opt){ opt.classList.remove('selected'); });
+    el.classList.add('selected');
+
+    var hiddenEl = document.getElementById(hiddenId);
+    if(hiddenEl) hiddenEl.value = el.getAttribute('data-value');
+  }
+
+  // Generic select -> hidden input sync (Travel Month / Budget / Contact Time)
+  function syncSelectValue(selectId, hiddenId){
+    var selectEl = document.getElementById(selectId);
+    var hiddenEl = document.getElementById(hiddenId);
+    if(selectEl && hiddenEl){
+      hiddenEl.value = selectEl.value;
+    }
+  }
+
+  // Budget hint box
+  function updateHint(){
+    var select = document.getElementById('budgetSelect');
+    var hintBox = document.getElementById('hintBox');
+    var hintText = document.getElementById('hintText');
+    var hints = {
+      budget: 'Great for backpacking-style trips with shared stays and local transport.',
+      mid: 'Our most popular range — comfortable hotels with a mix of guided and free time.',
+      premium: 'Boutique stays, private transfers, and curated experiences.',
+      luxury: 'Fully bespoke itineraries with 5-star stays and private guides.'
+    };
+    if(select && select.value && hints[select.value]){
+      hintText.textContent = hints[select.value];
+      hintBox.classList.add('visible');
+    } else if(hintBox){
+      hintBox.classList.remove('visible');
+    }
+  }
+
+  // FAQ accordion
+  function toggleFaq(el){
+    var item = el.parentElement;
+    item.classList.toggle('open');
+  }
+
+  // Basic required-field validation before the form actually posts to the backend
+  function handleSubmit(e){
+    var requiredFields = [
+      { id:'nameInput', label:'Full Name' },
+      { id:'mobInput', label:'Phone Number' },
+      { id:'emailInput', label:'Email' },
+      { id:'desInput', label:'Destination' }
+    ];
+
+    var firstInvalid = null;
+
+    requiredFields.forEach(function(f){
+      var el = document.getElementById(f.id);
+      var wrap = el ? el.closest('.field') : null;
+      var valid = el && el.value.trim().length > 0;
+      if(el && el.type === 'tel'){
+        valid = /^\d{10}$/.test(el.value.trim());
+      }
+      if(el && el.type === 'email'){
+        valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+      }
+      if(wrap){
+        wrap.classList.toggle('invalid', !valid);
+      }
+      if(!valid && !firstInvalid){
+        firstInvalid = wrap || el;
+      }
+    });
+
+    if(firstInvalid){
+      firstInvalid.scrollIntoView({ behavior:'smooth', block:'center' });
+      e.preventDefault();
+      return false;
+    }
+
+    return true;
+  }
+
+  // Make sure hidden fields carry correct starting values on page load
+  document.addEventListener('DOMContentLoaded', function(){
+    var aduEl = document.getElementById('hidden_adu');
+    var childEl = document.getElementById('hidden_child');
+    if(aduEl) aduEl.value = counts.adults;
+    if(childEl) childEl.value = counts.children;
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --green:#0B3D3A;
+    --green-dark:#082b29;
+    --green-light:#124F49;
+    --pale:#eef5f2;
+    --pale-dark:#dfeae5;
+    --white:#ffffff;
+    --gold:#c9a227;
+    --ink:#1a1a2e;
+    --ink-soft:#6b6b7a;
+    --line:#dbe5e1;
+    --font-display:'Fraunces', serif;
+    --font-data:'Space Grotesk', sans-serif;
+    --font-body:'Inter', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:var(--font-body);
+    color:var(--ink);
+    background:var(--white);
+  }
+  a{ text-decoration:none; color:inherit; }
+
+  /* ===========================================================
+     RAIL HERO — animated train on a dashed track
+     =========================================================== */
+  .rail-hero{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(201,162,39,0.18), transparent 55%),
+      linear-gradient(160deg, var(--green-light) 0%, var(--green-dark) 65%, var(--green) 100%);
+    padding:64px 8vw 0;
+    color:#fdf8ec;
+  }
+  .rail-hero-top{
+    max-width:1200px;
+    margin:0 auto;
+    position:relative;
+    z-index:2;
+  }
+  .rail-eyebrow{
+    font-family:var(--font-data);
+    font-size:.76rem;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .rail-eyebrow::before{
+    content:'';
+    width:22px; height:2px;
+    background:var(--gold);
+  }
+  .rail-hero h1{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(2.2rem, 4.6vw, 3.8rem);
+    line-height:1.12;
+    margin:18px 0 18px;
+    max-width:760px;
+  }
+  .rail-hero h1 em{ color:var(--gold); font-style:italic; font-weight:600; }
+  .rail-hero p.lede{
+    max-width:540px;
+    color:rgba(253,248,236,0.82);
+    font-size:1.04rem;
+    line-height:1.7;
+    margin:0 0 40px;
+  }
+
+  /* Departure-board style quick stats */
+  .board-strip{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    max-width:640px;
+    margin-bottom:56px;
+    border:1px solid rgba(253,248,236,0.18);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .board-cell{
+    flex:1 1 140px;
+    padding:16px 20px;
+    border-right:1px solid rgba(253,248,236,0.18);
+    background:rgba(0,0,0,0.14);
+  }
+  .board-cell:last-child{ border-right:none; }
+  .board-cell strong{
+    display:block;
+    font-family:var(--font-data);
+    font-size:1.5rem;
+    font-weight:700;
+    color:var(--gold);
+    letter-spacing:.03em;
+  }
+  .board-cell span{
+    font-size:.72rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:rgba(253,248,236,0.65);
+  }
+
+  /* The animated sky path — plane gliding along an SVG flight path, clouds drifting */
+  .sky-wrap{
+    position:relative;
+    height:130px;
+    z-index:2;
+    overflow:hidden;
+  }
+  .flight-path-svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+  .flight-path-svg path{
+    fill:none;
+    stroke:rgba(253,248,236,0.4);
+    stroke-width:2;
+    stroke-dasharray:2 10;
+  }
+  .cloud-drift{
+    position:absolute;
+    background:rgba(253,248,236,0.35);
+    border-radius:100px;
+    filter:blur(1px);
+    animation: cloud-move linear infinite;
+  }
+  @keyframes cloud-move{
+    0%{ transform:translateX(-10%); }
+    100%{ transform:translateX(110vw); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .cloud-drift{ animation:none !important; }
+    .flight-path-svg animateMotion{ display:none; }
+  }
+
+  /* ===========================================================
+     REGION QUICK-NAV
+     =========================================================== */
+  .region-nav{
+    background:var(--pale-dark);
+    border-bottom:1px solid var(--line);
+    padding:18px 8vw;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .region-nav a{
+    font-family:var(--font-data);
+    font-size:.82rem;
+    font-weight:600;
+    letter-spacing:.03em;
+    padding:9px 20px;
+    border:1.5px solid var(--green);
+    border-radius:50px;
+    color:var(--green);
+    transition:.25s ease;
+  }
+  .region-nav a:hover{
+    background:var(--green);
+    color:#fdf8ec;
+  }
+  .region-nav a.active{
+    background:var(--green);
+    color:#fdf8ec;
+  }
+
+  /* ===========================================================
+     REGION SECTIONS
+     =========================================================== */
+  .region-block{
+    max-width:1300px;
+    margin:0 auto;
+    padding:90px 8vw 20px;
+    scroll-margin-top:24px;
+  }
+  .region-block-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-bottom:40px;
+    border-bottom:2px solid var(--green);
+    padding-bottom:18px;
+  }
+  .region-block-head h2{
+    font-family:var(--font-display);
+    font-size:clamp(1.6rem, 2.8vw, 2.2rem);
+    font-weight:600;
+    color:var(--green);
+    margin:0;
+  }
+  .region-block-head p{
+    color:var(--ink-soft);
+    font-size:.92rem;
+    max-width:440px;
+    margin:6px 0 0;
+  }
+  .region-tag{
+    font-family:var(--font-data);
+    font-size:.74rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:700;
+    background:rgba(201,162,39,0.14);
+    padding:6px 14px;
+    border-radius:50px;
+    white-space:nowrap;
+  }
+
+  /* ---- TICKET GRID ---- */
+  .ticket-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:26px;
+  }
+  .ticket-card{
+    background:#fff;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 14px 34px -14px rgba(36,31,26,0.28);
+    display:flex;
+    flex-direction:column;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .ticket-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 22px 44px -14px rgba(36,31,26,0.36);
+  }
+  .ticket-photo{
+    height:150px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+  }
+  .ticket-photo::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(36,31,26,0) 55%, rgba(36,31,26,0.55) 100%);
+  }
+  .ticket-photo span{
+    position:absolute;
+    bottom:10px; left:14px;
+    z-index:2;
+    color:#fdf8ec;
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:1.08rem;
+  }
+
+  /* perforated tear line — the ticket motif */
+  .ticket-perf{
+    position:relative;
+    height:0;
+    border-top:2px dashed var(--line);
+    margin:0 16px;
+  }
+  .ticket-perf::before, .ticket-perf::after{
+    content:'';
+    position:absolute;
+    top:-8px;
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--white);
+  }
+  .ticket-perf::before{ left:-24px; }
+  .ticket-perf::after{ right:-24px; }
+
+  .ticket-body{
+    padding:16px 18px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    flex:1;
+  }
+  .ticket-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-size:.8rem;
+    color:var(--ink-soft);
+  }
+  .ticket-row strong{
+    font-family:var(--font-data);
+    font-weight:700;
+    color:var(--ink);
+    font-size:.92rem;
+  }
+  .ticket-fare{
+    margin-top:2px;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-top:1px dashed var(--line);
+    padding-top:12px;
+  }
+  .ticket-fare .amount{
+    font-family:var(--font-data);
+    font-weight:700;
+    font-size:1.3rem;
+    color:var(--green);
+  }
+  .ticket-fare .amount small{
+    font-family:var(--font-body);
+    font-weight:400;
+    font-size:.7rem;
+    color:var(--ink-soft);
+  }
+  .book-now{
+    margin-top:6px;
+    text-align:center;
+    background:var(--green);
+    color:#fdf8ec;
+    font-family:var(--font-data);
+    font-weight:600;
+    font-size:.86rem;
+    letter-spacing:.03em;
+    padding:12px;
+    border-radius:7px;
+    transition:.25s ease;
+  }
+  .book-now:hover{ background:var(--green-dark); }
+
+  /* Scroll reveal (reuses site convention) */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.revealed{ opacity:1; transform:translateY(0); }
+
+  @media (max-width:1100px){
+    .ticket-grid{ grid-template-columns:repeat(2, 1fr); }
+  }
+  @media (max-width:640px){
+    .ticket-grid{ grid-template-columns:1fr; }
+    .board-strip{ max-width:100%; }
+    .region-block{ padding:70px 6vw 10px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right"><span>20+ Years Crafting India Journeys</span></div>
+      <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html" >Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight" class="active">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+                         <a href="review.html">Review</a>
+
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+    <!-- ============ ANIMATED FLIGHT HERO ============ -->
+<section class="rail-hero" id="flight">
+  <div class="rail-hero-top">
+    <p class="rail-eyebrow">Getting Here · By Flight</p>
+    <h1>Skip the miles,<br><em>land</em> in the story.</h1>
+    <p class="lede">The fastest way in — trade the highway for a window seat and step out with the whole trip still ahead. Pick a route below and see the fare, flight time and next step laid out like a real departure board.</p>
+
+    <div class="board-strip">
+      <div class="board-cell"><strong>16</strong><span>Routes Listed</span></div>
+      <div class="board-cell"><strong>4</strong><span>Regions Covered</span></div>
+      <div class="board-cell"><strong>₹2,800+</strong><span>Fares From</span></div>
+      <div class="board-cell"><strong>Daily</strong><span>Departures</span></div>
+    </div>
+  </div>
+
+  <div class="sky-wrap" aria-hidden="true">
+    <svg class="flight-path-svg" viewBox="0 0 1200 130" preserveAspectRatio="none">
+      <path id="flightPath" d="M -40,115 C 220,115 260,15 620,15 C 900,15 950,65 1180,25"/>
+      <text font-size="30">✈️
+        <animateMotion dur="11s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#flightPath"/>
+        </animateMotion>
+      </text>
+    </svg>
+    <span class="cloud-drift" style="top:20px; width:70px; height:20px; animation-duration:16s; animation-delay:0s;"></span>
+    <span class="cloud-drift" style="top:60px; width:50px; height:16px; animation-duration:20s; animation-delay:-6s;"></span>
+    <span class="cloud-drift" style="top:90px; width:90px; height:24px; animation-duration:24s; animation-delay:-12s;"></span>
+  </div>
+</section>
+
+<!-- ============ REGION QUICK NAV ============ -->
+<nav class="region-nav" id="regionNav" aria-label="Jump to region">
+  <a href="#region-north" data-region="north">North</a>
+  <a href="#region-south" data-region="south">South</a>
+  <a href="#region-east" data-region="east">East</a>
+  <a href="#region-west" data-region="west">West</a>
+</nav>
+
+<!-- ============ NORTH ============ -->
+<section class="region-block" id="region-north">
+  <div class="region-block-head">
+    <div>
+      <h2>North India</h2>
+      <p>Mountain towns and Mughal cities, a short hop from the capital.</p>
+    </div>
+    <span class="region-tag">4 Routes</span>
+  </div>
+  <div class="ticket-grid">
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1609920658906-8223bd289001?w=500&q=80')">
+        <span>Amritsar</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>450 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h 20m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹3,200 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Amritsar" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1626016190845-3a5b95f5c4d3?w=500&q=80')">
+        <span>Shimla</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>370 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h 5m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹4,200 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Shimla" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1591793440318-2eb0c1c76d75?w=500&q=80')">
+        <span>Dehradun</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>240 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h 10m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹3,500 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Dehradun" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1599661046289-e31897846e41?w=500&q=80')">
+        <span>Jaipur</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>280 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹2,800 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Jaipur" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ SOUTH ============ -->
+<section class="region-block" id="region-south">
+  <div class="region-block-head">
+    <div>
+      <h2>South India</h2>
+      <p>Non-stop flights into backwaters, hill stations and coastal cities in a few hours.</p>
+    </div>
+    <span class="region-tag">4 Routes</span>
+  </div>
+  <div class="ticket-grid">
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&q=80')">
+        <span>Chennai</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>2,180 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>2h 40m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹4,500 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Chennai" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=500&q=80')">
+        <span>Bengaluru</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>2,150 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>2h 35m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹4,300 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Bengaluru" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=500&q=80')">
+        <span>Kochi</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>2,650 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>3h</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹5,200 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Kochi" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1600100397608-f92cc6c8b41b?w=500&q=80')">
+        <span>Mysuru</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>2,500 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>2h 50m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹5,000 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Mysuru" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+<!-- ============ EAST ============ -->
+<section class="region-block" id="region-east">
+  <div class="region-block-head">
+    <div>
+      <h2>East India</h2>
+      <p>Ganga-side cities and the northeastern gateway, reached in half a day by rail — or a couple of hours by air.</p>
+    </div>
+    <span class="region-tag">4 Routes</span>
+  </div>
+  <div class="ticket-grid">
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1558431382-27e303142255?w=500&q=80')">
+        <span>Kolkata</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>1,450 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>2h 10m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹4,200 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Kolkata" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1561361058-c24cecae35ca?w=500&q=80')">
+        <span>Varanasi</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>700 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h 30m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹3,800 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Varanasi" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&q=80')">
+        <span>Patna</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>1,000 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h 45m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹3,600 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Patna" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1544634076-a90160ddf22e?w=500&q=80')">
+        <span>Guwahati</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>1,950 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>2h 45m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹5,000 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Guwahati" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============ WEST ============ -->
+<section class="region-block" id="region-west">
+  <div class="region-block-head">
+    <div>
+      <h2>West India</h2>
+      <p>Coastal capitals, merchant cities and desert forts, all within a short flight.</p>
+    </div>
+    <span class="region-tag">4 Routes</span>
+  </div>
+  <div class="ticket-grid">
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?w=500&q=80')">
+        <span>Mumbai</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>1,150 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>2h</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹4,000 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Mumbai" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1600100397608-f92cc6c8b41b?w=500&q=80')">
+        <span>Ahmedabad</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>900 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h 40m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹3,400 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Ahmedabad" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=500&q=80')">
+        <span>Udaipur</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>650 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>1h 25m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹3,200 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Udaipur" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+    <article class="ticket-card reveal">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=500&q=80')">
+        <span>Goa</span>
+      </div>
+      <div class="ticket-perf"></div>
+      <div class="ticket-body">
+        <div class="ticket-row"><span>Distance</span><strong>1,850 km</strong></div>
+        <div class="ticket-row"><span>Flight Time</span><strong>2h 30m</strong></div>
+        <div class="ticket-fare">
+          <span class="amount">₹4,600 <small>onwards</small></span>
+        </div>
+        <a href="enquiry.html?destination=Goa" class="book-now">Book Now</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+   <!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+    <script>
+  /* Scroll-reveal for ticket cards */
+  const revealItems = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealItems.forEach(el => revealObserver.observe(el));
+
+  /* Region-nav: clicking North/South/East/West moves the cursor/view straight to that section */
+  const regionLinks = document.querySelectorAll('#regionNav a');
+  regionLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById('region-' + link.dataset.region);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* Scroll-spy: highlight whichever region is currently in view */
+  const regionSections = document.querySelectorAll('.region-block');
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const key = entry.target.id.replace('region-', '');
+        regionLinks.forEach(a => a.classList.toggle('active', a.dataset.region === key));
+      }
+    });
+  }, { threshold: 0, rootMargin: '-35% 0px -55% 0px' });
+  regionSections.forEach(sec => spyObserver.observe(sec));
+</script>
+</body>
+</html>

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --forest-1:#0b4a3a;
+    --forest-2:#0f6350;
+    --cream:#f6f1e6;
+    --cream-2:#efe8d8;
+    --gold:#c99a3e;
+    --red:#b23a2e;
+    --ink:#1c1c18;
+    --ink-soft:#5c5c52;
+    --line:#d8cfb8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  .eyebrow{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  /* ---------- MAIN HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(120deg,var(--forest-1),var(--forest-2) 70%);
+    color:#fff;
+    padding:64px 8vw 90px;
+    overflow:hidden;
+  }
+  .crumb{
+    font-size:.85rem;
+    color:#d8e6de;
+    margin-bottom:22px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .crumb a{color:#d8e6de; border-bottom:1px solid transparent;}
+  .crumb a:hover{border-color:#d8e6de;}
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,4.2rem);
+    font-weight:500;
+    margin:0 0 16px;
+    line-height:1.05;
+  }
+  .hero h1 em{color:var(--gold); font-style:italic; font-weight:600;}
+  .hero p.lede{
+    max-width:560px;
+    color:#d8e6de;
+    font-size:1.05rem;
+    line-height:1.6;
+  }
+  .hero-route{
+    position:absolute;
+    right:6vw; top:50%; transform:translateY(-50%);
+    width:min(38vw,420px);
+    opacity:.9;
+  }
+
+  /* ---------- QUICK NAV (same-page jump) ---------- */
+  .quick-nav{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    padding:14px 8vw;
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .quick-nav a{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.8rem;
+    padding:7px 15px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+    transition:background .2s ease, color .2s ease;
+  }
+  .quick-nav a:hover{
+    background:var(--forest-1);
+    border-color:var(--forest-1);
+    color:#fff;
+  }
+
+  /* ---------- REGION BLOCK ---------- */
+  .region-block{
+    scroll-margin-top:64px;
+  }
+
+  /* ---------- REGION HEADER LAYOUT (text + animated photo card) ---------- */
+  .region-head{
+    position:relative;
+    padding:64px 8vw 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:40px;
+    flex-wrap:wrap;
+  }
+  .region-head .head-copy{
+    flex:1 1 420px;
+    min-width:280px;
+  }
+  .region-photo{
+    flex:0 0 auto;
+    width:min(30vw,300px);
+    height:190px;
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.35);
+  }
+  .region-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transform:scale(1.05);
+    animation:regionZoom 12s ease-in-out infinite alternate;
+  }
+  @keyframes regionZoom{
+    0%{ transform:scale(1.05) translate(0,0); }
+    100%{ transform:scale(1.18) translate(-2%,-2%); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .region-photo img{ animation:none; }
+  }
+  @media (max-width:820px){
+    .region-photo{ width:100%; height:170px; }
+  }
+
+  .head-copy .index{
+    font-family:'Space Grotesk',sans-serif;
+    font-style:normal;
+    font-size:.72rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:#1c1c18;
+  }
+  .head-copy h2{
+    font-size:clamp(2rem,3.6vw,3rem);
+    font-weight:500;
+    margin:8px 0 12px;
+    color:#141410;
+  }
+  .head-copy p{
+    max-width:640px;
+    color:var(--ink-soft);
+    line-height:1.7;
+    font-size:1rem;
+    margin:0;
+  }
+  .head-copy .stops-count{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--ink-soft);
+    font-size:.85rem;
+    margin-top:18px;
+    display:inline-block;
+    border-top:1px solid var(--line);
+    padding-top:10px;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    position:relative;
+    max-width:1100px;
+    margin:0 auto;
+    padding:48px 8vw 100px;
+  }
+  .route-svg{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:2px;
+    height:100%;
+    transform:translateX(-50%);
+    z-index:0;
+  }
+  .route-svg path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:2;
+    stroke-dasharray:8 10;
+    stroke-linecap:round;
+    stroke-dashoffset:2000;
+    transition:stroke-dashoffset 1.8s ease;
+  }
+  .route-svg.in-view path{ stroke-dashoffset:0; }
+
+  .stop{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:center;
+    margin-bottom:88px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .stop:last-child{ margin-bottom:0; }
+  .stop.in-view{ opacity:1; transform:translateY(0); }
+  .stop.flip .stop-media{ order:2; }
+  .stop.flip .stop-text{ order:1; text-align:right; }
+  .stop.flip .tags{ justify-content:flex-end; }
+
+  .stop-marker{
+    position:absolute;
+    left:50%; top:20px;
+    transform:translateX(-50%);
+    width:14px; height:14px;
+    background:var(--red);
+    border:3px solid var(--cream);
+    border-radius:50%;
+    box-shadow:0 0 0 2px var(--gold);
+    z-index:2;
+  }
+
+  .stop-media{
+    position:relative;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 18px 40px -18px rgba(11,74,58,.45);
+  }
+  .stop-media img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    display:block;
+    transform:scale(1.04);
+    transition:transform .6s ease;
+  }
+  .stop-media:hover img{ transform:scale(1.12); }
+
+  .stop-text .num{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--gold);
+    font-size:.78rem;
+    letter-spacing:.18em;
+    font-weight:600;
+  }
+  .stop-text h3{
+    font-size:1.7rem;
+    font-weight:600;
+    margin:8px 0 14px;
+    color:#141410;
+  }
+  .stop-text p{
+    color:var(--ink-soft);
+    line-height:1.75;
+    font-size:.98rem;
+    margin:0 0 16px;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    padding:5px 12px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--forest-1);
+    background:#fff;
+  }
+
+  @media (max-width:820px){
+    .stop{grid-template-columns:1fr; gap:22px;}
+    .stop.flip .stop-media{ order:0; }
+    .stop.flip .stop-text{ order:1; text-align:left; }
+    .stop.flip .tags{ justify-content:flex-start; }
+    .stop-marker{ left:24px; }
+    .route-svg{ left:24px; }
+    .hero-route{ display:none; }
+    .quick-nav{ justify-content:flex-start; overflow-x:auto; }
+  }
+
+  /* ==========================================================
+     PER-DESTINATION COLOUR THEMES — accent colour applied only
+     to that destination's markers/tags/header background.
+     ========================================================== */
+  #dubai .region-head{ background:#f7efdf; }
+  #dubai .stop-marker{ background:#a8722f; }
+  #dubai .tag{ color:#a8722f; border-color:#e6d3ae; }
+
+  #bangkok .region-head{ background:#fbeee0; }
+  #bangkok .stop-marker{ background:#c96a2b; }
+  #bangkok .tag{ color:#c96a2b; border-color:#eecdae; }
+
+  #maldives .region-head{ background:#e6f4f2; }
+  #maldives .stop-marker{ background:#1f8a8a; }
+  #maldives .tag{ color:#1f8a8a; border-color:#b7dedc; }
+
+  #singapore .region-head{ background:#eaf3ec; }
+  #singapore .stop-marker{ background:#2f7d4f; }
+  #singapore .tag{ color:#2f7d4f; border-color:#bfdcc9; }
+
+  #switzerland .region-head{ background:#eaf2f6; }
+  #switzerland .stop-marker{ background:#2b6f8f; }
+  #switzerland .tag{ color:#2b6f8f; border-color:#bcd9e5; }
+
+  #kyoto .region-head{ background:#f8ebe9; }
+  #kyoto .stop-marker{ background:#a83232; }
+  #kyoto .tag{ color:#a83232; border-color:#e6c2c0; }
+
+  #london .region-head{ background:#eaecf2; }
+  #london .stop-marker{ background:#2c3e63; }
+  #london .tag{ color:#2c3e63; border-color:#c3c9dc; }
+
+  #paris .region-head{ background:#f6ecef; }
+  #paris .stop-marker{ background:#8a3452; }
+  #paris .tag{ color:#8a3452; border-color:#e3c4cf; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right"><span>20+ Years Crafting India Journeys</span></div>
+      <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html" >Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+        <a href="Byroade.html#road">By Road Ways</a>
+        <a href="bytrain.html#train" class="active">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html" class="active">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+                         <a href="review.html">Review</a>
+
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+    <section class="hero">
+  <div class="crumb">
+    <a href="Destination.html">Destination Index</a> <span>/</span> <span>Foreign Destinations</span>
+  </div>
+  <h1>Beyond India, <em>one journey</em></h1>
+  <p class="lede">Eight international destinations, each with a suggested route through its most defining places — scroll through, or jump straight to one below.</p>
+
+  <svg class="hero-route" viewBox="0 0 400 120">
+    <path id="heroPath" d="M10,90 C 100,10 260,120 390,30" fill="none" stroke="#c99a3e" stroke-width="2" stroke-dasharray="6 8" opacity=".8"/>
+    <circle r="4" fill="#fff">
+      <animateMotion dur="5s" repeatCount="indefinite">
+        <mpath href="#heroPath"/>
+      </animateMotion>
+    </circle>
+  </svg>
+</section>
+
+<nav class="quick-nav">
+  <a href="#dubai">Dubai</a>
+  <a href="#bangkok">Bangkok</a>
+  <a href="#maldives">Maldives</a>
+  <a href="#singapore">Singapore</a>
+  <a href="#switzerland">Switzerland</a>
+  <a href="#kyoto">Kyoto</a>
+  <a href="#london">London</a>
+  <a href="#paris">Paris</a>
+</nav>
+
+<!-- ============================= DUBAI ============================= -->
+<section class="region-block" id="dubai">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 01</div>
+      <h2>Dubai, UAE</h2>
+      <p>Desert skyline meets record-breaking luxury, where futuristic towers rise straight out of the sand.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/dubai-card/600/400" alt="Dubai, UAE" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/burj-khalifa/900/700" alt="Burj Khalifa & Downtown Dubai" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Burj Khalifa &amp; Downtown</h3>
+        <p>Downtown Dubai is anchored by the Burj Khalifa, the world's tallest building, with observation decks on the 124th and 148th floors offering views across the entire city and coastline. Below it, the Dubai Fountain performs choreographed water shows set to music every half hour after sunset, best watched from the boardwalk or a lakeside café. The Dubai Mall, one of the largest in the world, connects directly to the tower and holds an aquarium, an ice rink, and hundreds of stores. Souk Al Bahar, just across the water, offers a quieter Arabian-style alternative with river-view restaurants. Downtown works best in the evening, when the heat eases and the fountain and tower lights come alive together.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Mar</span><span class="tag">Known for: Burj Khalifa &amp; Dubai Fountain</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/dubai-marina/900/700" alt="Dubai Marina" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>Dubai Marina</h3>
+        <p>Dubai Marina is a man-made canal city lined with high-rise towers, yachts, and a waterfront promenade known as The Walk, popular for evening strolls and outdoor dining. Marina cruises, from traditional dhow dinners to speedboat tours, depart regularly and pass beneath the illuminated skyline after dark. JBR Beach sits just steps away, giving the district both a city and coastal character in the same afternoon. Bluewaters Island, connected by a short bridge, holds Ain Dubai, one of the world's largest observation wheels, along with beachside cafés. The Marina Mall and a dense strip of restaurants make this one of Dubai's most walkable, self-contained neighbourhoods.</p>
+        <div class="tags"><span class="tag">Best time: Oct – Apr</span><span class="tag">Known for: Waterfront Skyline &amp; Yachts</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/palm-jumeirah/900/700" alt="Palm Jumeirah" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>Palm Jumeirah</h3>
+        <p>Palm Jumeirah is an artificial palm-shaped island visible from space, home to beachfront resorts, private villas, and The Pointe's fountain shows facing the Atlantis hotel. The View at The Palm observation deck gives a full aerial perspective of the island's fronds and surrounding coastline. Atlantis The Palm anchors the tip of the island with a waterpark, aquarium, and marine habitat open to day visitors. Boardwalk paths along the outer crescent offer quieter beach access away from the main resort crowds. A monorail connects the length of the island, making it easy to combine beach time with dining and shopping without needing a car.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Mar</span><span class="tag">Known for: Artificial Island &amp; Resorts</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/old-dubai/900/700" alt="Old Dubai" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Old Dubai</h3>
+        <p>Old Dubai, centred around the Al Fahidi Historic District, preserves the city's pre-oil past with wind-tower architecture, narrow lanes, and small museums built into restored courtyard houses. Abras, traditional wooden boats, ferry passengers across Dubai Creek for a small fare, connecting the historic Deira and Bur Dubai sides. The Gold Souk and Spice Souk sit within walking distance of each other, packed with jewellery stalls and sacks of saffron, dried limes, and frankincense. The Dubai Museum, housed in the Al Fahidi Fort, traces the emirate's transformation from a fishing and pearling settlement into a modern global city. This district offers the clearest contrast to Dubai's newer, high-rise districts.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Mar</span><span class="tag">Known for: Souks &amp; Dubai Creek</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= BANGKOK ============================= -->
+<section class="region-block" id="bangkok">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 02</div>
+      <h2>Bangkok, Thailand</h2>
+      <p>Street food, temples, and river life set the pace of a city that never fully slows down.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/bangkok-card/600/400" alt="Bangkok, Thailand" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/grand-palace/900/700" alt="Grand Palace & Wat Phra Kaew" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Grand Palace &amp; Wat Phra Kaew</h3>
+        <p>The Grand Palace has served as the official residence of Thai kings since 1782, its walled complex holding gleaming spires, gilded stupas, and intricately tiled pavilions. Wat Phra Kaew, within the same grounds, houses the revered Emerald Buddha, carved from a single block of jade and dressed in seasonal robes changed by the king three times a year. Murals lining the surrounding cloisters depict the entire Ramakien epic across more than a hundred painted panels. Modest dress covering shoulders and knees is required for entry, with wraps available to rent at the gate. Early morning visits help avoid both the heat and the largest tour groups, which build steadily through midday.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Feb</span><span class="tag">Known for: Royal Architecture &amp; Emerald Buddha</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/chatuchak-market/900/700" alt="Chatuchak Weekend Market" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>Chatuchak Weekend Market</h3>
+        <p>Chatuchak is one of the largest weekend markets in the world, spread across more than eight thousand stalls selling everything from vintage clothing to handmade ceramics and exotic plants. The market is organised into loosely themed sections, though most visitors end up wandering by instinct through the maze of narrow, covered lanes. Food stalls scattered throughout serve regional Thai dishes rarely found in more touristed parts of the city, alongside fresh coconut ice cream and mango sticky rice. Live music bars and rooftop cafés around the market's edges offer a place to rest once the crowds and heat become overwhelming. Chatuchak is open primarily on Saturdays and Sundays, drawing both locals and visitors in equal measure.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Feb</span><span class="tag">Known for: Weekend Market &amp; Street Food</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/chao-phraya/900/700" alt="Chao Phraya River" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>Chao Phraya River</h3>
+        <p>The Chao Phraya cuts through the heart of Bangkok, with public express boats offering one of the cheapest and most scenic ways to move between the old city and its temples. Sunset dinner cruises pass illuminated landmarks including Wat Arun and the Rama VIII Bridge, often with live music on board. Smaller canals, or khlongs, branch off the main river into quieter residential districts where traditional teak houses still stand on stilts above the water. Floating markets further from the centre, such as Damnoen Saduak, extend the river theme into full boat-based trading. The river remains central to how the city moves, eats, and, in some neighbourhoods, still lives.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Feb</span><span class="tag">Known for: River Cruises &amp; Khlongs</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/wat-arun/900/700" alt="Wat Arun" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Wat Arun</h3>
+        <p>Wat Arun, the Temple of Dawn, rises directly from the western bank of the Chao Phraya, its central prang decorated entirely with fragments of Chinese porcelain donated by devotees. Steep steps lead partway up the tower for closer views of the intricate mosaic work and the river below. The temple is best photographed from across the water at Tha Tien pier, especially around sunset when the spire catches the last light. A short ferry ride connects Wat Arun to the older temples and palace complex on the opposite bank, making it easy to pair with a full day of temple visits. Evening illumination gives the tower a different, more dramatic character after dark.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Feb</span><span class="tag">Known for: Riverside Temple &amp; Porcelain Mosaics</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================= MALDIVES ============================= -->
+<section class="region-block" id="maldives">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 03</div>
+      <h2>Maldives</h2>
+      <p>Overwater villas on a turquoise atoll, built entirely around the ocean surrounding them.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/maldives-card/600/400" alt="Maldives" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/overwater-villas/900/700" alt="Overwater Villas" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Overwater Villas</h3>
+        <p>Resorts across the Maldives are typically built on their own private island, with overwater villas extending out on stilts above the lagoon, often including glass floor panels for fish-watching from bed. Most islands operate on an all-inclusive basis, with speedboat or seaplane transfers arranged directly from the resort rather than through a shared airport terminal. Sunset views are a fixed part of daily life here, with most villas facing either the sunrise or sunset side of the island depending on the reef layout. Spa pavilions built over the water and infinity pools blending into the lagoon are near-universal features. Each resort tends to cultivate its own distinct atmosphere, from family-friendly to strictly adults-only.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Apr</span><span class="tag">Known for: Overwater Villas &amp; Seaplane Transfers</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/house-reef/900/700" alt="House Reef Snorkelling" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>House Reef Snorkelling</h3>
+        <p>Many Maldivian resorts sit directly on a house reef, allowing guests to snorkel straight from the beach or their villa steps without needing a boat trip. Reef sharks, rays, and turtles are commonly spotted even in shallow lagoon water, particularly around dawn and dusk feeding times. Deeper dive sites further from shore include coral pinnacles known as thilas and channel dives where manta rays gather seasonally to feed. Most resorts run dedicated dive centres offering courses for beginners alongside guided trips for certified divers. Coral bleaching has affected some reefs in recent years, making resort choice and reef health worth checking ahead of a booking focused on marine life.</p>
+        <div class="tags"><span class="tag">Best time: Dec – Apr</span><span class="tag">Known for: Coral Reefs &amp; Manta Rays</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/male-city/900/700" alt="Malé City" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>Malé City</h3>
+        <p>Malé, the Maldivian capital, is one of the most densely populated islands in the world, packed with narrow streets, markets, and low-rise buildings just a short boat ride from the airport. The Old Friday Mosque, built from coral stone with intricate lacquer work inside, remains one of the oldest structures still standing in the country. The local fish market operates daily near the harbour, giving a direct look at the tuna-based economy underpinning much of Maldivian life. Most visitors pass through Malé briefly en route to a resort island, though a half-day stop offers a very different picture of the country than its resort islands show. Local ferries connect Malé to nearby inhabited islands for a lower-cost alternative to resort stays.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Apr</span><span class="tag">Known for: Old Friday Mosque &amp; Local Markets</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/sandbank-island/900/700" alt="Sandbanks & Uninhabited Islands" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Sandbanks &amp; Uninhabited Islands</h3>
+        <p>Beyond the resort islands, the Maldives holds hundreds of uninhabited sandbanks and islets that appear and shift with the tides, often used for day-trip picnics arranged by nearby resorts. Sandbank excursions typically include a private setup with shade, snorkelling gear, and a packed lunch, with the sandbank sometimes fully submerged at high tide. Local island tourism has grown on a handful of inhabited but non-resort islands, offering a budget-friendly alternative with guesthouses and public 'bikini beaches' set apart from local swimming areas. Dolphin cruises at dusk are a common add-on from most bases in the region. These uninhabited stretches of sand are often the single most photographed element of a Maldives trip.</p>
+        <div class="tags"><span class="tag">Best time: Nov – Apr</span><span class="tag">Known for: Sandbank Picnics &amp; Dolphin Cruises</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= SINGAPORE ============================= -->
+<section class="region-block" id="singapore">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 04</div>
+      <h2>Singapore</h2>
+      <p>Gardens, skyline, and island efficiency, packed into one of the most compact city-states in the world.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/singapore-card/600/400" alt="Singapore" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/gardens-by-bay/900/700" alt="Gardens by the Bay" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Gardens by the Bay</h3>
+        <p>Gardens by the Bay centres on the Supertree Grove, a set of vertical gardens up to 50 metres tall that light up in a choreographed evening show set to music. The Cloud Forest and Flower Dome conservatories recreate cool-climate ecosystems inside glass biomes, holding everything from a 35-metre indoor waterfall to seasonal tulip displays. An elevated walkway, the OCBC Skyway, connects several supertrees for views across the gardens and Marina Bay skyline. The gardens sit directly beside Marina Bay Sands, making it easy to combine both landmarks in a single visit. Evening visits are generally preferred, both for cooler temperatures and the nightly light show across the supertrees.</p>
+        <div class="tags"><span class="tag">Best time: Feb – Apr</span><span class="tag">Known for: Supertree Grove &amp; Conservatories</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/marina-bay-sands/900/700" alt="Marina Bay Sands & Skyline" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>Marina Bay Sands &amp; Skyline</h3>
+        <p>Marina Bay Sands is instantly recognisable for its three towers topped by a ship-shaped SkyPark, home to an infinity pool reserved for hotel guests and a public observation deck open to all visitors. The Merlion statue, a half-lion half-fish figure and unofficial symbol of Singapore, sits along the waterfront a short walk away. Free light and water shows, Spectra, run nightly across the bay, projected onto fountains and screens facing the Marina Bay Sands towers. The ArtScience Museum, shaped like a lotus flower, hosts rotating exhibitions blending art, science, and technology. This district represents the most photographed skyline in Singapore, especially at dusk when the towers and water reflect the fading light.</p>
+        <div class="tags"><span class="tag">Best time: Feb – Apr</span><span class="tag">Known for: Skyline &amp; Marina Bay</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/sentosa-island/900/700" alt="Sentosa Island" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>Sentosa Island</h3>
+        <p>Sentosa Island, connected to the mainland by cable car, monorail, or a short walkway, functions as Singapore's main resort and entertainment district. Universal Studios Singapore anchors the island alongside S.E.A. Aquarium, one of the largest in the region, and several beach clubs along the southern shoreline. Fort Siloso, a preserved coastal artillery fort from the colonial and wartime era, offers a quieter historical counterpoint to the island's theme-park energy. Cable car rides between Mount Faber and Sentosa give sweeping views over the harbour and surrounding container ports. The island suits both full-day theme park visits and shorter half-day beach or fort excursions depending on pace.</p>
+        <div class="tags"><span class="tag">Best time: Feb – Apr</span><span class="tag">Known for: Theme Parks &amp; Beaches</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/chinatown-singapore/900/700" alt="Chinatown & Little India" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Chinatown &amp; Little India</h3>
+        <p>Singapore's Chinatown blends restored shophouses, incense-filled temples, and hawker centres serving some of the city's best-known street food at low, government-subsidised prices. The Buddha Tooth Relic Temple anchors the district's religious side, while nearby Sri Mariamman Temple represents the area's older Hindu roots predating much of the surrounding development. A short train ride away, Little India offers a completely different sensory register, with flower garlands, spice shops, and the ornate Sri Veeramakaliamman Temple lining Serangoon Road. Tekka Centre serves as the neighbourhood's main wet market and food hub, popular for South Indian breakfasts. Together these districts show a side of Singapore distinct from its glass-and-steel financial core.</p>
+        <div class="tags"><span class="tag">Best time: Feb – Apr</span><span class="tag">Known for: Heritage Districts &amp; Street Food</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= SWITZERLAND ============================= -->
+<section class="region-block" id="switzerland">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 05</div>
+      <h2>Switzerland</h2>
+      <p>Alpine lakes between snow-capped peaks, connected by some of the most scenic rail routes in the world.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/switzerland-card/600/400" alt="Switzerland" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/interlaken-jungfrau/900/700" alt="Interlaken & Jungfraujoch" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Interlaken &amp; Jungfraujoch</h3>
+        <p>Interlaken sits between Lake Thun and Lake Brienz, functioning as the main base for reaching Jungfraujoch, known as the 'Top of Europe' and Europe's highest railway station. The cogwheel train climbs through tunnels cut directly into the mountain, arriving at an observation deck with year-round snow and views over the Aletsch Glacier, the longest in the Alps. Paragliding over the valley is a common activity for those staying closer to the town itself, launching from nearby hills with the lakes visible below. Harder Kulm, reached by funicular, offers a lower-altitude but still expansive viewpoint without the cost of the full Jungfraujoch trip. Interlaken's town centre remains compact and walkable, built almost entirely around access to the surrounding peaks.</p>
+        <div class="tags"><span class="tag">Best time: Jun – Sep</span><span class="tag">Known for: Alpine Railways &amp; Glacier Views</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/lake-geneva/900/700" alt="Lake Geneva & Montreux" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>Lake Geneva &amp; Montreux</h3>
+        <p>Lake Geneva stretches along the French-Swiss border, with Montreux on its eastern shore known for a mild microclimate that supports palm trees and vineyard terraces uncommon elsewhere in Switzerland. Chillon Castle, built on a rocky islet at the lake's edge, remains one of the most visited historic sites in the country, with turrets and dungeons dating back centuries. Geneva itself, at the lake's western tip, is known for the Jet d'Eau fountain and its role as a hub for international diplomacy. Lavaux's terraced vineyards, a UNESCO World Heritage site, line the slopes between Lausanne and Montreux and are best explored on foot or by the small wine-region train. The lake's promenades make it one of the more relaxed, walkable stretches of the country.</p>
+        <div class="tags"><span class="tag">Best time: May – Sep</span><span class="tag">Known for: Lakeside Castles &amp; Vineyards</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/zermatt-matterhorn/900/700" alt="Zermatt & Matterhorn" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>Zermatt &amp; Matterhorn</h3>
+        <p>Zermatt is a car-free alpine village built beneath the Matterhorn, one of the most photographed mountains in the world, reachable only by train or electric vehicle from the valley below. The Gornergrat railway climbs to a viewpoint directly facing the Matterhorn, passing through pine forests and open alpine meadows along the way. In winter, Zermatt connects to Cervinia on the Italian side, forming one of the largest cross-border ski areas in the Alps. Summer visitors favour hiking trails around Riffelsee, a small lake that mirrors the Matterhorn's peak on clear, still mornings. The village's narrow streets, wooden chalets, and mountain-facing cafés keep the pace deliberately slower than larger Swiss towns.</p>
+        <div class="tags"><span class="tag">Best time: Jun – Sep, Dec – Mar</span><span class="tag">Known for: Matterhorn Views &amp; Car-Free Village</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/lucerne-switzerland/900/700" alt="Lucerne" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Lucerne</h3>
+        <p>Lucerne sits on the edge of Lake Lucerne, its old town centred around the Chapel Bridge, a covered wooden footbridge dating to the 14th century and one of the most recognisable landmarks in Switzerland. The Lion Monument, carved directly into a rock face, commemorates Swiss Guards who died during the French Revolution and remains a quieter, more contemplative stop than the busy bridge area. Boat cruises across the lake reach smaller villages and offer close-up views of Mount Pilatus and Rigi, both accessible by cogwheel railway or cable car for panoramic Alpine views. The old town's frescoed buildings and covered market squares make Lucerne one of the most compact, walkable bases for exploring central Switzerland. Its position roughly midway between Zurich and the deeper Alps makes it a natural stopover point.</p>
+        <div class="tags"><span class="tag">Best time: May – Sep</span><span class="tag">Known for: Chapel Bridge &amp; Lake Cruises</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============================= KYOTO ============================= -->
+<section class="region-block" id="kyoto">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 06</div>
+      <h2>Kyoto, Japan</h2>
+      <p>Temples, cherry blossoms, and quiet gardens preserve Japan's former imperial capital almost intact.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/kyoto-card/600/400" alt="Kyoto, Japan" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/fushimi-inari/900/700" alt="Fushimi Inari Shrine" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Fushimi Inari Shrine</h3>
+        <p>Fushimi Inari Taisha is famous for thousands of vermillion torii gates forming continuous tunnels up the wooded slopes of Mount Inari, each gate donated by a business or individual seeking good fortune. The full loop to the summit takes two to three hours on foot, though most visitors walk only the first stretch to Yotsutsuji intersection, which already offers views over the city. Small fox statues, believed to be messengers of the rice deity Inari, appear throughout the shrine grounds in place of the lion-dogs found at most other shrines. Food stalls near the entrance sell inari sushi and other snacks associated with the shrine's fox symbolism. Early morning visits, before large tour groups arrive, offer the clearest photographs of the gate tunnels.</p>
+        <div class="tags"><span class="tag">Best time: Mar – May, Oct – Nov</span><span class="tag">Known for: Torii Gate Tunnels</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/arashiyama-bamboo/900/700" alt="Arashiyama Bamboo Grove" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>Arashiyama Bamboo Grove</h3>
+        <p>The Arashiyama Bamboo Grove is a short but striking walking path lined with towering bamboo stalks that filter light into a distinctive green glow, best experienced early in the morning before crowds fill the narrow lane. Nearby, Tenryu-ji Temple's garden, a UNESCO World Heritage site, blends borrowed scenery techniques with the surrounding mountains visible beyond its pond. The Togetsukyo Bridge crosses the Katsura River at the district's edge, with rental boats available for a slower view of the same landscape from the water. Monkey Park Iwatayama, a short climb up a nearby hill, adds wildlife viewing alongside panoramic city views. Arashiyama sits far enough from central Kyoto to feel distinctly rural despite being a short train ride away.</p>
+        <div class="tags"><span class="tag">Best time: Mar – May, Oct – Nov</span><span class="tag">Known for: Bamboo Grove &amp; Riverside Temples</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/kiyomizu-gion/900/700" alt="Kiyomizu-dera & Gion" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>Kiyomizu-dera &amp; Gion</h3>
+        <p>Kiyomizu-dera's main hall is built on a wooden stage supported by pillars without a single nail, extending out over the hillside with sweeping views across Kyoto, especially vivid during autumn foliage season. The approach through Higashiyama's preserved streets, lined with traditional shops selling pottery and sweets, sets the pace for a slower, walkable visit. A short distance away, Gion remains Kyoto's most famous geisha district, its wooden machiya townhouses and stone-paved lanes occasionally offering glimpses of geiko and maiko heading to evening appointments. Yasaka Shrine marks the entrance to Gion and hosts the Gion Matsuri festival each July, one of Japan's most significant annual events. Evening walks through this district, once the lanterns are lit, carry a noticeably different atmosphere than the daytime temple crowds.</p>
+        <div class="tags"><span class="tag">Best time: Mar – May, Oct – Nov</span><span class="tag">Known for: Hillside Temple &amp; Geisha District</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/kinkakuji-golden-pavilion/900/700" alt="Kinkaku-ji (Golden Pavilion)" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Kinkaku-ji (Golden Pavilion)</h3>
+        <p>Kinkaku-ji, the Golden Pavilion, is covered in gold leaf across its top two floors and reflects almost perfectly in the pond it overlooks, making it one of the most photographed buildings in Japan. Originally built as a retirement villa before being converted into a Zen temple, the current structure is a mid-20th-century reconstruction following a fire, though it follows the original design closely. The surrounding strolling garden is arranged to reveal the pavilion from several distinct angles along a single walking path rather than allowing entry into the building itself. Seasonal changes affect the visit considerably, with snow-dusted gold in winter and vivid autumn foliage framing the pond in November. Visits are typically brief but almost always included on a first trip to Kyoto given the pavilion's iconic status.</p>
+        <div class="tags"><span class="tag">Best time: Nov, Mar – Apr</span><span class="tag">Known for: Gold-Leaf Pavilion &amp; Reflecting Pond</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= LONDON ============================= -->
+<section class="region-block" id="london">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 07</div>
+      <h2>London, UK</h2>
+      <p>Centuries of history along the Thames, layered beneath a modern global capital.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/london-card/600/400" alt="London, UK" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/westminster-bigben/900/700" alt="Westminster & Big Ben" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Westminster &amp; Big Ben</h3>
+        <p>The Palace of Westminster houses the UK Parliament and is topped by the Elizabeth Tower, commonly known as Big Ben after its largest bell, best photographed from Westminster Bridge across the Thames. Westminster Abbey, next door, has hosted coronations since 1066 and holds the tombs of numerous monarchs, scientists, and writers within its Gothic interior. The London Eye, directly across the river, offers a slow-turning aerial view over the entire Westminster skyline and beyond on clear days. Downing Street and the surrounding government district sit within easy walking distance, marked by heavy but generally unobtrusive security. This cluster of landmarks remains the most compact and recognisable stretch of central London for a first visit.</p>
+        <div class="tags"><span class="tag">Best time: Apr – Sep</span><span class="tag">Known for: Parliament &amp; Westminster Abbey</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/tower-of-london/900/700" alt="Tower of London & Tower Bridge" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>Tower of London &amp; Tower Bridge</h3>
+        <p>The Tower of London, a nearly thousand-year-old fortress on the Thames, has served as a royal residence, armoury, and prison, and now holds the Crown Jewels behind reinforced glass. Yeoman Warders, known as Beefeaters, lead guided tours through the grounds, recounting centuries of executions, imprisonments, and royal intrigue tied to the site. Tower Bridge, immediately adjacent, is often mistaken for London Bridge and offers a glass-floored walkway between its two towers with views straight down onto the river traffic below. The bridge's bascules still raise several times a week for large vessels, a schedule published in advance for those hoping to see it in motion. Together the two landmarks form one of the most concentrated historical stretches along the entire river.</p>
+        <div class="tags"><span class="tag">Best time: Apr – Sep</span><span class="tag">Known for: Crown Jewels &amp; Tower Bridge</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/british-museum/900/700" alt="British Museum" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>British Museum</h3>
+        <p>The British Museum holds one of the largest collections of world history and culture anywhere, including the Rosetta Stone, the Parthenon sculptures, and an extensive Egyptian collection spanning multiple galleries. Entry remains free, with the Great Court's glass-roofed courtyard, designed by Norman Foster, serving as a striking central hub connecting the museum's wings. The scale of the collection means most visitors focus on two or three galleries rather than attempting the full museum in one visit. Bloomsbury, the surrounding neighbourhood, holds a dense cluster of independent bookshops and squares tied historically to London's literary and academic circles. Provenance disputes over several major artefacts, including the Parthenon marbles, remain an ongoing and openly discussed part of the museum's public conversation.</p>
+        <div class="tags"><span class="tag">Best time: Year-round</span><span class="tag">Known for: World History Collections</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/southbank-camden/900/700" alt="Camden & Southbank" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Camden &amp; Southbank</h3>
+        <p>Camden Market grew out of London's punk and alternative music scene and remains known for vintage clothing stalls, street food from around the world, and canal-side walks along Regent's Canal. Southbank, on the opposite side of the city along the Thames, holds a very different character built around the Southbank Centre, Tate Modern's converted power station galleries, and Borough Market's food stalls beneath Victorian railway arches. The riverside walk between the London Eye and Tower Bridge passes through Southbank almost entirely on foot, taking in street performers, second-hand book stalls, and near-constant river views. Shakespeare's Globe, a reconstruction of the original Elizabethan theatre, sits within this same stretch and still stages performances in the open-air yard. Both districts offer a more current, lived-in counterpoint to London's older ceremonial landmarks.</p>
+        <div class="tags"><span class="tag">Best time: Apr – Sep</span><span class="tag">Known for: Markets &amp; Riverside Culture</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= PARIS ============================= -->
+<section class="region-block" id="paris">
+  <div class="region-head">
+    <div class="head-copy">
+      <div class="index">Destination 08</div>
+      <h2>Paris, France</h2>
+      <p>Café culture beneath the Eiffel Tower, set against centuries of art and architecture along the Seine.</p>
+      <span class="stops-count">4 stops on this route</span>
+    </div>
+    <div class="region-photo"><img src="https://picsum.photos/seed/paris-card/600/400" alt="Paris, France" loading="lazy"></div>
+  </div>
+
+  <div class="timeline">
+    <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/eiffel-trocadero/900/700" alt="Eiffel Tower & Trocadéro" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 01</div>
+        <h3>Eiffel Tower &amp; Trocadéro</h3>
+        <p>The Eiffel Tower, completed in 1889 for the World's Fair, remains Paris's defining landmark, with lifts and stairs leading to three levels including a champagne bar near the summit. The best full-tower photographs come from Trocadéro's terrace across the Seine, especially at dusk when the tower's hourly light show begins on the hour after dark. Champ de Mars, the long park stretching from the tower's base, fills with picnicking crowds on warm evenings and offers an alternative ground-level view without the crowds directly beneath the structure. River cruises departing from nearby piers pass directly beneath the tower before continuing along the Seine's central stretch. Booking timed-entry tickets in advance significantly reduces wait times, particularly during summer months.</p>
+        <div class="tags"><span class="tag">Best time: Apr – Jun, Sep – Oct</span><span class="tag">Known for: Eiffel Tower &amp; Seine Views</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/louvre-museum/900/700" alt="Louvre Museum" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 02</div>
+        <h3>Louvre Museum</h3>
+        <p>The Louvre, entered through I.M. Pei's glass pyramid, holds an encyclopaedic collection spanning ancient Egyptian artefacts, Greek sculpture, and Renaissance painting, including the Mona Lisa in its own dedicated room. The museum's scale makes a single day insufficient to see everything, and most visitors plan a focused route through two or three wings rather than attempting a full survey. The former royal palace itself, with ornate ceilings and gilded halls, is often as striking as the artwork it now displays. Tuileries Garden extends directly from the museum's western entrance, offering a formal French garden setting for a break between galleries. Evening opening hours on select days help avoid the heaviest daytime crowds around the most famous works.</p>
+        <div class="tags"><span class="tag">Best time: Apr – Jun, Sep – Oct</span><span class="tag">Known for: Mona Lisa &amp; Royal Palace</span></div>
+      </div>
+    </div>
+
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/montmartre-sacrecoeur/900/700" alt="Montmartre & Sacré-Cœur" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 03</div>
+        <h3>Montmartre &amp; Sacré-Cœur</h3>
+        <p>Montmartre sits on Paris's highest hill, its winding cobblestone streets once home to Picasso, Van Gogh, and other artists who shaped the neighbourhood's bohemian reputation in the late 19th century. The Basilica of Sacré-Cœur, with its distinctive white domes, sits at the hill's summit, offering one of the widest panoramic views over the city from its front steps. Place du Tertre, just behind the basilica, remains filled with working artists offering portraits and quick sketches to passersby. The Moulin Rouge, at the district's base, continues to stage cabaret shows in the same building that helped define the genre in the 1890s. Funicular access from the base of the hill offers a quicker alternative to the steep stairways climbing through the neighbourhood.</p>
+        <div class="tags"><span class="tag">Best time: Apr – Jun, Sep – Oct</span><span class="tag">Known for: Basilica Views &amp; Artist Squares</span></div>
+      </div>
+    </div>
+
+    <div class="stop flip">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="https://picsum.photos/seed/seine-notredame/900/700" alt="Seine River & Notre-Dame" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 04</div>
+        <h3>Seine River &amp; Notre-Dame</h3>
+        <p>Notre-Dame Cathedral, on Île de la Cité in the middle of the Seine, is undergoing continued restoration following the 2019 fire, with the surrounding square still drawing visitors to view its Gothic facade from outside. Bouquiniste stalls line the riverbanks nearby, selling secondhand books and prints from green metal boxes fixed permanently to the embankment walls, a tradition recognised by UNESCO. Île Saint-Louis, just behind Notre-Dame, offers a quieter residential stretch known for small ice cream shops and narrow streets largely free of the city's louder tourist routes. Evening river cruises depart regularly from piers near the cathedral, passing beneath the city's ornate bridges as they light up after dark. The river remains the clearest organising line through central Paris, with most major landmarks visible from a single continuous walk along its banks.</p>
+        <div class="tags"><span class="tag">Best time: Apr – Jun, Sep – Oct</span><span class="tag">Known for: Notre-Dame &amp; Riverside Walks</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var stopObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) entry.target.classList.add('in-view');
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.stop').forEach(function (el) { stopObserver.observe(el); });
+
+  var routeObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) entry.target.querySelector('.route-svg').classList.add('in-view');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.timeline').forEach(function (el) { routeObserver.observe(el); });
+});
+</script>

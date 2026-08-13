@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --reg-cream:#F7F2E7;
+    --reg-green-deep:#1F4D2C;
+    --reg-green-mid:#3E7A4C;
+    --reg-sage:#7FA66B;
+    --reg-leaf-bg:#DCEAD1;
+    --reg-ink:#233827;
+    --reg-line:rgba(31,77,44,0.15);
+    --reg-error:#C1432E;
+  }
+  .reg-wrap *{ box-sizing:border-box; }
+  .reg-wrap{
+    font-family:'Inter', sans-serif;
+    color:var(--reg-ink);
+    position:relative;
+    background:var(--reg-cream);
+    padding:3.5rem 1.2rem 4rem;
+    overflow:hidden;
+    min-height:100vh;
+  }
+  .reg-wrap h1, .reg-wrap h2, .reg-wrap h3{ font-family:'Fraunces', serif; }
+
+  /* ---------- ANIMATED LEAF BACKGROUND ---------- */
+  .reg-bg{
+    position:absolute; inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .reg-bg::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 20%, rgba(127,166,107,0.16), transparent 55%),
+               radial-gradient(circle at 80% 75%, rgba(62,122,76,0.14), transparent 55%);
+  }
+  .reg-leaf{
+    position:absolute;
+    bottom:-10%;
+    opacity:0.55;
+    animation:regFloatUp linear infinite;
+    color:var(--reg-sage);
+  }
+  .reg-leaf svg{ width:100%; height:100%; display:block; }
+  @keyframes regFloatUp{
+    0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+    8%{ opacity:0.55; }
+    92%{ opacity:0.5; }
+    100%{ transform:translateY(-115vh) rotate(180deg); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reg-leaf{ animation:none; display:none; }
+  }
+
+  /* ---------- HERO STRIP ---------- */
+  .reg-hero{
+    position:relative; z-index:2;
+    max-width:640px;
+    margin:0 auto 2.2rem;
+    text-align:center;
+  }
+  .reg-hero .reg-eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:0.7rem;
+    font-weight:600;
+    color:var(--reg-green-mid);
+    display:block;
+    margin-bottom:0.7rem;
+  }
+  .reg-hero h1{
+    font-size:clamp(1.8rem, 6vw, 2.5rem);
+    font-weight:700;
+    color:var(--reg-green-deep);
+    margin-bottom:0.7rem;
+  }
+  .reg-hero p{
+    font-size:0.92rem;
+    color:#4d5f4f;
+    max-width:440px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+
+  /* ---------- FORM CARD ---------- */
+  .reg-card{
+    position:relative; z-index:2;
+    max-width:640px;
+    margin:0 auto;
+    background:rgba(255,253,247,0.9);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--reg-line);
+    border-radius:22px;
+    padding:2.2rem 1.8rem;
+    box-shadow:0 30px 60px -30px rgba(31,77,44,0.35);
+  }
+
+  .reg-section-title{
+    display:flex; align-items:center; gap:0.6rem;
+    font-size:0.78rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--reg-green-mid);
+    margin:1.6rem 0 1rem;
+  }
+  .reg-section-title:first-of-type{ margin-top:0; }
+  .reg-section-title::before{
+    content:"";
+    width:20px; height:2px;
+    background:var(--reg-sage);
+    border-radius:2px;
+  }
+
+  .reg-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.1rem;
+  }
+  .reg-field{ margin-bottom:1.1rem; }
+  .reg-field.full{ grid-column:1 / -1; }
+  .reg-field label{
+    display:block;
+    font-size:0.82rem;
+    font-weight:600;
+    margin-bottom:0.4rem;
+    color:var(--reg-green-deep);
+  }
+  .reg-field label .reg-opt{
+    font-weight:400;
+    font-size:0.72rem;
+    color:#7a8a7a;
+  }
+  .reg-field input[type="text"],
+  .reg-field input[type="tel"],
+  .reg-field input[type="email"],
+  .reg-field input[type="password"],
+  .reg-field input[type="date"],
+  .reg-field select,
+  .reg-field textarea{
+    width:100%;
+    border:1.5px solid var(--reg-line);
+    border-radius:10px;
+    padding:0.72rem 0.9rem;
+    font-size:0.88rem;
+    font-family:'Inter', sans-serif;
+    background:var(--reg-cream);
+    color:var(--reg-ink);
+  }
+  .reg-field input:focus, .reg-field select:focus, .reg-field textarea:focus{
+    outline:2px solid var(--reg-sage);
+    outline-offset:1px;
+    border-color:var(--reg-sage);
+  }
+  .reg-field textarea{ min-height:80px; resize:vertical; }
+
+  .reg-error-msg{
+    display:none;
+    font-size:0.76rem;
+    color:var(--reg-error);
+    margin-top:0.35rem;
+  }
+  .reg-field.invalid input,
+  .reg-field.invalid textarea{
+    border-color:var(--reg-error);
+  }
+  .reg-field.invalid .reg-error-msg{ display:block; }
+
+  .reg-gender-row{
+    display:flex; gap:1.2rem; flex-wrap:wrap;
+    padding-top:0.3rem;
+  }
+  .reg-gender-row label{
+    display:flex; align-items:center; gap:0.4rem;
+    font-size:0.85rem; font-weight:500;
+    color:var(--reg-ink);
+    cursor:pointer;
+  }
+  .reg-gender-row input{ accent-color:var(--reg-green-deep); width:16px; height:16px; }
+
+  .reg-photo-upload{
+    display:flex; align-items:center; gap:1rem;
+  }
+  .reg-photo-preview{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:var(--reg-leaf-bg);
+    border:1.5px dashed var(--reg-sage);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem;
+    color:var(--reg-green-mid);
+    overflow:hidden;
+    flex-shrink:0;
+  }
+  .reg-photo-preview img{ width:100%; height:100%; object-fit:cover; }
+  .reg-file-btn{
+    border:1.5px solid var(--reg-green-deep);
+    color:var(--reg-green-deep);
+    background:transparent;
+    font-size:0.82rem;
+    font-weight:600;
+    padding:0.55rem 1rem;
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .reg-file-btn input{ display:none; }
+
+  .reg-strength{
+    height:5px;
+    border-radius:4px;
+    background:var(--reg-line);
+    margin-top:0.5rem;
+    overflow:hidden;
+  }
+  .reg-strength-fill{
+    height:100%;
+    width:0%;
+    background:var(--reg-error);
+    transition:width 0.25s ease, background 0.25s ease;
+  }
+  .reg-strength-label{
+    font-size:0.72rem;
+    color:#7a8a7a;
+    margin-top:0.3rem;
+  }
+
+  .reg-terms{
+    display:flex; align-items:flex-start; gap:0.6rem;
+    margin:1.4rem 0 1.2rem;
+    font-size:0.85rem;
+    line-height:1.5;
+  }
+  .reg-terms input{
+    accent-color:var(--reg-green-deep);
+    width:18px; height:18px;
+    margin-top:2px;
+    flex-shrink:0;
+  }
+  .reg-terms a{ color:var(--reg-green-mid); font-weight:600; text-decoration:underline; }
+
+  .reg-btn-row{
+    display:flex; gap:0.9rem;
+  }
+  .reg-btn{
+    flex:1;
+    padding:0.9rem;
+    border-radius:12px;
+    font-weight:700;
+    font-size:0.92rem;
+    cursor:pointer;
+    border:none;
+    transition:transform 0.15s ease;
+  }
+  .reg-btn:hover{ transform:translateY(-1px); }
+  .reg-btn-primary{ background:var(--reg-green-deep); color:var(--reg-cream); }
+  .reg-btn-secondary{ background:transparent; color:var(--reg-green-deep); border:1.5px solid var(--reg-green-deep) !important; }
+
+  .reg-login-link{
+    text-align:center;
+    font-size:0.85rem;
+    margin-top:1.3rem;
+    color:#4d5f4f;
+  }
+  .reg-login-link a{ color:var(--reg-green-deep); font-weight:700; text-decoration:underline; }
+
+  @media(max-width:560px){
+    .reg-grid{ grid-template-columns:1fr; }
+    .reg-btn-row{ flex-direction:column; }
+  }
+
+  /* ---------- DARK ANIMATED BANNER (below header) ---------- */
+  .reg-dark-banner{
+    position:relative;
+    background:linear-gradient(160deg, #0E2A17 0%, #163D22 55%, #1F4D2C 100%);
+    color:var(--reg-cream);
+    padding:3.2rem 1.4rem;
+    overflow:hidden;
+    text-align:center;
+  }
+  .reg-dark-banner::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(247,242,231,0.07) 1.5px, transparent 1.5px);
+    background-size:24px 24px;
+    animation: regDotsDrift 30s linear infinite;
+  }
+  .reg-orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(4px);
+    opacity:0.5;
+  }
+  .reg-orb.o1{
+    width:260px; height:260px;
+    background:radial-gradient(circle, rgba(127,166,107,0.45), transparent 70%);
+    top:-80px; left:-60px;
+    animation: regOrbFloat 12s ease-in-out infinite;
+  }
+  .reg-orb.o2{
+    width:200px; height:200px;
+    background:radial-gradient(circle, rgba(201,161,92,0.35), transparent 70%);
+    bottom:-70px; right:-40px;
+    animation: regOrbFloat 15s ease-in-out infinite reverse;
+  }
+  @keyframes regDotsDrift{
+    0%{ background-position:0 0; }
+    100%{ background-position:480px 240px; }
+  }
+  @keyframes regOrbFloat{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(20px,-16px) scale(1.08); }
+  }
+  .reg-dark-inner{
+    position:relative; z-index:2;
+    max-width:600px;
+    margin:0 auto;
+  }
+  .reg-dark-inner .reg-eyebrow{
+    color:#C9A15C;
+    display:block;
+    margin-bottom:0.7rem;
+  }
+  .reg-dark-inner h2{
+    font-size:clamp(1.6rem, 6vw, 2.3rem);
+    font-weight:700;
+    margin-bottom:0.8rem;
+    line-height:1.2;
+  }
+  .reg-dark-inner h2 em{ font-style:italic; color:#DCEAD1; font-weight:500; }
+  .reg-dark-inner p{
+    font-size:0.92rem;
+    color:rgba(247,242,231,0.8);
+    line-height:1.6;
+    max-width:460px;
+    margin:0 auto 1.4rem;
+  }
+  .reg-dark-stats{
+    display:flex; justify-content:center; gap:2rem;
+    flex-wrap:wrap;
+  }
+  .reg-dark-stats .stat b{
+    font-family:'Fraunces', serif;
+    font-size:1.2rem;
+    color:#7FA66B;
+    display:block;
+  }
+  .reg-dark-stats .stat span{
+    font-size:0.66rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:rgba(247,242,231,0.65);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reg-dark-banner::before, .reg-orb{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right"><span>20+ Years Crafting India Journeys</span></div>
+      <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html" >Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+         <a href="bytrain.html#train" class="active">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+                         <a href="review.html">Review</a>
+
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+    <!--registration-->
+    <section class="reg-dark-banner">
+  <div class="reg-bg-image">
+    <img src="" alt="...">
+  </div>
+  <div class="reg-bg-overlay"></div>
+  <div class="reg-orb o1"></div>
+  <div class="reg-orb o2"></div>
+  <div class="reg-dark-inner">
+    <span class="reg-eyebrow">Become a Member</span>
+    <h2>Sign up once, <em>travel smarter</em> every time</h2>
+    <p>Create your sahyatri account to save destinations, track enquiries, and pick up your itinerary right where you left it — on any device.</p>
+    <div class="reg-dark-stats">...</div>
+  </div>
+</section>
+    <div class="reg-wrap">
+
+  <div class="reg-bg" id="regBg"></div>
+
+  <div class="reg-hero">
+    <span class="reg-eyebrow">Join trip</span>
+    <h1>Create your account</h1>
+    <p>Sign up to save your favourite trips, track enquiries, and get quotes tailored just for you.</p>
+  </div>
+
+  <div class="reg-card">
+    <form id="regForm" novalidate>
+
+      <div class="reg-section-title">Personal Information</div>
+      <div class="reg-grid">
+        <div class="reg-field full" id="fieldName">
+          <label>Full Name <span class="reg-opt">*</span></label>
+          <input type="text" name="name" id="regName" placeholder="e.g. Ananya Verma" oninput="validateField('name')">
+          <div class="reg-error-msg">Name should only contain letters and spaces.</div>
+        </div>
+
+        <div class="reg-field">
+          <label>Gender</label>
+          <div class="reg-gender-row">
+            <label><input type="radio" name="gender" value="Male"> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+            <label><input type="radio" name="gender" value="Other"> Other</label>
+          </div>
+        </div>
+
+        <div class="reg-field">
+          <label>Date of Birth <span class="reg-opt">(optional)</span></label>
+          <input type="date" name="date" id="regDob">
+        </div>
+
+        <div class="reg-field">
+          <label>Mobile Number <span class="reg-opt">*</span></label>
+          <input type="tel" name="mob" id="regMobile" maxlength="10" placeholder="9876543210" oninput="validateField('mobile')">
+          <div class="reg-error-msg">Mobile number must be exactly 10 digits.</div>
+        </div>
+
+        <div class="reg-field">
+          <label>Email Address <span class="reg-opt">*</span></label>
+          <input type="email"  name="email" id="regEmail" placeholder="you@email.com" oninput="validateField('email')">
+          <div class="reg-error-msg">Please enter a valid email address.</div>
+        </div>
+      </div>
+
+      <div class="reg-section-title">Address</div>
+      <div class="reg-grid">
+        <div class="reg-field full">
+          <label>Address</label>
+          <textarea id="regAddress" placeholder="House no., street, locality"></textarea>
+        </div>
+
+        <div class="reg-field">
+          <label>City</label>
+          <input type="text" id="regCity" placeholder="e.g. Pune">
+        </div>
+
+        <div class="reg-field">
+          <label>State</label>
+          <input type="text" id="regState" placeholder="e.g. Maharashtra">
+        </div>
+
+        <div class="reg-field">
+          <label>Pincode <span class="reg-opt">(optional)</span></label>
+          <input type="text" id="regPincode" maxlength="6" placeholder="411001">
+        </div>
+      </div>
+
+      <div class="reg-section-title">Account Setup</div>
+      <div class="reg-grid">
+        <div class="reg-field full">
+          <label>Username <span class="reg-opt">*</span></label>
+          <input type="text" id="regUsername" placeholder="Choose a username" oninput="validateField('username')">
+          <div class="reg-error-msg">Username is required.</div>
+        </div>
+
+        <div class="reg-field">
+          <label>Password <span class="reg-opt">*</span></label>
+          <input type="password" id="regPassword" placeholder="Minimum 8 characters" oninput="validateField('password'); updateStrength();">
+          <div class="reg-strength"><div class="reg-strength-fill" id="strengthFill"></div></div>
+          <div class="reg-strength-label" id="strengthLabel">Password strength</div>
+          <div class="reg-error-msg">Password must be at least 8 characters.</div>
+        </div>
+
+        <div class="reg-field">
+          <label>Confirm Password <span class="reg-opt">*</span></label>
+          <input type="password" id="regConfirmPassword" placeholder="Re-enter your password" oninput="validateField('confirmPassword')">
+          <div class="reg-error-msg">Passwords do not match.</div>
+        </div>
+
+        <div class="reg-field">
+          <label>Security Question <span class="reg-opt">(optional)</span></label>
+          <select id="regSecurityQ">
+            <option value="">Select a question</option>
+            <option>What is your first pet's name?</option>
+            <option>What city were you born in?</option>
+            <option>What is your mother's maiden name?</option>
+            <option>What was your first school?</option>
+          </select>
+        </div>
+
+        <div class="reg-field">
+          <label>Security Answer <span class="reg-opt">(optional)</span></label>
+          <input type="text" id="regSecurityA" placeholder="Your answer">
+        </div>
+
+        <div class="reg-field full">
+          <label>Profile Photo <span class="reg-opt">(optional)</span></label>
+          <div class="reg-photo-upload">
+            <div class="reg-photo-preview" id="photoPreview">🌿</div>
+            <label class="reg-file-btn">
+              Choose Photo
+              <input type="file" accept="image/*" onchange="previewPhoto(event)">
+            </label>
+          </div>
+        </div>
+      </div>
+       captcha code:
+                            <span style="color:red;
+                                font-size:27px; font-family:cursive;margin-left:33px">
+                                <strike id="ct1">sby3b</strike>
+                            </span>
+                            <span class="fa fa-refresh"
+                                  title="CLICK HERE FOR REFRESH YOUR CAPTCHA "
+                                  style="font-size: 32px; margin-left: 2px;
+                                  cursor: pointer" onclick="demo()"></span>
+                            <input type="hidden" name="hdn1" id="hdn1"><br>
+                            Enter Above Captcha code:
+                            <input type="text" class="form-control" name="cc1" placeholder="Enter Captcha code here "/>
+
+      <div class="reg-terms">
+        <input type="checkbox" id="regTerms" onchange="clearTermsError()">
+        <label for="regTerms">I agree to the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy Policy</a>.</label>
+      </div>
+      <div class="reg-error-msg" id="termsError" style="margin-top:-0.8rem; margin-bottom:1rem;">You must agree to the Terms &amp; Conditions to register.</div>
+
+      <div class="reg-btn-row">
+        <button type="button" class="reg-btn reg-btn-secondary" onclick="resetRegForm()">Reset</button>
+        <button type="submit" class="reg-btn reg-btn-primary">Register</button>
+      </div>
+
+      <div class="reg-login-link">Already have an account? <a href="login.html">Login</a></div>
+    </form>
+  </div>
+</div>
+    <!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+    </div>
+    <div class="footer-col">
+  <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+    <script>
+  (function(){
+    // ---------- Animated leaf background generator ----------
+    const bg = document.getElementById('regBg');
+    const leafSVG = `<svg viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C16 4 6 20 6 34c0 16 12 26 26 26 2 0 4-.2 6-.6C46 56 58 44 58 28 58 14 48 4 32 4zm-2 46C18 48 10 38 10 26c0-10 8-18 20-18 6 10 4 26-6 34 4 4 10 6 16 4-4 6-12 8-12 8z"/></svg>`;
+    const count = 14;
+    for(let i=0;i<count;i++){
+      const leaf = document.createElement('div');
+      leaf.className = 'reg-leaf';
+      const size = 18 + Math.random()*26;
+      leaf.style.width = size+'px';
+      leaf.style.height = size+'px';
+      leaf.style.left = (Math.random()*96)+'%';
+      leaf.style.animationDuration = (14 + Math.random()*14)+'s';
+      leaf.style.animationDelay = (Math.random()*16)+'s';
+      leaf.innerHTML = leafSVG;
+      bg.appendChild(leaf);
+    }
+  })();
+
+  function validateField(key){
+    const rules = {
+      name: {
+        el: document.getElementById('regName'),
+        field: document.getElementById('fieldName'),
+        test: v => /^[A-Za-z\s]+$/.test(v.trim()) && v.trim().length>0
+      },
+      mobile: {
+        el: document.getElementById('regMobile'),
+        field: document.getElementById('regMobile').closest('.reg-field'),
+        test: v => /^\d{10}$/.test(v.trim())
+      },
+      email: {
+        el: document.getElementById('regEmail'),
+        field: document.getElementById('regEmail').closest('.reg-field'),
+        test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim())
+      },
+      username: {
+        el: document.getElementById('regUsername'),
+        field: document.getElementById('regUsername').closest('.reg-field'),
+        test: v => v.trim().length>0
+      },
+      password: {
+        el: document.getElementById('regPassword'),
+        field: document.getElementById('regPassword').closest('.reg-field'),
+        test: v => v.length>=8
+      },
+      confirmPassword: {
+        el: document.getElementById('regConfirmPassword'),
+        field: document.getElementById('regConfirmPassword').closest('.reg-field'),
+        test: v => v === document.getElementById('regPassword').value && v.length>0
+      }
+    };
+    const rule = rules[key];
+    if(!rule) return true;
+    const valid = rule.test(rule.el.value);
+    rule.field.classList.toggle('invalid', !valid);
+    return valid;
+  }
+
+  function updateStrength(){
+    const val = document.getElementById('regPassword').value;
+    const fill = document.getElementById('strengthFill');
+    const label = document.getElementById('strengthLabel');
+    let score = 0;
+    if(val.length>=8) score++;
+    if(/[A-Z]/.test(val)) score++;
+    if(/[0-9]/.test(val)) score++;
+    if(/[^A-Za-z0-9]/.test(val)) score++;
+
+    const levels = [
+      {w:'0%', c:'#C1432E', l:'Password strength'},
+      {w:'25%', c:'#C1432E', l:'Weak'},
+      {w:'50%', c:'#C9A15C', l:'Fair'},
+      {w:'75%', c:'#7FA66B', l:'Good'},
+      {w:'100%', c:'#1F4D2C', l:'Strong'}
+    ];
+    const lvl = levels[val.length===0 ? 0 : score];
+    fill.style.width = lvl.w;
+    fill.style.background = lvl.c;
+    label.textContent = lvl.l;
+  }
+
+  function previewPhoto(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      document.getElementById('photoPreview').innerHTML = `<img src="${ev.target.result}" alt="Profile photo preview">`;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearTermsError(){
+    document.getElementById('termsError').style.display = 'none';
+  }
+
+  function resetRegForm(){
+    document.getElementById('regForm').reset();
+    document.getElementById('photoPreview').innerHTML = '🌿';
+    document.getElementById('strengthFill').style.width = '0%';
+    document.getElementById('strengthLabel').textContent = 'Password strength';
+    document.querySelectorAll('.reg-field.invalid').forEach(f=>f.classList.remove('invalid'));
+    document.getElementById('termsError').style.display = 'none';
+  }
+
+  document.getElementById('regForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const nameOk = validateField('name');
+    const mobileOk = validateField('mobile');
+    const emailOk = validateField('email');
+    const usernameOk = validateField('username');
+    const passwordOk = validateField('password');
+    const confirmOk = validateField('confirmPassword');
+    const termsOk = document.getElementById('regTerms').checked;
+
+    document.getElementById('termsError').style.display = termsOk ? 'none' : 'block';
+
+    const allOk = nameOk && mobileOk && emailOk && usernameOk && passwordOk && confirmOk && termsOk;
+
+    if(!allOk){
+      const firstInvalid = document.querySelector('.reg-field.invalid') || document.getElementById('termsError');
+      if(firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    alert('Welcome aboard! Your GuavaTrips account has been created.');
+    // this.submit(); // enable when wiring to a real backend
+  });
+</script>
+</body>
+</html>

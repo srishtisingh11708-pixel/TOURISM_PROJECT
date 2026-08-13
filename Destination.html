@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    .wf-destinations{
+  --wf-ink:#1b2a2e;
+  --wf-paper:#f6f2ea;
+  --wf-paper-deep:#efe8d9;
+  --wf-route:#c1571f;
+  --wf-sea:#2e5d5a;
+  --wf-sea-deep:#1c3d3b;
+  --wf-gold:#c9a24b;
+  --wf-line: rgba(27,42,46,0.14);
+
+  font-family:'Space Grotesk', sans-serif;
+  color:var(--wf-ink);
+  background:var(--wf-paper);
+  display:block;
+  width:100%;
+  box-sizing:border-box;
+}
+
+
+/* ============ HERO ============ */
+.wf-hero{
+  position:relative;
+  background:var(--wf-sea-deep);
+  color:var(--wf-paper);
+  padding:56px 44px 0;
+  overflow:hidden;
+}
+.wf-hero::before{
+  content:"";
+  position:absolute;
+  top:-140px; right:-140px;
+  width:420px; height:420px;
+  border:1px solid rgba(246,242,234,0.12);
+  border-radius:50%;
+  pointer-events:none;
+}
+.wf-hero::after{
+  content:"";
+  position:absolute;
+  bottom:-260px; left:-100px;
+  width:380px; height:380px;
+  border:1px solid rgba(246,242,234,0.08);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.wf-hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:720px;
+}
+.wf-eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--wf-gold);
+  margin-bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.wf-eyebrow::before{ content:""; width:26px; height:1px; background:var(--wf-gold); display:inline-block; }
+
+.wf-hero-inner h1{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  font-size:clamp(2.2rem, 5vw, 3.4rem);
+  line-height:1.08;
+  letter-spacing:-0.01em;
+  margin:0;
+}
+.wf-hero-inner h1 em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--wf-gold);
+}
+.wf-hero-inner p{
+  margin:16px 0 0;
+  max-width:460px;
+  font-size:1rem;
+  line-height:1.6;
+  color:rgba(246,242,234,0.72);
+}
+
+/* ============ CONTROL BAR (dropdowns) ============ */
+.wf-control-bar{
+  position:relative;
+  z-index:2;
+  margin-top:40px;
+  background:var(--wf-paper);
+  border-radius:6px 6px 0 0;
+  padding:26px 32px;
+  display:flex;
+  align-items:flex-end;
+  gap:24px;
+  flex-wrap:wrap;
+}
+
+.wf-select-group{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:220px;
+}
+.wf-select-group label{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.7rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:rgba(27,42,46,0.6);
+  margin-bottom:10px;
+}
+.wf-select-group label .wf-sub{
+  text-transform:none;
+  letter-spacing:0;
+  color:rgba(27,42,46,0.4);
+  font-size:0.68rem;
+}
+.wf-dot{
+  width:7px; height:7px;
+  border-radius:50%;
+  display:inline-block;
+}
+.wf-dot-sea{ background:var(--wf-sea); }
+.wf-dot-route{ background:var(--wf-route); }
+
+.wf-destinations .wf-select-group select{
+  width:100%;
+  font-size:1.02rem;
+  color:var(--wf-ink);
+  background-color:transparent;
+  border:none;
+  border-bottom:2px solid var(--wf-line);
+  border-radius:0;
+  padding:10px 24px 10px 2px;
+  outline:none;
+  cursor:pointer;
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%231b2a2e' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 2px center;
+  transition:border-color 0.25s ease;
+  box-shadow:none;
+  height:auto;
+  line-height:normal;
+}
+.wf-select-group:nth-child(1) select:focus{ border-bottom-color:var(--wf-sea); }
+.wf-select-group:nth-child(3) select:focus{ border-bottom-color:var(--wf-route); }
+
+.wf-control-divider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-bottom:14px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.75rem;
+  color:rgba(27,42,46,0.35);
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+}
+
+/* ============ HERO ANIMATED BACKGROUND ============ */
+.wf-hero-bg{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:1;
+}
+.wf-shape{
+  position:absolute;
+  border-radius:50%;
+  opacity:0.5;
+  filter:blur(1px);
+}
+.wf-shape-1{
+  width:90px; height:90px;
+  background:radial-gradient(circle, rgba(201,162,75,0.35), transparent 70%);
+  top:18%; left:8%;
+  animation:wf-float 9s ease-in-out infinite;
+}
+.wf-shape-2{
+  width:60px; height:60px;
+  background:radial-gradient(circle, rgba(246,242,234,0.25), transparent 70%);
+  top:55%; left:22%;
+  animation:wf-float 12s ease-in-out infinite;
+  animation-delay:-3s;
+}
+.wf-shape-3{
+  width:130px; height:130px;
+  background:radial-gradient(circle, rgba(46,93,90,0.4), transparent 70%);
+  top:8%; left:70%;
+  animation:wf-float 14s ease-in-out infinite;
+  animation-delay:-6s;
+}
+.wf-shape-4{
+  width:70px; height:70px;
+  background:radial-gradient(circle, rgba(201,162,75,0.3), transparent 70%);
+  top:60%; left:78%;
+  animation:wf-float 10s ease-in-out infinite;
+  animation-delay:-2s;
+}
+@keyframes wf-float{
+  0%, 100%{ transform:translateY(0) translateX(0); }
+  50%{ transform:translateY(-24px) translateX(14px); }
+}
+
+.wf-hero-path{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.wf-hero-path path{
+  animation:wf-dash 4s linear infinite;
+}
+@keyframes wf-dash{
+  to{ stroke-dashoffset:-32; }
+}
+
+.wf-plane{
+  position:absolute;
+  font-size:1.3rem;
+  color:var(--wf-gold);
+  offset-path: path("M -20 320 C 150 250, 300 350, 420 220 S 650 100, 830 140");
+  offset-rotate:auto;
+  animation:wf-fly 10s linear infinite;
+  opacity:0.85;
+}
+@keyframes wf-fly{
+  from{ offset-distance:0%; }
+  to{ offset-distance:100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .wf-shape, .wf-plane, .wf-hero-path path{ animation:none !important; }
+}
+
+/* ============ SECTION LABELS ============ */
+.wf-section-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:rgba(27,42,46,0.55);
+  margin:0 0 16px;
+}
+.wf-section-label-foreign{
+  margin-top:44px;
+}
+
+/* ============ RESULTS / SHORTCUT CARDS ============ */
+.wf-results{
+  max-width:1180px;
+  margin:0 auto;
+  padding:40px 44px 70px;
+}
+
+.wf-results-head{
+  margin-bottom:28px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--wf-line);
+}
+.wf-tag{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.7rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--wf-route);
+  display:block;
+  margin-bottom:8px;
+}
+.wf-results-head h2{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  font-size:1.5rem;
+  color:var(--wf-ink);
+  margin:0;
+}
+
+.wf-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+  gap:20px;
+}
+
+.wf-card{
+  position:relative;
+  background:var(--wf-paper-deep);
+  border-radius:4px;
+  overflow:hidden;
+  cursor:pointer;
+  border:1px solid var(--wf-line);
+  transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  display:flex;
+  flex-direction:column;
+  text-decoration:none;
+  color:inherit;
+}
+.wf-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 16px 32px rgba(27,42,46,0.14);
+  border-color:transparent;
+}
+.wf-card-region{ border-top:3px solid var(--wf-sea); }
+.wf-card-foreign{ border-top:3px solid var(--wf-route); }
+
+.wf-card-visual{
+  height:150px;
+  position:relative;
+  overflow:hidden;
+  background:var(--wf-sea-deep);
+}
+.wf-card-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform 0.4s ease;
+}
+.wf-card:hover .wf-card-visual img{
+  transform:scale(1.08);
+}
+.wf-card-visual.wf-img-fallback{
+  background:linear-gradient(135deg, var(--wf-sea), var(--wf-sea-deep));
+}
+.wf-card-foreign .wf-card-visual.wf-img-fallback{
+  background:linear-gradient(135deg, var(--wf-route), #8f3d13);
+}
+
+.wf-card-body{
+  padding:16px 16px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  flex:1;
+}
+.wf-card-body h3{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  font-size:1.05rem;
+  color:var(--wf-ink);
+  margin:0;
+}
+.wf-card-body p{
+  font-size:0.82rem;
+  color:rgba(27,42,46,0.6);
+  line-height:1.45;
+  margin:0;
+  flex:1;
+}
+.wf-card-foot{
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid var(--wf-line);
+}
+.wf-arrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.78rem;
+  color:var(--wf-route);
+  transition:transform 0.2s ease;
+  display:inline-block;
+}
+.wf-card:hover .wf-arrow{ transform:translateX(4px); }
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 720px){
+  .wf-hero{ padding:40px 22px 0; }
+  .wf-control-bar{ padding:22px 20px; flex-direction:column; align-items:stretch; }
+  .wf-control-divider{ padding:4px 0; }
+  .wf-results{ padding:32px 20px 50px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .wf-card{ transition:none; }
+
+  /* ---------- animated background ---------- */
+  .sky-bg{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse at 20% 10%, #FDF9F2 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 80%, #E7F1F6 0%, transparent 50%),
+      linear-gradient(180deg, #F3F8FB 0%, #EAF3F8 45%, #F2ECE0 100%);
+    pointer-events:none;
+  }
+  .cloud{
+    position:absolute;
+    opacity:0.55;
+    filter:blur(1px);
+    background:#fff;
+    border-radius:50%;
+  }
+  .cloud::before, .cloud::after{
+    content:'';
+    position:absolute;
+    background:#fff;
+    border-radius:50%;
+  }
+  .cloud1{ width:140px; height:44px; top:8%; left:-200px; animation:driftCloud 55s linear infinite; }
+  .cloud1::before{ width:70px; height:70px; top:-32px; left:20px; }
+  .cloud1::after{ width:50px; height:50px; top:-20px; left:75px; }
+  .cloud2{ width:100px; height:34px; top:22%; left:-200px; animation:driftCloud 75s linear infinite; animation-delay:-20s; opacity:0.4; }
+  .cloud2::before{ width:50px; height:50px; top:-22px; left:15px; }
+  .cloud2::after{ width:36px; height:36px; top:-14px; left:55px; }
+  .cloud3{ width:180px; height:54px; top:5%; left:-260px; animation:driftCloud 90s linear infinite; animation-delay:-45s; opacity:0.35; }
+  .cloud3::before{ width:90px; height:90px; top:-40px; left:30px; }
+  .cloud3::after{ width:60px; height:60px; top:-24px; left:100px; }
+
+  @keyframes driftCloud{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(calc(100vw + 400px)); }
+  }
+
+  .route-thread{
+    position:absolute;
+    left:0; right:0; bottom:14%;
+    height:2px;
+    background-image:linear-gradient(90deg, var(--ink-soft) 0 10px, transparent 10px 22px);
+    background-size:22px 2px;
+    opacity:0.15;
+  }
+
+  .drift-dot{
+    position:absolute;
+    bottom:calc(14% - 4px);
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--amber);
+    opacity:0.5;
+    animation:driftDot 18s linear infinite;
+  }
+  @keyframes driftDot{
+    from{ left:-5%; }
+    to{ left:105%; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cloud, .drift-dot{ animation:none !important; }
+  }
+
+  /* ---------- page content ---------- */
+  .page{
+    position:relative;
+    z-index:1;
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 32px 100px;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:26px; height:1px;
+    background:var(--ink-soft);
+  }
+
+  h1.hero-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(2.4rem, 5vw, 3.8rem);
+    line-height:1.05;
+    max-width:780px;
+    letter-spacing:-0.01em;
+  }
+  h1.hero-title em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--teal);
+  }
+  .hero-sub{
+    margin-top:20px;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    max-width:540px;
+    line-height:1.6;
+  }
+
+  /* ticket cards */
+  .routes{
+    margin-top:64px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  @media (max-width:900px){
+    .routes{ grid-template-columns:1fr; }
+  }
+
+  .ticket{
+    position:relative;
+    background:var(--card-bg);
+    border-radius:18px;
+    border:1px solid var(--line);
+    padding:0;
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform 0.35s ease, box-shadow 0.35s ease;
+    box-shadow:0 1px 2px rgba(31,45,58,0.04);
+  }
+  .ticket:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px -12px rgba(31,45,58,0.18);
+  }
+  .ticket:focus-visible{
+    outline:3px solid var(--teal);
+    outline-offset:3px;
+  }
+
+  .ticket-photo{
+    height:168px;
+    width:100%;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+  }
+  .ticket-photo::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+  }
+  .ticket-mode{
+    position:absolute;
+    bottom:12px; left:18px;
+    color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    z-index:2;
+  }
+
+  .ticket-body{
+    padding:22px 22px 24px;
+    position:relative;
+  }
+  .ticket-body h3{
+    font-family:'Fraunces', serif;
+    font-size:1.4rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .ticket-body p{
+    color:var(--ink-soft);
+    font-size:0.92rem;
+    line-height:1.55;
+    margin-bottom:16px;
+  }
+  .ticket-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:0.85rem;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .ticket-cta svg{ transition:transform 0.25s ease; }
+  .ticket:hover .ticket-cta svg{ transform:translateX(4px); }
+
+  /* perforation */
+  .perf{
+    position:relative;
+    border-top:1px dashed var(--line);
+    margin:0 22px;
+  }
+  .perf::before, .perf::after{
+    content:'';
+    position:absolute;
+    top:-8px;
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--mist);
+  }
+  .perf::before{ left:-30px; }
+  .perf::after{ right:-30px; }
+
+  .ticket-mini{
+    padding:14px 22px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .mini-anim{
+    width:100px;
+    height:26px;
+    position:relative;
+    overflow:hidden;
+  }
+  .mini-track{
+    position:absolute;
+    left:0; right:0; top:50%;
+    height:1px;
+    background-image:linear-gradient(90deg, var(--ink-soft) 0 5px, transparent 5px 11px);
+    opacity:0.4;
+  }
+  .mini-icon{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:1.1rem;
+    animation:moveIcon 3.2s ease-in-out infinite;
+  }
+  @keyframes moveIcon{
+    0%{ left:-10%; }
+    50%{ left:78%; }
+    100%{ left:-10%; }
+  }
+  .ticket[data-mode="flight"] .mini-icon{ animation-duration:2.6s; }
+  .ticket[data-mode="train"] .mini-icon{ animation-duration:3.4s; }
+  .ticket[data-mode="road"] .mini-icon{ animation-duration:3s; }
+
+  .eta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-soft);
+    text-align:right;
+    line-height:1.4;
+  }
+  .eta strong{ display:block; color:var(--ink); font-size:0.85rem; }
+
+  .ticket[data-mode="road"] .ticket-mode, .ticket[data-mode="road"] .eta strong{ color:var(--amber); }
+  .ticket[data-mode="train"] .eta strong{ color:var(--teal); }
+  .ticket[data-mode="flight"] .eta strong{ color:var(--cyan); }
+
+  /* ---------- detail panel ---------- */
+  .detail{
+    margin-top:40px;
+    display:none;
+    background:var(--card-bg);
+    border-radius:20px;
+    border:1px solid var(--line);
+    overflow:hidden;
+    animation:fadeSlide 0.45s ease;
+  }
+  .detail.active{ display:block; }
+  @keyframes fadeSlide{
+    from{ opacity:0; transform:translateY(14px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .detail-hero{
+    height:260px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+  }
+  .detail-hero::after{
+    content:'';
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.55) 100%);
+  }
+  .detail-hero-content{
+    position:absolute;
+    bottom:24px; left:32px; right:32px;
+    z-index:2;
+    color:#fff;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+  }
+  .detail-hero-content h2{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.6rem, 3vw, 2.2rem);
+    font-weight:600;
+  }
+  .detail-close{
+    background:rgba(255,255,255,0.16);
+    border:1px solid rgba(255,255,255,0.4);
+    color:#fff;
+    padding:9px 18px;
+    border-radius:100px;
+    font-size:0.82rem;
+    font-family:'Inter', sans-serif;
+    cursor:pointer;
+    backdrop-filter:blur(4px);
+    transition:background 0.2s ease;
+    white-space:nowrap;
+  }
+  .detail-close:hover{ background:rgba(255,255,255,0.28); }
+
+  .detail-body{
+    padding:36px 40px 42px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:40px;
+  }
+  @media (max-width:800px){
+    .detail-body{ grid-template-columns:1fr; }
+  }
+
+  .detail-body h4{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .detail-body ul{
+    list-style:none;
+  }
+  .detail-body ul li{
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+    display:flex;
+    gap:14px;
+    font-size:0.94rem;
+    color:var(--ink);
+    line-height:1.5;
+  }
+  .detail-body ul li:last-child{ border-bottom:none; }
+  .detail-body ul li .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--teal);
+    margin-top:8px;
+    flex-shrink:0;
+  }
+  .ticket[data-mode="road"] ~ .detail .dot,
+  #detail-road .dot{ background:var(--amber); }
+  #detail-flight .dot{ background:var(--cyan); }
+
+  .info-box{
+    background:var(--mist);
+    border-radius:14px;
+    padding:22px 24px;
+  }
+  .info-box .row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid rgba(31,45,58,0.08);
+    font-size:0.9rem;
+  }
+  .info-box .row:last-child{ border-bottom:none; }
+  .info-box .row span:first-child{ color:var(--ink-soft); }
+  .info-box .row span:last-child{ font-weight:600; }
+
+  .tip{
+    margin-top:18px;
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    font-style:italic;
+    line-height:1.5;
+    padding-top:14px;
+    border-top:1px dashed var(--line);
+  }
+  /*=======================================
+destinatiuon
+===========================================*/
+/* ============ HERO ============ */
+.hero{
+  position:relative;
+  background:var(--sea-deep);
+  color:var(--paper);
+  padding:64px 44px 0;
+  overflow:hidden;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  top:-140px; right:-140px;
+  width:420px; height:420px;
+  border:1px solid rgba(246,242,234,0.12);
+  border-radius:50%;
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  bottom:-260px; left:-100px;
+  width:380px; height:380px;
+  border:1px solid rgba(246,242,234,0.08);
+  border-radius:50%;
+}
+
+.brand-float{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:'Fraunces', serif;
+  font-size:1.2rem;
+  margin-bottom:48px;
+  position:relative;
+  z-index:2;
+}
+.brand-mark{
+  width:32px; height:32px;
+  border-radius:50%;
+  border:1.5px solid var(--gold);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.68rem;
+  color:var(--gold);
+  flex-shrink:0;
+}
+
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:720px;
+}
+.eyebrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.eyebrow::before{ content:""; width:26px; height:1px; background:var(--gold); }
+
+.hero-inner h1{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  font-size:clamp(2.4rem, 5vw, 3.6rem);
+  line-height:1.05;
+  letter-spacing:-0.01em;
+}
+.hero-inner h1 em{
+  font-style:italic;
+  font-weight:400;
+  color:var(--gold);
+}
+.hero-inner p{
+  margin-top:18px;
+  max-width:460px;
+  font-size:1rem;
+  line-height:1.6;
+  color:rgba(246,242,234,0.72);
+}
+
+/* ============ CONTROL BAR (dropdowns) ============ */
+.control-bar{
+  position:relative;
+  z-index:2;
+  margin-top:44px;
+  background:var(--paper);
+  border-radius:6px 6px 0 0;
+  padding:26px 32px;
+  display:flex;
+  align-items:flex-end;
+  gap:24px;
+  box-shadow:0 -2px 0 rgba(0,0,0,0.02);
+  flex-wrap:wrap;
+}
+
+.select-group{
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  min-width:220px;
+}
+.select-group label{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.7rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:rgba(27,42,46,0.6);
+  margin-bottom:10px;
+}
+.select-group label .sub{
+  text-transform:none;
+  letter-spacing:0;
+  color:rgba(27,42,46,0.4);
+  font-size:0.68rem;
+}
+.dot{
+  width:7px; height:7px;
+  border-radius:50%;
+  display:inline-block;
+}
+.dot-sea{ background:var(--sea); }
+.dot-route{ background:var(--route); }
+
+.select-group select{
+  font-family:'Space Grotesk', sans-serif;
+  font-size:1.02rem;
+  color:var(--ink);
+  background:transparent;
+  border:none;
+  border-bottom:2px solid var(--line);
+  padding:10px 24px 10px 2px;
+  outline:none;
+  cursor:pointer;
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%231b2a2e' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 2px center;
+  transition:border-color 0.25s ease;
+}
+.select-group:nth-child(1) select:focus{ border-bottom-color:var(--sea); }
+.select-group:nth-child(3) select:focus{ border-bottom-color:var(--route); }
+
+.control-divider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-bottom:14px;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.75rem;
+  color:rgba(27,42,46,0.35);
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+}
+
+.reset-btn{
+  align-self:flex-end;
+  margin-bottom:2px;
+  background:none;
+  border:1px solid var(--line);
+  color:rgba(27,42,46,0.55);
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.7rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:10px 18px;
+  border-radius:2px;
+  cursor:pointer;
+  transition:all 0.2s ease;
+  white-space:nowrap;
+}
+.reset-btn:hover{
+  border-color:var(--route);
+  color:var(--route);
+}
+/* ============ RESULTS ============ */
+.results-section{
+  max-width:1180px;
+  margin:0 auto;
+  padding:40px 44px 80px;
+}
+
+.results-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  margin-bottom:32px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--line);
+  flex-wrap:wrap;
+  gap:12px;
+}
+.results-label .tag{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.7rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--route);
+  display:block;
+  margin-bottom:8px;
+}
+.results-label h2{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  font-size:1.6rem;
+  color:var(--ink);
+}
+.results-count{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.8rem;
+  color:rgba(27,42,46,0.5);
+}
+.results-count #countNum{
+  color:var(--ink);
+  font-weight:500;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+  gap:22px;
+}
+
+.card{
+  position:relative;
+  background:var(--paper-deep);
+  border-radius:4px;
+  overflow:hidden;
+  cursor:pointer;
+  border:1px solid var(--line);
+  transition:transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  animation:card-in 0.4s ease both;
+}
+@keyframes card-in{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 16px 32px rgba(27,42,46,0.14);
+  border-color:transparent;
+}
+
+.card-visual{
+  height:140px;
+  position:relative;
+  display:flex;
+  align-items:flex-end;
+  padding:14px;
+  color:var(--paper);
+  overflow:hidden;
+}
+.card-visual::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+}
+.card-visual .glyph{
+  position:absolute;
+  right:10px;
+  top:10px;
+  font-size:2.4rem;
+  opacity:0.28;
+  z-index:1;
+}
+.card-visual .place-tag{
+  position:relative;
+  z-index:2;
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.66rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  background:rgba(27,42,46,0.4);
+  backdrop-filter:blur(4px);
+  padding:4px 9px;
+  border-radius:2px;
+}
+
+.card-body{
+  padding:18px 18px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  flex:1;
+}
+.card-body h3{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  font-size:1.15rem;
+  color:var(--ink);
+}
+.card-body p{
+  font-size:0.85rem;
+  color:rgba(27,42,46,0.6);
+  line-height:1.5;
+  flex:1;
+}
+.card-foot{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid var(--line);
+}
+.card-foot .best-time{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.68rem;
+  color:rgba(27,42,46,0.45);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+}
+.card-foot .go-arrow{
+  font-family:'JetBrains Mono', monospace;
+  font-size:0.85rem;
+  color:var(--route);
+  transition:transform 0.2s ease;
+}
+.card:hover .go-arrow{ transform:translateX(4px); }
+
+/* Region-color coded top border */
+.card.region{ border-top:3px solid var(--sea); }
+.card.foreign{ border-top:3px solid var(--route); }
+
+.empty-state{
+  text-align:center;
+  padding:70px 20px;
+  color:rgba(27,42,46,0.5);
+}
+.empty-mark{
+  font-size:2.4rem;
+  margin-bottom:16px;
+  opacity:0.4;
+}
+.empty-state h3{
+  font-family:'Fraunces', serif;
+  font-size:1.3rem;
+  color:var(--ink);
+  margin-bottom:8px;
+  font-weight:500;
+}
+.empty-state p{ font-size:0.9rem; }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+  <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html" >Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train" class="active">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html" class="active">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+                         <a href="review.html">Review</a>
+
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+ <!-- ============================================================
+     WAYFARE DESTINATION INDEX — paste this block into your page
+     wherever you want it to appear, between your existing
+     header and footer. Also link wayfare-destinations.css
+     in your <head>.
+     ============================================================ -->
+
+<section class="wf-destinations">
+
+  <!-- HERO -->
+  <header class="wf-hero">
+    <div class="wf-hero-bg" aria-hidden="true">
+      <span class="wf-shape wf-shape-1"></span>
+      <span class="wf-shape wf-shape-2"></span>
+      <span class="wf-shape wf-shape-3"></span>
+      <span class="wf-shape wf-shape-4"></span>
+      <svg class="wf-hero-path" viewBox="0 0 800 400" preserveAspectRatio="none">
+        <path d="M -20 320 C 150 250, 300 350, 420 220 S 650 100, 830 140" fill="none" stroke="rgba(201,162,75,0.35)" stroke-width="2" stroke-dasharray="6 10"/>
+      </svg>
+      <span class="wf-plane" aria-hidden="true">✈</span>
+    </div>
+
+    <div class="wf-hero-inner">
+      <div class="wf-eyebrow">Destination index</div>
+      <h1>Where to <em>next?</em></h1>
+      <p>Pick a home region or a country abroad — we'll take you straight there.</p>
+    </div>
+
+    <!-- DROPDOWN CONTROL BAR -->
+    <div class="wf-control-bar">
+      <div class="wf-select-group">
+        <label for="wfRegoinSelect">
+          <span class="wf-dot wf-dot-sea"></span> Regions <span class="wf-sub">(within India)</span>
+        </label>
+        <select id="wfRegionSelect">
+          <option value="" selected disabled>Choose a region</option>
+          <option value="north">North India</option>
+          <option value="south">South India</option>
+          <option value="east">East India</option>
+          <option value="west">West India</option>
+          <option value="northeast">Northeast India</option>
+          <option value="central">Central India</option>
+        </select>
+      </div>
+
+      <div class="wf-control-divider"><span>or</span></div>
+
+      <div class="wf-select-group">
+        <label for="wfForeignSelect">
+          <span class="wf-dot wf-dot-route"></span> Foreign <span class="wf-sub">(abroad)</span>
+        </label>
+        <select id="wfForeignSelect">
+          <option value="" selected disabled>Choose a country</option>
+          <option value="uae">United Arab Emirates</option>
+          <option value="thailand">Thailand</option>
+          <option value="maldives">Maldives</option>
+          <option value="singapore">Singapore</option>
+          <option value="switzerland">Switzerland</option>
+          <option value="japan">Japan</option>
+          <option value="uk">United Kingdom</option>
+          <option value="france">France</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- PREVIEW GRID: every named place, each with its own image -->
+  <main class="wf-results">
+    <div class="wf-results-head">
+      <div>
+        <span class="wf-tag">All destinations</span>
+        <h2>Every place on the register</h2>
+      </div>
+    </div>
+
+    <div class="wf-section-label">
+      <span class="wf-dot wf-dot-sea"></span> Regions — within India
+    </div>
+    <div class="wf-grid">
+      <a class="wf-card wf-card-region" href="Regoins.html?r=north">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_7dImrdNjZEQL-xEHyEDLGQ-UjFvzCzoopdaLkN8a0A&s=10" alt="North India" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>North India</h3>
+          <p>Kashmir valleys, Himalayan passes, the Taj Mahal at Agra.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-region" href="Regoins.html?r=south">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSyLYQv79Kc6ZnGM1Ekl7pYdcnP71AOMMEjBZrRHO-2A&s=10" alt="South India" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>South India</h3>
+          <p>Kerala backwaters, Coorg coffee estates, Hampi ruins.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-region" href="Regoins.html?r=east">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMdEOHpAxef17j8XzooF_3ss3nYkAZgnhXk9nqW5gEwQ&s=10" alt="East India" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>East India</h3>
+          <p>Darjeeling tea gardens, Sundarbans mangroves.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-region" href="Regoins.html?r=west">
+        <div class="wf-card-visual"><img src="https://picsum.photos/seed/goa-beach-04/600/450" alt="West India" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>West India</h3>
+          <p>Goa beaches, the white salt desert of Kutch.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-region" href="Regoins.html?r=northeast">
+        <div class="wf-card-visual"><img src="https://picsum.photos/seed/meghalaya-fall-05/600/450" alt="Northeast India" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Northeast India</h3>
+          <p>Shillong waterfalls, the monastery town of Tawang.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-region" href="Regoins.html?r=central">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeG5iVcVdDvd2NnXSjHSLHHrB48UiiETGPMI2FjNlfpQ&s=10" alt="Central India" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Central India</h3>
+          <p>Khajuraho's carved temples, Pench's tiger forests.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="wf-section-label wf-section-label-foreign">
+      <span class="wf-dot wf-dot-route"></span> Foreign — abroad
+    </div>
+    <div class="wf-grid">
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=uae">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaUd_kLpDtuIicJXPHN7AE-MQl2Jhd2falCdsqhLiO0A&s=10" alt="Dubai, UAE" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Dubai, UAE</h3>
+          <p>Desert skyline meets record-breaking luxury.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=thailand">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0OCqMMJGV1D0uAnY8CucjzwU4w_EF0RB8MwWF-3ryVw&s=10" alt="Bangkok, Thailand" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Bangkok, Thailand</h3>
+          <p>Street food, temples, and river life.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=maldives">
+        <div class="wf-card-visual"><img src="https://picsum.photos/seed/maldives-sea-09/600/450" alt="Maldives" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Maldives</h3>
+          <p>Overwater villas on a turquoise atoll.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=singapore">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuHgFVr1ooxtU3ZQRyhS2JbC0JhNg_TgOeHv0RpkvFTA&s=10" alt="Singapore" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Singapore</h3>
+          <p>Gardens, skyline, and island efficiency.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=switzerland">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOwj04MMZsnXfaFDRY0qzEmJ4K-nfU5rXi0AcmtgFDfg&s=10" alt="Switzerland" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Switzerland</h3>
+          <p>Alpine lakes between snow-capped peaks.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=japan">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx1hjU1XrykBBD6Xtg57zN0qldYA6cDEAc7m_DaTTltQ&s=10" alt="Kyoto, Japan" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Kyoto, Japan</h3>
+          <p>Temples, cherry blossoms, and quiet gardens.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=uk">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZigeHqDc8tdSj7rn7MRtBjsM25YQZhcGntyLWY9VlDA&s=10 alt="London, UK" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>London, UK</h3>
+          <p>Centuries of history along the Thames.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+
+      <a class="wf-card wf-card-foreign" href="Foreign.html?c=france">
+        <div class="wf-card-visual"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7dj1HiGh0b6qLr2-zXiQ4zAi0byqk_rrp_Y4SBVXTjQ&s=10222222222" alt="Paris, France" loading="lazy" onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.classList.add(\'wf-img-fallback\');"></div>
+        <div class="wf-card-body">
+          <h3>Paris, France</h3>
+          <p>Café culture beneath the Eiffel Tower.</p>
+          <div class="wf-card-foot"><span class="wf-arrow">Explore →</span></div>
+        </div>
+      </a>
+    </div>
+  </main>
+
+</section>
+
+<script>
+(function(){
+  const regionSelect = document.getElementById("wfRegionSelect");
+  const foreignSelect = document.getElementById("wfForeignSelect");
+
+  // Selecting a region navigates straight to Region.html
+  regionSelect.addEventListener("change", function(){
+    if(this.value){
+      window.location.href = "Regoins.html?r=" + encodeURIComponent(this.value);
+    }
+  });
+
+  // Selecting a country navigates straight to Foreign.html
+  foreignSelect.addEventListener("change", function(){
+    if(this.value){
+      window.location.href = "Foreign.html?c=" + encodeURIComponent(this.value);
+    }
+  });
+})();
+</script>  
+<!-- RESULTS -->
+<main class="results-section">
+  <div class="results-head">
+    <div class="results-label" id="resultsLabel">
+      <span class="tag" id="resultsTag">All destinations</span>
+      <h2 id="resultsTitle">Every place on the register</h2>
+    </div>
+    <div class="results-count"><span id="countNum">14</span> destinations</div>
+  </div>
+
+  <div class="grid" id="destGrid"><!-- injected by JS --></div>
+
+  <div class="empty-state" id="emptyState" hidden>
+    <div class="empty-mark">✈</div>
+    <h3>No destinations filed here yet</h3>
+    <p>Try the other dropdown, or reset to see the full register.</p>
+  </div>
+</main>
+<!-- DESTINATION DETAIL MODAL -->
+<div class="overlay" id="detailOverlay">
+  <div class="detail-modal">
+    <button class="modal-x" id="detailClose">✕</button>
+    <div class="detail-modal-visual" id="detailVisual">
+      <span class="detail-glyph" id="detailGlyph"></span>
+      <span class="detail-place-tag" id="detailPlaceTag"></span>
+    </div>
+    <div class="detail-modal-body">
+      <h3 id="detailName">Destination</h3>
+      <p class="detail-lead" id="detailTagline"></p>
+      <p class="detail-desc" id="detailDesc"></p>
+      <div class="detail-fact-strip">
+        <div>
+          <div class="k">Best time to visit</div>
+          <div class="v" id="detailBest">—</div>
+        </div>
+        <div>
+          <div class="k">Category</div>
+          <div class="v" id="detailCategory">—</div>
+        </div>
+      </div>
+      <a href="Registration.html" class="cta-primary">Plan this trip →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ DESTINATION DATA ============
+// Each destination belongs to a "region" (India) or is "foreign" (abroad).
+// Clicking a card navigates to destination-detail.html?slug=xxx
+
+const destinations = [
+  // ---- NORTH INDIA ----
+  { slug:"leh-ladakh", name:"Leh-Ladakh", group:"region", key:"north", tagline:"High-altitude desert, monasteries & mountain passes.", best:"May – Sep", glyph:"⛰" },
+  { slug:"manali", name:"Manali", group:"region", key:"north", tagline:"Pine valleys and snow passes in Himachal.", best:"Mar – Jun", glyph:"🏔" },
+  { slug:"agra", name:"Agra", group:"region", key:"north", tagline:"Home of the Taj Mahal and Mughal heritage.", best:"Oct – Mar", glyph:"🕌" },
+
+  // ---- SOUTH INDIA ----
+  { slug:"kerala-backwaters", name:"Kerala Backwaters", group:"region", key:"south", tagline:"Houseboats drifting through palm-lined canals.", best:"Sep – Mar", glyph:"🌴" },
+  { slug:"coorg", name:"Coorg", group:"region", key:"south", tagline:"Coffee estates and misty Western Ghats.", best:"Oct – Mar", glyph:"☕" },
+  { slug:"hampi", name:"Hampi", group:"region", key:"south", tagline:"Boulder-strewn ruins of a Vijayanagara capital.", best:"Oct – Feb", glyph:"🏛" },
+
+  // ---- EAST INDIA ----
+  { slug:"darjeeling", name:"Darjeeling", group:"region", key:"east", tagline:"Tea gardens with a view of Kanchenjunga.", best:"Mar – May", glyph:"🍃" },
+  { slug:"sundarbans", name:"Sundarbans", group:"region", key:"east", tagline:"Mangrove delta and the Royal Bengal tiger.", best:"Nov – Feb", glyph:"🐅" },
+
+  // ---- WEST INDIA ----
+  { slug:"goa", name:"Goa", group:"region", key:"west", tagline:"Beach shacks, Portuguese lanes, sunset coasts.", best:"Nov – Feb", glyph:"🏖" },
+  { slug:"rann-of-kutch", name:"Rann of Kutch", group:"region", key:"west", tagline:"White salt desert under a full moon.", best:"Nov – Feb", glyph:"🌕" },
+
+  // ---- NORTHEAST INDIA ----
+  { slug:"shillong", name:"Shillong", group:"region", key:"northeast", tagline:"Waterfalls and living root bridges of Meghalaya.", best:"Oct – Apr", glyph:"🌧" },
+  { slug:"tawang", name:"Tawang", group:"region", key:"northeast", tagline:"Himalayan monastery town near the Bhutan border.", best:"Mar – Oct", glyph:"🏔" },
+
+  // ---- CENTRAL INDIA ----
+  { slug:"khajuraho", name:"Khajuraho", group:"region", key:"central", tagline:"Intricately carved temples of the Chandela dynasty.", best:"Oct – Mar", glyph:"🛕" },
+  { slug:"pench-national-park", name:"Pench National Park", group:"region", key:"central", tagline:"Dense sal forests and tiger safaris.", best:"Nov – Apr", glyph:"🐾" },
+
+  // ---- FOREIGN ----
+  { slug:"dubai", name:"Dubai, UAE", group:"foreign", key:"uae", tagline:"Desert skyline meets record-breaking luxury.", best:"Nov – Mar", glyph:"🏙" },
+  { slug:"bangkok", name:"Bangkok, Thailand", group:"foreign", key:"thailand", tagline:"Street food, temples, and river life.", best:"Nov – Feb", glyph:"🛕" },
+  { slug:"maldives-islands", name:"Malé, Maldives", group:"foreign", key:"maldives", tagline:"Overwater villas on a turquoise atoll.", best:"Nov – Apr", glyph:"🏝" },
+  { slug:"singapore-city", name:"Singapore", group:"foreign", key:"singapore", tagline:"Gardens, skyline, and island efficiency.", best:"Feb – Apr", glyph:"🌆" },
+  { slug:"swiss-alps", name:"Interlaken, Switzerland", group:"foreign", key:"switzerland", tagline:"Alpine lakes between snow-capped peaks.", best:"Jun – Sep", glyph:"🚡" },
+  { slug:"kyoto", name:"Kyoto, Japan", group:"foreign", key:"japan", tagline:"Temples, cherry blossoms, and quiet gardens.", best:"Mar – May", glyph:"⛩" },
+  { slug:"london", name:"London, UK", group:"foreign", key:"uk", tagline:"Centuries of history along the Thames.", best:"May – Sep", glyph:"🎡" },
+  { slug:"paris", name:"Paris, France", group:"foreign", key:"france", tagline:"Café culture beneath the Eiffel Tower.", best:"Apr – Jun", glyph:"🗼" },
+];
+
+const regionLabels = {
+  north:"North India", south:"South India", east:"East India",
+  west:"West India", northeast:"Northeast India", central:"Central India"
+};
+const foreignLabels = {
+  uae:"United Arab Emirates", thailand:"Thailand", maldives:"Maldives",
+  singapore:"Singapore", switzerland:"Switzerland", japan:"Japan",
+  uk:"United Kingdom", france:"France"
+};
+
+
+// ============ DOM refs ============
+const regionSelect = document.getElementById("regionSelect");
+const foreignSelect = document.getElementById("foreignSelect");
+const resetBtn = document.getElementById("resetBtn");
+const grid = document.getElementById("destGrid");
+const emptyState = document.getElementById("emptyState");
+const resultsTag = document.getElementById("resultsTag");
+const resultsTitle = document.getElementById("resultsTitle");
+const countNum = document.getElementById("countNum");
+
+// Modal refs
+const detailOverlay = document.getElementById("detailOverlay");
+const detailClose = document.getElementById("detailClose");
+const detailVisual = document.getElementById("detailVisual");
+const detailGlyph = document.getElementById("detailGlyph");
+const detailPlaceTag = document.getElementById("detailPlaceTag");
+const detailName = document.getElementById("detailName");
+const detailTagline = document.getElementById("detailTagline");
+const detailDesc = document.getElementById("detailDesc");
+const detailBest = document.getElementById("detailBest");
+const detailCategory = document.getElementById("detailCategory");
+
+function openDetail(d){
+  const bg = d.group === "region"
+    ? "linear-gradient(135deg, #2e5d5a, #1c3d3b)"
+    : "linear-gradient(135deg, #c1571f, #8f3d13)";
+  detailVisual.style.background = bg;
+  detailGlyph.textContent = d.glyph;
+  detailPlaceTag.textContent = d.group === "region" ? regionLabels[d.key] : foreignLabels[d.key];
+  detailName.textContent = d.name;
+  detailTagline.textContent = d.tagline;
+  detailDesc.textContent = descriptions[d.slug] || d.tagline;
+  detailBest.textContent = d.best;
+  detailCategory.textContent = d.group === "region" ? "Domestic — " + regionLabels[d.key] : "International — " + foreignLabels[d.key];
+
+  detailOverlay.classList.add("active");
+}
+
+function closeDetail(){
+  detailOverlay.classList.remove("active");
+}
+
+detailClose.addEventListener("click", closeDetail);
+detailOverlay.addEventListener("click", (e) => {
+  if(e.target === detailOverlay) closeDetail();
+});
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Escape") closeDetail();
+});
+
+// ============ Render function ============
+function renderCards(list){
+  grid.innerHTML = "";
+
+  if(list.length === 0){
+    emptyState.hidden = false;
+    grid.hidden = true;
+    countNum.textContent = "0";
+    return;
+  }
+
+  emptyState.hidden = true;
+  grid.hidden = false;
+  countNum.textContent = list.length;
+
+  list.forEach((d, i) => {
+    const card = document.createElement("div");
+    card.className = `card ${d.group}`;
+    card.style.animationDelay = `${i * 0.04}s`;
+    card.addEventListener("click", () => openDetail(d));
+
+    const bg = d.group === "region"
+      ? "linear-gradient(135deg, #2e5d5a, #1c3d3b)"
+      : "linear-gradient(135deg, #c1571f, #8f3d13)";
+
+    card.innerHTML = `
+      <div class="card-visual" style="background:${bg}">
+        <span class="glyph">${d.glyph}</span>
+        <span class="place-tag">${d.group === "region" ? regionLabels[d.key] : foreignLabels[d.key]}</span>
+      </div>
+      <div class="card-body">
+        <h3>${d.name}</h3>
+        <p>${d.tagline}</p>
+        <div class="card-foot">
+          <span class="best-time">Best: ${d.best}</span>
+          <span class="go-arrow">Explore →</span>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ============ Filter logic ============
+function applyFilters(){
+  const regionVal = regionSelect.value;
+  const foreignVal = foreignSelect.value;
+
+  if(regionVal){
+    const list = destinations.filter(d => d.group === "region" && d.key === regionVal);
+    resultsTag.textContent = "Region";
+    resultsTitle.textContent = regionLabels[regionVal];
+    renderCards(list);
+  } else if(foreignVal){
+    const list = destinations.filter(d => d.group === "foreign" && d.key === foreignVal);
+    resultsTag.textContent = "Foreign";
+    resultsTitle.textContent = foreignLabels[foreignVal];
+    renderCards(list);
+  } else {
+    resultsTag.textContent = "All destinations";
+    resultsTitle.textContent = "Every place on the register";
+    renderCards(destinations);
+  }
+}
+
+regionSelect.addEventListener("change", () => {
+  if(regionSelect.value) foreignSelect.value = "";
+  applyFilters();
+});
+
+foreignSelect.addEventListener("change", () => {
+  if(foreignSelect.value) regionSelect.value = "";
+  applyFilters();
+});
+
+resetBtn.addEventListener("click", () => {
+  regionSelect.value = "";
+  foreignSelect.value = "";
+  applyFilters();
+});
+
+// ============ Initial render ============
+renderCards(destinations);
+
+</script>
+  
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
