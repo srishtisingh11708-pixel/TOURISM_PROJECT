@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    /* =========================================================
+   TOKENS (shared brand system)
+========================================================= */
+:root{
+  --ink:        #2A2622;
+  --ink-soft:   #5B564E;
+  --paper:      #FFF8DC;
+  --paper-dim:  #F2EBDB;
+  --night:      #1A1A2E;
+  --marigold:   #E8A23D;
+  --terracotta: #B5482E;
+  --line:       rgba(42,38,34,0.12);
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+
+  --radius: 14px;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--paper);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+ul{ list-style:none; }
+h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; }
+
+.section-eyebrow{
+  display:inline-block;
+  font-size:0.78rem;
+  font-weight:600;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--terracotta);
+  margin-bottom:0.9rem;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+}
+/* =========================================================
+   PAGE HERO
+========================================================= */
+.bt-hero{
+  position:relative;
+  height:64vh;
+  min-height:440px;
+  margin-top:0;
+  overflow:hidden;
+}
+.bt-hero img{
+  width:100%; height:100%;
+  object-fit:cover;
+}
+.bt-hero-overlay{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(20,32,56,0.72) 0%, rgba(20,32,56,0.35) 50%, rgba(20,32,56,0.8) 100%);
+}
+.bt-hero-content{
+  position:absolute;
+  inset:0;
+  z-index:2;
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 2rem;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  color:var(--paper);
+}
+.bt-eyebrow{
+  font-size:0.85rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--marigold);
+  font-weight:600;
+  margin-bottom:1rem;
+}
+.bt-hero-content h1{
+  font-size:clamp(2.4rem, 5.5vw, 4rem);
+  margin-bottom:1.2rem;
+}
+.bt-hero-content p{
+  max-width:52ch;
+  font-size:1.05rem;
+  color:rgba(251,246,236,0.88);
+}
+
+/* =========================================================
+   INTRO STRIP
+========================================================= */
+.bt-intro{
+  max-width:900px;
+  margin:0 auto;
+  padding:3.5rem 2rem;
+  text-align:center;
+}
+.bt-intro p{
+  font-size:1.15rem;
+  color:var(--ink-soft);
+  font-family:var(--font-display);
+  line-height:1.6;
+}
+.bt-intro strong{ color:var(--terracotta); font-weight:600; }
+
+/* =========================================================
+   SEASON BLOCKS
+========================================================= */
+.seasons{
+  max-width:1280px;
+  margin:0 auto;
+  padding:2rem 2rem 5rem;
+  display:flex;
+  flex-direction:column;
+  gap:4.5rem;
+}
+.season-block{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:3rem;
+  align-items:center;
+}
+.season-block.reverse .season-media{ order:2; }
+.season-block.reverse .season-body{ order:1; }
+
+.season-media{
+  position:relative;
+  border-radius:var(--radius);
+  overflow:hidden;
+  height:360px;
+}
+.season-media img{ width:100%; height:100%; object-fit:cover; }
+.season-tag{
+  position:absolute;
+  top:1.2rem; left:1.2rem;
+  padding:0.4rem 0.9rem;
+  border-radius:100px;
+  font-size:0.78rem;
+  font-weight:700;
+  letter-spacing:0.02em;
+  color:var(--paper);
+}
+.season-tag.winter{ background:var(--night); }
+.season-tag.summer{ background:var(--terracotta); }
+.season-tag.monsoon{ background:#2F6B4F; }
+
+.season-label{
+  font-size:0.75rem;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--marigold);
+  font-weight:700;
+}
+.season-body h2{
+  font-size:clamp(1.8rem, 3vw, 2.4rem);
+  margin:0.4rem 0 1rem;
+}
+.season-body > p{
+  color:var(--ink-soft);
+  margin-bottom:1.4rem;
+  max-width:52ch;
+}
+.season-facts{
+  display:flex;
+  flex-direction:column;
+  gap:0.7rem;
+  border-left:2px solid var(--line);
+  padding-left:1.1rem;
+}
+.season-facts li{ font-size:0.92rem; color:var(--ink); }
+.season-facts strong{ color:var(--terracotta); font-weight:600; }
+
+/* =========================================================
+   MONTH STRIP
+========================================================= */
+.month-strip{
+  background:var(--night);
+  color:var(--paper);
+  padding:5rem 0;
+}
+.month-strip-inner{
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 2rem;
+}
+.month-strip .section-eyebrow{ color:var(--marigold); }
+.month-strip h2{
+  font-size:clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom:2.4rem;
+  color:var(--paper);
+}
+.month-grid{
+  display:grid;
+  grid-template-columns:repeat(6, 1fr);
+  gap:1rem;
+}
+.month-chip{
+  border-radius:10px;
+  padding:1.1rem 1rem;
+  font-family:var(--font-display);
+  font-size:1.1rem;
+  font-weight:600;
+  text-align:center;
+  border:1px solid rgba(251,246,236,0.14);
+}
+.month-chip small{
+  display:block;
+  font-family:var(--font-body);
+  font-weight:400;
+  font-size:0.72rem;
+  margin-top:0.35rem;
+  opacity:0.75;
+}
+.month-chip.cold{ background:rgba(232,162,61,0.14); color:var(--marigold); }
+.month-chip.mild{ background:rgba(251,246,236,0.08); color:var(--paper); }
+.month-chip.hot{ background:rgba(181,72,46,0.22); color:#E8825F; }
+.month-chip.rain{ background:rgba(47,107,79,0.28); color:#7FCBA4; }
+
+/* =========================================================
+   REGION TIMING TABLE
+========================================================= */
+.region-timing{
+  max-width:1280px;
+  margin:0 auto;
+  padding:6rem 2rem;
+}
+.section-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:2rem;
+  margin-bottom:3rem;
+}
+.section-head h2{ font-size:clamp(1.8rem, 3vw, 2.4rem); }
+.section-note{ max-width:32ch; color:var(--ink-soft); font-size:0.92rem; }
+
+.timing-table{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.timing-row{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1.8fr;
+  gap:1.5rem;
+  padding:1.1rem 1.6rem;
+  border-bottom:1px solid var(--line);
+}
+.timing-row:last-child{ border-bottom:none; }
+.timing-row.timing-header{
+  background:var(--paper-dim);
+  font-size:0.75rem;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-weight:700;
+  color:var(--terracotta);
+}
+.timing-row:not(.timing-header):hover{ background:var(--paper-dim); }
+.timing-row span:first-child{ font-weight:600; }
+.timing-row span:nth-child(2){ color:var(--terracotta); font-weight:600; font-size:0.9rem; }
+.timing-row:not(.timing-header) span:last-child{ color:var(--ink-soft); font-size:0.9rem; }
+
+/* =========================================================
+   VIDEO SECTION
+========================================================= */
+.trip-videos{
+  max-width:1280px;
+  margin:0 auto;
+  padding:1rem 2rem 6rem;
+}
+.video-grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1.8rem;
+}
+.video-card h4{
+  font-size:1.05rem;
+  margin:1rem 0 0.4rem;
+}
+.video-card p{
+  font-size:0.88rem;
+  color:var(--ink-soft);
+}
+.video-embed{
+  position:relative;
+  width:100%;
+  padding-top:56.25%; /* 16:9 */
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--ink);
+  box-shadow:0 12px 28px rgba(42,38,34,0.14);
+}
+.video-embed iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+}
+
+/* =========================================================
+   CTA STRIP
+========================================================= */
+.bt-cta{
+  background: #F7F3E8;   /* var(--night-2) ki jagah direct cream */
+  color: #1A1A2E;
+  padding:5rem 2rem;
+  text-align:center;
+}
+.bt-cta-inner{ max-width:640px; margin:0 auto; }
+.bt-cta h2{
+  font-size:clamp(1.7rem, 3vw, 2.3rem);
+  margin-bottom:1rem;
+}
+.bt-cta p{
+  color:rgba(251,246,236,0.75);
+  margin-bottom:1.8rem;
+}
+.bt-cta-btn{
+  display:inline-block;
+  background:var(--marigold);
+  color:var(--night);
+  font-weight:700;
+  padding:0.9rem 2rem;
+  border-radius:100px;
+  transition:background .25s;
+}
+.bt-cta-btn:hover{ background:var(--terracotta); color:var(--paper); }
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 1024px){
+  .season-block{ grid-template-columns:1fr; }
+  .season-block.reverse .season-media{ order:1; }
+  .season-block.reverse .season-body{ order:2; }
+  .month-grid{ grid-template-columns:repeat(4, 1fr); }
+  .video-grid{ grid-template-columns:1fr 1fr; }
+  .footer-grid{ grid-template-columns:1fr 1fr; }
+}
+
+@media (max-width: 768px){
+  .main-nav{
+    position:fixed;
+    top:0; right:0;
+    height:100vh;
+    width:min(78vw, 320px);
+    background:var(--night);
+    flex-direction:column;
+    align-items:flex-start;
+    padding:6rem 2rem 2rem;
+    gap:1.6rem;
+    transform:translateX(100%);
+    transition:transform .4s var(--ease);
+    z-index:99;
+  }
+  .main-nav.is-open{ transform:translateX(0); }
+  .main-nav a{ color:var(--paper) !important; font-size:1.05rem; opacity:1; }
+  .nav-toggle{ display:flex; }
+  .nav-toggle.is-open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .nav-toggle.is-open span:nth-child(2){ opacity:0; }
+  .nav-toggle.is-open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+  .month-grid{ grid-template-columns:repeat(3, 1fr); }
+  .video-grid{ grid-template-columns:1fr; }
+  .timing-row{ grid-template-columns:1fr; gap:0.3rem; }
+  .timing-row.timing-header{ display:none; }
+  .timing-row span:first-child{ font-size:1rem; }
+  .timing-row span::before{ content: attr(data-label) ": "; font-weight:700; color:var(--terracotta); }
+  .timing-row span:first-child::before{ content:""; }
+  .footer-grid{ grid-template-columns:1fr; }
+  .section-head{ flex-direction:column; align-items:flex-start; gap:0.8rem; }
+}
+
+/* Keyboard focus visibility */
+a:focus-visible, button:focus-visible{
+  outline:2px solid var(--marigold);
+  outline-offset:3px;
+}
+</style>
+</head>
+<body style="background-color:#FFF8DC;">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html" class="active">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html">Review</a>
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<!-- ===== PAGE HERO ===== -->
+<section class="bt-hero">
+  <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1800&q=80" alt="Desert landscape in Rajasthan under a clear winter sky">
+  <div class="bt-hero-overlay"></div>
+  <div class="bt-hero-content">
+    <span class="bt-eyebrow">Trip Planning Guide</span>
+    <h1>The Best Time to<br>Visit India</h1>
+    <p>India doesn't have one season — it has a dozen, depending on where you stand. Here's what to expect, month by month and region by region, so your dates match your destination.</p>
+  </div>
+</section>
+
+<!-- ===== INTRO NOTE ===== -->
+<section class="bt-intro">
+  <p><strong>Short answer:</strong> October to March is kind to most of the country — cool, dry, and clear. But the Himalayas wake up in summer, Kerala turns lush in monsoon, and the desert is best avoided in May. Scroll on for the season your trip actually needs.</p>
+</section>
+
+<!-- ===== SEASON CARDS ===== -->
+<div style="background-color:FFF8DC">
+<section class="seasons" id="seasons">
+
+  <article class="season-block">
+    <div class="season-media">
+      <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1000&q=80" alt="Amber Fort in Jaipur under clear winter skies">
+      <span class="season-tag winter">Oct – Mar</span>
+    </div>
+    <div class="season-body">
+      <span class="season-label">Peak Season</span>
+      <h2>Winter</h2>
+      <p>The most comfortable stretch of the year across the plains and the south. Days are warm, nights are cool, and skies stay clear — ideal for forts, cities, wildlife parks, and the backwaters alike. This is when most travellers come, so book heritage hotels early.</p>
+      <ul class="season-facts">
+        <li><strong>Temp:</strong> 10°C – 25°C in the north, 20°C – 32°C in the south</li>
+        <li><strong>Best for:</strong> Rajasthan, Delhi–Agra, Kerala, wildlife safaris, Goa's dry beaches</li>
+        <li><strong>Watch out:</strong> Dense fog can delay early flights in Delhi and Punjab, December–January</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="season-block reverse">
+    <div class="season-media">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4TX0XnATgtpwL81okGXsGHff_JNtWLqKF86MKyZTwdw&s=10" alt="Snow-free mountain road in Spiti Valley during summer">
+      <span class="season-tag summer">Apr – Jun</span>
+    </div>
+    <div class="season-body">
+      <span class="season-label">Mountain Season</span>
+      <h2>Summer</h2>
+      <p>The plains turn hot and best avoided, but this is exactly when the high Himalayas open up. Snow clears from mountain passes, Ladakh becomes reachable by road, and hill stations offer a genuine escape from the heat below.</p>
+      <ul class="season-facts">
+        <li><strong>Temp:</strong> 35°C – 45°C in the plains, 10°C – 22°C in the hills</li>
+        <li><strong>Best for:</strong> Ladakh, Spiti, Himachal, Uttarakhand, Kashmir</li>
+        <li><strong>Watch out:</strong> Central and North Indian cities get uncomfortably hot by May</li>
+      </ul>
+    </div>
+  </article>
+
+  <article class="season-block">
+    <div class="season-media">
+      <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1000&q=80" alt="Lush green Kerala backwaters during monsoon season">
+      <span class="season-tag monsoon">Jul – Sep</span>
+    </div>
+    <div class="season-body">
+      <span class="season-label">Green Season</span>
+      <h2>Monsoon</h2>
+      <p>Often skipped, often underrated. The rains turn the Western Ghats, Kerala, and the Northeast a vivid green, waterfalls run full, and crowds thin out everywhere. It's the off-season price advantage with genuinely dramatic scenery — if you don't mind rescheduling around rain.</p>
+      <ul class="season-facts">
+        <li><strong>Temp:</strong> 25°C – 33°C, high humidity</li>
+        <li><strong>Best for:</strong> Kerala's Ayurveda season, Western Ghats, Meghalaya, Goa's off-season calm</li>
+        <li><strong>Watch out:</strong> Landslide risk on mountain roads; carry buffer days into any itinerary</li>
+      </ul>
+    </div>
+  </article>
+
+</section>
+</div>
+
+<!-- ===== MONTH STRIP ===== -->
+<section class="month-strip">
+  <div class="month-strip-inner">
+    <span class="section-eyebrow">At a glance</span>
+    <h2>Month by month</h2>
+    <div class="month-grid">
+      <div class="month-chip cold">Jan <small>Cool, clear</small></div>
+      <div class="month-chip cold">Feb <small>Pleasant</small></div>
+      <div class="month-chip mild">Mar <small>Warming up</small></div>
+      <div class="month-chip hot">Apr <small>Hot in plains</small></div>
+      <div class="month-chip hot">May <small>Peak heat</small></div>
+      <div class="month-chip rain">Jun <small>Monsoon begins</small></div>
+      <div class="month-chip rain">Jul <small>Full monsoon</small></div>
+      <div class="month-chip rain">Aug <small>Green &amp; lush</small></div>
+      <div class="month-chip mild">Sep <small>Rains ease</small></div>
+      <div class="month-chip cold">Oct <small>Festive, clear</small></div>
+      <div class="month-chip cold">Nov <small>Cool &amp; crisp</small></div>
+      <div class="month-chip cold">Dec <small>Peak season</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REGION TIMING TABLE ===== -->
+<section class="region-timing" id="regions">
+  <div class="section-head">
+    <div>
+      <span class="section-eyebrow">Region by region</span>
+      <h2>When to go where</h2>
+    </div>
+  </div>
+
+  <div class="timing-table">
+    <div class="timing-row timing-header">
+      <span>Region</span>
+      <span>Best months</span>
+      <span>Why</span>
+    </div>
+    <div class="timing-row">
+      <span data-label="Region">Rajasthan &amp; Delhi</span>
+      <span data-label="Best months">Oct – Mar</span>
+      <span data-label="Why">Desert heat is brutal outside winter</span>
+    </div>
+    <div class="timing-row">
+      <span data-label="Region">Kerala &amp; Tamil Nadu</span>
+      <span data-label="Best months">Sep – Mar</span>
+      <span data-label="Why">Cooler, drier after the monsoon retreats</span>
+    </div>
+    <div class="timing-row">
+      <span data-label="Region">Ladakh &amp; Spiti</span>
+      <span data-label="Best months">May – Sep</span>
+      <span data-label="Why">Only window when high passes are open</span>
+    </div>
+    <div class="timing-row">
+      <span data-label="Region">Goa</span>
+      <span data-label="Best months">Nov – Feb</span>
+      <span data-label="Why">Dry, sunny beach weather</span>
+    </div>
+    <div class="timing-row">
+      <span data-label="Region">Northeast (Meghalaya, Sikkim)</span>
+      <span data-label="Best months">Oct – Apr</span>
+      <span data-label="Why">Clear skies after heavy monsoon rains</span>
+    </div>
+    <div class="timing-row">
+      <span data-label="Region">Wildlife parks (Ranthambore, Bandhavgarh)</span>
+      <span data-label="Best months">Mar – Jun</span>
+      <span data-label="Why">Dry heat pushes animals to waterholes</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO SECTION ===== -->
+<section class="trip-videos" id="videos">
+  <div class="section-head">
+    <div>
+      <span class="section-eyebrow">See it before you go</span>
+      <h2>India, across the seasons</h2>
+    </div>
+    <p class="section-note">A few short films from past routes — winter deserts, summer mountains, and the monsoon coast.</p>
+  </div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/UOOfLdQtNvc"
+          title="Rajasthan winter travel video"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <h4>Rajasthan in Winter</h4>
+      <p>Forts, dunes, and clear December skies across the Desert Triangle route.</p>
+    </div>
+
+    <div class="video-card">
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/uSUB8xxxpP0"
+          title="Ladakh summer road trip video"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <h4>Ladakh Overland in Summer</h4>
+      <p>High passes, blue lakes, and the only months the road is open.</p>
+    </div>
+
+    <div class="video-card">
+      <div class="video-embed">
+        <iframe
+          src="https://www.youtube.com/embed/UbQgXeY_zi0"
+          title="Kerala monsoon backwaters video"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <h4>Kerala's Green Monsoon</h4>
+      <p>Backwaters at their fullest, and a quieter side of the coast.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA STRIP ===== -->
+<section class="bt-cta">
+  <div class="bt-cta-inner">
+    <h2>Not sure which season fits your trip?</h2>
+    <p>Tell us your dates and where you're hoping to go — we'll tell you honestly if it's the right time, or a better one.</p>
+    <a href="index.html#plan" class="bt-cta-btn">Ask us directly</a>
+  </div>
+</section>
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+<script>
+    // =========================================================
+// MOBILE NAV TOGGLE
+// =========================================================
+const navToggle = document.getElementById('navToggle');
+const mainNav = document.getElementById('mainNav');
+
+navToggle.addEventListener('click', () => {
+  const isOpen = mainNav.classList.toggle('is-open');
+  navToggle.classList.toggle('is-open', isOpen);
+  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+});
+
+mainNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mainNav.classList.remove('is-open');
+    navToggle.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// =========================================================
+// SCROLL REVEAL for season blocks, month chips, video cards
+// =========================================================
+const revealTargets = document.querySelectorAll('.season-block, .month-chip, .video-card, .timing-row:not(.timing-header)');
+revealTargets.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .6s ease, transform .6s ease';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+revealTargets.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

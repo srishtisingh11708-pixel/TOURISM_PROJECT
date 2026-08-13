@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"><style>
+    :root{
+    --teal-deep:#0F3D3E;
+    --teal-mid:#154C4D;
+    --sand:#F1E4C3;
+    --coral:#E8734A;
+    --white:#FBF8F2;
+    --gold:#C9A15C;
+    --ink:#0B2626;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Fraunces', serif;}
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:0.72rem;
+    font-weight:600;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:78vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:var(--teal-deep);
+    padding:2rem 1.5rem;
+  }
+  .hero-bg{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(232,115,74,0.35), transparent 55%),
+      radial-gradient(circle at 80% 70%, rgba(201,161,92,0.3), transparent 55%),
+      radial-gradient(circle at 50% 100%, rgba(21,76,77,0.9), transparent 60%);
+    animation: driftBg 16s ease-in-out infinite alternate;
+  }
+  @keyframes driftBg{
+    0%{ transform: translate(-3%, -2%) scale(1); }
+    100%{ transform: translate(3%, 2%) scale(1.08); }
+  }
+  .sun{
+    position:absolute;
+    width:340px; height:340px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(232,115,74,0.55), rgba(232,115,74,0) 70%);
+    top:-90px; left:50%;
+    transform:translateX(-50%);
+    filter:blur(2px);
+    animation: pulseSun 6s ease-in-out infinite;
+  }
+  @keyframes pulseSun{
+    0%,100%{ opacity:0.7; }
+    50%{ opacity:1; }
+  }
+  .route-dots{
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(251,248,242,0.12) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+    animation: dotsMove 40s linear infinite;
+  }
+  @keyframes dotsMove{
+    0%{ background-position:0 0; }
+    100%{ background-position:520px 260px; }
+  }
+  .hero-content{ position:relative; z-index:2; max-width:760px; }
+  .hero .eyebrow{ color:var(--gold); margin-bottom:1.1rem; display:inline-block;}
+  .hero h1{
+    color:var(--white);
+    font-size:clamp(2.6rem, 7vw, 5rem);
+    font-weight:700;
+    line-height:1.02;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--coral);
+  }
+  .hero p{
+    color:rgba(251,248,242,0.78);
+    font-size:1.05rem;
+    max-width:520px;
+    margin:1.4rem auto 0;
+    line-height:1.6;
+  }
+
+  /* ---------- SECTION LABELS ---------- */
+  .section{
+    max-width:1180px;
+    margin:0 auto;
+    padding:5rem 1.5rem;
+  }
+  .section-head{
+    text-align:center;
+    margin-bottom:3rem;
+  }
+  .section-head .eyebrow{ color:var(--coral); }
+  .section-head h2{
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    margin-top:0.6rem;
+    font-weight:600;
+  }
+
+  /* ---------- ROUTE PATH (signature) ---------- */
+  .team-path{
+    position:relative;
+  }
+  .team-path::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0; bottom:0;
+    width:2px;
+    background-image: linear-gradient(var(--gold) 60%, transparent 0%);
+    background-size: 2px 14px;
+    background-repeat:repeat-y;
+    transform:translateX(-50%);
+    opacity:0.5;
+    z-index:0;
+  }
+
+  /* ---------- GUIDE CARD (top) ---------- */
+  .guide-card{
+    position:relative; z-index:1;
+    background:var(--teal-deep);
+    border-radius:22px;
+    padding:2.6rem;
+    display:flex;
+    gap:2.2rem;
+    align-items:flex-start;
+    color:var(--white);
+    max-width:760px;
+    margin:0 auto 3rem;
+    box-shadow:0 20px 40px -18px rgba(15,61,62,0.5);
+  }
+  .guide-card > div{
+    flex:1;
+    min-width:0;
+  }
+  .guide-card .socials{
+    justify-content:flex-start;
+  }
+  .guide-card .photo-wrap{
+    width:190px; height:190px;
+    border-radius:50%;
+    flex-shrink:0;
+    padding:5px;
+    background:linear-gradient(135deg, var(--coral), var(--gold));
+    overflow:hidden;
+  }
+  .guide-card .photo-wrap img{
+    width:100%; height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    background:var(--sand);
+    display:block;
+  }
+  .guide-card .role-tag{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:0.68rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--coral);
+    display:inline-block;
+    margin-bottom:0.4rem;
+  }
+  .guide-card h3{ font-size:1.7rem; font-weight:600; }
+  .guide-card p{
+    margin-top:0.7rem;
+    font-size:0.92rem;
+    line-height:1.6;
+    color:rgba(251,248,242,0.8);
+  }
+
+  /* ---------- MEMBER GRID ---------- */
+  .member-grid{
+    position:relative; z-index:1;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:1.8rem;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .member-card{
+    background:var(--white);
+    border:1px solid rgba(15,61,62,0.1);
+    border-radius:18px;
+    padding:1.8rem 1.4rem 1.6rem;
+    text-align:center;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .member-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 30px -18px rgba(15,61,62,0.28);
+  }
+  .member-card .photo-wrap{
+    width:132px; height:132px;
+    border-radius:50%;
+    margin:0 auto 1rem;
+    padding:4px;
+    background:linear-gradient(135deg, var(--gold), var(--coral));
+  }
+  .member-card .photo-wrap img{
+    width:100%; height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    background:var(--sand);
+  }
+  .member-card .role-tag{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:0.62rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--coral);
+    display:block;
+    margin-bottom:0.3rem;
+  }
+  .member-card h4{ font-size:1.05rem; font-weight:600; color:var(--ink); }
+  .member-card p{
+    margin-top:0.55rem;
+    font-size:0.82rem;
+    line-height:1.55;
+    color:#4d5f5b;
+  }
+  .member-card.leader-card{
+    border-color:var(--gold);
+    background:linear-gradient(180deg, rgba(201,161,92,0.08), transparent 40%);
+  }
+  .member-card.leader-card .photo-wrap{
+    background:linear-gradient(135deg, var(--teal-deep), var(--gold));
+  }
+
+  /* ---------- SOCIAL ICONS ---------- */
+  .socials{
+    display:flex;
+    justify-content:center;
+    gap:0.7rem;
+    margin-top:1.1rem;
+  }
+  .socials a{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--teal-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background 0.2s ease, transform 0.2s ease;
+  }
+  .socials a:hover{
+    background:var(--coral);
+    transform:translateY(-2px);
+  }
+  .socials svg{ width:15px; height:15px; fill:var(--white); }
+  .guide-card .socials a, .lead-card .socials a{
+    background:rgba(251,248,242,0.12);
+  }
+  .lead-card .socials a{ background:var(--sand); }
+  .lead-card .socials svg{ fill:var(--teal-deep); }
+  .guide-card .socials a:hover, .lead-card .socials a:hover{ background:var(--coral); }
+  .guide-card .socials svg{ fill:var(--white); }
+  .lead-card .socials a:hover svg{ fill:var(--white); }
+
+  /* ---------- ABOUT US ---------- */
+  .about{
+    background:var(--sand);
+  }
+  .about-inner{
+    max-width:1180px;
+    margin:0 auto;
+    padding:5rem 1.5rem;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:3rem;
+    align-items:center;
+  }
+  .about .eyebrow{ color:var(--coral); }
+  .about h2{
+    font-size:clamp(1.9rem, 4vw, 2.7rem);
+    margin-top:0.6rem;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.15;
+  }
+  .about p{
+    margin-top:1.2rem;
+    font-size:1rem;
+    line-height:1.75;
+    color:#2c3e3b;
+    max-width:520px;
+  }
+  .about-media img{
+    width:100%;
+    border-radius:20px;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    background:#d8ccae;
+    box-shadow:0 24px 50px -24px rgba(15,61,62,0.4);
+  }
+
+  @media(max-width:640px){
+    .guide-card{ flex-direction:column; text-align:center; }
+    .guide-card .socials{ justify-content:center; }
+    .about-inner{ grid-template-columns:1fr; }
+    .team-path::before{ display:none; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-bg, .sun, .route-dots{ animation:none; }
+  }
+
+</style>
+
+</head>
+<body style="background-color:#FFF8DC;">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html" class="active">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html">Review</a>
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+    <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="sun"></div>
+    <div class="route-dots"></div>
+    <div class="hero-content">
+      <span class="eyebrow">Team Travelers</span>
+      <h1>Meet the <em>Team Experts</em><br>behind every journey</h1>
+      <p>The planners, guides and storytellers who turn a map into a memory — one trip at a time.</p>
+    </div>
+  </section>
+
+  <section class="section team-path">
+    <div class="section-head">
+      <span class="eyebrow">The Route</span>
+      <h2 style="color:white;">Guided by one, carried out by many</h2>
+    </div>
+
+    <!-- PROJECT GUIDE -->
+    <div class="guide-card">
+        <div class="photo-wrap"><img src="image/sir1.jpeg" alt="Project Guide photo — add your image here"></div>
+      <div>
+        <span class="role-tag">Project Guide</span>
+        <h3></h3>
+        <p>Project Guide
+Mr. Suraj Singh
+
+We sincerely thank Mr. Suraj Singh, our Project Guide, for his valuable guidance, continuous support, and encouragement
+throughout this project. He is an excellent teacher 
+and mentor whose knowledge, dedication, and motivation inspired us to successfully complete this project..</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBERS (Team Leader + 5 members, one row) -->
+    <div class="member-grid">
+
+      <div class="member-card leader-card">
+          <div class="photo-wrap"><img src="image/imgsri.jpeg" alt="Team Leader photo — add your image here"></div>
+        <span class="role-tag">Team Leader</span>
+        <h4 style="color:wheat;">Srishti Singh</h4>
+        <p style="color: whitesmoke;">Team Leader
+Srishti Singh
+
+Srishti Singh led the team with dedication, responsibility, and confidence. She coordinated the project effectively, 
+encouraged teamwork, and contributed significantly to the successful completion of the project.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg></a>
+        </div>
+      </div>
+
+      <div style="background-color:graytext;" class="member-card">
+          <div class="photo-wrap"><img src="image/anushreya.jpeg" alt="Team member photo"></div>
+        <span class="role-tag">Co-Team leader</span>
+        <h4>Anushreya singh</h4>
+        <p style="color: white;">Co-Team Leader
+Anushreya
+
+Anushreya contributed actively to the project with dedication and teamwork. She supported project planning, coordination, and implementation, 
+helping the team successfully complete the project through her commitment and cooperation..</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+          </a>
+          <a href="#" aria-label="GitHub">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="member-card">
+          <div class="photo-wrap"><img src="image/kalpana.jpeg" alt="Team member photo"></div>
+        <span class="role-tag">Frontend Developer</span>
+        <h4>Kalpana Chaurasiya</h4>
+        <p>Kalpana Chaurasiya
+UI/UX Designer
+Kalpana Chaurasiya designed the user interface of the project, ensuring an attractive, user-friendly,
+and responsive layout. She also contributed to improving the overall user experience..</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="member-card">
+          <div class="photo-wrap"><img src="image/kavya.jpeg" alt="Team member photo"></div>
+        <span class="role-tag">Backend Developer </span>
+        <h4>Akshara singh</h4>
+        <p>Backend Developer
+Akshara Singh worked on the backend development of the project, managed the database, and ensured smooth functionality and data processing.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="member-card">
+          <div class="photo-wrap"><img src="image/kajal.jpeg" alt="Team member photo"></div>
+        <span class="role-tag">Photographer</span>
+        <h4>Kajal Bind</h4>
+        <p>Testing & Documentation
+Kajal Bind was responsible for testing the project, identifying and resolving issues, and preparing the project documentation to ensure accuracy and quality. .</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="member-card">
+          <div class="photo-wrap"><img src="image/anshika.jpeg" alt="Team member photo"></div>
+        <span class="role-tag">Database Administrator</span>
+        <h4>Anshika singh</h4>
+        <p> Tested the project, identified bugs, and ensured the proper functionality of all features.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg></a>
+        </div>
+      </div>
+        
+      <div class="member-card">
+          <div class="photo-wrap"><img src="image/mahek.jpeg" alt="Team member photo"></div>
+        <span class="role-tag">Presentation</span>
+        <h4>Mahek Shukla</h4>
+        <p>Prepared the project documentation, organized reports, and contributed to the final project presentation.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg></a>
+          <a href="#" aria-label="GitHub"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69-.1-.26-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.9-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.66.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24"><path d="M22 5.9c-.7.3-1.5.5-2.3.6.8-.5 1.5-1.3 1.8-2.3-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4.1 4.1 0 0 0 1.2 5.4c-.6 0-1.2-.2-1.7-.5v.1c0 1.9 1.4 3.5 3.1 3.9-.5.1-1.1.2-1.7.1.5 1.6 1.9 2.7 3.6 2.7A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.8c7.5 0 11.6-6.3 11.6-11.6v-.5c.8-.6 1.5-1.3 2.1-2.2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M6.9 8.6H3.5V20h3.4V8.6zM5.2 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM20.5 20h-3.4v-5.9c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V20H9.5V8.6h3.3v1.6h.05c.46-.87 1.6-1.8 3.3-1.8 3.5 0 4.15 2.3 4.15 5.3V20z"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-media">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE6srRxZv59_Zn68Sl9LHO09UYf-p4CugHt3xH3HjvhQ&s=10" alt="">
+      </div>
+      <div>
+        <span class="eyebrow">About Us</span>
+        <h2>We plan trips the way locals would</h2>
+        <p>Wanderloom Travels started with a simple idea — that the best journeys aren't just booked, they're built.
+            For over eight years, our team has been designing trips across mountains, coastlines and cities that go 
+            beyond the usual checklist of landmarks. We work closely with local guides and small communities to bring travellers experiences that feel personal, not packaged.</p>
+        <p>From the first itinerary sketch to the last sunset of the trip, every member of our team plays a part in making sure your 
+            journey feels effortless. We believe travel should widen the world, not just fill a passport — and that belief shapes every route we design.</p>
+      </div>
+    </div>
+  </section>
+    
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+<script>
+  const data = {
+    teacher: {
+      name: "Teacher Ka Naam",
+      role: "Guide / Teacher",
+      paragraphs: [
+        "Hamare guide/teacher ne is tourism project mein bahut important role nibhaya hai. Unhone shuru se hi team ko sahi direction di aur bataya ki ek tourism-based project mein kis tarah ki research aur presentation honi chahiye.",
+        "Jab bhi team confuse hoti thi ki topic ko kaise aage badhaya jaye, teacher ne apne experience se simple aur clear tarike se samjhaya. Unki guidance se team ko project ke structure ko samajhna aasan hua.",
+        "Teacher ne har stage par feedback diya — chahe wo content ho, design ho ya presentation — jisse project ki quality lagatar improve hoti gayi. Unka feedback hamesha constructive raha, jisse team demotivate nahi hui balki aur behtar karne ki koshish ki.",
+        "Inhone sirf academic guidance hi nahi di, balki real-world tourism industry ke examples bhi share kiye, jisse students ka practical knowledge bhi badha. Isse project sirf kitabi na rehkar real aur relatable ban gaya.",
+        "Teacher ki mehnat aur patience ki wajah se hi yeh project itni acchi shape mein aa paaya hai. Unka support pura project banane ke process mein ek strong pillar raha hai."
+      ]
+    },
+    leader: {
+      name: "Team Leader Ka Naam",
+      role: "Team Leader",
+      paragraphs: [
+        "Team leader is tourism project ki rooh hain — unhone hi shuru se lekar aakhir tak har member ko sahi disha dikhayi aur project ko ek strong direction di. Unka kaam sirf tasks baantna nahi tha, balki har idea ko sunna aur usse project ke goal ke saath jodna tha.",
+        "Inki leadership style bahut hi supportive rahi hai. Jab bhi kisi member ko koi problem aayi, unhone patience se suna aur solution nikaalne mein madad ki. Isi wajah se team ka communication smooth raha aur deadlines time par poori hui.",
+        "Research aur planning phase mein inka role sabse zyada important tha, kyunki tourism jaise topic mein data aur destinations ko sahi tarike se organize karna zaroori hota hai. Unhone har member ko unki strength ke hisaab se kaam diya, jisse output quality mein kaafi farak dikha.",
+        "Presentation aur final report banate waqt bhi leader ne har chhoti detail ko check kiya, taaki project professional lage aur teacher ke expectations pe khara utre. Unki mehnat is project ka backbone rahi hai.",
+        "Overall, ek accha leader vahi hota hai jo apni team ko saath lekar chale — aur yeh quality humare leader mein poori tarah dikhti hai. Inhi ki wajah se yeh project ek team effort ban paaya, na ki sirf individual kaam ka jod."
+      ]
+    },
+    m1: {
+      name: "Member 1 Ka Naam",
+      role: "Team Member",
+      paragraphs: [
+        "Is member ne project ke research part mein bahut mehnat ki hai. Different tourist destinations ke baare mein data collect karna, unki history samajhna aur usse simple language mein likhna inka main kaam raha.",
+        "Inhone kaafi time internet aur books se authentic information nikaalne mein diya, taaki project mein galat facts na aayein. Isse project ki credibility badhi hai.",
+        "Team ke andar communication banaye rakhne mein bhi inka contribution rha — jab bhi koi doubt hota tha, ye baaki members se discuss karte the aur solution nikalte the.",
+        "Presentation banate waqt inhone content ko organize karne mein madad ki, taaki slides logical order mein rahe aur dekhne wale ko samajhne mein aasani ho.",
+        "Overall inki dedication aur consistency project ki success mein ek important factor rahi hai."
+      ]
+    },
+    m2: {
+      name: "Member 2 Ka Naam",
+      role: "Team Member",
+      paragraphs: [
+        "Is member ka focus zyada tar design aur visual presentation par raha. Unhone slides, charts aur images ko is tarah arrange kiya ki project dekhne mein professional aur attractive lage.",
+        "Inhone creative inputs diye jisse project sirf text-heavy na rehkar visually engaging bana. Colors aur layout choose karte waqt inhone kaafi soch-samajh kar decisions liye.",
+        "Team meetings mein ye active rehte the aur naye ideas suggest karte the, jisse project mein variety aayi. Inki creativity ne project ko ek unique touch diya.",
+        "Deadline ke pressure mein bhi inhone calm rehkar apna kaam complete kiya aur baaki members ki bhi madad ki jab unhe design se related help chahiye thi.",
+        "Inka contribution project ki visual identity banane mein sabse zyada raha hai, jo ki kisi bhi presentation ka important hissa hota hai."
+      ]
+    },
+    m3: {
+      name: "Member 3 Ka Naam",
+      role: "Team Member",
+      paragraphs: [
+        "Is member ne project ki writing aur content structuring mein important role play kiya. Har section ko clearly likhna aur usse ek flow dena inka main responsibility tha.",
+        "Inhone ensure kiya ki jo bhi information project mein daali ja rahi hai, wo easy language mein ho taaki koi bhi reader usse aasani se samajh sake.",
+        "Team ke andar inka nature bahut hi cooperative raha — jab bhi kisi ko help chahiye hoti thi, ye turant aage aakar madad karte the.",
+        "Final report banate waqt inhone proofreading aur corrections ka kaam bhi sambhala, jisse project mein galtiyon ki sankhya kam ho gayi.",
+        "Inki consistency aur responsibility ki bhavna is project ko time par aur acchi quality ke saath complete karne mein bahut kaam aayi."
+      ]
+    }
+  };
+
+  const panel = document.getElementById('bio-panel');
+  const bioName = document.getElementById('bio-name');
+  const bioRole = document.getElementById('bio-role');
+  const bioText = document.getElementById('bio-text');
+  const bioPhoto = document.getElementById('bio-photo');
+
+  function openBio(key){
+    const info = data[key];
+    if(!info) return;
+    bioName.textContent = info.name;
+    bioRole.textContent = info.role;
+    bioText.innerHTML = info.paragraphs.map(p => `<p>${p}</p>`).join('');
+
+    const sourceFrame = document.getElementById('photo-' + key);
+    bioPhoto.innerHTML = sourceFrame.innerHTML;
+
+    panel.classList.add('open');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function closeBio(){
+    panel.classList.remove('open');
+  }
+
+  document.querySelectorAll('[data-member]').forEach(card => {
+    card.addEventListener('click', () => openBio(card.dataset.member));
+    card.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') openBio(card.dataset.member);
+    });
+  });
+</script>
+
+</body>
+</html>
+   

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --reg-cream:#F7F2E7;
+    --reg-green-deep:#1F4D2C;
+    --reg-green-mid:#3E7A4C;
+    --reg-sage:#7FA66B;
+    --reg-leaf-bg:#DCEAD1;
+    --reg-ink:#233827;
+    --reg-line:rgba(31,77,44,0.15);
+    --reg-error:#C1432E;
+    --reg-gold:#C9A15C;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--reg-ink);
+    background:var(--reg-cream);
+  }
+  h1,h2{ font-family:'Fraunces', serif; }
+  a{ text-decoration:none; }
+  .eyebrow{
+    font-family:'Space Grotesk', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:0.7rem;
+    font-weight:600;
+  }
+
+  /* ---------- SPLIT LAYOUT ---------- */
+  .split-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:calc(100vh - 60px);
+    padding:2.4rem 1.4rem;
+  }
+
+  .login-shell{
+    display:grid;
+    grid-template-columns:1fr 1.05fr;
+    max-width:960px;
+    width:100%;
+    background:var(--reg-cream);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 40px 80px -40px rgba(31,77,44,0.35);
+  }
+
+  /* LEFT: solid color info panel */
+  .login-info-panel{
+    background:var(--reg-green-deep);
+    color:var(--reg-cream);
+    padding:3rem 2.4rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .login-info-panel::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(247,242,231,0.06) 1.5px, transparent 1.5px);
+    background-size:22px 22px;
+  }
+  .login-info-panel > *{ position:relative; z-index:1; }
+  .login-info-panel .eyebrow{ color:var(--reg-gold); display:block; margin-bottom:0.7rem; }
+  .login-info-panel h1{
+    font-size:clamp(1.8rem, 4vw, 2.4rem);
+    font-weight:700;
+    margin-bottom:1.1rem;
+    line-height:1.15;
+  }
+  .login-info-panel > p{
+    font-size:0.9rem;
+    color:rgba(247,242,231,0.8);
+    line-height:1.6;
+    margin-bottom:1.8rem;
+    max-width:320px;
+  }
+  .info-checklist{ display:flex; flex-direction:column; gap:0.9rem; }
+  .info-checklist .check-row{
+    display:flex; align-items:center; gap:0.7rem;
+    font-size:0.9rem;
+    font-weight:600;
+  }
+  .info-checklist .check-icon{
+    width:22px; height:22px;
+    border-radius:50%;
+    background:var(--reg-sage);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .info-checklist .check-icon svg{ width:11px; height:11px; stroke:var(--reg-green-deep); stroke-width:3; fill:none; }
+
+  /* RIGHT: form panel */
+  .login-form-panel{
+    background:#FFFDF8;
+    padding:3rem 2.6rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .login-form-panel h2{
+    font-size:1.6rem;
+    color:var(--reg-green-deep);
+    margin-bottom:0.4rem;
+  }
+  .login-form-panel > p.sub{
+    font-size:0.85rem;
+    color:#5a6d5b;
+    margin-bottom:1.8rem;
+  }
+
+  .icon-field{
+    display:flex; align-items:center; gap:0.7rem;
+    border-bottom:1.5px solid var(--reg-line);
+    padding:0.75rem 0.2rem;
+    margin-bottom:1.3rem;
+  }
+  .icon-field svg{ width:17px; height:17px; stroke:var(--reg-green-mid); fill:none; stroke-width:2; flex-shrink:0; }
+  .icon-field input{
+    border:none;
+    outline:none;
+    width:100%;
+    font-size:0.9rem;
+    font-family:'Inter', sans-serif;
+    background:transparent;
+    color:var(--reg-ink);
+  }
+  .icon-field input::placeholder{ color:#9aa89a; }
+  .icon-field:focus-within{ border-color:var(--reg-sage); }
+
+  .login-error{
+    display:none;
+    font-size:0.8rem;
+    color:var(--reg-error);
+    background:#FBEAE6;
+    border:1px solid #F0C4BA;
+    border-radius:8px;
+    padding:0.6rem 0.8rem;
+    margin-bottom:1rem;
+  }
+  .login-error.visible{ display:block; }
+
+  .login-row-between{
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:0.8rem;
+    margin-bottom:1.5rem;
+  }
+  .login-row-between label{ display:flex; align-items:center; gap:0.4rem; color:var(--reg-ink); }
+  .login-row-between input{ accent-color:var(--reg-green-deep); width:16px; height:16px; }
+  .login-row-between a{ color:var(--reg-green-mid); font-weight:600; text-decoration:underline; }
+
+  .login-btn{
+    width:100%;
+    background:var(--reg-green-deep);
+    color:var(--reg-cream);
+    font-weight:700;
+    font-size:0.94rem;
+    padding:0.95rem;
+    border-radius:10px;
+    border:none;
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow:0 14px 26px -14px rgba(31,77,44,0.55);
+  }
+  .login-btn:hover{ transform:translateY(-1px); }
+
+  .or-divider{
+    display:flex; align-items:center; gap:0.8rem;
+    margin:1.6rem 0;
+    color:#9aa89a;
+    font-size:0.75rem;
+    font-weight:600;
+  }
+  .or-divider::before, .or-divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--reg-line);
+  }
+
+  .social-row{
+    display:flex; justify-content:center; gap:0.9rem;
+    margin-bottom:1.6rem;
+  }
+  .social-btn{
+    width:42px; height:42px;
+    border-radius:50%;
+    border:1.5px solid var(--reg-line);
+    display:flex; align-items:center; justify-content:center;
+    background:#fff;
+    transition:transform 0.15s ease, border-color 0.15s ease;
+  }
+  .social-btn:hover{ transform:translateY(-2px); border-color:var(--reg-sage); }
+  .social-btn svg{ width:18px; height:18px; }
+
+  .login-success{
+    display:none;
+    text-align:center;
+    padding:1rem 0.4rem 0.4rem;
+  }
+  .login-success.visible{ display:block; }
+  .login-success .icon{ font-size:2.6rem; margin-bottom:0.6rem; }
+  .login-success h3{ font-family:'Fraunces', serif; color:var(--reg-green-deep); font-size:1.2rem; margin-bottom:0.4rem; }
+  .login-success p{ font-size:0.85rem; color:#5a6d5b; }
+
+  .login-register-link{
+    text-align:center;
+    font-size:0.85rem;
+    color:#5a6d5b;
+  }
+  .login-register-link a{ color:var(--reg-green-deep); font-weight:700; text-decoration:underline; }
+
+  @media(max-width:820px){
+    .login-shell{ grid-template-columns:1fr; }
+    .login-info-panel{ padding:2.4rem 1.8rem; text-align:center; align-items:center; }
+    .login-info-panel > p{ margin-left:auto; margin-right:auto; }
+    .info-checklist{ align-items:center; }
+    .login-form-panel{ padding:2.4rem 1.8rem; }
+  }
+</style>
+</head>
+
+<body style="background-color:#FFF8DC;">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html" class="active">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html">Review</a>
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+    <!--login-->
+    <div class="split-wrap">
+    <div class="login-shell">
+
+      <!-- LEFT: info panel -->
+      <div class="login-info-panel">
+        <span class="eyebrow">Welcome To</span>
+        <h1>sahyatri.com</h1>
+        <p>Plan getaways, road trips, and honeymoons — all tailored to you, with your saved trips waiting right where you left them.</p>
+        <div class="info-checklist">
+          <div class="check-row">
+            <span class="check-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+            Secure Login
+          </div>
+          <div class="check-row">
+            <span class="check-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+            Easy Trip Booking
+          </div>
+          <div class="check-row">
+            <span class="check-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+            Instant Quote Confirmation
+          </div>
+        </div>
+      </div>
+      <!-- RIGHT: form panel -->
+      <div class="login-form-panel">
+        <h2>Login Account</h2>
+        <p class="sub">Welcome back! Please login to continue.</p>
+
+        <div class="login-error" id="loginError">Incorrect username or password. Please try again.</div>
+
+        <form id="loginForm" action="codes/logincode.jsp" method="post">
+          <div class="icon-field">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 5h18v14H3z"/><path d="M3 5l9 7 9-7"/></svg>
+            <input type="text" id="loginUsername" name="email" placeholder="Username or Email" autocomplete="username">
+          </div>
+          <div class="icon-field">
+            <svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+            <input type="password" id="loginPassword" name="pass" placeholder="Password" autocomplete="current-password">
+          </div>
+
+          <div class="login-row-between">
+            <label><input type="checkbox" id="rememberMe"> Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">Login Now</button>
+        </form>
+
+        <div class="or-divider">OR</div>
+        <div class="social-row">
+          <div class="social-btn" title="Continue with Google">
+            <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.25 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.85A10.99 10.99 0 0012 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 010-4.2V7.05H2.18a11 11 0 000 9.9l3.66-2.85z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.05l3.66 2.85c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+          </div>
+          <div class="social-btn" title="Continue with Facebook">
+            <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.4c0-.87.24-1.46 1.5-1.46H16.5V4.3c-.26-.04-1.15-.11-2.19-.11-2.17 0-3.66 1.32-3.66 3.75v2.1H8.1v3h2.55V21h2.85z"/></svg>
+          </div>
+          <div class="social-btn" title="Continue with Instagram">
+            <svg viewBox="0 0 24 24" fill="#E1306C"><path d="M12 2c2.7 0 3 .01 4.1.06 1.1.05 1.8.22 2.4.46.7.27 1.2.6 1.7 1.1.5.5.9 1 1.1 1.7.24.6.4 1.3.46 2.4.05 1.1.06 1.4.06 4.1s-.01 3-.06 4.1c-.05 1.1-.22 1.8-.46 2.4a4.6 4.6 0 0 1-1.1 1.7 4.6 4.6 0 0 1-1.7 1.1c-.6.24-1.3.4-2.4.46-1.1.05-1.4.06-4.1.06s-3-.01-4.1-.06c-1.1-.05-1.8-.22-2.4-.46a4.6 4.6 0 0 1-1.7-1.1 4.6 4.6 0 0 1-1.1-1.7c-.24-.6-.4-1.3-.46-2.4C2 15 2 14.7 2 12s.01-3 .06-4.1c.05-1.1.22-1.8.46-2.4.27-.7.6-1.2 1.1-1.7.5-.5 1-.9 1.7-1.1.6-.24 1.3-.4 2.4-.46C9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/></svg>
+          </div>
+        </div>
+
+        <div class="login-success" id="loginSuccess">
+          <div class="icon">🌿</div>
+          <h3>You're logged in!</h3>
+          <p>Welcome back to shaytri.com — redirecting you to your dashboard...</p>
+        </div>
+
+        <div class="login-register-link">Don't have an account? <a href="Registration.html">Register Now</a></div>
+      </div>
+
+    </div>
+  </div>
+    <!-----end----------->
+   
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+</div>
+</body>
+</html>

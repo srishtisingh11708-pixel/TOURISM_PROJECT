@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    :root{
+    --forest-1:#0b4a3a;
+    --forest-2:#0f6350;
+    --cream:#f6f1e6;
+    --cream-2:#efe8d8;
+    --gold:#c99a3e;
+    --red:#b23a2e;
+    --ink:#1c1c18;
+    --ink-soft:#5c5c52;
+    --line:#d8cfb8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',serif;}
+  .eyebrow{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:600;
+  }
+  a{text-decoration:none;color:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    background:linear-gradient(120deg,var(--forest-1),var(--forest-2) 70%);
+    color:#fff;
+    padding:64px 8vw 90px;
+    overflow:hidden;
+  }
+  .crumb{
+    font-size:.85rem;
+    color:#d8e6de;
+    margin-bottom:22px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  .crumb a{color:#d8e6de; border-bottom:1px solid transparent;}
+  .crumb a:hover{border-color:#d8e6de;}
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,4.2rem);
+    font-weight:500;
+    margin:0 0 16px;
+    line-height:1.05;
+  }
+  .hero h1 em{color:var(--gold); font-style:italic; font-weight:600;}
+  .hero p.lede{
+    max-width:560px;
+    color:#d8e6de;
+    font-size:1.05rem;
+    line-height:1.6;
+  }
+  .hero-route{
+    position:absolute;
+    right:6vw; top:50%; transform:translateY(-50%);
+    width:min(38vw,420px);
+    opacity:.9;
+  }
+  .flight-dot{
+    animation:fly 6s linear infinite;
+  }
+  @keyframes fly{
+    0%{ offset-distance:0%; }
+    100%{ offset-distance:100%; }
+  }
+ /*---------------navb-----------*/
+ .quick-nav{
+  background:#0b4a3a;   /* 👈 poore strip ka background color */
+  border-bottom:1px solid #0b4a3a;
+}
+.quick-nav a{
+  color:#ffffff;        /* 👈 button text ka color */
+  border-color:rgba(255,255,255,0.3);
+}
+.quick-nav a:hover{
+  background:#c99a3e;   /* 👈 hover pe button ka color */
+  border-color:#c99a3e;
+  color:#1c1c18;
+}
+
+  /* ---------- STOPS INTRO ---------- */
+  .stops-head{
+    padding:56px 8vw 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .stops-head h2{
+    font-size:clamp(1.6rem,2.6vw,2.1rem);
+    font-weight:500;
+    margin:6px 0 0;
+  }
+  .stops-count{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--ink-soft);
+    font-size:.9rem;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    position:relative;
+    max-width:1100px;
+    margin:48px auto 0;
+    padding:0 8vw 100px;
+  }
+  .route-svg{
+    position:absolute;
+    left:50%;
+    top:0;
+    width:2px;
+    height:100%;
+    transform:translateX(-50%);
+    z-index:0;
+  }
+  .route-svg path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:2;
+    stroke-dasharray:8 10;
+    stroke-linecap:round;
+    stroke-dashoffset:2000;
+    transition:stroke-dashoffset 1.8s ease;
+  }
+  .route-svg.in-view path{ stroke-dashoffset:0; }
+
+  .stop{
+    position:relative;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:center;
+    margin-bottom:88px;
+    opacity:0;
+    transform:translateY(30px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .stop.in-view{ opacity:1; transform:translateY(0); }
+  .stop:nth-child(even) .stop-media{ order:2; }
+  .stop:nth-child(even) .stop-text{ order:1; text-align:right; }
+  .stop:nth-child(even) .tags{ justify-content:flex-end; }
+
+  .stop-marker{
+    position:absolute;
+    left:50%; top:20px;
+    transform:translateX(-50%);
+    width:14px; height:14px;
+    background:var(--red);
+    border:3px solid var(--cream);
+    border-radius:50%;
+    box-shadow:0 0 0 2px var(--gold);
+    z-index:2;
+  }
+
+  .stop-media{
+    position:relative;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:0 18px 40px -18px rgba(11,74,58,.45);
+  }
+  .stop-media img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+    display:block;
+    transform:scale(1.04);
+    transition:transform .6s ease;
+  }
+  .stop-media:hover img{ transform:scale(1.12); }
+
+  .stop-text .num{
+    font-family:'Space Grotesk',sans-serif;
+    color:var(--gold);
+    font-size:.78rem;
+    letter-spacing:.18em;
+    font-weight:600;
+  }
+  .stop-text h3{
+    font-size:1.7rem;
+    font-weight:600;
+    margin:8px 0 14px;
+    color:var(--forest-1);
+  }
+  .stop-text p{
+    color:var(--ink-soft);
+    line-height:1.75;
+    font-size:.98rem;
+    margin:0 0 16px;
+  }
+  .tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .tag{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    padding:5px 12px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    color:var(--forest-1);
+    background:#fff;
+  }
+
+  @media (max-width:820px){
+    .stop{grid-template-columns:1fr; gap:22px;}
+    .stop:nth-child(even) .stop-media{ order:0; }
+    .stop:nth-child(even) .stop-text{ order:1; text-align:left; }
+    .stop:nth-child(even) .tags{ justify-content:flex-start; }
+    .stop-marker{ left:24px; }
+    .route-svg{ left:24px; }
+    .hero-route{ display:none; }
+  }
+
+  /* ---------- REGION SWITCH STRIP ---------- */
+  .switch-strip{
+    background:var(--cream-2);
+    border-top:1px solid var(--line);
+    padding:28px 8vw;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .switch-strip a{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:.82rem;
+    padding:8px 16px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    color:var(--ink-soft);
+  }
+  .switch-strip a.active{
+    background:var(--forest-1);
+    border-color:var(--forest-1);
+    color:#fff;
+  }   
+  /* ---------- QUICK NAV (jump to region) ---------- */
+.quick-nav{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:14px 8vw;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.quick-nav a{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.8rem;
+  padding:7px 15px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  color:var(--ink-soft);
+  transition:background .2s ease, color .2s ease;
+}
+.quick-nav a:hover{
+  background:var(--forest-1);
+  border-color:var(--forest-1);
+  color:#fff;
+}
+
+/* ---------- REGION BLOCK (one per region, like Foreign page) ---------- */
+.region-block{ scroll-margin-top:64px; }
+
+.region-head{
+  position:relative;
+  padding:56px 8vw 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.region-head .head-copy{ flex:1 1 420px; min-width:280px; }
+.region-photo{
+  flex:0 0 auto;
+  width:min(30vw,300px);
+  height:190px;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 18px 40px -18px rgba(0,0,0,.35);
+}
+.region-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+@media (max-width:820px){
+  .region-photo{ width:100%; height:170px; }
+}
+.head-copy .index{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--ink);
+}
+.head-copy h2{
+  font-size:clamp(2rem,3.6vw,3rem);
+  font-weight:500;
+  margin:8px 0 12px;
+  color:var(--forest-1);
+}
+.head-copy p{ max-width:640px; color:var(--ink-soft); line-height:1.7; font-size:1rem; margin:0; }
+.head-copy .stops-count{
+  font-family:'Space Grotesk',sans-serif;
+  color:var(--ink-soft);
+  font-size:.85rem;
+  margin-top:18px;
+  display:inline-block;
+  border-top:1px solid var(--line);
+  padding-top:10px;
+}
+   
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right"><span>20+ Years Crafting India Journeys</span></div>
+      <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html" >Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+             <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+         
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+                         <a href="review.html">Review</a>
+
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<section class="hero">
+  <div class="crumb">
+    <a href="Destination.html">Destination Index</a> <span>/</span> <span>All Regions</span>
+  </div>
+  <h1>Every Region, <em>one journey</em></h1>
+  <p class="lede">Six regions of India, each with a suggested route through its most defining places — scroll through, or jump straight to one below.</p>
+
+  <svg class="hero-route" viewBox="0 0 400 120">
+    <path id="heroPath" d="M10,90 C 100,10 260,120 390,30" fill="none" stroke="#c99a3e" stroke-width="2" stroke-dasharray="6 8" opacity=".8"/>
+    <circle r="4" fill="#fff">
+      <animateMotion dur="5s" repeatCount="indefinite">
+        <mpath href="#heroPath"/>
+      </animateMotion>
+    </circle>
+  </svg>
+</section>
+
+<nav class="quick-nav" id="quickNav"></nav>
+
+<div id="regionsContainer"></div>
+    <!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+    </div>
+    <div class="footer-col">
+  <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+    <script>
+const REGIONS = {
+  north: {
+    label: "North India",
+    lede: "From alpine valleys to Mughal marble, the north moves between mountain silence and imperial grandeur.",
+    stops: [
+      {
+        name: "Srinagar & Kashmir Valley",
+        img: "https://picsum.photos/seed/kashmir-valley/900/700",
+        tags: ["Best time: Apr – Oct", "Known for: Lakes & Alpine Valleys"],
+        text: "Kashmir opens with Dal Lake, where houseboats and shikaras drift past floating gardens and the Mughal-era Shalimar and Nishat Bagh gardens rise in terraces along the water. Beyond Srinagar, Gulmarg's meadows turn into one of Asia's highest gondola rides in winter, while Pahalgam's pine forests line the Lidder river for gentle valley walks. Sonmarg serves as the gateway to glacier treks and the Thajiwas ice fields. The old city's wooden mosques, saffron fields of Pampore, and handicraft lanes selling pashmina and papier-mâché add a slower, cultural layer. Summers are mild and green, winters bring snow sports, making the valley a year-round draw for both stillness and adventure."
+      },
+      {
+        name: "Agra",
+        img: "https://picsum.photos/seed/agra-taj/900/700",
+        tags: ["Best time: Oct – Mar", "Known for: Mughal Architecture"],
+        text: "Agra is built around the Taj Mahal, the white marble mausoleum best seen at sunrise when the stone shifts from pink to ivory. Agra Fort's red sandstone ramparts hold courtyards, mirrored chambers, and the Musamman Burj where Shah Jahan is said to have viewed the Taj in his final years. A short drive out, Fatehpur Sikri's abandoned red-sandstone city preserves an entire Mughal capital frozen in place, including the Buland Darwaza and Panch Mahal. The old bazaars around Kinari Bazaar are known for marble inlay work, leather goods, and petha sweets. Agra rewards travellers who linger past the monuments into the craft workshops and riverside gardens along the Yamuna."
+      },
+      {
+        name: "Manali",
+        img: "https://picsum.photos/seed/manali-himalaya/900/700",
+        tags: ["Best time: Mar – Jun, Oct – Dec", "Known for: Mountain Passes"],
+        text: "Manali sits at the base of the Pir Panjal range, with old Manali's cafés and apple orchards giving way quickly to alpine trails. The Solang Valley offers paragliding and snow activities depending on season, while the Rohtang and Atal Tunnel routes lead toward the high-altitude desert of Lahaul-Spiti. Hadimba Temple, built around a cave shrine beneath tall deodar trees, remains one of the valley's oldest landmarks. Rafting on the Beas river, hot springs at Vashisht, and short treks to Bhrigu Lake round out an itinerary. Manali works equally well as a base for serious mountain expeditions and as an easy weekend escape into pine-scented air."
+      },
+      {
+        name: "Amritsar",
+        img: "https://picsum.photos/seed/amritsar-temple/900/700",
+        tags: ["Best time: Nov – Mar", "Known for: Golden Temple & Border Ceremony"],
+        text: "Amritsar centres on the Golden Temple, its gold-plated sanctum floating on a sacred pool, open day and night to visitors of every faith who join the langar hall serving free meals to thousands daily. Nearby, Jallianwala Bagh preserves the site of the 1919 massacre as a quiet memorial garden. Just outside the city, the Wagah border ceremony draws crowds each evening for a theatrical flag-lowering ritual between India and Pakistan. The old city's narrow katras are packed with Punjabi food stalls serving kulcha and lassi, alongside markets for phulkari embroidery. Amritsar pairs spiritual weight with everyday warmth, making it a compact but memorable stop in the north."
+      }
+    ]
+  },
+  south: {
+    label: "South India",
+    lede: "Backwaters, spice hills, and stone-carved empires define a slower, greener route through the peninsula.",
+    stops: [
+      {
+        name: "Alleppey & Kerala Backwaters",
+        img: "https://picsum.photos/seed/kerala-backwaters/900/700",
+        tags: ["Best time: Oct – Mar", "Known for: Houseboats & Canals"],
+        text: "Alleppey's backwaters are a network of canals, lagoons, and lakes lined with coconut palms, best explored aboard a converted rice-barge houseboat. Days drift past paddy fields below sea level, small villages where residents fish and wash clothes at the water's edge, and toddy shops serving fresh coconut liquor. Kumarakom, a short stretch away, adds a bird sanctuary and Vembanad Lake's open waters to the route. The annual snake boat races bring dramatic bursts of colour and crowds to otherwise quiet canals. Ayurvedic wellness centres along the backwaters offer traditional massage and treatment stays. The pace here is deliberately unhurried, built around water rather than roads."
+      },
+      {
+        name: "Coorg",
+        img: "https://picsum.photos/seed/coorg-hills/900/700",
+        tags: ["Best time: Oct – Mar", "Known for: Coffee Estates"],
+        text: "Coorg, in Karnataka's Western Ghats, is layered with coffee and cardamom plantations that scent the entire hill range. Abbey Falls drops through private coffee estate land, while Talacauvery marks the sacred source of the Cauvery river at the top of Brahmagiri hill. The Namdroling Golden Temple, a large Tibetan Buddhist monastery, adds an unexpected splash of colour amid the greenery. Dubare Elephant Camp allows close encounters with rescued and working elephants along the riverbank. Kodava cuisine, built around pork curry and bamboo shoot dishes, is distinct from the rest of South India. Coorg suits travellers who want misty mornings, plantation walks, and quiet homestays over structured sightseeing."
+      },
+      {
+        name: "Hampi",
+        img: "https://picsum.photos/seed/hampi-ruins/900/700",
+        tags: ["Best time: Oct – Feb", "Known for: Vijayanagara Ruins"],
+        text: "Hampi's boulder-strewn landscape hides the ruins of the Vijayanagara empire, once one of the wealthiest cities in the medieval world. The Virupaksha Temple remains active, its gopuram towering over the bazaar street where traders once sold diamonds. The Vittala Temple complex holds the iconic stone chariot and musical pillars that ring with different notes when tapped. Coracle rides across the Tungabhadra river connect the temple side to the quieter Hampi Island, dotted with rice paddies and banana plantations. Sunset from Matanga Hill frames the entire ruined city in orange light against granite boulders. Hampi rewards slow exploration on foot or bicycle rather than a single rushed pass."
+      },
+      {
+        name: "Munnar",
+        img: "https://picsum.photos/seed/munnar-tea/900/700",
+        tags: ["Best time: Sep – Mar", "Known for: Tea Gardens"],
+        text: "Munnar's hills are shaped entirely by tea, with manicured plantations rolling across every visible ridge since the British era. The Tea Museum traces the crop's history and processing, while Eravikulam National Park protects the endangered Nilgiri tahr on high-altitude grasslands. Anamudi, South India's highest peak, rises above the park for those attempting the climb. Mattupetty Dam's reservoir and Top Station's viewpoint into Tamil Nadu are common half-day stops. Neelakurinji, a flower that blooms only once every twelve years and briefly turns entire hillsides violet-blue, is native to these slopes. Cool temperatures year-round make Munnar a consistent escape from the coastal heat of Kerala's lowlands."
+      }
+    ]
+  },
+  east: {
+    label: "East India",
+    lede: "Tea-covered ridges, tidal mangroves, and a colonial-era capital give the east a distinct, layered identity.",
+    stops: [
+      {
+        name: "Darjeeling",
+        img: "https://picsum.photos/seed/darjeeling-tea/900/700",
+        tags: ["Best time: Mar – May, Oct – Nov", "Known for: Tea Estates & Himalayan Views"],
+        text: "Darjeeling's steep hillsides are terraced almost entirely with tea gardens producing some of the world's most prized leaf. The Darjeeling Himalayan Railway, a narrow-gauge 'toy train', climbs through town on tracks laid in the 1880s. Tiger Hill draws early risers for sunrise views of Kanchenjunga, the world's third-highest peak, when skies are clear. The Padmaja Naidu Himalayan Zoological Park specialises in high-altitude species like red pandas and snow leopards. Tibetan refugee settlements around town add monasteries, handicraft centres, and thukpa stalls to the walkable centre. Cool weather, colonial-era architecture, and the surrounding tea gardens make Darjeeling one of the east's most atmospheric hill towns."
+      },
+      {
+        name: "Sundarbans",
+        img: "https://picsum.photos/seed/sundarbans-mangrove/900/700",
+        tags: ["Best time: Nov – Feb", "Known for: Mangrove Forests & Tigers"],
+        text: "The Sundarbans is the world's largest mangrove delta, a maze of tidal rivers and creeks straddling India and Bangladesh at the mouth of the Ganges. It remains one of the only places where Bengal tigers are known to swim between islands, though sightings are rare and prized. Boat safaris move slowly through narrow channels past mudflats where crocodiles bask and spotted deer graze at the waterline. Local villages depend on fishing and honey collection, both shaped around the constant risk of tiger encounters. Watchtowers at points like Sajnekhali offer the best chance of spotting wildlife from a safe elevated vantage. The Sundarbans suits travellers drawn to raw, unmanicured wilderness over conventional sightseeing."
+      },
+      {
+        name: "Kolkata",
+        img: "https://picsum.photos/seed/kolkata-city/900/700",
+        tags: ["Best time: Oct – Mar", "Known for: Colonial Architecture & Culture"],
+        text: "Kolkata carries its colonial past visibly, from the Victoria Memorial's white marble domes to the trams still running through central streets. The Howrah Bridge, a cantilever structure over the Hooghly river, frames the city's most recognisable skyline shot at dawn. College Street's kilometre-long book market and the coffee houses around it have shaped generations of the city's literary and political life. Durga Puja transforms entire neighbourhoods into elaborate themed pavilions each autumn, drawing crowds through the night. Kumartuli's potters still hand-sculpt clay idols using techniques passed down for generations. Street food built around puchka, kathi rolls, and mishti doi runs through nearly every part of the city."
+      },
+      {
+        name: "Gangtok",
+        img: "https://picsum.photos/seed/gangtok-sikkim/900/700",
+        tags: ["Best time: Mar – Jun, Sep – Dec", "Known for: Monasteries & Mountain Views"],
+        text: "Gangtok, Sikkim's capital, sits on a ridge with views toward Kanchenjunga on clear mornings and a compact, walkable centre built around MG Marg. Rumtek Monastery, one of the largest in Sikkim, holds ornate murals and serves as a seat of Tibetan Buddhist learning. The Tsomgo Lake and Nathu La pass routes climb toward the Chinese border through increasingly stark high-altitude terrain, often edged with snow outside monsoon months. Cable cars and the Ganesh Tok and Hanuman Tok viewpoints offer easier valley panoramas for shorter visits. Organic farms and orchid sanctuaries around the city reflect Sikkim's status as India's first fully organic state. Gangtok works well as both a mountain base and a relaxed cultural stop."
+      }
+    ]
+  },
+  west: {
+    label: "West India",
+    lede: "Beaches, salt deserts, and merchant cities meet along a coastline shaped by trade and colour.",
+    stops: [
+      {
+        name: "Goa",
+        img: "https://picsum.photos/seed/goa-beach/900/700",
+        tags: ["Best time: Nov – Feb", "Known for: Beaches & Portuguese Heritage"],
+        text: "Goa's coastline splits between the lively beach shacks of Baga and Calangute in the north and the quieter stretches of Palolem and Agonda further south. Old Goa's whitewashed churches, including the Basilica of Bom Jesus, reflect nearly four and a half centuries of Portuguese rule and remain active pilgrimage sites. Fontainhas, Panaji's Latin Quarter, preserves narrow lanes of colourful heritage houses now home to cafés and small galleries. Spice plantation tours near Ponda combine agriculture with traditional Goan lunches. Beyond the beaches, river cruises on the Mandovi and dolphin-spotting trips add a quieter side to a destination usually associated with nightlife and parties."
+      },
+      {
+        name: "Rann of Kutch",
+        img: "https://picsum.photos/seed/kutch-desert/900/700",
+        tags: ["Best time: Nov – Feb", "Known for: White Salt Desert"],
+        text: "The Rann of Kutch is a vast white salt marsh that turns almost mirror-like under a full moon, best experienced during the annual Rann Utsav festival when tented camps rise on its edge. Nearby villages like Bhujodi and Nirona are known for handloom weaving, bandhani tie-dye, and rogan art, a rare hand-painted textile craft. Bhuj, the regional hub, holds the Aina Mahal palace and earthquake-rebuilt old town markets selling embroidery and mirror-work. The Banni grasslands on the Rann's fringes support pastoral communities and migratory bird populations, including flamingos in season. Wild ass sanctuaries protect one of the last populations of the Indian wild ass in this stark, flat terrain."
+      },
+      {
+        name: "Udaipur",
+        img: "https://picsum.photos/seed/udaipur-lake-palace/900/700",
+        tags: ["Best time: Sep – Mar", "Known for: Lake Palaces"],
+        text: "Udaipur is built around Lake Pichola, with the City Palace's cream-coloured facade rising along its eastern shore and the Lake Palace appearing to float at its centre. Jagdish Temple's carved spires sit just steps from the palace gates, while boat rides across the lake pass Jag Mandir's island pavilions. The Saheliyon Ki Bari gardens, built for royal attendants, are known for their fountains and marble elephant sculptures. Narrow old-city lanes hold miniature painting workshops and rooftop cafés overlooking the water. Fateh Sagar Lake and the Monsoon Palace above town add wider valley views. Udaipur's palace-lake combination has made it one of Rajasthan's most photographed cities."
+      },
+      {
+        name: "Mumbai",
+        img: "https://picsum.photos/seed/mumbai-gateway/900/700",
+        tags: ["Best time: Nov – Feb", "Known for: Gateway of India & Film Industry"],
+        text: "Mumbai's Gateway of India, an arch built to commemorate a royal visit, faces the Arabian Sea beside the historic Taj Mahal Palace hotel. Marine Drive's curved promenade, lit at night into what locals call the Queen's Necklace, remains the city's most iconic walk. Elephanta Island's rock-cut cave temples, a short ferry ride away, hold centuries-old sculptures dedicated to Shiva. Dharavi's dense lanes host one of Asia's largest informal economies, now visited through guided community tours. Bollywood studio visits and the colonial-era Chhatrapati Shivaji Terminus, a UNESCO-listed railway station, add both entertainment and architectural layers. Mumbai moves fast, but its coastline and heritage buildings still anchor the city's identity."
+      }
+    ]
+  },
+  northeast: {
+    label: "Northeast India",
+    lede: "Living root bridges, cloud-wrapped monasteries, and rainforest wildlife make the northeast India's least-crowded frontier.",
+    stops: [
+      {
+        name: "Shillong",
+        img: "https://picsum.photos/seed/shillong-hills/900/700",
+        tags: ["Best time: Oct – May", "Known for: Waterfalls & Khasi Culture"],
+        text: "Shillong, Meghalaya's capital, is ringed by pine hills and waterfalls, with Elephant Falls dropping in three tiers just outside town. Ward's Lake and Lady Hydari Park offer easy walks within the city, while Shillong Peak gives panoramic views over the whole valley. The Khasi Heritage Village and local markets reflect the strong matrilineal Khasi culture unique to the region. Live music venues have earned Shillong the nickname 'Rock Capital of India', a scene visible in its many small cafés and bars. Nearby, Mawlynnong is frequently cited as one of Asia's cleanest villages, built around bamboo architecture and community-run tourism. Shillong works well as a base for exploring Meghalaya's wider cave and waterfall network."
+      },
+      {
+        name: "Tawang",
+        img: "https://picsum.photos/seed/tawang-monastery/900/700",
+        tags: ["Best time: Mar – Oct", "Known for: Himalayan Monastery"],
+        text: "Tawang sits high in Arunachal Pradesh, reached via the dramatic Sela Pass, and is home to India's largest Buddhist monastery, housing several hundred monks and a three-storey golden Buddha statue. The Tawang War Memorial commemorates the 1962 India-China conflict fought across these same ridgelines. Madhuri Lake, formed by a landslide-dammed river, and the high-altitude Sela Lake add stark alpine scenery along the approach roads. Nearby valleys host semi-nomadic Monpa communities whose wooden houses and yak-herding traditions remain largely unchanged. The drive itself, through pine forests, waterfalls, and snow at higher elevations, is often considered as memorable as the destination. Tawang remains one of India's more remote and least-visited monastery towns."
+      },
+      {
+        name: "Kaziranga",
+        img: "https://picsum.photos/seed/kaziranga-rhino/900/700",
+        tags: ["Best time: Nov – Apr", "Known for: One-Horned Rhinoceros"],
+        text: "Kaziranga National Park in Assam holds the largest population of one-horned rhinoceroses in the world, spread across tall elephant grass and wetlands along the Brahmaputra river. Jeep and elephant-back safaris move through four main ranges, each offering different chances at spotting rhinos, wild buffalo, and swamp deer. The park is also a tiger reserve, though sightings are less predictable than the rhino population. Migratory birds arrive in large numbers during winter, drawing dedicated birdwatchers to the wetland zones. Surrounding tea estates and Assamese villages give visitors a chance to combine wildlife safaris with cultural stops. Kaziranga remains one of India's most successful conservation stories, credited with saving the species from near extinction."
+      },
+      {
+        name: "Cherrapunji",
+        img: "https://picsum.photos/seed/cherrapunji-rainforest/900/700",
+        tags: ["Best time: Oct – Apr", "Known for: Living Root Bridges"],
+        text: "Cherrapunji, among the wettest places on earth, is best known for its living root bridges, structures grown over decades by training rubber tree roots across streams to form natural, load-bearing crossings. The double-decker root bridge near Nongriat requires a steep descent of several thousand steps through rainforest but remains one of Meghalaya's most rewarding treks. Nohkalikai Falls, India's tallest plunge waterfall, is at its most dramatic during monsoon months. Mawsmai Cave offers a shorter, accessible limestone cave system near the town centre. Seven Sisters Falls and viewpoints toward the Bangladesh plains round out a typical visit. Cherrapunji suits travellers willing to trade convenience for genuinely unusual, slow-grown natural landmarks."
+      }
+    ]
+  },
+  central: {
+    label: "Central India",
+    lede: "Carved temples and dense tiger forests sit at the geographic heart of the country, away from the usual tourist corridors.",
+    stops: [
+      {
+        name: "Khajuraho",
+        img: "https://picsum.photos/seed/khajuraho-temples/900/700",
+        tags: ["Best time: Oct – Mar", "Known for: Carved Temples"],
+text: "Khajuraho's temple complex, built by the Chandela dynasty over a thousand years ago, is famous for elaborate stone carvings covering nearly every surface, depicting deities, dancers, and daily life in remarkable detail. The Western Group holds the largest and best-preserved temples, including the Kandariya Mahadeva, considered the finest example of Chandela architecture. A nightly sound-and-light show narrates the dynasty's history against the illuminated temple silhouettes. The Archaeological Museum nearby displays sculptures recovered from surrounding sites. Beyond the temples, Khajuraho serves as a gateway to Panna National Park's tiger reserves and the Ken river's boat safaris. The town remains compact enough to cover its main sites in a day or two."
+      },
+      {
+        name: "Pench National Park",
+        img: "https://picsum.photos/seed/pench-forest/900/700",
+        tags: ["Best time: Oct – Jun", "Known for: Tiger Reserve"],
+        text: "Pench National Park straddles Madhya Pradesh and Maharashtra, its teak and bamboo forests along the Pench river said to have inspired Rudyard Kipling's Jungle Book setting. Jeep safaris through core zones offer regular tiger sightings alongside leopards, wild dogs, and large herds of spotted deer. The Pench Tiger Reserve maintains lower visitor density than Madhya Pradesh's more famous parks, making for quieter, less crowded game drives. Sunset points over the Totladoh reservoir add a scenic break between safari sessions. Interpretation centres near the gates explain the park's conservation history and its role in India's tiger protection programme. Pench works well as a slightly less commercial alternative to Kanha or Bandhavgarh for wildlife-focused travellers."
+      },
+      {
+        name: "Bandhavgarh",
+        img: "https://picsum.photos/seed/bandhavgarh-tiger/900/700",
+        tags: ["Best time: Oct – Jun", "Known for: Highest Tiger Density"],
+        text: "Bandhavgarh National Park is known for having one of the highest tiger densities of any reserve in India, built around a ruined hilltop fort that once controlled the surrounding region. Ancient rock-cut caves and ruined temple remains sit scattered through the core zone, adding archaeological interest to wildlife drives. Safari zones like Tala are consistently rated among the best in the country for tiger sightings, though permits are limited and often booked well in advance. The park's grasslands and sal forests also support large populations of deer, langurs, and over 250 recorded bird species. A statue of a reclining Vishnu at the base of the fort marks one of the park's more unusual landmarks. Bandhavgarh remains a priority stop for serious wildlife photographers."
+      },
+      {
+        name: "Bhopal",
+        img: "https://picsum.photos/seed/bhopal-lake-city",
+        tags: ["Best time: Oct – Mar", "Known for: Lakes & Old City"],
+        text: "Bhopal, Madhya Pradesh's capital, is built around two lakes, the Upper and Lower Lakes, which give the city its nickname as the 'City of Lakes' and offer boating and lakeside walks near the centre. The old city holds the Taj-ul-Masajid, one of India's largest mosques, alongside bustling markets selling bangles, batwa purses, and Bhopali cuisine. A short drive away, the Bhimbetka rock shelters preserve some of the earliest known evidence of human life in India, with paintings dating back tens of thousands of years. Sanchi's Buddhist stupas, roughly an hour out, rank among the oldest stone structures in the country. Bhopal's mix of natural lakes, Mughal-era architecture, and prehistoric sites makes it an understated but layered stop in central India."
+      }
+    ]
+  }
+};
+
+const regionsContainer = document.getElementById('regionsContainer');
+const quickNav = document.getElementById('quickNav');
+
+Object.entries(REGIONS).forEach(([key, region], idx) => {
+  // quick-nav link
+  const navLink = document.createElement('a');
+  navLink.href = `#${key}`;
+  navLink.textContent = region.label;
+  quickNav.appendChild(navLink);
+
+  // region section
+  const section = document.createElement('section');
+  section.className = 'region-block';
+  section.id = key;
+
+  const stopsHtml = region.stops.map((stop, i) => `
+    <div class="stop">
+      <div class="stop-marker"></div>
+      <div class="stop-media"><img src="${stop.img}" alt="${stop.name}" loading="lazy"></div>
+      <div class="stop-text">
+        <div class="num">STOP 0${i + 1}</div>
+        <h3>${stop.name}</h3>
+        <p>${stop.text}</p>
+        <div class="tags">${stop.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+
+  section.innerHTML = `
+    <div class="region-head">
+      <div class="head-copy">
+        <div class="index">Region ${String(idx + 1).padStart(2, '0')}</div>
+        <h2>${region.label}</h2>
+        <p>${region.lede}</p>
+        <span class="stops-count">${region.stops.length} stops on this route</span>
+      </div>
+      <div class="region-photo"><img src="${region.stops[0].img}" alt="${region.label}" loading="lazy"></div>
+    </div>
+    <div class="timeline">
+      <svg class="route-svg" viewBox="0 0 2 1000" preserveAspectRatio="none"><path d="M1,0 L1,1000"/></svg>
+      ${stopsHtml}
+    </div>
+  `;
+
+  regionsContainer.appendChild(section);
+});
+
+/* Scroll-triggered reveal, same as before */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('in-view');
+  });
+}, { threshold: 0.2 });
+document.querySelectorAll('.stop').forEach(el => observer.observe(el));
+
+const routeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.querySelector('.route-svg').classList.add('in-view');
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.timeline').forEach(el => routeObserver.observe(el));
+</script>
+</body>
+</html>

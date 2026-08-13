@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --reg-cream:#F7F2E7;
+    --reg-green-deep:#1F4D2C;
+    --reg-green-mid:#3E7A4C;
+    --reg-sage:#7FA66B;
+    --reg-leaf-bg:#DCEAD1;
+    --reg-ink:#233827;
+    --reg-line:rgba(31,77,44,0.15);
+    --reg-error:#C1432E;
+    --reg-gold:#C9A15C;
+  }
+  .reg-wrap *{ box-sizing:border-box; }
+  .reg-wrap{
+    font-family:'Poppins', sans-serif;
+    color:var(--reg-ink);
+    position:relative;
+    background:var(--reg-cream);
+    padding:3.5rem 1.2rem 4rem;
+    overflow:hidden;
+    min-height:100vh;
+  }
+  .reg-wrap h1, .reg-wrap h2, .reg-wrap h3{ font-family:'Playfair Display', serif; }
+
+  /* ---------- ANIMATED LEAF BACKGROUND ---------- */
+  .reg-bg{
+    position:absolute; inset:0;
+    z-index:0;
+    overflow:hidden;
+    pointer-events:none;
+  }
+  .reg-bg::before{
+    content:"";
+    position:absolute; inset:0;
+    background:radial-gradient(circle at 20% 20%, rgba(127,166,107,0.16), transparent 55%),
+               radial-gradient(circle at 80% 75%, rgba(62,122,76,0.14), transparent 55%);
+  }
+  .reg-leaf{
+    position:absolute;
+    bottom:-10%;
+    opacity:0.55;
+    animation:regFloatUp linear infinite;
+    color:var(--reg-sage);
+  }
+  .reg-leaf svg{ width:100%; height:100%; display:block; }
+  @keyframes regFloatUp{
+    0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+    8%{ opacity:0.55; }
+    92%{ opacity:0.5; }
+    100%{ transform:translateY(-115vh) rotate(180deg); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reg-leaf{ animation:none; display:none; }
+  }
+
+  /* ---------- HERO STRIP ---------- */
+  .reg-hero{
+    position:relative; z-index:2;
+    max-width:680px;
+    margin:0 auto 2.2rem;
+    text-align:center;
+  }
+  .reg-hero .reg-eyebrow{
+    font-family:'Poppins', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:0.7rem;
+    font-weight:600;
+    color:var(--reg-green-mid);
+    display:block;
+    margin-bottom:0.7rem;
+  }
+  .reg-hero h1{
+    font-size:clamp(1.8rem, 6vw, 2.5rem);
+    font-weight:700;
+    color:var(--reg-green-deep);
+    margin-bottom:0.7rem;
+  }
+  .reg-hero p{
+    font-size:0.92rem;
+    color:#4d5f4f;
+    max-width:460px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+
+  /* ---------- FORM CARD ---------- */
+  .reg-card{
+    position:relative; z-index:2;
+    max-width:760px;
+    margin:0 auto;
+    background:rgba(255,253,247,0.9);
+    backdrop-filter:blur(6px);
+    border:1px solid var(--reg-line);
+    border-radius:22px;
+    padding:2.2rem 1.8rem;
+    box-shadow:0 30px 60px -30px rgba(31,77,44,0.35);
+  }
+
+  .reg-section-title{
+    display:flex; align-items:center; gap:0.6rem;
+    font-size:0.78rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--reg-green-mid);
+    margin:1.6rem 0 1rem;
+  }
+  .reg-section-title:first-of-type{ margin-top:0; }
+  .reg-section-title::before{
+    content:"";
+    width:20px; height:2px;
+    background:var(--reg-sage);
+    border-radius:2px;
+  }
+
+  .reg-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.1rem;
+  }
+  .reg-field{ margin-bottom:1.1rem; }
+  .reg-field.full{ grid-column:1 / -1; }
+  .reg-field label{
+    display:block;
+    font-size:0.82rem;
+    font-weight:600;
+    margin-bottom:0.4rem;
+    color:var(--reg-green-deep);
+  }
+  .reg-field label .reg-opt{
+    font-weight:400;
+    font-size:0.72rem;
+    color:#7a8a7a;
+  }
+  .reg-field input[type="text"],
+  .reg-field input[type="tel"],
+  .reg-field input[type="number"],
+  .reg-field input[type="email"],
+  .reg-field input[type="password"],
+  .reg-field input[type="file"],
+  .reg-field select{
+    width:100%;
+    border:1.5px solid var(--reg-line);
+    border-radius:10px;
+    padding:0.72rem 0.9rem;
+    font-size:0.88rem;
+    font-family:'Poppins', sans-serif;
+    background:var(--reg-cream);
+    color:var(--reg-ink);
+  }
+  .reg-field input:focus, .reg-field select:focus{
+    outline:2px solid var(--reg-sage);
+    outline-offset:1px;
+    border-color:var(--reg-sage);
+  }
+
+  .reg-gender-row{
+    display:flex; gap:1.2rem; flex-wrap:wrap;
+    padding-top:0.3rem;
+  }
+  .reg-gender-row label{
+    display:flex; align-items:center; gap:0.4rem;
+    font-size:0.85rem; font-weight:500;
+    color:var(--reg-ink);
+    cursor:pointer;
+    margin-bottom:0;
+  }
+  .reg-gender-row input{ accent-color:var(--reg-green-deep); width:16px; height:16px; }
+
+  /* ---------- CAPTCHA ---------- */
+  .reg-captcha-row{
+    display:flex; align-items:center; gap:0.9rem;
+    background:var(--reg-leaf-bg);
+    border:1.5px dashed var(--reg-sage);
+    border-radius:10px;
+    padding:0.6rem 0.9rem;
+    margin-bottom:1.1rem;
+  }
+  .reg-captcha-code{
+    font-family:'Playfair Display', serif;
+    font-size:1.4rem;
+    font-weight:700;
+    letter-spacing:0.12em;
+    color:var(--reg-error);
+    text-decoration:line-through;
+    user-select:none;
+  }
+  .reg-captcha-refresh{
+    cursor:pointer;
+    font-size:1.3rem;
+    color:var(--reg-green-mid);
+    line-height:1;
+  }
+  .reg-captcha-refresh:hover{ color:var(--reg-green-deep); }
+
+  .reg-btn-row{
+    display:flex; gap:0.9rem;
+    margin-top:0.6rem;
+  }
+  .reg-btn{
+    flex:1;
+    padding:0.9rem;
+    border-radius:12px;
+    font-weight:700;
+    font-size:0.92rem;
+    cursor:pointer;
+    border:none;
+    transition:transform 0.15s ease;
+  }
+  .reg-btn:hover{ transform:translateY(-1px); }
+  .reg-btn-primary{ background:var(--reg-green-deep); color:var(--reg-cream); }
+
+  .reg-login-link{
+    text-align:center;
+    font-size:0.85rem;
+    margin-top:1.3rem;
+    color:#4d5f4f;
+  }
+  .reg-login-link a{ color:var(--reg-green-deep); font-weight:700; text-decoration:underline; }
+
+  @media(max-width:560px){
+    .reg-grid{ grid-template-columns:1fr; }
+    .reg-btn-row{ flex-direction:column; }
+    .reg-captcha-row{ flex-wrap:wrap; }
+  }
+
+  /* ---------- DARK ANIMATED BANNER (below header) ---------- */
+  .reg-dark-banner{
+    position:relative;
+    background:linear-gradient(160deg, #0E2A17 0%, #163D22 55%, #1F4D2C 100%);
+    color:var(--reg-cream);
+    padding:3.2rem 1.4rem;
+    overflow:hidden;
+    text-align:center;
+  }
+  .reg-dark-banner::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(247,242,231,0.07) 1.5px, transparent 1.5px);
+    background-size:24px 24px;
+    animation: regDotsDrift 30s linear infinite;
+  }
+  .reg-orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(4px);
+    opacity:0.5;
+  }
+  .reg-orb.o1{
+    width:260px; height:260px;
+    background:radial-gradient(circle, rgba(127,166,107,0.45), transparent 70%);
+    top:-80px; left:-60px;
+    animation: regOrbFloat 12s ease-in-out infinite;
+  }
+  .reg-orb.o2{
+    width:200px; height:200px;
+    background:radial-gradient(circle, rgba(201,161,92,0.35), transparent 70%);
+    bottom:-70px; right:-40px;
+    animation: regOrbFloat 15s ease-in-out infinite reverse;
+  }
+  @keyframes regDotsDrift{
+    0%{ background-position:0 0; }
+    100%{ background-position:480px 240px; }
+  }
+  @keyframes regOrbFloat{
+    0%,100%{ transform:translate(0,0) scale(1); }
+    50%{ transform:translate(20px,-16px) scale(1.08); }
+  }
+  .reg-dark-inner{
+    position:relative; z-index:2;
+    max-width:600px;
+    margin:0 auto;
+  }
+  .reg-dark-inner .reg-eyebrow{
+    color:#C9A15C;
+    display:block;
+    margin-bottom:0.7rem;
+    text-transform:uppercase;
+    letter-spacing:0.16em;
+    font-size:0.7rem;
+    font-weight:600;
+  }
+  .reg-dark-inner h2{
+    font-size:clamp(1.6rem, 6vw, 2.3rem);
+    font-weight:700;
+    margin-bottom:0.8rem;
+    line-height:1.2;
+  }
+  .reg-dark-inner h2 em{ font-style:italic; color:#DCEAD1; font-weight:500; }
+  .reg-dark-inner p{
+    font-size:0.92rem;
+    color:rgba(247,242,231,0.8);
+    line-height:1.6;
+    max-width:460px;
+    margin:0 auto 1.4rem;
+  }
+  .reg-dark-stats{
+    display:flex; justify-content:center; gap:2.2rem;
+    flex-wrap:wrap;
+    margin-top:0.4rem;
+  }
+  .reg-dark-stats .stat b{
+    font-family:'Playfair Display', serif;
+    font-size:1.25rem;
+    color:#7FA66B;
+    display:block;
+  }
+  .reg-dark-stats .stat span{
+    font-size:0.65rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:rgba(247,242,231,0.65);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reg-dark-banner::before, .reg-orb{ animation:none; }
+  }
+  /* ---------- TOURISM TOUCHES ---------- */
+  .reg-trust-strip{
+    position:relative; z-index:2;
+    max-width:760px;
+    margin:0 auto 1.6rem;
+    display:flex; justify-content:center; gap:0.7rem;
+    flex-wrap:wrap;
+  }
+  .reg-trust-chip{
+    display:flex; align-items:center; gap:0.4rem;
+    background:var(--reg-leaf-bg);
+    color:var(--reg-green-deep);
+    font-size:0.74rem;
+    font-weight:600;
+    padding:0.4rem 0.8rem;
+    border-radius:20px;
+    border:1px solid var(--reg-line);
+  }
+  .reg-section-title .reg-icon{ font-size:0.95rem; }
+  .reg-field label .reg-icon{ margin-right:0.3rem; }
+</style>
+<script>
+    var i;
+    function f1()
+    {
+        var strArr="0123456789AdeFghijklnsocx";
+        var code="";
+        for(i=0;i<5;i++)
+        {
+            code=code+strArr[Math.floor(Math.random()*22)];
+        }
+        return code;
+
+    }
+    function demo()
+    {
+        var c=f1();
+        document.getElementById("ct1").innerHTML=c;
+        document.getElementById("hdn1").value=c;
+    }
+    </script>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right"><span>20+ Years Crafting India Journeys</span></div>
+      <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html" >Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+         <a href="bytrain.html#train" class="active">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+                         <a href="review.html">Review</a>
+
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="reg-dark-banner">
+  <div class="reg-orb o1"></div>
+  <div class="reg-orb o2"></div>
+  <div class="reg-dark-inner">
+    <span class="reg-eyebrow">Become a Member</span>
+    <h2>Sign up once, <em>travel smarter</em> every time</h2>
+    <p>Create your Sahyatri account to save destinations, track enquiries, and pick up your itinerary right where you left it — on any device.</p>
+    <div class="reg-dark-stats">
+      <div class="stat"><b>500+</b><span>Destinations Covered</span></div>
+      <div class="stat"><b>20+</b><span>Years Experience</span></div>
+      <div class="stat"><b>10K+</b><span>Happy Travelers</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="reg-wrap">
+
+  <div class="reg-bg" id="regBg"></div>
+
+  <div class="reg-hero">
+    <span class="reg-eyebrow">🧳 Join Sahyatri</span>
+    <h1>Registration Here</h1>
+    <p>Fill in your details below to create your travel account and get itineraries tailored just for you.</p>
+  </div>
+
+  <div class="reg-trust-strip">
+    <span class="reg-trust-chip">🗺️ Pan-India Tours</span>
+    <span class="reg-trust-chip">🛡️ Verified Operator</span>
+    <span class="reg-trust-chip">💬 24x7 Trip Support</span>
+  </div>
+
+  <div class="reg-card">
+    <form action="registrationcode" method="post" enctype="multipart/form-data">
+
+      <div class="reg-section-title"><span class="reg-icon">🧳</span> Personal Information</div>
+      <div class="reg-grid">
+        <div class="reg-field">
+          <label><span class="reg-icon">🙍</span>Enter Name</label>
+          <input type="text" name="name" placeholder="Enter Your Name" required="required">
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">👨</span>Father Name</label>
+          <input type="text" name="fname" placeholder="Enter Your Father Name" required="required">
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">👩</span>Mother Name</label>
+          <input type="text" name=" mname" placeholder="Enter Your mother name" required="required">
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">⚧</span>Gender</label>
+          <div class="reg-gender-row">
+            <label><input type="radio" name="gender" value="male">Male</label>
+            <label><input type="radio" name="gender" value="Female">Female</label>
+          </div>
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">🎓</span>Qualification</label>
+          <select name="quali">
+            <option>Please Select Your Qualification</option>
+            <option>MTECH</option>
+            <option>Btach</option>
+            <option>MCA</option>
+            <option>BCA</option>
+            <option>Diplpma</option>
+          </select>
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">📱</span>Mobile Number</label>
+          <input type="number" name="mob" placeholder="Enter your Mobile number" required="required">
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">🏙️</span>Enter city</label>
+          <input type="text" name="city" placeholder="Enter your city" required="required">
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">📧</span>Enter Email</label>
+          <input type="email" name="email" placeholder="Enter your email" required="required">
+        </div>
+      </div>
+
+      <div class="reg-section-title"><span class="reg-icon">🪪</span> Additional Details</div>
+      <div class="reg-grid">
+        <div class="reg-field">
+          <label><span class="reg-icon">📷</span>Enter Profile Picture</label>
+          <input type="file" name="profile">
+        </div>
+
+        <div class="reg-field">
+          <label><span class="reg-icon">📍</span>Enter State</label>
+          <select name="state">
+            <option>Please Select state</option>
+            <option>up</option>
+            <option>MUMBAI</option>
+            <option>HARYANA</option>
+            <option>BIHAR</option>
+          </select>
+        </div>
+
+        <div class="reg-field full">
+          <label><span class="reg-icon">🔒</span>Captcha Code</label>
+          <div class="reg-captcha-row">
+            <strike id="ct1" class="reg-captcha-code">sby3b</strike>
+            <span class="reg-captcha-refresh fa fa-refresh" title="Click here to refresh your captcha" onclick="demo()">&#8635;</span>
+            <input type="hidden" name="hdn1" id="hdn1">
+          </div>
+        </div>
+
+        <div class="reg-field full">
+          <label><span class="reg-icon">🔑</span>Enter Above Captcha code</label>
+          <input type="text" name="cc1" placeholder="Enter Captcha code here">
+        </div>
+      </div>
+
+      <div class="reg-btn-row">
+        <button type="submit" class="reg-btn reg-btn-primary">✈️ REGISTRATION HERE</button>
+      </div>
+
+      <div class="reg-login-link">Already have an account? <a href="login.html">Login</a></div>
+    </form>
+  </div>
+</div>
+
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+<script>
+  (function(){
+    // ---------- Animated leaf background generator ----------
+    const bg = document.getElementById('regBg');
+    const leafSVG = `<svg viewBox="0 0 64 64" fill="currentColor"><path d="M32 4C16 4 6 20 6 34c0 16 12 26 26 26 2 0 4-.2 6-.6C46 56 58 44 58 28 58 14 48 4 32 4zm-2 46C18 48 10 38 10 26c0-10 8-18 20-18 6 10 4 26-6 34 4 4 10 6 16 4-4 6-12 8-12 8z"/></svg>`;
+    const count = 14;
+    for(let i=0;i<count;i++){
+      const leaf = document.createElement('div');
+      leaf.className = 'reg-leaf';
+      const size = 18 + Math.random()*26;
+      leaf.style.width = size+'px';
+      leaf.style.height = size+'px';
+      leaf.style.left = (Math.random()*96)+'%';
+      leaf.style.animationDuration = (14 + Math.random()*14)+'s';
+      leaf.style.animationDelay = (Math.random()*16)+'s';
+      leaf.innerHTML = leafSVG;
+      bg.appendChild(leaf);
+    }
+  })();
+</script>
+</body>
+</html>

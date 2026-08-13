@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    /*====================================
+review
+========================================*/
+/* =====================================================
+   Wanderlust Diaries — Traveler Reviews
+   Theme: postcard wall + passport stamps
+   ===================================================== */
+
+:root{
+  --cream: #f6f1e4;
+  --paper: #fffdf7;
+  --ink: #24211b;
+  --ink-soft: #5b564a;
+  --clay: #c05a30;
+  --teal: #1f5a52;
+  --gold: #c99a3a;
+  --line: rgba(36,33,27,0.14);
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+}
+
+*{ box-sizing: border-box; }
+
+.reviews-page{
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.reviews-page img{ max-width: 100%; display: block; }
+
+/* ---------- shared section heads ---------- */
+.section-head{ max-width: 1100px; margin: 0 auto 2.5rem; padding: 0 1.5rem; }
+.section-head.light{ color: var(--paper); }
+.section-eyebrow{
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+}
+.section-head.light .section-eyebrow{ color: var(--gold); }
+.section-head h2{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin: 0;
+}
+.section-note{
+  margin: 0.6rem 0 0;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+.section-head.light .section-note{ color: rgba(255,253,247,0.72); }
+
+/* =====================================================
+   HERO
+   ===================================================== */
+.hero{
+  position: relative;
+  padding: 3.5rem 0 3rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(192,90,48,0.08), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(31,90,82,0.10), transparent 45%),
+    var(--cream);
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-stamp-belt{
+  display: flex;
+  gap: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: var(--ink-soft);
+  opacity: 0.55;
+  padding: 0 1.5rem 2rem;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+
+.hero-inner{
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.hero-eyebrow{
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.hero-title{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  line-height: 1.08;
+  margin: 0 0 1.1rem;
+}
+
+.hero-sub{
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+  max-width: 52ch;
+  margin: 0 auto 2.2rem;
+}
+
+.hero-summary{ display: flex; justify-content: center; }
+
+/* ---------- floating parallax photo ---------- */
+.hero-float-photo{
+  position: relative;
+  width: min(320px, 70vw);
+  margin: 0 auto 2.2rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 6px solid var(--paper);
+  box-shadow: 0 20px 40px rgba(36,33,27,0.18);
+  transition: transform 0.15s ease-out;
+  animation: heroFloat 5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hero-float-photo img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-float-tag{
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(36,33,27,0.72);
+  color: var(--paper);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  backdrop-filter: blur(2px);
+}
+
+@keyframes heroFloat{
+  0%   { transform: translateY(0px) rotate(-2deg); }
+  50%  { transform: translateY(-14px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(-2deg); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-float-photo{ animation: none; }
+}
+
+.place-ratings{
+    background:#0f5c52;
+    padding:80px 0;
+}
+
+.ledger-row{
+    background:#f8e7d3;
+    color:#333;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:25px;
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+    box-shadow:0 8px 20px rgba(0,0,0,.15);
+}
+
+.ledger-place{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.ledger-place img{
+    width:90px;
+    height:90px;
+    border-radius:12px;
+    object-fit:cover;
+}
+
+.ledger-place h3{
+    color:#0f5c52;
+    margin:0;
+}
+
+.ledger-quote{
+    color:#555;
+}
+
+.ledger-by{
+    color:#777;
+}
+
+.ledger-stars{
+    color:#ff9800;
+    font-size:22px;
+    margin-left:auto;
+}
+
+.stamp{
+    background:#ff9800;
+    color:#fff;
+    padding:5px 12px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:bold;
+}
+/*================================
+review
+=====================================*/
+.reviews-page{
+  background: var(--navy);
+  color: var(--paper);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+.reviews-page img{ max-width: 100%; display: block; }
+
+/* ---------- shared section heads ---------- */
+.section-head{ max-width: 1100px; margin: 0 auto 2.5rem; padding: 0 1.5rem; }
+.section-eyebrow{
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+}
+.section-head h2{
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+  margin: 0;
+  color: var(--paper);
+}
+.section-note{
+  margin: 0.6rem 0 0;
+  color: var(--ink-soft);
+  max-width: 46ch;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+/* =====================================================
+   HERO — DEPARTURE BOARD
+   ===================================================== */
+.hero{
+  padding: 3.5rem 0 4rem;
+  background:
+    linear-gradient(180deg, var(--navy-deep), var(--navy) 60%);
+  border-bottom: 1px solid var(--line);
+}
+
+.board-frame{
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.board-topline{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+  text-transform: uppercase;
+  border: 1px solid var(--amber-dim);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  margin: 0 auto 1.8rem;
+}
+
+.board-dot{
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%, 100%{ opacity: 1; }
+  50%{ opacity: 0.3; }
+}
+
+.board-time{
+  margin-left: 0.4rem;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+
+.board-title{
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-align: center;
+  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.1rem;
+  color: var(--paper);
+}
+.board-title span{ color: var(--amber); }
+
+.board-sub{
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  max-width: 44ch;
+  margin: 0 auto 2.4rem;
+}
+
+/* floating ticket photo */
+.hero-float-photo{
+  position: relative;
+  width: min(300px, 68vw);
+  margin: 0 auto 2.4rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px dashed var(--amber-dim);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.45);
+  animation: heroFloat 5s ease-in-out infinite;
+  will-change: transform;
+  background: var(--panel);
+  padding: 6px;
+}
+.hero-float-photo img{ border-radius: 4px; width: 100%; height: 220px; object-fit: cover; }
+
+.ticket-notch{
+  position: absolute;
+  left: -10px;
+  width: 20px; height: 20px;
+  background: var(--navy);
+  border-radius: 50%;
+}
+.ticket-notch.top{ top: -10px; }
+.ticket-notch.bottom{ bottom: -10px; }
+
+.hero-float-tag{
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  background: rgba(7,10,18,0.82);
+  color: var(--amber);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+}
+
+@keyframes heroFloat{
+  0%   { transform: translateY(0px) rotate(-1.5deg); }
+  50%  { transform: translateY(-12px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(-1.5deg); }
+}
+@media (prefers-reduced-motion: reduce){
+  .hero-float-photo{ animation: none; }
+}
+
+/* board rows */
+.board-rows{
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 2.6rem;
+  background: var(--panel);
+}
+.board-row{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.85rem 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+.board-row:last-child{ border-bottom: none; }
+.row-code{ color: var(--amber); font-weight: 600; letter-spacing: 0.04em; }
+.row-name{ color: var(--paper); }
+.row-status{
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.row-status.onboard{ background: rgba(74,222,128,0.14); color: var(--green); }
+.row-status.delayed{ background: rgba(248,113,113,0.14); color: var(--red); }
+
+/* review counter */
+.review-counter{ text-align: center; }
+.counter-label{
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  margin: 0 0 0.4rem;
+}
+.counter-number{
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 4.2rem);
+  color: var(--amber);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.counter-sub{
+  margin: 0.5rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+/* =====================================================
+   PHOTO STRIP — LUGGAGE TAGS
+   ===================================================== */
+.photo-wall{ padding: 4.5rem 0; }
+
+.tag-strip{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem 1.1rem;
+}
+
+.lug-tag{
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem;
+  transform: rotate(var(--r, 0deg));
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.lug-tag:nth-child(odd){ --r: -1.2deg; }
+.lug-tag:nth-child(even){ --r: 1deg; }
+.lug-tag:hover{ transform: rotate(0deg) translateY(-4px); border-color: var(--amber-dim); }
+
+.lug-tag img{
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.lug-hole{
+  position: absolute;
+  top: 14px; left: 14px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 2px solid var(--amber-dim);
+}
+
+.lug-tag figcaption{
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  padding: 0.6rem 0.2rem 0.2rem;
+}
+.lug-tag figcaption b{
+  display: block;
+  color: var(--amber);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+}
+
+/* =====================================================
+   VIDEO REVIEWS — BOARDING PASSES
+   ===================================================== */
+.video-reviews{
+  background: var(--navy-deep);
+  padding: 4.5rem 0;
+}
+
+.pass-grid{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+.pass-card{
+  background: var(--panel);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  position: relative;
+}
+
+.pass-frame{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+.pass-frame iframe{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.pass-stub{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  border-top: 2px dashed var(--amber-dim);
+  position: relative;
+}
+.pass-stub::before, .pass-stub::after{
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--navy-deep);
+}
+.pass-stub::before{ left: -8px; }
+.pass-stub::after{ right: -8px; }
+
+.pass-stub-main h3{
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  color: var(--paper);
+}
+.pass-stub-main p{
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.pass-stub-side{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+.mini-rating{ color: var(--amber); letter-spacing: 0.1em; font-size: 0.85rem; }
+.pass-seat{
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+}
+
+/* =====================================================
+   PLACE RATINGS LEDGER (kept, adapted to dark theme)
+   ===================================================== */
+.place-ratings{ padding: 4.5rem 0; background: var(--navy); }
+
+.ledger{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.ledger-row{
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--green);
+  border-radius: 10px;
+  padding: 1.6rem 1.8rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "place stars"
+    "quote quote"
+    "by by";
+  column-gap: 1.5rem;
+  row-gap: 0.6rem;
+  align-items: center;
+  width: 100%;
+}
+
+.ledger-row.okay{ border-left-color: var(--amber); }
+.ledger-row.meh{ border-left-color: #c9a34a; }
+.ledger-row.bad{ border-left-color: var(--red); }
+
+.ledger-place{
+  grid-area: place;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+.ledger-place h3{
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 700;
+  color: var(--paper);
+}
+
+.stamp{
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.3rem 0.65rem;
+  border: 1.5px solid var(--green);
+  color: var(--green);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.good .stamp{ border-color: var(--green); color: var(--green); }
+.okay .stamp{ border-color: var(--amber); color: var(--amber); }
+.meh .stamp{ border-color: #c9a34a; color: #c9a34a; }
+.bad .stamp{ border-color: var(--red); color: var(--red); }
+
+.ledger-stars{
+  grid-area: stars;
+  color: var(--amber);
+  letter-spacing: 0.15em;
+  font-size: 1.1rem;
+  text-align: right;
+}
+
+.ledger-quote{
+  grid-area: quote;
+  margin: 0.2rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.ledger-by{
+  grid-area: by;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  opacity: 0.8;
+}
+
+/* =====================================================
+   CTA STRIP
+   ===================================================== */
+.cta-strip{
+  text-align: center;
+  padding: 4rem 1.5rem 5rem;
+  background: var(--navy-deep);
+  color: var(--paper);
+  border-top: 1px solid var(--line);
+}
+.cta-strip h2{
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.6vw, 2.4rem);
+  margin: 0 0 0.6rem;
+  font-weight: 400;
+}
+.cta-strip p{
+  margin: 0 0 1.6rem;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+.cta-btn{
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--amber);
+  color: var(--navy-deep);
+  border: none;
+  padding: 0.9rem 2.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.cta-btn:hover{ transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,182,72,0.25); }
+.cta-btn:focus-visible, a:focus-visible, button:focus-visible{
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+@media (max-width: 900px){
+  .tag-strip{ grid-template-columns: repeat(2, 1fr); }
+  .pass-grid{ grid-template-columns: repeat(2, 1fr); }
+  .ledger-row{
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "place"
+      "stars"
+      "quote"
+      "by";
+  }
+  .ledger-stars{ text-align: left; }
+}
+
+@media (max-width: 560px){
+  .tag-strip{ grid-template-columns: repeat(2, 1fr); }
+  .pass-grid{ grid-template-columns: 1fr; }
+  .board-title{ font-size: 2.4rem; }
+  .board-row{ grid-template-columns: auto 1fr; }
+  .row-status{ grid-column: 1 / -1; width: fit-content; }
+}
+.hero{
+    padding: 3.5rem 0 4rem;
+    background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url("https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=1600&q=80");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+.board-title{
+    color:#d84b4b;
+}
+
+.board-title span{
+    color:#ff6b6b;
+}
+
+.board-sub{
+    color:#ffb5b5;
+}
+.row-status.onboard{
+    background:#ffe5e5;
+    color:#c62828;
+    border:1px solid #c62828;
+}
+
+.row-status.delayed{
+    background:#fff2cc;
+    color:#b85c00;
+    border:1px solid #b85c00;
+}
+.review-counter{
+    background:#fff0f0;
+    padding:25px;
+    border-radius:15px;
+    border:2px solid #d84b4b;
+}
+
+.counter-label{
+    color:#b71c1c;
+}
+
+.counter-number{
+    color:#d32f2f;
+}
+
+.counter-sub{
+    color:#7b1e1e;
+}
+.photo-wall{
+    background:#fff6f6;
+}
+
+.section-head h2{
+    color:#c62828;
+}
+
+.section-note{
+    color:#7b1e1e;
+}
+.video-reviews{
+    background:#ffecec;
+}
+
+.video-reviews h2{
+    color:#0f5c52;
+}
+
+.video-reviews .section-note{
+    color:#555;
+}
+.pass-card{
+    background:#fff;
+    border:2px solid #c62828;
+}
+
+.pass-stub-main h3{
+    color:#c62828;
+}
+
+.pass-stub-main p{
+    color:#444;
+}
+
+.mini-rating{
+    color:#ff9800;
+}
+.ledger-row{
+    background:#fff;
+}
+
+.ledger-place h3{
+    color:#c62828;
+}
+
+.ledger-quote{
+    color:#444;
+}
+
+.ledger-by{
+    color:#666;
+}
+
+.ledger-stars{
+    color:#ff9800;
+}
+.place-ratings{
+    background:#fff5f5;
+}
+.ledger-place img{
+    width:90px;
+    height:90px;
+    border-radius:10px;
+    object-fit:cover;
+}
+.cta-strip{
+    background:lightsalmon;
+    color:white;
+}
+
+.cta-strip h2{
+    color:white;
+}
+
+.cta-strip p{
+    color:#ffeaea;
+}
+
+.cta-btn{
+    background:white;
+    color:#b71c1c;
+}
+.board-row{
+    background: #2563eb;
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+/* VIDEO REVIEW SECTION */
+.video-reviews{
+    background: linear-gradient(135deg,#0B8D8A,#0F5C52);
+    padding:80px 30px;
+    margin-top:60px;
+}
+
+/* Heading */
+.video-reviews .section-head{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.video-reviews h2,
+.video-reviews .section-eyebrow,
+.video-reviews .section-note{
+    color:#fff;
+}
+
+/* Cards white */
+.pass-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+</style>
+</head>
+<body style="background-color:#FFF8DC;">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html" class="active">Review</a>
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- ===================== YOUR HEADER GOES HERE ===================== -->
+  <!-- <header>...</header> -->
+
+  <main class="reviews-page">
+
+    <!-- ============ HERO — DEPARTURE BOARD ============ -->
+    <section class="hero">
+      <div class="board-frame">
+        <div class="board-topline">
+          <span class="board-dot"></span> LIVE FEED — TRAVELER REVIEWS
+          <span class="board-time" id="boardClock">--:--:--</span>
+        </div>
+
+        <h1 class="board-title">NOW <span>BOARDING</span><br>REAL TRIP STORIES</h1>
+        <p class="board-sub">No filters, no scripts — just travelers telling you exactly how it went.</p>
+
+        <!-- floating photo, ticket style -->
+        <div class="hero-float-photo" id="heroFloatPhoto">
+          <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&q=80" alt="Traveler looking at the Taj Mahal">
+          <div class="ticket-notch top"></div>
+          <div class="ticket-notch bottom"></div>
+          <span class="hero-float-tag">GATE — AGRA · TAJ MAHAL</span>
+        </div>
+
+        <div class="board-rows">
+          <div class="board-row">
+            <span class="row-code">DEL–AGR</span>
+            <span class="row-name">Golden Triangle Circuit</span>
+            <span class="row-status onboard">ON TIME</span>
+          </div>
+          <div class="board-row">
+            <span class="row-code">KER–ALP</span>
+            <span class="row-name">Alleppey Backwaters</span>
+            <span class="row-status onboard">ON TIME</span>
+          </div>
+          <div class="board-row">
+            <span class="row-code">MNL–SOL</span>
+            <span class="row-name">Manali Valley Run</span>
+            <span class="row-status delayed">DELAYED</span>
+          </div>
+        </div>
+
+        <div class="review-counter" aria-label="Live review counter">
+          <p class="counter-label">Reviews collected so far</p>
+          <div class="counter-number" id="reviewCounter">0</div>
+          <p class="counter-sub">and counting — new stamps added every week</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PHOTO STRIP — LUGGAGE TAGS ============ -->
+    <section class="photo-wall" aria-label="Traveler photos">
+      <div class="section-head">
+        <p class="section-eyebrow" style="color:black;">01 — Baggage Claim</p>
+        <h2>Photos travelers checked in with</h2>
+      </div>
+
+      <div class="tag-strip">
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80" alt="Taj Mahal at sunrise, Agra">
+          <div class="lug-hole"></div>
+          <figcaption><b>AGRA</b> Taj Mahal — sunrise visit</figcaption>
+        </figure>
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=800&q=80" alt="Backwaters houseboat in Kerala">
+          <div class="lug-hole"></div>
+          <figcaption><b>ALLEPPEY</b> Backwaters — houseboat stay</figcaption>
+        </figure>
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800&q=80" alt="Hawa Mahal Jaipur street view">
+          <div class="lug-hole"></div>
+          <figcaption><b>JAIPUR</b> Hawa Mahal — street level</figcaption>
+        </figure>
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=900&q=80" alt="Himalayan mountain road in Manali">
+          <div class="lug-hole"></div>
+          <figcaption><b>MANALI</b> Valley — road trip stop</figcaption>
+        </figure>
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800&q=80" alt="Goa beach at sunset">
+          <div class="lug-hole"></div>
+          <figcaption><b>GOA</b> Baga Beach — sunset hour</figcaption>
+        </figure>
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=800&q=80" alt="Varanasi ghats along the Ganges">
+          <div class="lug-hole"></div>
+          <figcaption><b>VARANASI</b> Ghats — evening aarti</figcaption>
+        </figure>
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800&q=80" alt="Amber Fort Jaipur">
+          <div class="lug-hole"></div>
+          <figcaption><b>JAIPUR</b> Amber Fort — morning trek</figcaption>
+        </figure>
+
+        <figure class="lug-tag">
+          <img src="https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?w=800&q=80" alt="Rishikesh river rafting">
+          <div class="lug-hole"></div>
+          <figcaption><b>RISHIKESH</b> Rafting day</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ============ VIDEO REVIEWS — BOARDING PASSES ============ -->
+    <section class="video-reviews" aria-label="Video reviews">
+      <div class="section-head light">
+        <p class="section-eyebrow">02 — Boarding Passes</p>
+        <h2>Video reviews from the trip</h2>
+        <p class="section-note">Six travelers, six different trips — camera rolling the whole way.</p>
+      </div>
+
+      <div class="pass-grid">
+
+        <article class="pass-card">
+          <div class="pass-frame">
+            <iframe src="https://www.youtube.com/embed/-wRaNSqW8Zw" title="Golden Triangle tour review" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="pass-stub">
+            <div class="pass-stub-main">
+              <h3>Golden Triangle in 6 Days</h3>
+              <p>Delhi–Agra–Jaipur felt rushed on paper but worked perfectly in practice.</p>
+            </div>
+            <div class="pass-stub-side">
+              <span class="mini-rating" aria-label="5 out of 5">★★★★★</span>
+              <span class="pass-seat">SEAT 06D</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pass-card">
+          <div class="pass-frame">
+            <iframe src="https://www.youtube.com/embed/R37rkQ2RbuU" title="Kerala backwaters houseboat review" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="pass-stub">
+            <div class="pass-stub-main">
+              <h3>48 Hours on a Houseboat</h3>
+              <p>Slow travel done right. Food was the highlight; wifi was not.</p>
+            </div>
+            <div class="pass-stub-side">
+              <span class="mini-rating" aria-label="4.5 out of 5">★★★★☆</span>
+              <span class="pass-seat">SEAT 12A</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pass-card">
+          <div class="pass-frame">
+            <iframe src="https://www.youtube.com/embed/NEY7RlQPUGU" title="Manali road trip review" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="pass-stub">
+            <div class="pass-stub-main">
+              <h3>Manali: Worth the Bumps?</h3>
+              <p>Views were unreal past Solang Valley. Road is rough though.</p>
+            </div>
+            <div class="pass-stub-side">
+              <span class="mini-rating" aria-label="4 out of 5">★★★★☆</span>
+              <span class="pass-seat">SEAT 03C</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pass-card">
+          <div class="pass-frame">
+            <iframe src="https://www.youtube.com/embed/T84zCT5V2C8" title="Goa beach trip review" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="pass-stub">
+            <div class="pass-stub-main">
+              <h3>Goa Off-Season Run</h3>
+              <p>Traded rainy afternoons for empty beaches and half the crowd rates.</p>
+            </div>
+            <div class="pass-stub-side">
+              <span class="mini-rating" aria-label="4 out of 5">★★★★☆</span>
+              <span class="pass-seat">SEAT 19F</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pass-card">
+          <div class="pass-frame">
+            <iframe src="https://www.youtube.com/embed/CKoCuEZHB9g" title="Varanasi spiritual tour review" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="pass-stub">
+            <div class="pass-stub-main">
+              <h3>A Morning on the Ghats</h3>
+              <p>Nothing prepares you for the boat ride at sunrise.</p>
+            </div>
+            <div class="pass-stub-side">
+              <span class="mini-rating" aria-label="5 out of 5">★★★★★</span>
+              <span class="pass-seat">SEAT 01A</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pass-card">
+          <div class="pass-frame">
+            <iframe src="https://www.youtube.com/embed/X_qzr-S4RLA" title="Rishikesh adventure trip review" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="pass-stub">
+            <div class="pass-stub-main">
+              <h3>Rishikesh: Rafting, Yoga, Repeat</h3>
+              <p>Great for adventure, but the town gets noisy by evening.</p>
+            </div>
+            <div class="pass-stub-side">
+              <span class="mini-rating" aria-label="3.5 out of 5">★★★☆☆</span>
+              <span class="pass-seat">SEAT 22B</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ WRITTEN REVIEWS / RATINGS BY PLACE (UNCHANGED) ============ -->
+    <section class="place-ratings" aria-label="Ratings by destination">
+      <div class="section-head">
+        <p class="section-eyebrow" style="color:black;">03 — The Honest Ledger</p>
+        <h2>How each place actually rated</h2>
+        <p class="section-note">Good, average, or not worth it — sorted by destination, not sugarcoated.</p>
+      </div>
+
+      <div class="ledger">
+
+        <article class="ledger-row good">
+        <div class="ledger-place">
+            <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=150&q=80">
+            <span class="stamp">GREAT</span>
+            <h3>Kerala Backwaters</h3>
+          </div>
+          <div class="ledger-stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="ledger-quote">"The houseboat stay alone justified the entire trip. Slow, green, and completely worth the extra day."</p>
+          <span class="ledger-by">— Ayesha K., visited March 2026</span>
+        </article>
+
+        <article class="ledger-row good">
+          <div class="ledger-place">
+              <img src="https://images.unsplash.com/photo-1561361513-2d000a50f0dc?w=150&q=80">
+            <span class="stamp">GREAT</span>
+            <h3>Varanasi Ghats</h3>
+          </div>
+          <div class="ledger-stars" aria-label="5 out of 5">★★★★★</div>
+          <p class="ledger-quote">"The evening aarti ceremony is something photos genuinely cannot capture. Go at least once in your life."</p>
+          <span class="ledger-by">— Farhan M., visited Nov 2025</span>
+        </article>
+
+        <article class="ledger-row okay">
+          <div class="ledger-place">
+              <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=150&q=80">
+            <span class="stamp">GOOD</span>
+            <h3>Jaipur City Tour</h3>
+          </div>
+          <div class="ledger-stars" aria-label="4 out of 5">★★★★☆</div>
+          <p class="ledger-quote">"Amber Fort and Hawa Mahal were highlights. Traffic between stops ate more time than expected."</p>
+          <span class="ledger-by">— Priya S., visited Jan 2026</span>
+        </article>
+
+        <article class="ledger-row okay">
+          <div class="ledger-place">
+              <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=150&q=80">
+            <span class="stamp">GOOD</span>
+            <h3>Manali Valley</h3>
+          </div>
+          <div class="ledger-stars" aria-label="4 out of 5">★★★★☆</div>
+          <p class="ledger-quote">"Scenery is a 10/10. Roads are rough, so this one is better for travelers who don't mind a bumpy ride."</p>
+          <span class="ledger-by">— Rohit V., visited Dec 2025</span>
+        </article>
+
+        <article class="ledger-row meh">
+          <div class="ledger-place">
+              <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=150&q=80">
+            <span class="stamp">AVERAGE</span>
+            <h3>Rishikesh Main Ghat</h3>
+          </div>
+          <div class="ledger-stars" aria-label="3 out of 5">★★★☆☆</div>
+          <p class="ledger-quote">"Rafting was excellent, but the main ghat area felt overcrowded and overly commercial by evening."</p>
+          <span class="ledger-by">— Sana T., visited Feb 2026</span>
+        </article>
+
+        <article class="ledger-row bad">
+          <div class="ledger-place">
+              <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=150&q=80">
+            <span class="stamp">SKIP</span>
+            <h3>Downtown Souvenir Market</h3>
+          </div>
+          <div class="ledger-stars" aria-label="2 out of 5">★★☆☆☆</div>
+          <p class="ledger-quote">"Overpriced and pushy vendors. Better souvenir options exist near the fort entrances instead."</p>
+          <span class="ledger-by">— Imran Q., visited Jan 2026</span>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta-strip">
+      <h2>Been on one of these trips?</h2>
+      <p>Add your own stamp to the wall — your rating helps the next traveler pack smarter.</p>
+   <a href="feedback.html" class="cta-btn" style="text-decoration:none; display:inline-block;">Write a Review</a>
+    </section>
+
+  </main>
+
+  <!-- ===================== YOUR FOOTER GOES HERE ===================== -->
+  <!-- <footer>...</footer> -->
+
+  <script>
+    // ---- Departure board live clock ----
+    (function(){
+      const clockEl = document.getElementById('boardClock');
+      if(!clockEl) return;
+      function updateClock(){
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2,'0');
+        const m = String(now.getMinutes()).padStart(2,'0');
+        const s = String(now.getSeconds()).padStart(2,'0');
+        clockEl.textContent = `${h}:${m}:${s}`;
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
+    })();
+
+    // ---- Review counter: counts up once when it scrolls into view ----
+    (function(){
+      const counterEl = document.getElementById('reviewCounter');
+      if(!counterEl) return;
+      const target = 1248;
+      const duration = 1800;
+      let started = false;
+
+      function animateCount(){
+        if(started) return;
+        started = true;
+        const startTime = performance.now();
+        function tick(now){
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = Math.floor(eased * target);
+          counterEl.textContent = value.toLocaleString('en-IN');
+          if(progress < 1){
+            requestAnimationFrame(tick);
+          } else {
+            counterEl.textContent = target.toLocaleString('en-IN');
+          }
+        }
+        requestAnimationFrame(tick);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            animateCount();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+
+      observer.observe(counterEl);
+    })();
+
+    // ---- Floating photo: gentle parallax drift on mouse move ----
+    (function(){
+      const photo = document.getElementById('heroFloatPhoto');
+      if(!photo) return;
+
+      window.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 14;
+        const y = (e.clientY / window.innerHeight - 0.5) * 14;
+        photo.style.transform = `translate(${x}px, ${y}px) rotate(-2deg)`;
+      });
+    })();
+    // ---- Load user-submitted reviews from localStorage and render as cards ----
+    (function(){
+      const ledger = document.querySelector('.ledger');
+      if(!ledger) return;
+
+      const stored = JSON.parse(localStorage.getItem('sahyatriReviews') || '[]');
+
+      stored.forEach(function(r){
+        const article = document.createElement('article');
+        article.className = 'ledger-row ' + (r.tone || 'good');
+
+        const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+
+        article.innerHTML = `
+          <div class="ledger-place">
+            <span class="stamp">${r.stamp}</span>
+            <h3>${r.place}</h3>
+          </div>
+          <div class="ledger-stars" aria-label="${r.rating} out of 5">${stars}</div>
+          <p class="ledger-quote">"${r.quote}"</p>
+          <span class="ledger-by">— ${r.name}, submitted just now</span>
+        `;
+        ledger.appendChild(article);
+      });
+    })();
+  </script>
+  
+   
+      
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Now | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  :root{
+    --bk-teal-deep:#0F3D3E;
+    --bk-teal-mid:#154C4D;
+    --bk-teal:#17A673;
+    --bk-sand:#F1E4C3;
+    --bk-cream:#FBF8F2;
+    --bk-coral:#E8734A;
+    --bk-gold:#C9A15C;
+    --bk-ink:#0B2626;
+    --bk-line:rgba(15,61,62,0.12);
+    --bk-muted:#5b6f6a;
+  }
+  .bk-scope *{ box-sizing:border-box; }
+  .bk-scope{ font-family:'Poppins', sans-serif; color:var(--bk-ink); background:var(--bk-cream); }
+  .bk-scope h1,.bk-scope h2,.bk-scope h3,.bk-scope h4{ font-family:'Playfair Display', serif; }
+
+  /* ================= HERO ================= */
+  .bk-hero{
+    position:relative;
+    background:linear-gradient(160deg, var(--bk-teal-deep) 0%, var(--bk-teal-mid) 55%, #1c5758 100%);
+    color:var(--bk-cream);
+    padding:3.8rem 1.4rem 3.2rem;
+    overflow:hidden;
+    text-align:center;
+  }
+  .bk-hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: radial-gradient(rgba(251,248,242,0.06) 1.5px, transparent 1.5px);
+    background-size:22px 22px;
+  }
+  .bk-anim-layer{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .bk-float-ic{
+    position:absolute; bottom:-12%;
+    opacity:0;
+    animation:bkFloatUp linear infinite;
+  }
+  @keyframes bkFloatUp{
+    0%{ transform:translateY(0) rotate(0deg) scale(0.85); opacity:0; }
+    10%{ opacity:0.6; }
+    90%{ opacity:0.5; }
+    100%{ transform:translateY(-125vh) rotate(150deg) scale(1.1); opacity:0; }
+  }
+  @media (prefers-reduced-motion: reduce){ .bk-float-ic{ animation:none; display:none; } }
+  .bk-hero-inner{ position:relative; z-index:2; max-width:640px; margin:0 auto; }
+  .bk-eyebrow{
+    display:inline-flex; align-items:center; gap:0.5rem;
+    background:rgba(251,248,242,0.12);
+    border:1px solid rgba(251,248,242,0.35);
+    color:var(--bk-sand);
+    font-size:0.76rem; font-weight:600;
+    padding:0.45rem 1rem; border-radius:30px;
+    margin-bottom:1rem;
+  }
+  .bk-hero h1{ font-size:clamp(1.9rem, 6vw, 2.7rem); font-weight:700; margin-bottom:0.7rem; }
+  .bk-hero p{ color:rgba(251,248,242,0.82); font-size:0.94rem; line-height:1.6; max-width:460px; margin:0 auto 1.4rem; }
+  .bk-hero-stats{ display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; }
+  .bk-hero-stats .stat b{ font-family:'Playfair Display', serif; font-size:1.2rem; color:var(--bk-gold); display:block; }
+  .bk-hero-stats .stat span{ font-size:0.65rem; text-transform:uppercase; letter-spacing:0.06em; color:rgba(251,248,242,0.65); }
+
+  /* ================= LAYOUT ================= */
+  .bk-wrap{ max-width:1100px; margin:0 auto; padding:2.6rem 1.4rem 4rem; }
+  .bk-grid{ display:grid; grid-template-columns:1.5fr 1fr; gap:1.6rem; align-items:start; }
+  @media(max-width:900px){ .bk-grid{ grid-template-columns:1fr; } }
+
+  .bk-card{
+    background:#fff; border:1px solid var(--bk-line); border-radius:18px;
+    padding:1.8rem 1.7rem; box-shadow:0 20px 45px -30px rgba(15,61,62,0.3);
+    margin-bottom:1.4rem;
+  }
+  .bk-card:last-child{ margin-bottom:0; }
+  .bk-section-title{
+    display:flex; align-items:center; gap:0.6rem;
+    font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;
+    color:var(--bk-teal-mid); margin-bottom:1.1rem;
+  }
+  .bk-section-title::before{ content:""; width:20px; height:2px; background:var(--bk-gold); border-radius:2px; }
+
+  .bk-field-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .bk-field{ margin-bottom:1rem; }
+  .bk-field.full{ grid-column:1/-1; }
+  .bk-field label{
+    display:block; font-size:0.8rem; font-weight:600; margin-bottom:0.4rem; color:var(--bk-teal-deep);
+  }
+  .bk-field label .req{ color:var(--bk-coral); }
+  .bk-field input, .bk-field select{
+    width:100%; border:1.5px solid var(--bk-line); border-radius:10px;
+    padding:0.7rem 0.9rem; font-size:0.87rem; font-family:'Poppins',sans-serif;
+    background:var(--bk-cream); color:var(--bk-ink);
+  }
+  .bk-field input:focus, .bk-field select:focus{
+    outline:2px solid var(--bk-gold); outline-offset:1px; border-color:var(--bk-gold);
+  }
+  @media(max-width:560px){ .bk-field-grid{ grid-template-columns:1fr; } }
+
+  /* pills */
+  .bk-pill-select{ display:flex; gap:0.6rem; flex-wrap:wrap; }
+  .bk-pill{
+    border:1.5px solid var(--bk-line); border-radius:20px; padding:0.55rem 1.1rem;
+    font-size:0.82rem; font-weight:600; color:var(--bk-teal-deep); background:var(--bk-cream);
+    cursor:pointer; user-select:none; display:flex; align-items:center; gap:0.4rem;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .bk-pill.selected{ background:var(--bk-teal-deep); color:#fff; border-color:var(--bk-teal-deep); }
+
+  /* counters */
+  .bk-counter{
+    display:flex; align-items:center; justify-content:space-between;
+    border:1.5px solid var(--bk-line); border-radius:10px; padding:0.55rem 0.8rem;
+  }
+  .bk-counter .lbl{ font-size:0.85rem; font-weight:500; }
+  .bk-counter .btns{ display:flex; align-items:center; gap:0.7rem; }
+  .bk-cbtn{
+    width:26px; height:26px; border-radius:50%; border:none;
+    background:var(--bk-teal-deep); color:#fff; font-size:1rem; font-weight:700;
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+  }
+  .bk-cval{ font-weight:700; min-width:16px; text-align:center; font-size:0.9rem; }
+
+  /* ================= SUMMARY (sticky) ================= */
+  .bk-summary{ position:sticky; top:1.2rem; }
+  .bk-summary-head{
+    background:linear-gradient(160deg, var(--bk-teal-deep), var(--bk-teal-mid));
+    color:var(--bk-cream); border-radius:14px 14px 0 0; padding:1.1rem 1.3rem;
+    display:flex; align-items:center; gap:0.5rem; font-weight:600;
+  }
+  .bk-summary-body{ padding:1.3rem; }
+  .bk-line{ display:flex; justify-content:space-between; font-size:0.85rem; padding:0.5rem 0; border-bottom:1px dashed var(--bk-line); color:var(--bk-muted); }
+  .bk-line span:last-child{ color:var(--bk-ink); font-weight:600; }
+  .bk-line.total{
+    border-bottom:none; margin-top:0.5rem; padding-top:0.9rem; border-top:2px solid var(--bk-teal-deep);
+    font-size:1.05rem; font-weight:700; color:var(--bk-teal-deep);
+  }
+  .bk-line.total span:last-child{ color:var(--bk-coral); font-size:1.2rem; }
+  .bk-summary-note{ font-size:0.72rem; color:var(--bk-muted); margin-top:0.6rem; line-height:1.5; }
+
+  .bk-submit{
+    width:100%; background:var(--bk-coral); color:#fff; font-weight:700; font-size:0.95rem;
+    padding:0.9rem; border-radius:12px; border:none; margin-top:1rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    transition:transform .15s ease;
+  }
+  .bk-submit:hover{ transform:translateY(-1px); }
+
+  .bk-secure{
+    display:flex; align-items:center; gap:0.4rem; justify-content:center;
+    font-size:0.72rem; color:var(--bk-muted); margin-top:0.7rem;
+  }
+</style>
+</head>
+<body class="bk-scope">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right"><span>20+ Years Crafting India Journeys</span></div>
+      <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html">Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+          <a href="review.html">Review</a>
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="bk-hero">
+  <div class="bk-anim-layer" id="bkAnimLayer"></div>
+  <div class="bk-hero-inner">
+    <span class="bk-eyebrow">🎫 Book Now</span>
+    <h1>Plan your trip, lock your seat</h1>
+    <p>Pick your destination, choose how you want to travel, and see your total fare instantly — no surprises at checkout.</p>
+    <div class="bk-hero-stats">
+      <div class="stat"><b>26</b><span>Destinations</span></div>
+      <div class="stat"><b>3</b><span>Travel Modes</span></div>
+      <div class="stat"><b>Instant</b><span>Fare Estimate</span></div>
+      <div class="stat"><b>Secure</b><span>Checkout</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="bk-wrap">
+  <form id="bookingForm"  action="codes/book.jsp" method="post">
+    <div class="bk-grid">
+
+      <!-- LEFT: FORM -->
+      <div class="bk-form-col">
+
+        <!-- Traveler details -->
+        <div class="bk-card">
+          <div class="bk-section-title">Traveler Details</div>
+          <div class="bk-field-grid">
+            <div class="bk-field full">
+              <label>Full Name <span class="req">*</span></label>
+              <input type="text" name="name" id="bkName" required placeholder="Your full name">
+            </div>
+            <div class="bk-field">
+              <label>Phone Number <span class="req">*</span></label>
+              <input type="tel" name="mob" id="bkMob" required maxlength="10" pattern="[0-9]{10}" placeholder="98765 43210">
+            </div>
+            <div class="bk-field">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" name="email" id="bkEmail" required placeholder="you@email.com">
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip details -->
+        <div class="bk-card">
+          <div class="bk-section-title">Trip Details</div>
+          <div class="bk-field-grid">
+            <div class="bk-field full">
+              <label>Destination <span class="req">*</span></label>
+              <select name="destination" id="destSelect" required onchange="recalcTotal()">
+                <option value="">Select your destination</option>
+                <optgroup label="North India">
+                  <option value="Delhi">Delhi</option>
+                  <option value="Agra (Taj Mahal)">Agra (Taj Mahal)</option>
+                  <option value="Jaipur">Jaipur</option>
+                  <option value="Shimla">Shimla</option>
+                  <option value="Manali">Manali</option>
+                  <option value="Amritsar">Amritsar</option>
+                  <option value="Rishikesh">Rishikesh</option>
+                  <option value="Varanasi">Varanasi</option>
+                  <option value="Lucknow">Lucknow</option>
+                </optgroup>
+                <optgroup label="South India">
+                  <option value="Kerala Backwaters">Kerala Backwaters</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Ooty">Ooty</option>
+                  <option value="Mysore">Mysore</option>
+                  <option value="Coorg">Coorg</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                </optgroup>
+                <optgroup label="East &amp; Northeast India">
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Darjeeling">Darjeeling</option>
+                  <option value="Gangtok">Gangtok</option>
+                  <option value="Shillong">Shillong</option>
+                  <option value="Guwahati">Guwahati</option>
+                  <option value="Kaziranga">Kaziranga</option>
+                </optgroup>
+                <optgroup label="West India">
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Udaipur">Udaipur</option>
+                  <option value="Jodhpur">Jodhpur</option>
+                  <option value="Ahmedabad">Ahmedabad</option>
+                  <option value="Rann of Kutch">Rann of Kutch</option>
+                  <option value="Mount Abu">Mount Abu</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="bk-field">
+              <label>Departure Date <span class="req">*</span></label>
+              <input type="date" name="dep_date" id="bkDepDate" required>
+            </div>
+            <div class="bk-field">
+              <label>Return Date <span class="req">(optional)</span></label>
+              <input type="date" name="ret_date" id="bkRetDate">
+            </div>
+
+            <div class="bk-field">
+              <label>Adults</label>
+              <div class="bk-counter">
+                <span class="lbl">Travelers (12+ yrs)</span>
+                <div class="btns">
+                  <button type="button" class="bk-cbtn" onclick="adjustBkCount('adults',-1)">−</button>
+                  <span class="bk-cval" id="bkAdultsVal">1</span>
+                  <button type="button" class="bk-cbtn" onclick="adjustBkCount('adults',1)">+</button>
+                </div>
+              </div>
+              <input type="hidden" name="adults" id="hidden_bk_adults" value="1">
+            </div>
+            <div class="bk-field">
+              <label>Children</label>
+              <div class="bk-counter">
+                <span class="lbl">Children (2–11 yrs)</span>
+                <div class="btns">
+                  <button type="button" class="bk-cbtn" onclick="adjustBkCount('children',-1)">−</button>
+                  <span class="bk-cval" id="bkChildrenVal">0</span>
+                  <button type="button" class="bk-cbtn" onclick="adjustBkCount('children',1)">+</button>
+                </div>
+              </div>
+              <input type="hidden" name="children" id="hidden_bk_children" value="0">
+            </div>
+          </div>
+        </div>
+
+        <!-- Transport -->
+        <div class="bk-card">
+          <div class="bk-section-title">Choose Transport</div>
+
+          <div class="bk-field full">
+            <label>Travel Mode</label>
+            <div class="bk-pill-select" id="transportModeSelect">
+              <div class="bk-pill selected" data-mode="Flight" onclick="selectTransportMode(this)">✈️ Flight</div>
+              <div class="bk-pill" data-mode="Train" onclick="selectTransportMode(this)">🚆 Train</div>
+              <div class="bk-pill" data-mode="Bus" onclick="selectTransportMode(this)">🚌 Bus</div>
+            </div>
+            <input type="hidden" name="transport_mode" id="hidden_bk_mode" value="Flight">
+          </div>
+
+          <div class="bk-field-grid">
+            <div class="bk-field">
+              <label id="carrierLabel">Airline</label>
+              <select id="carrierSelect" name="carrier" onchange="recalcTotal()"></select>
+            </div>
+            <div class="bk-field">
+              <label id="classLabel">Class</label>
+              <select id="classSelect" name="travel_class" onchange="recalcTotal()"></select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hotel -->
+        <div class="bk-card">
+          <div class="bk-section-title">Hotel Preference</div>
+          <div class="bk-field full">
+            <div class="bk-pill-select" id="hotelSelect">
+              <div class="bk-pill selected" data-value="3" onclick="selectHotel(this)">⭐ 3-Star</div>
+              <div class="bk-pill" data-value="4" onclick="selectHotel(this)">⭐ 4-Star</div>
+              <div class="bk-pill" data-value="5" onclick="selectHotel(this)">⭐ 5-Star Luxury</div>
+            </div>
+            <input type="hidden" name="hotel" id="hidden_bk_hotel" value="3">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: SUMMARY -->
+      <div class="bk-summary">
+        <div class="bk-card" style="padding:0; overflow:hidden;">
+          <div class="bk-summary-head">🧾 Payment Summary</div>
+          <div class="bk-summary-body">
+            <div class="bk-line"><span>Destination Package</span><span id="sumDest">₹0</span></div>
+            <div class="bk-line"><span>Transport Fare</span><span id="sumTransport">₹0</span></div>
+            <div class="bk-line"><span>Class Upgrade</span><span id="sumClass">x1.0</span></div>
+            <div class="bk-line"><span>Hotel Tier</span><span id="sumHotel">x1.0</span></div>
+            <div class="bk-line"><span>Travelers</span><span id="sumTravelers">1 Adult</span></div>
+            <div class="bk-line"><span>Subtotal</span><span id="sumSubtotal">₹0</span></div>
+            <div class="bk-line"><span>GST (5%)</span><span id="sumGst">₹0</span></div>
+            <div class="bk-line total"><span>Total Amount</span><span id="sumTotal">₹0</span></div>
+
+            <div class="bk-field full" style="margin-top:1rem;">
+              <label>Payment Method</label>
+              <select name="payment_method" id="paymentMethod">
+                <option value="Credit/Debit Card">Credit / Debit Card</option>
+                <option value="UPI">UPI</option>
+                <option value="Net Banking">Net Banking</option>
+                <option value="Pay at Office">Pay at Office</option>
+              </select>
+            </div>
+
+            <input type="hidden" name="total_amount" id="hidden_bk_total" value="0">
+
+            <button type="submit" class="bk-submit">🔒 Confirm Booking</button>
+            <div class="bk-secure">🔒 Your payment details are encrypted &amp; secure</div>
+            <div class="bk-summary-note">Final fare may vary slightly based on live availability. This is an estimate generated instantly from your selections.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+    </div>
+    <div class="footer-col">
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>
+
+<script>
+  /* ===================== PRICE DATA ===================== */
+  const destinationPrices = {
+    "Delhi":4500, "Agra (Taj Mahal)":5000, "Jaipur":5500, "Shimla":6500, "Manali":7000,
+    "Amritsar":5200, "Rishikesh":6000, "Varanasi":5300, "Lucknow":4800,
+    "Kerala Backwaters":9000, "Goa":8000, "Ooty":6800, "Mysore":6200, "Coorg":7200, "Chennai":5600, "Hyderabad":5400,
+    "Kolkata":5100, "Darjeeling":7500, "Gangtok":8200, "Shillong":7800, "Guwahati":6900, "Kaziranga":8600,
+    "Mumbai":6100, "Udaipur":7300, "Jodhpur":6700, "Ahmedabad":5800, "Rann of Kutch":8900, "Mount Abu":6400
+  };
+
+  const carrierData = {
+    Flight: [
+      { name:"IndiGo", price:3200 },
+      { name:"Air India", price:3800 },
+      { name:"SpiceJet", price:3000 },
+      { name:"Vistara", price:4200 },
+      { name:"Akasa Air", price:3400 },
+      { name:"Air India Express", price:3600 }
+    ],
+    Train: [
+      { name:"Rajdhani Express", price:1800 },
+      { name:"Shatabdi Express", price:1500 },
+      { name:"Duronto Express", price:1700 },
+      { name:"Vande Bharat Express", price:2200 },
+      { name:"Humsafar Express", price:1600 },
+      { name:"Garib Rath Express", price:900 }
+    ],
+    Bus: [
+      { name:"Volvo AC Sleeper", price:1200 },
+      { name:"RedBus Multi-Axle", price:1000 },
+      { name:"State Transport Deluxe", price:700 },
+      { name:"Semi-Sleeper AC", price:900 },
+      { name:"Non-AC Seater", price:400 }
+    ]
+  };
+
+  const classData = {
+    Flight: [
+      { name:"Economy", mult:1.0 },
+      { name:"Premium Economy", mult:1.25 },
+      { name:"Business", mult:1.6 }
+    ],
+    Train: [
+      { name:"Sleeper (SL)", mult:1.0 },
+      { name:"AC 3-Tier", mult:1.3 },
+      { name:"AC 2-Tier", mult:1.6 },
+      { name:"AC First Class", mult:2.0 }
+    ],
+    Bus: [
+      { name:"Non-AC Seater", mult:1.0 },
+      { name:"AC Seater", mult:1.2 },
+      { name:"AC Sleeper", mult:1.4 }
+    ]
+  };
+
+  const carrierLabels = { Flight:"Airline", Train:"Train Name", Bus:"Bus Operator" };
+  const hotelMultiplier = { "3":1.0, "4":1.3, "5":1.7 };
+
+  let currentMode = "Flight";
+  let currentHotel = "3";
+  let bkCounts = { adults:1, children:0 };
+
+  /* ===================== POPULATE DYNAMIC SELECTS ===================== */
+  function populateTransportSelects(mode){
+    const carrierSel = document.getElementById('carrierSelect');
+    const classSel = document.getElementById('classSelect');
+    document.getElementById('carrierLabel').textContent = carrierLabels[mode];
+
+    carrierSel.innerHTML = "";
+    carrierData[mode].forEach(function(c){
+      const opt = document.createElement('option');
+      opt.value = c.name;
+      opt.textContent = c.name;
+      carrierSel.appendChild(opt);
+    });
+
+    classSel.innerHTML = "";
+    classData[mode].forEach(function(c){
+      const opt = document.createElement('option');
+      opt.value = c.name;
+      opt.textContent = c.name;
+      classSel.appendChild(opt);
+    });
+  }
+
+  function selectTransportMode(el){
+    document.querySelectorAll('#transportModeSelect .bk-pill').forEach(function(p){ p.classList.remove('selected'); });
+    el.classList.add('selected');
+    currentMode = el.getAttribute('data-mode');
+    document.getElementById('hidden_bk_mode').value = currentMode;
+    populateTransportSelects(currentMode);
+    recalcTotal();
+  }
+
+  function selectHotel(el){
+    document.querySelectorAll('#hotelSelect .bk-pill').forEach(function(p){ p.classList.remove('selected'); });
+    el.classList.add('selected');
+    currentHotel = el.getAttribute('data-value');
+    document.getElementById('hidden_bk_hotel').value = currentHotel;
+    recalcTotal();
+  }
+
+  function adjustBkCount(type, delta){
+    const min = (type === 'adults') ? 1 : 0;
+    const max = 10;
+    bkCounts[type] = Math.min(max, Math.max(min, bkCounts[type] + delta));
+    document.getElementById(type === 'adults' ? 'bkAdultsVal' : 'bkChildrenVal').textContent = bkCounts[type];
+    document.getElementById(type === 'adults' ? 'hidden_bk_adults' : 'hidden_bk_children').value = bkCounts[type];
+    recalcTotal();
+  }
+
+ 
+  /* ===================== ANIMATED BOOKING BACKGROUND ===================== */
+  (function(){
+    const layer = document.getElementById('bkAnimLayer');
+    if(!layer) return;
+    const glyphs = ['✈️','🚆','🚌','🎫','🧳'];
+    const count = 16;
+    for(let i=0;i<count;i++){
+      const el = document.createElement('span');
+      el.className = 'bk-float-ic';
+      el.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+      const size = 16 + Math.random()*20;
+      el.style.fontSize = size + 'px';
+      el.style.left = (Math.random()*96) + '%';
+      el.style.animationDuration = (14 + Math.random()*14) + 's';
+      el.style.animationDelay = (Math.random()*16) + 's';
+      layer.appendChild(el);
+    }
+  })();
+
+</script>
+</body>
+</html>

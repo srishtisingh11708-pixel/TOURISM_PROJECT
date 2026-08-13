@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us | Sahyatri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+    /* ============================================================
+   SAHYATRI — style.css
+   Palette drawn from the hero sky gradient already in the HTML:
+   dawn gold #f7cf8f · ember #e8815f · dusk rose #c96b7a
+   twilight #7a5b8f · indigo #3d3c6e · deep navy #22254a
+   paper #f6f2ea · ink #1b2a2e · gold accent #d8a34d
+   ============================================================ */
+
+:root{
+  --paper: #f6f2ea;
+  --ink: #1b2a2e;
+  --gold: #d8a34d;
+  --route: #c96b7a;
+  --dawn: #f7cf8f;
+  --ember: #e8815f;
+  --indigo: #3d3c6e;
+  --navy: #22254a;
+  --muted: #6b6a7f;
+  --line: rgba(27,42,46,0.12);
+
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+
+  --radius: 6px;
+  --shadow-soft: 0 20px 50px rgba(20,20,45,0.14);
+  --shadow-card: 0 14px 34px rgba(20,20,45,0.16);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+a{ text-decoration:none; color:inherit; }
+ul{ list-style:none; margin:0; padding:0; }
+button{ font-family: inherit; cursor:pointer; }
+img{ max-width:100%; display:block; }
+
+
+/* ============ SKY BACKGROUND (behind hero content) ============ */
+.sky-bg{
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg,
+    #1b4332 0%, #2d6a4f 25%, #40916c 50%, #52b788 75%, #95d5b2 100%);
+  min-height: 260px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.sky-bg-content{
+  position:relative; z-index:2;
+  color:#fff; padding:0 20px;
+}
+.sky-bg-content h2{
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem,3vw,2.2rem);
+  margin:0 0 8px;
+}
+.sky-bg-content p{
+  font-size:0.95rem; opacity:0.9; margin:0;
+}
+.travel-track{
+  position:absolute; bottom:16%; left:0; right:0; height:40px;
+}
+.travel-track::before{
+  content:"";
+  position:absolute; left:5%; right:5%; top:50%;
+  height:2px;
+  background: repeating-linear-gradient(90deg, rgba(255,255,255,0.5) 0 10px, transparent 10px 18px);
+}
+.travel-icon{
+  position:absolute; top:50%; left:-5%;
+  font-size:1.6rem;
+  transform: translateY(-50%);
+  animation: travel-move 14s linear infinite;
+}
+.travel-icon.car{ animation-duration:12s; }
+.travel-icon.train{ animation-duration:16s; animation-delay:-5s; }
+.travel-icon.plane{ top:20%; animation-duration:10s; animation-delay:-2s; }
+
+@keyframes travel-move{
+  from{ left:-5%; }
+  to{ left:105%; }
+}
+@media (prefers-reduced-motion: reduce){
+  .travel-icon{ animation:none !important; }
+}
+.cloud1{ width:160px; height:40px; top:20%; left:8%; }
+.cloud2{ width:120px; height:32px; top:45%; left:60%; opacity:0.6; }
+.cloud3{ width:200px; height:48px; top:10%; left:70%; opacity:0.4; }
+
+.route-thread{
+  position:absolute;
+  left:5%; right:5%; bottom:18%;
+  height:2px;
+  background: repeating-linear-gradient(90deg, var(--gold) 0 10px, transparent 10px 18px);
+  opacity:0.6;
+}
+.drift-dot{
+  position:absolute;
+  bottom: 14%;
+  left:-4px;
+  width:8px; height:8px;
+  border-radius:50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(216,163,77,0.8);
+  animation: drift-across 18s linear infinite;
+}
+@keyframes drift-across{
+  from{ left:-4px; }
+  to{ left:100%; }
+}
+
+/* ============ PAGE / HERO TEXT ============ */
+.page{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 24px 100px;
+}
+.eyebrow{
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight:600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--route);
+  margin: 0 0 10px;
+}
+.hero-title{
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.2vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--navy);
+  margin: 0 0 18px;
+  max-width: 780px;
+}
+.hero-title em{ color: var(--route); font-style: italic; }
+.hero-sub{
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 0 48px;
+}
+
+/* ============ TICKET CARDS (boarding-pass style) ============ */
+.routes{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.ticket{
+  background: #fff;
+  border-radius: var(--radius);
+  overflow:hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--line);
+  cursor:pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+  outline-offset: 3px;
+}
+.ticket:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 24px 50px rgba(20,20,45,0.22);
+}
+.ticket:focus-visible{
+  outline: 3px solid var(--route);
+}
+
+.ticket-photo{
+  height: 170px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.ticket-photo::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(20,20,45,0) 40%, rgba(20,20,45,0.55) 100%);
+}
+.ticket-mode{
+  position:absolute;
+  bottom: 12px; left:16px;
+  z-index: 2;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.ticket-body{ padding: 22px 20px 18px; }
+.ticket-body h3{
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin: 0 0 8px;
+  color: var(--navy);
+}
+.ticket-body p{
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+.ticket-cta{
+  display:inline-flex;
+  align-items:center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight:600;
+  color: var(--route);
+}
+.ticket-cta svg{ transition: transform .2s ease; }
+.ticket:hover .ticket-cta svg{ transform: translateX(4px); }
+
+/* perforated divider — the "boarding pass" signature */
+.perf{
+  position:relative;
+  height: 0;
+  border-top: 2px dashed var(--line);
+  margin: 0 20px;
+}
+.perf::before,
+.perf::after{
+  content:"";
+  position:absolute;
+  top:-9px;
+  width:18px; height:18px;
+  border-radius:50%;
+  background: var(--paper);
+}
+.perf::before{ left:-29px; }
+.perf::after{ right:-29px; }
+
+.ticket-mini{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  padding: 16px 20px 20px;
+}
+.mini-anim{
+  position:relative;
+  flex:1;
+  height: 20px;
+}
+.mini-track{
+  position:absolute;
+  top:50%; left:0; right:0;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 12px);
+  transform: translateY(-50%);
+}
+.mini-icon{
+  position:absolute;
+  top:50%; left:0;
+  transform: translate(-50%, -50%);
+  font-size: 1.1rem;
+  animation: mini-travel 3.2s ease-in-out infinite;
+}
+@keyframes mini-travel{
+  0%{ left:0; }
+  50%{ left:100%; }
+  50.01%{ left:100%; }
+  100%{ left:100%; }
+}
+.eta{
+  text-align:right;
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.eta strong{
+  display:block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+/* ============ DETAIL SECTIONS (expand on click) ============ */
+.detail{
+  display:none;
+  margin-top: 40px;
+  border-radius: var(--radius);
+  overflow:hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--line);
+  background:#fff;
+}
+.detail.active{
+  display:block;
+  animation: detail-in .35s ease;
+}
+@keyframes detail-in{
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.detail-hero{
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display:flex;
+  align-items:flex-end;
+}
+.detail-hero::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(20,20,45,0.05) 0%, rgba(20,20,45,0.75) 100%);
+}
+.detail-hero-content{
+  position: relative;
+  z-index:2;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 20px 28px;
+}
+.detail-hero-content h2{
+  font-family: var(--font-display);
+  color:#fff;
+  font-size: 1.9rem;
+  margin:0;
+}
+.detail-close{
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  color:#fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight:500;
+  backdrop-filter: blur(6px);
+  transition: background .2s ease;
+}
+.detail-close:hover{ background: rgba(255,255,255,0.3); }
+
+.detail-body{
+  display:grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 40px;
+  padding: 32px 28px 36px;
+}
+.detail-body h4{
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin: 0 0 16px;
+}
+.detail-body ul{ display:flex; flex-direction:column; gap:14px; }
+.detail-body li{
+  display:flex;
+  gap: 12px;
+  font-size: 0.92rem;
+  line-height:1.6;
+  color: var(--ink);
+}
+.dot{
+  flex-shrink:0;
+  width:8px; height:8px;
+  border-radius:50%;
+  background: var(--route);
+  margin-top: 7px;
+}
+
+.info-box{
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.info-box .row{
+  display:flex;
+  justify-content:space-between;
+  font-size: 0.88rem;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.info-box .row:last-child{ border-bottom:none; }
+.info-box .row span:first-child{ color: var(--muted); }
+.info-box .row span:last-child{ font-weight:600; color: var(--navy); }
+
+.tip{
+  margin-top: 16px;
+  font-size: 0.85rem;
+  line-height:1.6;
+  color: var(--muted);
+  padding: 14px 16px;
+  background: rgba(216,163,77,0.1);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 960px){
+  .main-nav{ display:none; }
+  .hamburger{ display:flex; }
+  .routes{ grid-template-columns: 1fr; }
+  .detail-body{ grid-template-columns: 1fr; }
+  .footer-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 560px){
+  .topbar-left{ gap:12px; font-size: 0.72rem; }
+  .footer-grid{ grid-template-columns: 1fr; }
+  .hero-title{ font-size: 1.8rem; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .drift-dot, .mini-icon{ animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-left">
+      <span>📞 +91-98765-43210</span>
+      <span>✉️ hello@sahyatri.in</span>
+    </div>
+    <div class="topbar-right">
+        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
+        <a href="login.html">
+        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+        </a>
+           <a href="Registration.html">
+          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+           </a>
+  </div>
+</div>
+
+<header class="site-header" id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">स</span>
+      <span class="logo-text">Sah<em>yatri</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="Contact.html" >Contact Us</a>
+      <a href="Visapolicy.html">Visa Policy</a>
+      <div class="nav-dropdown">
+        <a href="Howtoreach.html" class="active">How to Reach ▾</a>
+        <div class="nav-dropdown-menu">
+         <a href="Byroade.html#road">By Road Ways</a>
+        <a href="bytrain.html#train">By Train</a>
+          <a href="Byflight.html#flight">By Flight</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="Destination.html">Destination ▾</a>
+        <div class="nav-dropdown-menu">
+          <a href="Regoins.html">Regions</a>
+          <a href="Foreign.html">Foreign</a>
+        </div>
+      </div>
+      <a href="Besttime.html">Best Time</a>
+        <a href="team.html">Team Member</a>
+        <a href="enquiry.html">Enquiry page</a>
+         <a href="gallery.html">Gallery</a>
+                         <a href="review.html">Review</a>
+
+
+    </nav>
+    <div class="header-cta">
+      <button class="btn-plan">Plan My Trip</button>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>   
+
+<div class="sky-bg">
+  <div class="sky-bg-content">
+    <h2>Teen Raaste, Ek Yatra</h2>
+    <p>Sadak, Rail ya Hawai jahaz — jo bhi raasta chuno, safar yaadgaar hoga.</p>
+  </div>
+  <div class="travel-track" aria-hidden="true">
+    <span class="travel-icon car">🚗</span>
+    <span class="travel-icon train">🚆</span>
+    <span class="travel-icon plane">✈️</span>
+  </div>
+</div>
+<main class="page">
+  <p class="eyebrow">Getting Here</p>
+  <h1 class="hero-title">Three ways in. <em>One</em> unforgettable arrival.</h1>
+  <p class="hero-sub">Whether you're chasing the coastline by road, watching the hills roll by from a train window, or landing straight into the heart of it — pick your route below.</p>
+
+  <section class="routes">
+
+    <!-- ROAD -->
+    <article class="ticket" data-mode="road" tabindex="0" role="button" aria-expanded="false" aria-controls="detail-road">
+      <div class="ticket-photo" style="background-image:url(')">
+        <span class="ticket-mode">By Road</span>
+      </div>
+      <div class="ticket-body">
+        <h3>Drive the Coastal Highway</h3>
+        <p>Winding mountain roads, roadside dhabas, and a soundtrack of your own choosing.</p>
+       <span class="ticket-cta"><a href="Byroade.html">View route details
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</span>
+      </div>
+      <div class="perf"></div>
+      <div class="ticket-mini">
+        <div class="mini-anim"><div class="mini-track"></div><span class="mini-icon">🚗</span></div>
+        <div class="eta"><strong>6h 30m</strong>310 km</div>
+      </div>
+    </article>
+
+    <!-- TRAIN -->
+    <article class="ticket" data-mode="train" tabindex="0" role="button" aria-expanded="false" aria-controls="detail-train">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1516684732162-798a0062be99?w=600&q=80')">
+        <span class="ticket-mode">By Train</span>
+      </div>
+      <div class="ticket-body">
+        <h3>Ride the Valley Express</h3>
+        <p>Wide windows, chai stops at every station, and the hills sliding past slowly.</p>
+       <span class="ticket-cta"><a href="bytrain.html">View route details
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</span>
+      </div>
+      <div class="perf"></div>
+      <div class="ticket-mini">
+        <div class="mini-anim"><div class="mini-track"></div><span class="mini-icon">🚆</span></div>
+        <div class="eta"><strong>4h 45m</strong>Daily, 3 trains</div>
+      </div>
+    </article>
+
+    <!-- FLIGHT -->
+    <article class="ticket" data-mode="flight" tabindex="0" role="button" aria-expanded="false" aria-controls="detail-flight">
+      <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&q=80')">
+        <span class="ticket-mode">By Flight</span>
+      </div>
+      <div class="ticket-body">
+        <h3>Land Above the Clouds</h3>
+        <p>The fastest way in — skip the miles and step out with the whole trip still ahead.</p>
+      <span class="ticket-cta"><a href="bytrain.html">View route details
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</span>
+      </div>
+      <div class="perf"></div>
+      <div class="ticket-mini">
+        <div class="mini-anim"><div class="mini-track"></div><span class="mini-icon">✈️</span></div>
+        <div class="eta"><strong>1h 20m</strong>2 flights/day</div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- DETAIL: ROAD -->
+  <section class="detail" id="detail-road">
+    <div class="detail-hero" style="background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&q=80')">
+      <div class="detail-hero-content">
+        <h2>By Road</h2>
+        <button class="detail-close" data-close>Close ✕</button>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div>
+        <h4>Route Notes</h4>
+        <ul>
+          <li><span class="dot"></span>From the capital, take NH-44 north and follow signs toward the valley — the road is well-paved for most of the stretch.</li>
+          <li><span class="dot"></span>Stop at Ridgeview Point (2.5 hrs in) for the best overlook photo of the whole trip.</li>
+          <li><span class="dot"></span>Self-drive, taxis, and overnight buses are all available; taxis can be booked at the stand outside any major station.</li>
+          <li><span class="dot"></span>Fuel stations thin out after the halfway mark — top up at Bantwal junction.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="info-box">
+          <div class="row"><span>Distance</span><span>310 km</span></div>
+          <div class="row"><span>Drive time</span><span>6h 30m</span></div>
+          <div class="row"><span>Best for</span><span>Flexible schedules</span></div>
+          <div class="row"><span>Road condition</span><span>Good, hilly last 40 km</span></div>
+        </div>
+        <p class="tip">Tip: leave before 6 AM to clear the ghat section before the afternoon mist rolls in.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL: TRAIN -->
+  <section class="detail" id="detail-train">
+    <div class="detail-hero" style="background-image:url('https://images.unsplash.com/photo-1516684732162-798a0062be99?w=1200&q=80')">
+      <div class="detail-hero-content">
+        <h2>By Train</h2>
+        <button class="detail-close" data-close>Close ✕</button>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div>
+        <h4>Route Notes</h4>
+        <ul>
+          <li><span class="dot"></span>Board the Valley Express from Central Station — reserve a window seat on the left for the best views after Kundapur.</li>
+          <li><span class="dot"></span>Three departures daily: early morning, early afternoon, and a scenic sunset run recommended for first-time visitors.</li>
+          <li><span class="dot"></span>The nearest station to town is a 15-minute auto ride from the main square, autos wait right outside the exit.</li>
+          <li><span class="dot"></span>Book at least a week ahead in peak season — the sunset run sells out first.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="info-box">
+          <div class="row"><span>Duration</span><span>4h 45m</span></div>
+          <div class="row"><span>Frequency</span><span>3 trains / day</span></div>
+          <div class="row"><span>Best for</span><span>Scenic, relaxed travel</span></div>
+          <div class="row"><span>Nearest station</span><span>Central Station</span></div>
+        </div>
+        <p class="tip">Tip: the sunset departure crosses the Kundapur bridge right at golden hour — worth planning around.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAIL: FLIGHT -->
+  <section class="detail" id="detail-flight">
+    <div class="detail-hero" style="background-image:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1200&q=80')">
+      <div class="detail-hero-content">
+        <h2>By Flight</h2>
+        <button class="detail-close" data-close>Close ✕</button>
+      </div>
+    </div>
+    <div class="detail-body">
+      <div>
+        <h4>Route Notes</h4>
+        <ul>
+          <li><span class="dot"></span>Two daily flights connect from the capital — morning and evening — landing at the regional airport just 12 km from town.</li>
+          <li><span class="dot"></span>Prepaid taxis and hotel shuttles are available right outside arrivals.</li>
+          <li><span class="dot"></span>The airport is small — arrive 60 minutes before departure, no need for the usual buffer.</li>
+          <li><span class="dot"></span>Fares are lowest booked 3+ weeks ahead; the evening flight tends to run cheaper.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="info-box">
+          <div class="row"><span>Flight time</span><span>1h 20m</span></div>
+          <div class="row"><span>Frequency</span><span>2 flights / day</span></div>
+          <div class="row"><span>Best for</span><span>Shortest travel time</span></div>
+          <div class="row"><span>Airport</span><span>12 km from town</span></div>
+        </div>
+        <p class="tip">Tip: window seats on the left of the evening flight catch the valley lighting up at dusk.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script>
+  const tickets = document.querySelectorAll('.ticket');
+  const details = document.querySelectorAll('.detail');
+
+  function openDetail(mode){
+    details.forEach(d => d.classList.remove('active'));
+    tickets.forEach(t => t.setAttribute('aria-expanded','false'));
+    const target = document.getElementById('detail-' + mode);
+    if(target){
+      target.classList.add('active');
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
+    const activeTicket = document.querySelector('.ticket[data-mode="'+mode+'"]');
+    if(activeTicket) activeTicket.setAttribute('aria-expanded','true');
+  }
+
+  tickets.forEach(ticket => {
+      ticket.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    openDetail(ticket.dataset.mode);
+});
+  ticket.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        openDetail(ticket.dataset.mode);
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.detail').classList.remove('active');
+      tickets.forEach(t => t.setAttribute('aria-expanded','false'));
+    });
+  });
+</script>
+    
+  
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer" id="contact">
+  <div class="footer-grid">
+    <div class="footer-col brand-col">
+      <a href="#home" class="logo light">
+        <span class="logo-mark">स</span>
+        <span class="logo-text">Sah<em>yatri</em></span>
+      </a>
+      <p>Your fellow traveler across India — designing journeys around real landscapes, real people, and real time since 2008.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/?hl=en" aria-label="Instagram">IG</a>
+        <a href="https://www.facebook.com/" aria-label="Facebook">FB</a>
+        <a href="https://www.youtube.com/" aria-label="YouTube">YT</a>
+        <a href="https://in.pinterest.com/" aria-label="Pinterest">PIN</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
+      <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
+      <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
+      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Sahyatri</a>
+      <a href="#">Careers</a>
+      <a href="index.html">Traveler Reviews</a>
+      <a href="gallery.html">Travel Blog</a>
+    </div>
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <a href="tel:+919876543210">+91-98765-43210</a>
+      <a href="mailto:hello@sahyatri.in">hello@sahyatri.in</a>
+      <p class="foot-addr">14 Marigold Lane, Connaught Place,<br>New Delhi 110001, India</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
+  </div>
+</footer>

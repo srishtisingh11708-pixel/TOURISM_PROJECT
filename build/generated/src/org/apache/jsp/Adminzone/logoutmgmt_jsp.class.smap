@@ -1,0 +1,11 @@
+SMAP
+logoutmgmt_jsp.java
+JSP
+*S JSP
+*F
++ 0 logoutmgmt.jsp
+Adminzone/logoutmgmt.jsp
+*L
+2,2:45
+3,8:47
+*E
