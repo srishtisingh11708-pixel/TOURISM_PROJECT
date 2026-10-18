@@ -1307,30 +1307,39 @@ review
       setInterval(updateClock, 1000);
     })();
 
-    // ---- Review counter: counts up once when it scrolls into view ----
+    // ---- Review counter: database (feedback table) se real count aata hai ----
     (function(){
       const counterEl = document.getElementById('reviewCounter');
       if(!counterEl) return;
-      const target = 1248;
+      let target = 0;              // Hinglish: ab hardcoded 1248 nahi, DB ka number aayega
       const duration = 1800;
       let started = false;
+
+      // CounterServlet se reviews ki real count mangwao
+      const statsReady = fetch('CounterServlet')
+        .then(res => res.json())
+        .then(data => { if(data.reviews != null) target = data.reviews; })
+        .catch(err => console.error('Review count fetch failed:', err));
 
       function animateCount(){
         if(started) return;
         started = true;
-        const startTime = performance.now();
-        function tick(now){
-          const progress = Math.min((now - startTime) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const value = Math.floor(eased * target);
-          counterEl.textContent = value.toLocaleString('en-IN');
-          if(progress < 1){
-            requestAnimationFrame(tick);
-          } else {
-            counterEl.textContent = target.toLocaleString('en-IN');
+        // data aane ke baad hi animation shuru hogi
+        statsReady.then(function(){
+          const startTime = performance.now();
+          function tick(now){
+            const progress = Math.min((now - startTime) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const value = Math.floor(eased * target);
+            counterEl.textContent = value.toLocaleString('en-IN');
+            if(progress < 1){
+              requestAnimationFrame(tick);
+            } else {
+              counterEl.textContent = target.toLocaleString('en-IN');
+            }
           }
-        }
-        requestAnimationFrame(tick);
+          requestAnimationFrame(tick);
+        });
       }
 
       const observer = new IntersectionObserver((entries) => {
