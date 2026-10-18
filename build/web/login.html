@@ -415,5 +415,13 @@
   </div>
 </footer>
 </div>
+    <script>
+    (function () {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("msg") === "success") {
+            alert("Registration successful. Please login.");
+        }
+    })();
+</script>
 </body>
 </html>

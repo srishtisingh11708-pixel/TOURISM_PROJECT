@@ -3,378 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us | Sahyatri</title>
+<title>By Road | Sahyatri</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- FIX: CSS me Fraunces / Space Grotesk / Inter use ho rahe the, lekin yahan Playfair/Poppins load ho rahe the -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
   :root{
-    --green:#0B3D3A;
-    --green-dark:#082b29;
-    --green-light:#124F49;
-    --pale:#eef5f2;
-    --pale-dark:#dfeae5;
-    --white:#ffffff;
-    --gold:#c9a227;
-    --ink:#1a1a2e;
-    --ink-soft:#6b6b7a;
-    --line:#dbe5e1;
+    --green:#0B3D3A; --green-dark:#082b29; --green-light:#124F49;
+    --pale:#eef5f2; --pale-dark:#dfeae5; --white:#ffffff; --gold:#c9a227;
+    --ink:#1a1a2e; --ink-soft:#6b6b7a; --line:#dbe5e1;
     --font-display:'Fraunces', serif;
     --font-data:'Space Grotesk', sans-serif;
     --font-body:'Inter', sans-serif;
   }
   *{box-sizing:border-box;}
-  body{
-    margin:0;
-    font-family:var(--font-body);
-    color:var(--ink);
-    background:var(--white);
-  }
-  a{ text-decoration:none; color:inherit; }
+  html,body{max-width:100%;overflow-x:hidden;}   /* side-scroll band */
+  body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--white);}
+  a{text-decoration:none;color:inherit;}
+  img,svg{max-width:100%;}
 
-  /* ===========================================================
-     RAIL HERO — animated train on a dashed track
-     =========================================================== */
-  .rail-hero{
-    position:relative;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 15% 20%, rgba(201,162,39,0.18), transparent 55%),
-      linear-gradient(160deg, var(--green-light) 0%, var(--green-dark) 65%, var(--green) 100%);
-    padding:64px 8vw 0;
-    color:#fdf8ec;
-  }
-  .rail-hero-top{
-    max-width:1200px;
-    margin:0 auto;
-    position:relative;
-    z-index:2;
-  }
-  .rail-eyebrow{
-    font-family:var(--font-data);
-    font-size:.76rem;
-    letter-spacing:.24em;
-    text-transform:uppercase;
-    color:var(--gold);
-    font-weight:600;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .rail-eyebrow::before{
-    content:'';
-    width:22px; height:2px;
-    background:var(--gold);
-  }
-  .rail-hero h1{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:clamp(2.2rem, 4.6vw, 3.8rem);
-    line-height:1.12;
-    margin:18px 0 18px;
-    max-width:760px;
-  }
-  .rail-hero h1 em{ color:var(--gold); font-style:italic; font-weight:600; }
-  .rail-hero p.lede{
-    max-width:540px;
-    color:rgba(253,248,236,0.82);
-    font-size:1.04rem;
-    line-height:1.7;
-    margin:0 0 40px;
-  }
+  /* ================= TOP BAR ================= */
+  .topbar{background:var(--green-dark);color:#fdf8ec;font-size:.8rem;}
+  .topbar-inner{max-width:1300px;margin:0 auto;padding:8px 4vw;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+  .topbar-left{display:flex;gap:18px;flex-wrap:wrap;}
+  .topbar-right{display:flex;align-items:center;gap:12px;min-width:0;}
+  /* <marquee> hata diya (deprecated + mobile pe width todta hai) -> CSS ticker */
+  .ticker{overflow:hidden;white-space:nowrap;width:220px;}
+  .ticker span{display:inline-block;padding-left:100%;animation:tick 12s linear infinite;}
+  @keyframes tick{to{transform:translateX(-100%);}}
+  .auth-btn{background:#1a4fd8;color:#fff;padding:6px 16px;border-radius:50px;font-weight:600;font-size:.78rem;white-space:nowrap;}
+  .auth-btn:hover{background:#133aa6;}
 
-  /* Departure-board style quick stats */
-  .board-strip{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0;
-    max-width:640px;
-    margin-bottom:56px;
-    border:1px solid rgba(253,248,236,0.18);
-    border-radius:8px;
-    overflow:hidden;
-  }
-  .board-cell{
-    flex:1 1 140px;
-    padding:16px 20px;
-    border-right:1px solid rgba(253,248,236,0.18);
-    background:rgba(0,0,0,0.14);
-  }
-  .board-cell:last-child{ border-right:none; }
-  .board-cell strong{
-    display:block;
-    font-family:var(--font-data);
-    font-size:1.5rem;
-    font-weight:700;
-    color:var(--gold);
-    letter-spacing:.03em;
-  }
-  .board-cell span{
-    font-size:.72rem;
-    letter-spacing:.06em;
-    text-transform:uppercase;
-    color:rgba(253,248,236,0.65);
-  }
+  /* ================= HEADER + NAV ================= */
+  .site-header{position:sticky;top:0;z-index:1000;background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.08);}
+  .header-inner{max-width:1300px;margin:0 auto;padding:12px 4vw;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;}
+  .logo{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .main-nav{display:flex;align-items:center;gap:20px;}
+  .main-nav > a, .nav-dropdown > a{font-family:var(--font-data);font-size:.88rem;font-weight:500;color:var(--ink);white-space:nowrap;padding:6px 0;display:block;}
+  .main-nav a:hover{color:var(--green);}
+  .nav-dropdown{position:relative;}
+  .nav-dropdown-menu{display:none;position:absolute;top:100%;left:0;min-width:170px;background:#fff;border-radius:8px;padding:8px 0;box-shadow:0 14px 30px -10px rgba(0,0,0,.25);z-index:50;}
+  .nav-dropdown:hover .nav-dropdown-menu{display:block;}
+  .nav-dropdown-menu a{display:block;padding:9px 18px;font-size:.85rem;white-space:nowrap;}
+  .nav-dropdown-menu a:hover,.nav-dropdown-menu a.active{background:var(--pale);color:var(--green);}
+  .header-cta{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+  .header-cta .btn-plan{background:var(--green);color:#fdf8ec;border:none;padding:10px 20px;border-radius:50px;font-family:var(--font-data);font-weight:600;font-size:.85rem;cursor:pointer;white-space:nowrap;}
+  .hamburger{display:none;width:42px;height:42px;border:1.5px solid var(--green);background:transparent;border-radius:8px;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0;}
+  .hamburger span{display:block;width:20px;height:2px;background:var(--green);transition:.3s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-  /* The animated road — car winding along a curved highway, roadside hills */
-  .road-wrap{
-    position:relative;
-    height:130px;
-    z-index:2;
-    overflow:hidden;
-  }
-  .road-path-svg{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-  }
-  .road-path-svg path{
-    fill:none;
-    stroke:rgba(253,248,236,0.4);
-    stroke-width:3;
-    stroke-dasharray:14 12;
-  }
-  .hill-drift{
-    position:absolute;
-    bottom:0;
-    background:rgba(253,248,236,0.14);
-    border-radius:50% 50% 0 0;
-  }
-  @media (prefers-reduced-motion: reduce){
-    .road-path-svg animateMotion{ display:none; }
-  }
+  /* ================= RAIL / ROAD HERO ================= */
+  .rail-hero{position:relative;overflow:hidden;background:radial-gradient(circle at 15% 20%, rgba(201,162,39,0.18), transparent 55%),linear-gradient(160deg, var(--green-light) 0%, var(--green-dark) 65%, var(--green) 100%);padding:64px 8vw 0;color:#fdf8ec;}
+  .rail-hero-top{max-width:1200px;margin:0 auto;position:relative;z-index:2;}
+  .rail-eyebrow{font-family:var(--font-data);font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:10px;}
+  .rail-eyebrow::before{content:'';width:22px;height:2px;background:var(--gold);}
+  .rail-hero h1{font-family:var(--font-display);font-weight:600;font-size:clamp(2rem, 4.6vw, 3.8rem);line-height:1.12;margin:18px 0;max-width:760px;}
+  .rail-hero h1 em{color:var(--gold);font-style:italic;font-weight:600;}
+  .rail-hero p.lede{max-width:540px;color:rgba(253,248,236,0.82);font-size:1.04rem;line-height:1.7;margin:0 0 40px;}
+  .board-strip{display:flex;flex-wrap:wrap;max-width:640px;margin-bottom:56px;border:1px solid rgba(253,248,236,0.18);border-radius:8px;overflow:hidden;}
+  .board-cell{flex:1 1 140px;padding:16px 20px;border-right:1px solid rgba(253,248,236,0.18);background:rgba(0,0,0,0.14);}
+  .board-cell:last-child{border-right:none;}
+  .board-cell strong{display:block;font-family:var(--font-data);font-size:1.5rem;font-weight:700;color:var(--gold);letter-spacing:.03em;}
+  .board-cell span{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(253,248,236,0.65);}
 
-  /* ===========================================================
-     REGION QUICK-NAV
-     =========================================================== */
-  .region-nav{
-    background:var(--pale-dark);
-    border-bottom:1px solid var(--line);
-    padding:18px 8vw;
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:10px;
-  }
-  .region-nav a{
-    font-family:var(--font-data);
-    font-size:.82rem;
-    font-weight:600;
-    letter-spacing:.03em;
-    padding:9px 20px;
-    border:1.5px solid var(--green);
-    border-radius:50px;
-    color:var(--green);
-    transition:.25s ease;
-  }
-  .region-nav a:hover{
-    background:var(--green);
-    color:#fdf8ec;
-  }
-  .region-nav a.active{
-    background:var(--green);
-    color:#fdf8ec;
-  }
+  .road-wrap{position:relative;height:130px;z-index:2;overflow:hidden;}
+  .road-path-svg{position:absolute;inset:0;width:100%;height:100%;}
+  .road-path-svg path{fill:none;stroke:rgba(253,248,236,0.4);stroke-width:3;stroke-dasharray:14 12;}
+  .hill-drift{position:absolute;bottom:0;background:rgba(253,248,236,0.14);border-radius:50% 50% 0 0;}
 
-  /* ===========================================================
-     REGION SECTIONS
-     =========================================================== */
-  .region-block{
-    max-width:1300px;
-    margin:0 auto;
-    padding:90px 8vw 20px;
-    scroll-margin-top:24px;
-  }
-  .region-block-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:24px;
-    flex-wrap:wrap;
-    margin-bottom:40px;
-    border-bottom:2px solid var(--green);
-    padding-bottom:18px;
-  }
-  .region-block-head h2{
-    font-family:var(--font-display);
-    font-size:clamp(1.6rem, 2.8vw, 2.2rem);
-    font-weight:600;
-    color:var(--green);
-    margin:0;
-  }
-  .region-block-head p{
-    color:var(--ink-soft);
-    font-size:.92rem;
-    max-width:440px;
-    margin:6px 0 0;
-  }
-  .region-tag{
-    font-family:var(--font-data);
-    font-size:.74rem;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--gold);
-    font-weight:700;
-    background:rgba(201,162,39,0.14);
-    padding:6px 14px;
-    border-radius:50px;
-    white-space:nowrap;
-  }
+  /* ================= REGION QUICK-NAV ================= */
+  .region-nav{background:var(--pale-dark);border-bottom:1px solid var(--line);padding:18px 8vw;display:flex;justify-content:center;flex-wrap:wrap;gap:10px;}
+  .region-nav a{font-family:var(--font-data);font-size:.82rem;font-weight:600;letter-spacing:.03em;padding:9px 20px;border:1.5px solid var(--green);border-radius:50px;color:var(--green);transition:.25s ease;white-space:nowrap;}
+  .region-nav a:hover,.region-nav a.active{background:var(--green);color:#fdf8ec;}
 
-  /* ---- TICKET GRID ---- */
-  .ticket-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:26px;
-  }
-  .ticket-card{
-    background:#fff;
-    border-radius:10px;
-    overflow:hidden;
-    box-shadow:0 14px 34px -14px rgba(36,31,26,0.28);
-    display:flex;
-    flex-direction:column;
-    transition:transform .3s ease, box-shadow .3s ease;
-  }
-  .ticket-card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 22px 44px -14px rgba(36,31,26,0.36);
-  }
-  .ticket-photo{
-    height:150px;
-    background-size:cover;
-    background-position:center;
-    position:relative;
-  }
-  .ticket-photo::after{
-    content:'';
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(36,31,26,0) 55%, rgba(36,31,26,0.55) 100%);
-  }
-  .ticket-photo span{
-    position:absolute;
-    bottom:10px; left:14px;
-    z-index:2;
-    color:#fdf8ec;
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:1.08rem;
-  }
+  /* ================= REGION SECTIONS ================= */
+  .region-block{max-width:1300px;margin:0 auto;padding:90px 8vw 20px;scroll-margin-top:80px;}
+  .region-block-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:40px;border-bottom:2px solid var(--green);padding-bottom:18px;}
+  .region-block-head h2{font-family:var(--font-display);font-size:clamp(1.5rem, 2.8vw, 2.2rem);font-weight:600;color:var(--green);margin:0;}
+  .region-block-head p{color:var(--ink-soft);font-size:.92rem;max-width:440px;margin:6px 0 0;}
+  .region-tag{font-family:var(--font-data);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700;background:rgba(201,162,39,0.14);padding:6px 14px;border-radius:50px;white-space:nowrap;}
 
-  /* perforated tear line — the ticket motif */
-  .ticket-perf{
-    position:relative;
-    height:0;
-    border-top:2px dashed var(--line);
-    margin:0 16px;
-  }
-  .ticket-perf::before, .ticket-perf::after{
-    content:'';
-    position:absolute;
-    top:-8px;
-    width:16px; height:16px;
-    border-radius:50%;
-    background:var(--white);
-  }
-  .ticket-perf::before{ left:-24px; }
-  .ticket-perf::after{ right:-24px; }
+  .ticket-grid{display:grid;grid-template-columns:repeat(4, 1fr);gap:26px;}
+  .ticket-card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 14px 34px -14px rgba(36,31,26,0.28);display:flex;flex-direction:column;transition:transform .3s ease, box-shadow .3s ease;min-width:0;}
+  .ticket-card:hover{transform:translateY(-6px);box-shadow:0 22px 44px -14px rgba(36,31,26,0.36);}
+  .ticket-photo{height:150px;background-size:cover;background-position:center;position:relative;}
+  .ticket-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(36,31,26,0) 55%, rgba(36,31,26,0.55) 100%);}
+  .ticket-photo span{position:absolute;bottom:10px;left:14px;z-index:2;color:#fdf8ec;font-family:var(--font-display);font-weight:600;font-size:1.08rem;}
+  .ticket-perf{position:relative;height:0;border-top:2px dashed var(--line);margin:0 16px;}
+  .ticket-perf::before,.ticket-perf::after{content:'';position:absolute;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--white);}
+  .ticket-perf::before{left:-24px;} .ticket-perf::after{right:-24px;}
+  .ticket-body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .ticket-row{display:flex;justify-content:space-between;align-items:baseline;font-size:.8rem;color:var(--ink-soft);}
+  .ticket-row strong{font-family:var(--font-data);font-weight:700;color:var(--ink);font-size:.92rem;}
+  .ticket-fare{margin-top:2px;display:flex;align-items:baseline;justify-content:space-between;border-top:1px dashed var(--line);padding-top:12px;}
+  .ticket-fare .amount{font-family:var(--font-data);font-weight:700;font-size:1.3rem;color:var(--green);}
+  .ticket-fare .amount small{font-family:var(--font-body);font-weight:400;font-size:.7rem;color:var(--ink-soft);}
+  .book-now{margin-top:6px;text-align:center;background:var(--green);color:#fdf8ec;font-family:var(--font-data);font-weight:600;font-size:.86rem;letter-spacing:.03em;padding:12px;border-radius:7px;transition:.25s ease;}
+  .book-now:hover{background:var(--green-dark);}
 
-  .ticket-body{
-    padding:16px 18px 20px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    flex:1;
-  }
-  .ticket-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:baseline;
-    font-size:.8rem;
-    color:var(--ink-soft);
-  }
-  .ticket-row strong{
-    font-family:var(--font-data);
-    font-weight:700;
-    color:var(--ink);
-    font-size:.92rem;
-  }
-  .ticket-fare{
-    margin-top:2px;
-    display:flex;
-    align-items:baseline;
-    justify-content:space-between;
-    border-top:1px dashed var(--line);
-    padding-top:12px;
-  }
-  .ticket-fare .amount{
-    font-family:var(--font-data);
-    font-weight:700;
-    font-size:1.3rem;
-    color:var(--green);
-  }
-  .ticket-fare .amount small{
-    font-family:var(--font-body);
-    font-weight:400;
-    font-size:.7rem;
-    color:var(--ink-soft);
-  }
-  .book-now{
-    margin-top:6px;
-    text-align:center;
-    background:var(--green);
-    color:#fdf8ec;
-    font-family:var(--font-data);
-    font-weight:600;
-    font-size:.86rem;
-    letter-spacing:.03em;
-    padding:12px;
-    border-radius:7px;
-    transition:.25s ease;
-  }
-  .book-now:hover{ background:var(--green-dark); }
+  /* FOOTER layout (colours tumhari style.css se hi aayenge) */
+  .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:32px;max-width:1300px;margin:0 auto;padding:50px 6vw 30px;}
+  .footer-col{min-width:0;}
+  .footer-col a{display:block;margin-bottom:8px;}
+  .footer-col .social-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .footer-col .social-row a{display:inline-block;margin:0;}
+  .footer-bottom{text-align:center;padding:16px 6vw;}
 
-  /* Scroll reveal (reuses site convention) */
-  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
-  .reveal.revealed{ opacity:1; transform:translateY(0); }
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.revealed{opacity:1;transform:translateY(0);}
 
+  /* ================= RESPONSIVE ================= */
+  /* Tablet / chhota laptop: nav ke 10 links ek line me nahi aate -> hamburger menu */
   @media (max-width:1100px){
-    .ticket-grid{ grid-template-columns:repeat(2, 1fr); }
+    .hamburger{display:flex !important;}
+    .main-nav{
+      position:absolute !important; top:100% !important; left:0 !important; right:0 !important;
+      flex-direction:column !important; align-items:stretch !important; gap:0 !important;
+      background:#fff !important; max-height:0 !important; overflow:hidden !important;
+      box-shadow:0 18px 30px -12px rgba(0,0,0,.25); transition:max-height .35s ease;
+    }
+    .main-nav.open{max-height:calc(100vh - 110px) !important; overflow-y:auto !important;}
+    .main-nav > a, .nav-dropdown > a{padding:14px 5vw;border-top:1px solid var(--line);}
+    .nav-dropdown-menu{position:static;display:none;box-shadow:none;border-radius:0;background:var(--pale);padding:0;}
+    .nav-dropdown:hover .nav-dropdown-menu{display:none;}
+    .nav-dropdown.open .nav-dropdown-menu{display:block;}
+    .nav-dropdown-menu a{padding:12px 8vw;}
+    .ticket-grid{grid-template-columns:repeat(2, 1fr);}
+    .footer-grid{grid-template-columns:1fr 1fr;}
   }
-  @media (max-width:640px){
-    .ticket-grid{ grid-template-columns:1fr; }
-    .board-strip{ max-width:100%; }
-    .region-block{ padding:70px 6vw 10px; }
+  @media (max-width:700px){
+    .topbar-inner{padding:7px 4vw;}
+    .topbar-left span:nth-child(2){display:none;}  /* email chhupa do, phone rehne do */
+    .ticker{display:none;}
+    .header-cta .btn-plan{padding:9px 14px;font-size:.78rem;}
+    .rail-hero{padding:44px 6vw 0;}
+    .rail-hero p.lede{font-size:.96rem;margin-bottom:28px;}
+    .board-strip{max-width:100%;margin-bottom:36px;}
+    .board-cell{flex:1 1 45%;border-bottom:1px solid rgba(253,248,236,0.18);padding:14px 16px;}
+    .board-cell strong{font-size:1.25rem;}
+    .region-nav{padding:14px 5vw;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .region-nav a{flex-shrink:0;padding:8px 18px;}
+    .region-block{padding:60px 6vw 10px;}
+    .region-block-head{margin-bottom:28px;}
+    .ticket-grid{grid-template-columns:1fr;gap:22px;}
+    .ticket-photo{height:170px;}
+    .footer-grid{grid-template-columns:1fr;gap:26px;padding:40px 6vw 20px;}
+  }
+  @media (max-width:380px){
+    .header-cta .btn-plan{display:none;}   /* bahut chhoti screen pe sirf hamburger */
+    .auth-btn{padding:6px 12px;}
   }
   @media (prefers-reduced-motion: reduce){
-    .reveal{ opacity:1; transform:none; }
+    .reveal{opacity:1;transform:none;}
+    .ticker span{animation:none;padding-left:0;}
+    .road-path-svg animateMotion{display:none;}
   }
 </style>
 </head>
 <body>
 
+<!-- FIX: pehle topbar/topbar-inner ke closing </div> missing the, isliye header topbar ke andar chala jata tha.
+     Buttons <a> ke andar the aur 3 jagah same id="hamburger" tha -> sab hata ke saaf kar diya -->
 <div class="topbar">
   <div class="topbar-inner">
     <div class="topbar-left">
       <span>📞 +91-98765-43210</span>
       <span>✉️ hello@sahyatri.in</span>
     </div>
-  <div class="topbar-right">
-        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
-        <a href="login.html">
-        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-        </a>
-           <a href="Registration.html">
-          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-           </a>
+    <div class="topbar-right">
+      <div class="ticker"><span>20+ Years Crafting India Journeys</span></div>
+      <a href="login.html" class="auth-btn">Login</a>
+      <a href="Registration.html" class="auth-btn">Register</a>
+    </div>
   </div>
 </div>
 
@@ -386,40 +190,39 @@
     </a>
     <nav class="main-nav" id="mainNav">
       <a href="index.html">Home</a>
-      <a href="Contact.html" >Contact Us</a>
+      <a href="Contact.html">Contact Us</a>
       <a href="Visapolicy.html">Visa Policy</a>
       <div class="nav-dropdown">
         <a href="Howtoreach.html">How to Reach ▾</a>
         <div class="nav-dropdown-menu">
-          <a href="Byroade.html#road" class="active">By Road Ways</a>
-          <a href="Bytrain.html#train">By Train</a>
-          <a href="flight.html#flight">By Flight</a>
+          <a href="bytrain.html" class="active">By Road Ways</a>
+          <a href="bytrain.html">By Train</a>
+          <a href="Byflight.html">By Flight</a>
         </div>
       </div>
       <div class="nav-dropdown">
         <a href="Destination.html">Destination ▾</a>
         <div class="nav-dropdown-menu">
           <a href="Regoins.html">Regions</a>
-          <a href="foreign.html">Foreign</a>
+          <a href="Foreign.html">Foreign</a>
         </div>
       </div>
       <a href="Besttime.html">Best Time</a>
-        <a href="team.html">Team Member</a>
-        <a href="enquiry.html">Enquiry page</a>
-         <a href="gallery.html">Gallery</a>
-           <a href="review.html">Review</a>
-
-
+      <a href="team.html">Team Member</a>
+      <a href="enquiry.html">Enquiry page</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="review.html">Review</a>
     </nav>
     <div class="header-cta">
       <button class="btn-plan">Plan My Trip</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
-    <section class="rail-hero" id="road">
+
+<section class="rail-hero" id="road">
   <div class="rail-hero-top">
     <p class="rail-eyebrow">Getting Here · By Road</p>
     <h1>The best stories<br>happen <em>en route</em>.</h1>
@@ -438,7 +241,8 @@
     <span class="hill-drift" style="left:34%; width:140px; height:44px;"></span>
     <span class="hill-drift" style="left:64%; width:200px; height:70px;"></span>
     <span class="hill-drift" style="left:88%; width:120px; height:38px;"></span>
-    <svg class="road-path-svg" viewBox="0 0 1200 130" preserveAspectRatio="none">
+    <!-- FIX: preserveAspectRatio="none" se phone pe gaadi 🚗 pichak jati thi -> "slice" -->
+    <svg class="road-path-svg" viewBox="0 0 1200 130" preserveAspectRatio="xMidYMid slice">
       <path id="roadPath" d="M -40,110 C 220,110 260,20 620,20 C 900,20 950,100 1180,60"/>
       <text font-size="28">🚗
         <animateMotion dur="12s" repeatCount="indefinite" rotate="auto">
@@ -449,7 +253,6 @@
   </div>
 </section>
 
-<!-- ============ REGION QUICK NAV ============ -->
 <nav class="region-nav" id="regionNav" aria-label="Jump to region">
   <a href="#region-north" data-region="north">North</a>
   <a href="#region-south" data-region="south">South</a>
@@ -467,7 +270,6 @@
     <span class="region-tag">4 Routes</span>
   </div>
   <div class="ticket-grid">
-
     <article class="ticket-card reveal">
       <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1609920658906-8223bd289001?w=500&q=80')">
         <span>Amritsar</span>
@@ -527,7 +329,6 @@
         <a href="booknow.html?destination=Jaipur" class="book-now">Book Now</a>
       </div>
     </article>
-
   </div>
 </section>
 
@@ -541,7 +342,6 @@
     <span class="region-tag">4 Routes</span>
   </div>
   <div class="ticket-grid">
-
     <article class="ticket-card reveal">
       <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=500&q=80')">
         <span>Chennai</span>
@@ -601,7 +401,6 @@
         <a href="booknow.html?destination=Mysuru" class="book-now">Book Now</a>
       </div>
     </article>
-
   </div>
 </section>
 
@@ -615,7 +414,6 @@
     <span class="region-tag">4 Routes</span>
   </div>
   <div class="ticket-grid">
-
     <article class="ticket-card reveal">
       <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1558431382-27e303142255?w=500&q=80')">
         <span>Kolkata</span>
@@ -675,7 +473,6 @@
         <a href="booknow.html?destination=Guwahati" class="book-now">Book Now</a>
       </div>
     </article>
-
   </div>
 </section>
 
@@ -689,7 +486,6 @@
     <span class="region-tag">4 Routes</span>
   </div>
   <div class="ticket-grid">
-
     <article class="ticket-card reveal">
       <div class="ticket-photo" style="background-image:url('https://images.unsplash.com/photo-1529253355930-ddbe423a2ac7?w=500&q=80')">
         <span>Mumbai</span>
@@ -749,10 +545,10 @@
         <a href="booknow.html?destination=Goa" class="book-now">Book Now</a>
       </div>
     </article>
-
   </div>
 </section>
-<!-- ============ FOOTER ============ -->
+
+
 <footer class="site-footer" id="contact">
   <div class="footer-grid">
     <div class="footer-col brand-col">
@@ -793,9 +589,49 @@
     <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
   </div>
 </footer>
+
 <script>
+  /* FIX: is page me hamburger ka JS tha hi nahi, isliye mobile pe menu khulta nahi tha */
+  const hamburger = document.getElementById('hamburger');
+  const mainNav   = document.getElementById('mainNav');
+  const isMobile  = () => window.matchMedia('(max-width:1100px)').matches;
+
+  hamburger.addEventListener('click', () => {
+    const open = mainNav.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  /* Mobile pe dropdown: "How to Reach ▾" par tap -> submenu khule/band ho */
+  document.querySelectorAll('.nav-dropdown > a').forEach(a => {
+    a.addEventListener('click', e => {
+      if (isMobile()) {
+        e.preventDefault();
+        a.parentElement.classList.toggle('open');
+      }
+    });
+  });
+
+  /* Koi normal link dabao to menu band ho jaye */
+  mainNav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (isMobile() && !a.parentElement.classList.contains('nav-dropdown') || a.closest('.nav-dropdown-menu')) {
+        mainNav.classList.remove('open');
+        hamburger.classList.remove('open');
+      }
+    });
+  });
+
+  /* Screen badi ho jaye to menu reset */
+  window.addEventListener('resize', () => {
+    if (!isMobile()) {
+      mainNav.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.querySelectorAll('.nav-dropdown.open').forEach(d => d.classList.remove('open'));
+    }
+  });
+
   /* Scroll-reveal for ticket cards */
-  const revealItems = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -804,22 +640,19 @@
       }
     });
   }, { threshold: 0.15 });
-  revealItems.forEach(el => revealObserver.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-  /* Region-nav: clicking North/South/East/West moves the cursor/view straight to that section */
+  /* Region-nav smooth scroll */
   const regionLinks = document.querySelectorAll('#regionNav a');
   regionLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const target = document.getElementById('region-' + link.dataset.region);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
-  /* Scroll-spy: highlight whichever region is currently in view */
-  const regionSections = document.querySelectorAll('.region-block');
+  /* Scroll-spy */
   const spyObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -828,7 +661,7 @@
       }
     });
   }, { threshold: 0, rootMargin: '-35% 0px -55% 0px' });
-  regionSections.forEach(sec => spyObserver.observe(sec));
+  document.querySelectorAll('.region-block').forEach(sec => spyObserver.observe(sec));
 </script>
 </body>
 </html>

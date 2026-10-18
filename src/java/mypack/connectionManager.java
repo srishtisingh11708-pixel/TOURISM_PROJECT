@@ -9,6 +9,10 @@ import java.sql.PreparedStatement;
  * @author hp
  */
 public class connectionManager{
+
+    static Connection getConnection() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
  public Connection getCon()
  { 
  try//true block

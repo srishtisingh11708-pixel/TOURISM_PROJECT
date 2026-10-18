@@ -1,11 +1,171 @@
+<%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="mypack.connectionManager"%>
+<%@page import="java.sql.ResultSet" %>
+<%!
+  /* =====================================================================
+     CONFIG - sirf yahin apne table / column ke naam check karo
+     (baaki poore page me kahin change karne ki zarurat nahi)
+     ===================================================================== */
+  // Table names (jo tumne bataye)
+  static final String T_BOOK    = "bookings";
+  static final String T_CONTACT = "contact";
+  static final String T_ENQ     = "enquiry";
+  static final String T_FB      = "feedback";
+  static final String T_REG     = "reg";
+
+  // Har table ka DATE / DATETIME column (chart aur "last 7 days" ke liye)
+  static final String D_BOOK    = "booking_date";
+  static final String D_CONTACT = "created_at";
+  static final String D_ENQ     = "created_at";
+  static final String D_FB      = "created_at";
+  static final String D_REG     = "created_at";
+
+  // bookings table ke columns (Recent Bookings list ke liye)
+  static final String BK_ID      = "id";
+  static final String BK_NAME    = "name";
+  static final String BK_PACKAGE = "destination";
+  static final String BK_DATE    = "booking_date";
+
+  // feedback table ka rating column (1 se 5)
+  static final String FB_RATING  = "rating";
+
+  /* =====================================================================
+     DB helper - connectionManager sirf yahin use ho raha hai.
+     Agar tumhari connectionManager class me method ka naam alag hai
+     (jaise selectData / getData), to bas neeche wali ek line badlo.
+     ===================================================================== */
+  ResultSet runQuery(String sql) throws Exception {
+      connectionManager cm = new connectionManager();
+      // connectionManager me jo bhi method "String lekar ResultSet deta hai", wahi auto-detect karke chalega.
+      // (Method ka naam pata chal jaye to yahan seedha cm.tumharaMethod(sql) likh sakti ho.)
+      for(java.lang.reflect.Method m : cm.getClass().getMethods()){
+          Class<?>[] p = m.getParameterTypes();
+          if(p.length == 1 && p[0] == String.class && ResultSet.class.isAssignableFrom(m.getReturnType())){
+              return (ResultSet) m.invoke(cm, sql);
+          }
+      }
+      throw new Exception("connectionManager me ResultSet dene wala method nahi mila");
+  }
+
+  // COUNT(*) type query ke liye. Error aaye to -1 (matlab data nahi mila)
+  int getInt(String sql){
+      try{
+          ResultSet rs = runQuery(sql);
+          if(rs.next()) return rs.getInt(1);
+          return 0;
+      }catch(Exception e){ return -1; }
+  }
+
+  // AVG(rating) ke liye. Data na ho to -1
+  double getAvg(String sql){
+      try{
+          ResultSet rs = runQuery(sql);
+          if(rs.next()){
+              double v = rs.getDouble(1);
+              if(rs.wasNull()) return -1;
+              return v;
+          }
+          return -1;
+      }catch(Exception e){ return -1; }
+  }
+
+  // Last N din ka day-wise count (index 0 = sabse purana din)
+  int[] dailyCounts(String table, String col, int days){
+      int[] out = new int[days];
+      try{
+          ResultSet rs = runQuery("SELECT DATE("+col+") d, COUNT(*) c FROM "+table+
+              " WHERE DATE("+col+") >= DATE_SUB(CURDATE(), INTERVAL "+(days-1)+" DAY) GROUP BY DATE("+col+")");
+          java.time.LocalDate start = java.time.LocalDate.now().minusDays(days-1);
+          while(rs.next()){
+              java.sql.Date d = rs.getDate(1);
+              if(d == null) continue;
+              long idx = java.time.temporal.ChronoUnit.DAYS.between(start, d.toLocalDate());
+              if(idx >= 0 && idx < days) out[(int)idx] = rs.getInt(2);
+          }
+      }catch(Exception e){ /* column/table galat ho to zero dikhega */ }
+      return out;
+  }
+
+  // Last 12 mahine ka month-wise count (index 11 = current month)
+  int[] monthlyCounts(String table, String col){
+      int[] out = new int[12];
+      try{
+          ResultSet rs = runQuery("SELECT YEAR("+col+") y, MONTH("+col+") m, COUNT(*) c FROM "+table+
+              " WHERE "+col+" >= DATE_SUB(DATE_FORMAT(CURDATE(),'%Y-%m-01'), INTERVAL 11 MONTH)"+
+              " GROUP BY YEAR("+col+"), MONTH("+col+")");
+          java.time.YearMonth cur = java.time.YearMonth.now();
+          while(rs.next()){
+              java.time.YearMonth ym = java.time.YearMonth.of(rs.getInt(1), rs.getInt(2));
+              long idx = 11 - java.time.temporal.ChronoUnit.MONTHS.between(ym, cur);
+              if(idx >= 0 && idx < 12) out[(int)idx] = rs.getInt(3);
+          }
+      }catch(Exception e){ }
+      return out;
+  }
+
+  String[] dayLabels(int days){
+      String[] a = new String[days];
+      java.time.LocalDate start = java.time.LocalDate.now().minusDays(days-1);
+      java.time.format.DateTimeFormatter f = java.time.format.DateTimeFormatter.ofPattern("dd MMM", java.util.Locale.ENGLISH);
+      for(int i=0;i<days;i++) a[i] = start.plusDays(i).format(f);
+      return a;
+  }
+  String[] monthLabels(){
+      String[] a = new String[12];
+      java.time.YearMonth cur = java.time.YearMonth.now();
+      java.time.format.DateTimeFormatter f = java.time.format.DateTimeFormatter.ofPattern("MMM yy", java.util.Locale.ENGLISH);
+      for(int i=0;i<12;i++) a[i] = cur.minusMonths(11-i).format(f);
+      return a;
+  }
+
+  String jsArr(int[] a){
+      StringBuilder sb = new StringBuilder("[");
+      for(int i=0;i<a.length;i++){ if(i>0) sb.append(","); sb.append(a[i]); }
+      return sb.append("]").toString();
+  }
+  String jsStrArr(String[] a){
+      StringBuilder sb = new StringBuilder("[");
+      for(int i=0;i<a.length;i++){ if(i>0) sb.append(","); sb.append("\"").append(a[i]).append("\""); }
+      return sb.append("]").toString();
+  }
+
+  // HTML safe banane ke liye
+  String esc(String s){
+      if(s == null) return "";
+      return s.replace("&","&amp;").replace("<","&lt;").replace(">","&gt;").replace("\"","&quot;");
+  }
+  // Column na mile to empty string (page crash nahi hoga)
+  String safe(ResultSet rs, String col){
+      try{ String v = rs.getString(col); return v == null ? "" : v; }catch(Exception e){ return ""; }
+  }
+  String initial(String s){
+      if(s == null || s.trim().length() == 0) return "?";
+      return s.trim().substring(0,1).toUpperCase();
+  }
+  String num(int n){ return n < 0 ? "&mdash;" : String.valueOf(n); }
+
+  // Ek stat card ka HTML banata hai
+  String statCard(String cls, String icon, String label, int total, int week, String link){
+      StringBuilder sb = new StringBuilder();
+      sb.append("<a class=\"stat-card ").append(cls).append("\" href=\"").append(link).append("\">");
+      sb.append("<div class=\"sc-ic\"><i class=\"fa-solid ").append(icon).append("\"></i></div>");
+      sb.append("<div class=\"sc-label\">").append(label).append("</div>");
+      sb.append("<div class=\"sc-row\"><span class=\"sc-num\">").append(num(total)).append("</span>");
+      if(week >= 0){
+          sb.append("<span class=\"sc-delta\"><i class=\"fa-solid fa-arrow-trend-up\"></i> +").append(week).append("</span>");
+      }
+      sb.append("</div>");
+      sb.append("<div class=\"sc-sub\">").append(week >= 0 ? "Last 7 days" : "All time").append("</div>");
+      sb.append("</a>");
+      return sb.toString();
+  }
+%>
 <!DOCTYPE html>
 <html lang="en">
-    <%@page import="mypack.connectionManager"%>
- <%@page import="java.sql.ResultSet" %>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Sahyatri ? Tourism Admin</title>
+<title>Sahyatri â€” Tourism Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
@@ -132,100 +292,84 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
   .content{padding:24px 28px 36px;flex:1;}
 
-  .quick-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:22px;}
-  .quick-card{
-    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 12px;
-    display:flex;flex-direction:column;align-items:center;gap:9px;position:relative;text-align:center;
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  }
-  .quick-card:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(15,61,48,0.1);}
-  .quick-card .count{
-    position:absolute;top:10px;right:10px;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:700;
-    background:var(--teal-tint);color:var(--ink);padding:1px 7px;border-radius:20px;
-  }
-  .quick-card .qicon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;background:var(--teal);}
-  .quick-card .qlabel{font-size:11.5px;font-weight:600;color:var(--ink);}
+  /* ================= OVERVIEW (naya middle section) ================= */
+  .ov-head h2{font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin:0;color:var(--ink);}
+  .ov-head p{margin:3px 0 20px;color:var(--muted);font-size:12.5px;}
 
-  .quick-card.qc-contact .qicon{background:var(--blue);}
-  .quick-card.qc-contact:hover{border-color:var(--blue);}
-  .quick-card.qc-enquiry .qicon{background:var(--purple);}
-  .quick-card.qc-enquiry:hover{border-color:var(--purple);}
-  .quick-card.qc-registration .qicon{background:var(--teal);}
-  .quick-card.qc-registration:hover{border-color:var(--teal);}
-  .quick-card.qc-review .qicon{background:var(--amber);}
-  .quick-card.qc-review:hover{border-color:var(--amber);}
-  .quick-card.qc-profile .qicon{background:var(--slate);}
-  .quick-card.qc-profile:hover{border-color:var(--slate);}
-  .quick-card.qc-password .qicon{background:var(--rose);}
-  .quick-card.qc-password:hover{border-color:var(--rose);}
+  /* stat cards */
+  .stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:22px;}
+  .stat-card{
+    display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;
+    box-shadow:0 6px 18px rgba(15,61,48,0.06);
+    transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  }
+  .stat-card:hover{transform:translateY(-3px);box-shadow:0 14px 26px rgba(15,61,48,0.12);}
+  .sc-ic{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;margin-bottom:14px;}
+  .sc-label{font-size:12px;font-weight:600;color:var(--muted);}
+  .sc-row{display:flex;align-items:baseline;gap:10px;margin-top:4px;}
+  .sc-num{font-size:26px;font-weight:700;color:var(--ink);line-height:1.1;}
+  .sc-delta{font-size:11px;font-weight:700;color:var(--teal);white-space:nowrap;}
+  .sc-sub{font-size:10.5px;color:var(--muted);margin-top:6px;}
+  .sc-book .sc-ic{background:var(--saffron);}
+  .sc-enq  .sc-ic{background:var(--blue);}
+  .sc-reg  .sc-ic{background:var(--teal);}
+  .sc-contact .sc-ic{background:var(--purple);}
+  .sc-review .sc-ic{background:var(--rose);}
+  .sc-book:hover{border-color:var(--saffron);} .sc-enq:hover{border-color:var(--blue);}
+  .sc-reg:hover{border-color:var(--teal);} .sc-contact:hover{border-color:var(--purple);}
+  .sc-review:hover{border-color:var(--rose);}
 
-  .notif-viewport{
-    height:300px;
-    overflow:hidden;
-    position:relative;
-    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
-    mask-image:linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
-  }
-  .notif-scroll{
-    display:flex;flex-direction:column;
-    animation:notifAutoScroll 16s linear infinite;
-  }
-  .notif-viewport:hover .notif-scroll{ animation-play-state:paused; }
-  @keyframes notifAutoScroll{
-    from{ transform:translateY(0); }
-    to{ transform:translateY(-50%); }
-  }
-  .notif-row{
-    display:flex;gap:11px;padding:11px 8px;border-bottom:1px solid var(--line);align-items:flex-start;
-    border-radius:10px;cursor:pointer;
-    transition:background .18s ease, transform .18s ease, box-shadow .18s ease;
-  }
-  .notif-row:last-child{border-bottom:none;}
-  .notif-ic{
-    width:30px;height:30px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
-    font-size:13px;background:var(--teal-tint);color:var(--ink);
-  }
-  .notif-body{flex:1;min-width:0;}
-  .notif-title{font-size:12.5px;font-weight:600;color:var(--ink);}
-  .notif-sub{font-size:11.5px;color:var(--muted);margin-top:1px;}
-  .notif-time{font-size:10.5px;color:var(--muted);white-space:nowrap;padding-top:2px;}
-  .notif-row.unread .notif-ic{background:var(--saffron);color:#fff;}
+  /* main grid */
+  .ov-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:22px;align-items:start;}
 
-  .notif-row .notif-ic.nt-enquiry{background:var(--blue-tint);color:var(--blue);}
-  .notif-row.unread .notif-ic.nt-enquiry{background:var(--blue);color:#fff;}
-  .notif-row .notif-ic.nt-confirmed{background:var(--teal-tint);color:var(--teal);}
-  .notif-row.unread .notif-ic.nt-confirmed{background:var(--teal);color:#fff;}
-  .notif-row .notif-ic.nt-review{background:var(--amber-tint);color:var(--amber);}
-  .notif-row .notif-ic.nt-pending{background:var(--rose-tint);color:var(--rose);}
-  .notif-row .notif-ic.nt-refund{background:var(--purple-tint);color:var(--purple);}
-
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;}
-  .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
-  .panel-head h3{font-family:'Fraunces',serif;font-size:15.5px;font-weight:600;margin:0;}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:0 6px 18px rgba(15,61,48,0.05);}
+  .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px;}
+  .panel-head h3{font-family:'Fraunces',serif;font-size:17px;font-weight:600;margin:0;}
   .panel-head .see-all{font-size:11.5px;color:var(--teal);font-weight:600;}
-  .range-toggle{display:flex;gap:3px;background:var(--paper);border-radius:8px;padding:3px;}
-  .range-toggle button{border:none;background:none;padding:6px 11px;border-radius:6px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;}
-  .range-toggle button.on{background:var(--ink);color:#fff;}
 
-  .report-panel{margin-bottom:20px;}
-  .chart-wrap{height:220px;}
+  /* chart panel */
+  .chart-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:6px;}
+  .range-toggle{display:flex;gap:4px;align-items:center;}
+  .range-toggle button{border:none;background:none;padding:6px 12px;border-radius:20px;font-size:11.5px;font-weight:600;color:var(--muted);cursor:pointer;transition:background .15s ease,color .15s ease;}
+  .range-toggle button:hover{color:var(--ink);}
+  .range-toggle button.on{background:var(--blue);color:#fff;}
+  .chart-total{text-align:right;}
+  .chart-total .lbl{font-size:11px;color:var(--muted);font-weight:600;}
+  .chart-total .val{font-size:22px;font-weight:700;color:var(--ink);}
+  .chart-total .per{font-size:10.5px;color:var(--muted);font-weight:500;}
+  .legend-row{display:flex;gap:18px;margin:8px 0 6px;font-size:11.5px;color:var(--muted);font-weight:500;}
+  .legend-row span{display:inline-flex;align-items:center;gap:6px;}
+  .legend-row i{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  .chart-wrap{height:270px;position:relative;}
 
-  .compare-row{display:flex;margin-top:18px;border-top:1px solid var(--line);padding-top:14px;}
-  .compare-item{flex:1;padding:0 16px;border-left:1px solid var(--line);}
-  .compare-item:first-child{border-left:none;padding-left:0;}
-  .compare-item .c-top{display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;}
-  .compare-item .c-sub{font-size:10px;color:var(--muted);letter-spacing:0.3px;margin-top:2px;}
-  .compare-item .c-bar{height:3px;border-radius:2px;margin-top:9px;}
+  /* satisfaction panel */
+  .sat-panel{background:linear-gradient(180deg,#F3F7FF 0%,#E6EEFC 100%);border-color:#D6E3FA;margin-bottom:22px;}
+  .sat-panel h3{font-size:15px;}
+  .gauge-wrap{position:relative;height:150px;margin:6px auto 0;max-width:260px;}
+  .gauge-text{position:absolute;left:0;right:0;bottom:2px;text-align:center;}
+  .gauge-text .t{font-size:10.5px;color:var(--muted);font-weight:600;}
+  .gauge-text .s{font-size:26px;font-weight:700;color:var(--ink);line-height:1.1;}
+  .gauge-text .s small{font-size:14px;color:var(--muted);font-weight:600;}
+  .sat-note{text-align:center;font-size:11.5px;color:var(--muted);margin:10px 8px 14px;}
+  .sat-btn{
+    display:block;text-align:center;background:#fff;border-radius:30px;padding:11px;font-weight:700;font-size:12.5px;color:var(--ink);
+    box-shadow:0 6px 16px rgba(47,111,237,0.14);transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .sat-btn:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(47,111,237,0.22);}
 
-  .split-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;}
-
-  table.mini{width:100%;border-collapse:collapse;}
-  table.mini th{font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);text-align:left;padding:7px 6px;border-bottom:1px solid var(--line);}
-  table.mini td{font-size:12.5px;padding:10px 6px;border-bottom:1px solid var(--line);}
-  table.mini tr:last-child td{border-bottom:none;}
-  .traveler-cell{display:flex;align-items:center;gap:8px;}
-  .traveler-cell img{width:24px;height:24px;border-radius:50%;object-fit:cover;}
-  .rating-pill{color:var(--saffron);font-weight:700;}
+  /* recent bookings */
+  .rb-row{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);border-radius:10px;transition:background .15s ease;}
+  .rb-row:last-child{border-bottom:none;}
+  .rb-row:hover{background:var(--teal-tint);}
+  .rb-av{width:38px;height:38px;border-radius:50%;background:var(--amber-tint);color:var(--saffron);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;}
+  .rb-row:nth-child(2n) .rb-av{background:var(--blue-tint);color:var(--blue);}
+  .rb-row:nth-child(3n) .rb-av{background:var(--rose-tint);color:var(--rose);}
+  .rb-row:nth-child(4n) .rb-av{background:var(--purple-tint);color:var(--purple);}
+  .rb-body{flex:1;min-width:0;}
+  .rb-name{font-size:13px;font-weight:700;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .rb-sub{font-size:11px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .rb-go{color:var(--muted);font-size:11px;}
+  .empty-note{font-size:12px;color:var(--muted);padding:14px 4px;}
 
   .site-footer{
     background:var(--ink);color:rgba(234,240,232,0.7);
@@ -238,11 +382,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
   .site-footer .f-links a:hover{color:#fff;}
   .site-footer .f-meta{margin-left:auto;display:flex;gap:14px;font-size:11px;color:rgba(234,240,232,0.45);}
 
-  @media (max-width:1050px){.split-grid{grid-template-columns:1fr;} .bp-main{flex-direction:column;align-items:flex-start;} .bp-greet{border-right:none;padding-right:0;}}
+  @media (max-width:1250px){ .stat-grid{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:1050px){ .ov-grid{grid-template-columns:1fr;} }
   @media (max-width:640px){
     .app-shell:not(.collapsed) .sidebar{position:fixed;left:0;top:0;bottom:0;z-index:30;box-shadow:8px 0 24px rgba(0,0,0,0.2);}
-    .boarding-pass{flex-direction:column;} .bp-stub{width:auto;border-left:none;border-top:1px dashed rgba(255,255,255,0.25);flex-direction:row;}
-    .bp-stub .pnr{writing-mode:horizontal-tb;}
+    .stat-grid{grid-template-columns:repeat(2,1fr);}
+    .content{padding:18px 16px 30px;}
     .site-footer .f-meta{margin-left:0;}
   }
 
@@ -266,7 +411,35 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         {
             out.print("<script>alert('Please first login then go my adminzoe');window.location.href='../../TOURISM_PROJECT/login.html'</script>");
         }
-        %>
+
+        /* ================= DATABASE SE REAL DATA ================= */
+        // Total counts (poori table ka)
+        int cBook    = getInt("SELECT COUNT(*) FROM " + T_BOOK);
+        int cEnq     = getInt("SELECT COUNT(*) FROM " + T_ENQ);
+        int cReg     = getInt("SELECT COUNT(*) FROM " + T_REG);
+        int cContact = getInt("SELECT COUNT(*) FROM " + T_CONTACT);
+        int cFb      = getInt("SELECT COUNT(*) FROM " + T_FB);
+
+        // Last 7 din ke counts
+        int wBook    = getInt("SELECT COUNT(*) FROM " + T_BOOK    + " WHERE DATE(" + D_BOOK    + ") >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)");
+        int wEnq     = getInt("SELECT COUNT(*) FROM " + T_ENQ     + " WHERE DATE(" + D_ENQ     + ") >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)");
+        int wReg     = getInt("SELECT COUNT(*) FROM " + T_REG     + " WHERE DATE(" + D_REG     + ") >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)");
+        int wContact = getInt("SELECT COUNT(*) FROM " + T_CONTACT + " WHERE DATE(" + D_CONTACT + ") >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)");
+        int wFb      = getInt("SELECT COUNT(*) FROM " + T_FB      + " WHERE DATE(" + D_FB      + ") >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)");
+
+        // Average rating (feedback table se)
+        double avgRating = getAvg("SELECT AVG(" + FB_RATING + ") FROM " + T_FB);
+        String avgTxt = avgRating < 0 ? "0" : String.format(java.util.Locale.ENGLISH, "%.2f", avgRating);
+
+        // Chart ka data: Week (7 din), Month (30 din), Year (12 mahine)
+        String wLabels = jsStrArr(dayLabels(7));
+        String mLabels = jsStrArr(dayLabels(30));
+        String yLabels = jsStrArr(monthLabels());
+
+        String wB = jsArr(dailyCounts(T_BOOK, D_BOOK, 7)),  mB = jsArr(dailyCounts(T_BOOK, D_BOOK, 30)),  yB = jsArr(monthlyCounts(T_BOOK, D_BOOK));
+        String wE = jsArr(dailyCounts(T_ENQ,  D_ENQ,  7)),  mE = jsArr(dailyCounts(T_ENQ,  D_ENQ,  30)),  yE = jsArr(monthlyCounts(T_ENQ,  D_ENQ));
+        String wR = jsArr(dailyCounts(T_REG,  D_REG,  7)),  mR = jsArr(dailyCounts(T_REG,  D_REG,  30)),  yR = jsArr(monthlyCounts(T_REG,  D_REG));
+     %>
 
 <!-- ADVISORY TICKER -->
 <div class="advisory-bar" id="advisoryBar">
@@ -275,12 +448,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     <div class="advisory-scroll">
       <span><i class="fa-solid fa-cloud-showers-heavy"></i> Monsoon watch: Kerala backwater routes may see delays this week</span>
       <span><i class="fa-solid fa-arrow-trend-up"></i> Festival surge: Jaipur Heritage Walk bookings up 40% this month</span>
-      <span><i class="fa-solid fa-mountain"></i> Manali high-altitude passes reopening ? update guide rosters</span>
+      <span><i class="fa-solid fa-mountain"></i> Manali high-altitude passes reopening â€” update guide rosters</span>
       <span><i class="fa-solid fa-umbrella-beach"></i> Goa coastal packages fully booked through the weekend</span>
       <span><i class="fa-solid fa-bell"></i> 12 new enquiries awaiting a response</span>
       <span><i class="fa-solid fa-cloud-showers-heavy"></i> Monsoon watch: Kerala backwater routes may see delays this week</span>
       <span><i class="fa-solid fa-arrow-trend-up"></i> Festival surge: Jaipur Heritage Walk bookings up 40% this month</span>
-      <span><i class="fa-solid fa-mountain"></i> Manali high-altitude passes reopening ? update guide rosters</span>
+      <span><i class="fa-solid fa-mountain"></i> Manali high-altitude passes reopening â€” update guide rosters</span>
       <span><i class="fa-solid fa-umbrella-beach"></i> Goa coastal packages fully booked through the weekend</span>
       <span><i class="fa-solid fa-bell"></i> 12 new enquiries awaiting a response</span>
     </div>
@@ -290,7 +463,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
 <div class="app-shell" id="appShell">
 
-  <!-- SIDEBAR -->
+  <!-- SIDEBAR (design same hai, bas counts ab database se aa rahe hain) -->
   <nav class="sidebar" id="sidebar" aria-label="Admin navigation">
     <div class="brand-row">
       <div class="brand-mark"><i class="fa-solid fa-mountain-sun"></i></div>
@@ -304,11 +477,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
       <div class="nav-eyebrow">Operations</div>
       <ul class="nav-list">
         <li class="active"><a href="dashboard.jsp" data-page="Dashboard"><span class="ic"><i class="fa-solid fa-gauge-high"></i></span> Dashboard</a></li>
-        <li><a href="contactmgmt.jsp" data-page="Contact Data"><span class="ic"><i class="fa-solid fa-address-book"></i></span> Contact Data <span class="count">250</span></a></li>
-        <li><a href="Enquirymgmt.jsp" data-page="Enquiry Data"><span class="ic"><i class="fa-solid fa-comment-dots"></i></span> Enquiry Data <span class="count">232</span></a></li>
-        <li><a href="Registrationmgmt.jsp" data-page="Registration Data"><span class="ic"><i class="fa-solid fa-clipboard-list"></i></span> Registration Data <span class="count">190</span></a></li>
-        <li><a href="Reviewmgmt.jsp" data-page="Review Data"><span class="ic"><i class="fa-solid fa-star"></i></span> Review Data <span class="count">128</span></a></li>
-              <li><a href="bookmgmt.jsp" data-page="Review Data"><span class="ic"><i class="fa-solid fa-star"></i></span> Book Data<span class="count">128</span></a></li>
+        <li><a href="contactmgmt.jsp" data-page="Contact Data"><span class="ic"><i class="fa-solid fa-address-book"></i></span> Contact Data <span class="count"><%= cContact < 0 ? "-" : cContact %></span></a></li>
+        <li><a href="Enquirymgmt.jsp" data-page="Enquiry Data"><span class="ic"><i class="fa-solid fa-comment-dots"></i></span> Enquiry Data <span class="count"><%= cEnq < 0 ? "-" : cEnq %></span></a></li>
+        <li><a href="Registrationmgmt.jsp" data-page="Registration Data"><span class="ic"><i class="fa-solid fa-clipboard-list"></i></span> Registration Data <span class="count"><%= cReg < 0 ? "-" : cReg %></span></a></li>
+        <li><a href="Reviewmgmt.jsp" data-page="Review Data"><span class="ic"><i class="fa-solid fa-star"></i></span> Review Data <span class="count"><%= cFb < 0 ? "-" : cFb %></span></a></li>
+              <li><a href="bookmgmt.jsp" data-page="Review Data"><span class="ic"><i class="fa-solid fa-star"></i></span> Book Data<span class="count"><%= cBook < 0 ? "-" : cBook %></span></a></li>
 
       </ul>
 
@@ -344,148 +517,97 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 
     <div class="content">
 
-      <!-- QUICK-ACCESS -->
-      <div class="quick-grid">
-        <a class="quick-card qc-contact" href="contactmgmt.jsp">
-          <span class="count">250</span>
-          <div class="qicon"><i class="fa-solid fa-address-book"></i></div>
-          <div class="qlabel">Contact Data</div>
-        </a>
-        <a class="quick-card qc-enquiry" href="Enquirymgmt.jsp">
-          <span class="count">232</span>
-          <div class="qicon"><i class="fa-solid fa-comment-dots"></i></div>
-          <div class="qlabel">Enquiry Data</div>
-        </a>
-        <a class="quick-card qc-registration" href="Registrationmgmt.jsp">
-          <span class="count">190</span>
-          <div class="qicon"><i class="fa-solid fa-clipboard-list"></i></div>
-          <div class="qlabel">Registration</div>
-        </a>
-        <a class="quick-card qc-review" href="Reviewmgmt.jsp">
-          <span class="count">128</span>
-          <div class="qicon"><i class="fa-solid fa-star"></i></div>
-          <div class="qlabel">Review Data</div>
-        </a>
-        <a class="quick-card qc-profile" href="profilemgmt.jsp">
-          <div class="qicon"><i class="fa-solid fa-user"></i></div>
-          <div class="qlabel">Profile</div>
-        </a>
-        <a class="quick-card qc-password" href="changepassword.jsp">
-          <div class="qicon"><i class="fa-solid fa-lock"></i></div>
-          <div class="qlabel">Password</div>
-        </a>
+      <!-- ================= OVERVIEW ================= -->
+      <div class="ov-head">
+        <h2>Overview</h2>
+        <p>Whole data about your business here</p>
       </div>
 
-      <div class="split-grid">
-        <div class="panel">
-          <div class="panel-head"><h3>Notifications</h3><span class="see-all">Mark all read</span></div>
-          <div class="notif-viewport" id="notifViewport">
-            <div class="notif-scroll" id="notifScroll">
-            <div class="notif-row unread"
-                 onmouseover="this.style.background='var(--blue-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(47,111,237,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-enquiry"><i class="fa-solid fa-comment-dots"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">New enquiry from Rohan Shah</div>
-                <div class="notif-sub">Interested in Manali Hillside Retreat</div>
-              </div>
-              <div class="notif-time">5m ago</div>
-            </div>
-            <div class="notif-row unread"
-                 onmouseover="this.style.background='var(--teal-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(23,166,115,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-confirmed"><i class="fa-solid fa-circle-check"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">Booking confirmed</div>
-                <div class="notif-sub">Kerala Backwater Trail · Meera Diwan</div>
-              </div>
-              <div class="notif-time">32m ago</div>
-            </div>
-            <div class="notif-row"
-                 onmouseover="this.style.background='var(--amber-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(232,163,61,0.14)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-review"><i class="fa-solid fa-star"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">New 5-star review posted</div>
-                <div class="notif-sub">Goa Coastal Escape · Priya Nair</div>
-              </div>
-              <div class="notif-time">1h ago</div>
-            </div>
-            <div class="notif-row"
-                 onmouseover="this.style.background='var(--rose-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(214,72,107,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-pending"><i class="fa-solid fa-hourglass-half"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">Registration pending payment</div>
-                <div class="notif-sub">Jaipur Heritage Walk · Sana Iqbal</div>
-              </div>
-              <div class="notif-time">2h ago</div>
-            </div>
-            <div class="notif-row"
-                 onmouseover="this.style.background='var(--purple-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(124,92,252,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-refund"><i class="fa-solid fa-money-bill-transfer"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">Refund request submitted</div>
-                <div class="notif-sub">Rishikesh River Camp · Arjun Verma</div>
-              </div>
-              <div class="notif-time">3h ago</div>
-            </div>
+      <!-- STAT CARDS (sab real counts) -->
+      <div class="stat-grid">
+        <%= statCard("sc-book",    "fa-suitcase-rolling", "Total Bookings",      cBook,    wBook,    "bookmgmt.jsp") %>
+        <%= statCard("sc-enq",     "fa-comment-dots",     "Total Enquiries",     cEnq,     wEnq,     "Enquirymgmt.jsp") %>
+        <%= statCard("sc-reg",     "fa-clipboard-list",   "Total Registrations", cReg,     wReg,     "Registrationmgmt.jsp") %>
+        <%= statCard("sc-contact", "fa-address-book",     "Total Contacts",      cContact, wContact, "contactmgmt.jsp") %>
+        <%= statCard("sc-review",  "fa-star",             "Total Reviews",       cFb,      wFb,      "Reviewmgmt.jsp") %>
+      </div>
 
-            <!-- duplicate set - makes the auto-scroll loop seamlessly -->
-            <div class="notif-row unread" aria-hidden="true"
-                 onmouseover="this.style.background='var(--blue-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(47,111,237,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-enquiry"><i class="fa-solid fa-comment-dots"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">New enquiry from Rohan Shah</div>
-                <div class="notif-sub">Interested in Manali Hillside Retreat</div>
-              </div>
-              <div class="notif-time">5m ago</div>
-            </div>
-            <div class="notif-row unread" aria-hidden="true"
-                 onmouseover="this.style.background='var(--teal-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(23,166,115,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-confirmed"><i class="fa-solid fa-circle-check"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">Booking confirmed</div>
-                <div class="notif-sub">Kerala Backwater Trail · Meera Diwan</div>
-              </div>
-              <div class="notif-time">32m ago</div>
-            </div>
-            <div class="notif-row" aria-hidden="true"
-                 onmouseover="this.style.background='var(--amber-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(232,163,61,0.14)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-review"><i class="fa-solid fa-star"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">New 5-star review posted</div>
-                <div class="notif-sub">Goa Coastal Escape · Priya Nair</div>
-              </div>
-              <div class="notif-time">1h ago</div>
-            </div>
-            <div class="notif-row" aria-hidden="true"
-                 onmouseover="this.style.background='var(--rose-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(214,72,107,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-pending"><i class="fa-solid fa-hourglass-half"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">Registration pending payment</div>
-                <div class="notif-sub">Jaipur Heritage Walk · Sana Iqbal</div>
-              </div>
-              <div class="notif-time">2h ago</div>
-            </div>
-            <div class="notif-row" aria-hidden="true"
-                 onmouseover="this.style.background='var(--purple-tint)'; this.style.transform='translateX(3px)'; this.style.boxShadow='0 4px 12px rgba(124,92,252,0.12)';"
-                 onmouseout="this.style.background='transparent'; this.style.transform='translateX(0)'; this.style.boxShadow='none';">
-              <div class="notif-ic nt-refund"><i class="fa-solid fa-money-bill-transfer"></i></div>
-              <div class="notif-body">
-                <div class="notif-title">Refund request submitted</div>
-                <div class="notif-sub">Rishikesh River Camp · Arjun Verma</div>
-              </div>
-              <div class="notif-time">3h ago</div>
-            </div>
+      <div class="ov-grid">
+
+        <!-- LEFT: Activity chart -->
+        <div class="panel">
+          <div class="panel-head" style="margin-bottom:6px;">
+            <h3>Activity Stat</h3>
+            <div class="range-toggle" id="rangeToggle">
+              <button data-range="week">Week</button>
+              <button data-range="month" class="on">Month</button>
+              <button data-range="year">Year</button>
             </div>
           </div>
+          <div class="chart-top">
+            <div class="legend-row">
+              <span><i style="background:#2F6FED"></i> Bookings</span>
+              <span><i style="background:#17A673"></i> Registrations</span>
+              <span><i style="background:#E8A33D"></i> Enquiries</span>
+            </div>
+            <div class="chart-total">
+              <div class="lbl">Total Bookings</div>
+              <div class="val" id="totalVal">0</div>
+              <div class="per" id="totalPer">Last 30 days</div>
+            </div>
+          </div>
+          <div class="chart-wrap"><canvas id="reportChart"></canvas></div>
         </div>
+
+        <!-- RIGHT: Satisfaction + Recent bookings -->
+        <div>
+          <div class="panel sat-panel">
+            <div class="panel-head"><h3>Customers Satisfaction</h3></div>
+            <div class="gauge-wrap">
+              <canvas id="gaugeChart"></canvas>
+              <div class="gauge-text">
+                <div class="t">Total Score</div>
+                <div class="s"><%= avgRating < 0 ? "&mdash;" : avgTxt %><small>/5</small></div>
+              </div>
+            </div>
+            <div class="sat-note">
+              <%= avgRating < 0 ? "Abhi tak koi rating nahi mili." : "Average rating " + cFb + " reviews ke basis par." %>
+            </div>
+            <a class="sat-btn" href="Reviewmgmt.jsp">See Customer Reviews</a>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head"><h3>Recent Bookings</h3><a class="see-all" href="bookmgmt.jsp">See all</a></div>
+            <%
+                boolean anyBooking = false;
+                try{
+                    ResultSet rb = runQuery("SELECT * FROM " + T_BOOK + " ORDER BY " + BK_ID + " DESC LIMIT 4");
+                    while(rb.next()){
+                        anyBooking = true;
+                        String bName = safe(rb, BK_NAME);
+                        String bPkg  = safe(rb, BK_PACKAGE);
+                        String bDate = safe(rb, BK_DATE);
+                        String bSub  = bPkg;
+                        if(bDate.length() > 0) bSub = (bSub.length() > 0 ? bSub + " Â· " : "") + bDate;
+            %>
+            <a class="rb-row" href="bookmgmt.jsp">
+              <div class="rb-av"><%= esc(initial(bName)) %></div>
+              <div class="rb-body">
+                <div class="rb-name"><%= esc(bName) %></div>
+                <div class="rb-sub"><%= esc(bSub) %></div>
+              </div>
+              <i class="fa-solid fa-chevron-right rb-go"></i>
+            </a>
+            <%
+                    }
+                }catch(Exception e){ /* query fail ho to niche empty note dikhega */ }
+                if(!anyBooking){
+            %>
+            <div class="empty-note">Abhi koi booking nahi hai.</div>
+            <% } %>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -500,8 +622,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         <a href="Reviewmgmt.jsp">Reviews</a>
       </div>
       <div class="f-meta">
-        <span>Support: 24×7</span>
-        <span>© 2026 Sahyatri Tourism</span>
+        <span>Support: 24Ã—7</span>
+        <span>Â© 2026 Sahyatri Tourism</span>
         <span>Developed by:Er.Srishti singh</span>
 
       </div>
@@ -527,22 +649,82 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     document.getElementById('advisoryBar').classList.add('hidden');
   });
 
-  new Chart(document.getElementById('reportChart'), {
+  /* ================= ACTIVITY CHART (database ka real data) ================= */
+  const RANGES = {
+    week:  { label:'Last 7 days',   labels: <%= wLabels %>, book: <%= wB %>, reg: <%= wR %>, enq: <%= wE %> },
+    month: { label:'Last 30 days',  labels: <%= mLabels %>, book: <%= mB %>, reg: <%= mR %>, enq: <%= mE %> },
+    year:  { label:'Last 12 months',labels: <%= yLabels %>, book: <%= yB %>, reg: <%= yR %>, enq: <%= yE %> }
+  };
+  const sum = arr => arr.reduce((a,b) => a + b, 0);
+
+  const chartCtx = document.getElementById('reportChart').getContext('2d');
+  // Bookings line ke neeche halka blue gradient
+  const grad = chartCtx.createLinearGradient(0, 0, 0, 270);
+  grad.addColorStop(0, 'rgba(47,111,237,0.22)');
+  grad.addColorStop(1, 'rgba(47,111,237,0)');
+
+  const mkLine = (label, color, fill) => ({
+    label: label, data: [], borderColor: color, backgroundColor: fill || color,
+    fill: !!fill, tension: 0.4, borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 5,
+    pointBackgroundColor: '#fff', pointBorderColor: color, pointBorderWidth: 2
+  });
+
+  const activityChart = new Chart(chartCtx, {
+    type: 'line',
     data: {
-      labels: ["01 Jan","02 Jan","03 Jan","04 Jan","05 Jan","06 Jan","07 Jan","08 Jan","09 Jan","10 Jan","11 Jan","12 Jan"],
+      labels: [],
       datasets: [
-        { type:'bar', label:'Bookings', data:[420,500,410,670,210,410,190,340,760,310,255,120], backgroundColor:'#17A673', borderRadius:4, barThickness:14, yAxisID:'y' },
-        { type:'line', label:'Revenue (?k)', data:[30,45,42,32,45,25,22,30,28,25,18,15], borderColor:'#E8A33D', backgroundColor:'#E8A33D', tension:0.4, yAxisID:'y1', pointRadius:3 }
+        mkLine('Bookings', '#2F6FED', grad),
+        mkLine('Registrations', '#17A673'),
+        mkLine('Enquiries', '#E8A33D')
       ]
     },
     options: {
-      responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:'bottom', labels:{ boxWidth:10, font:{ size:11 } } } },
-      scales:{
-        y:{ position:'left', grid:{ color:'#EEF2EA' }, title:{ display:true, text:'Bookings', font:{ size:10 } } },
-        y1:{ position:'right', grid:{ display:false }, title:{ display:true, text:'Revenue', font:{ size:10 } } },
-        x:{ grid:{ display:false } }
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0F3D30', padding: 10, cornerRadius: 8, boxPadding: 4,
+          titleFont: { family: 'Inter', size: 11 }, bodyFont: { family: 'Inter', size: 11 }
+        }
+      },
+      scales: {
+        y: { beginAtZero: true, ticks: { precision: 0, font: { size: 10 }, color: '#5E7A6D' },
+             grid: { color: '#EEF3F0', borderDash: [4,4] }, border: { display: false } },
+        x: { ticks: { font: { size: 10 }, color: '#5E7A6D', maxTicksLimit: 10 }, grid: { display: false }, border: { display: false } }
       }
+    }
+  });
+
+  function setRange(key){
+    const r = RANGES[key];
+    activityChart.data.labels = r.labels;
+    activityChart.data.datasets[0].data = r.book;
+    activityChart.data.datasets[1].data = r.reg;
+    activityChart.data.datasets[2].data = r.enq;
+    activityChart.update();
+    document.getElementById('totalVal').textContent = sum(r.book);
+    document.getElementById('totalPer').textContent = r.label;
+  }
+  document.querySelectorAll('#rangeToggle button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#rangeToggle button').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      setRange(btn.dataset.range);
+    });
+  });
+  setRange('month');   // default: Month
+
+  /* ================= SATISFACTION GAUGE (feedback ki average rating) ================= */
+  const avg = <%= avgRating < 0 ? "0" : avgTxt %>;
+  new Chart(document.getElementById('gaugeChart'), {
+    type: 'doughnut',
+    data: { datasets: [{ data: [avg, 5 - avg], backgroundColor: ['#2F6FED', '#D9E5FA'], borderWidth: 0, borderRadius: 6 }] },
+    options: {
+      rotation: -90, circumference: 180, cutout: '72%',
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { enabled: false } }
     }
   });
 </script>

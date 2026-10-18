@@ -8,6 +8,148 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<!-- ================= RESPONSIVE FIXES (style.css ke BAAD, isliye override karega) ================= -->
+<style>
+  /* ===== Basic safety ===== */
+  html, body { overflow-x: hidden; }
+  img { max-width: 100%; height: auto; }
+  iframe { max-width: 100%; }
+
+  /* ===== Topbar ===== */
+  .topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .topbar-marquee { max-width: 220px; overflow: hidden; }
+  .btn-top {
+    background: blue;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-block;
+  }
+
+  /* ===== Hamburger desktop par hidden ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px; height: 42px;
+    background: none; border: 0; cursor: pointer;
+    z-index: 1100;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 3px;
+    background: #0B3D3A; border-radius: 3px;
+    transition: transform .3s, opacity .3s;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ===== FAQ open/close (pehle JS hi nahi tha) ===== */
+  .faq-item .faq-answer { display: none; }
+  .faq-item.open .faq-answer { display: block; }
+  .faq-question { width: 100%; text-align: left; cursor: pointer; }
+
+  /* ===== Form step buttons ===== */
+  .sf-btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* ===== TABLET + MOBILE (860px aur neeche) ===== */
+  @media (max-width: 860px) {
+    .hamburger { display: flex; }
+
+    /* backdrop-filter/transform fixed drawer ko todte hain */
+    .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
+
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; }
+    .header-cta { display: flex; align-items: center; gap: 10px; }
+
+    /* nav ab side drawer hai */
+    .site-header .main-nav {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 80%; max-width: 320px; height: 100vh;
+      background: #fff;
+      display: flex; flex-direction: column; align-items: stretch;
+      padding: 80px 20px 30px;
+      gap: 0;
+      overflow-y: auto;
+      box-shadow: -6px 0 24px rgba(0,0,0,.2);
+      transition: right .35s ease;
+      z-index: 1050;
+    }
+    .site-header .main-nav.open { right: 0; }
+
+    .main-nav a {
+      display: block;
+      padding: 14px 6px;
+      color: #0B3D3A;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* dropdown mobile par tap se khulega */
+    .nav-dropdown-menu {
+      display: none;
+      position: static;
+      box-shadow: none;
+      background: #faf6e8;
+      padding-left: 14px;
+      opacity: 1; visibility: visible; transform: none;
+    }
+    .nav-dropdown.dropdown-open .nav-dropdown-menu { display: block; }
+
+    /* Page hero */
+    .page-hero-content { padding: 0 18px; }
+    .page-hero-content h1 { font-size: clamp(30px, 8vw, 44px); }
+
+    /* Split layout: 2 column se 1 column */
+    .split-contact { display: block; }
+    .split-visual {
+      position: relative;
+      top: auto;
+      width: 100%;
+      height: auto;
+    }
+    .split-visual-inner {
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: 480px;
+    }
+    .split-visual-content { padding: 30px 18px; }
+    .split-visual-content h1 { font-size: clamp(28px, 7vw, 38px); }
+    .split-content { width: 100%; padding: 30px 18px; }
+
+    .sf-row { display: flex; flex-direction: column; gap: 12px; }
+    .split-map { height: 300px; }
+    .split-studio-detail { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  }
+
+  /* ===== CHOTE PHONE (520px aur neeche) ===== */
+  @media (max-width: 520px) {
+    .topbar-left { display: none; }
+    .topbar-marquee { display: none; }
+    .topbar-inner { justify-content: center; }
+    .header-cta .btn-plan { display: none; }
+
+    .footer-grid { grid-template-columns: 1fr; }
+    .split-visual-inner { min-height: 520px; }
+    .sf-btn-row button { flex: 1 1 100%; }
+    .sf-next, .sf-submit { width: 100%; }
+    .split-map { height: 240px; }
+  }
+</style>
 </head>
 <body>
 
@@ -18,19 +160,11 @@
       <span>✉️ hello@sahyatri.in</span>
     </div>
     <div class="topbar-right">
-        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
-        <a href="login.html">
-        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-        </a>
-           <a href="Registration.html">
-          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-           </a>
+      <span class="topbar-marquee"><marquee>20+ Years Crafting India Journeys</marquee></span>
+      <!-- button ki jagah seedha link, koi extra hamburger nahi -->
+      <a href="login.html" class="btn-plan btn-top">Login</a>
+      <a href="Registration.html" class="btn-plan btn-top">Register</a>
+    </div>
   </div>
 </div>
 
@@ -42,13 +176,13 @@
     </a>
     <nav class="main-nav" id="mainNav">
       <a href="index.html">Home</a>
-      <a href="Cntact.html" class="active">Contact Us</a>
+      <a href="Contact.html" class="active">Contact Us</a>
       <a href="Visapolicy.html">Visa Policy</a>
       <div class="nav-dropdown">
         <a href="Howtoreach.html">How to Reach ▾</a>
         <div class="nav-dropdown-menu">
-         <a href="Byroade.html#road">By Road Ways</a>
-         <a href="bytrain.html#train" class="active">By Train</a>
+          <a href="Byroade.html#road">By Road Ways</a>
+          <a href="bytrain.html#train">By Train</a>
           <a href="Byflight.html#flight">By Flight</a>
         </div>
       </div>
@@ -61,13 +195,12 @@
       </div>
       <a href="Besttime.html">Best Time</a>
       <a href="enquiry.html">Enquiry page</a>
-         <a href="gallery.html">Gallery</a>
-           <a href="review.html">Review</a>
-
-
+      <a href="gallery.html">Gallery</a>
+      <a href="review.html">Review</a>
     </nav>
     <div class="header-cta">
       <button class="btn-plan">Plan My Trip</button>
+      <!-- poore page mein sirf EK hamburger -->
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -86,12 +219,10 @@
   </div>
 </section>
 
-<!-- ============ CONTACT ============ -->
-
- <!-- ============ SPLIT CONTACT LAYOUT ============ -->
+<!-- ============ SPLIT CONTACT LAYOUT ============ -->
 <section class="split-contact">
 
-  <!-- LEFT: Sticky image panel -->
+  <!-- LEFT: Image panel -->
   <div class="split-visual">
     <div class="split-visual-inner">
       <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=1200&q=80" alt="Kerala backwaters" class="split-img split-img-2">
@@ -133,7 +264,7 @@
     </div>
   </div>
 
-  <!-- RIGHT: Scrolling form + content panel -->
+  <!-- RIGHT: Form + content panel -->
   <div class="split-content">
 
     <!-- Step indicator form -->
@@ -144,7 +275,7 @@
 
       <div class="form-status" id="formStatus">✓ Enquiry sent! We'll be in touch within 24 hours.</div>
 
-      <form class="split-form" id="enquiryForm" onsubmit="submitForm(event)" novalidate action="codes/contactus.jsp" method="post">
+      <form class="split-form" id="enquiryForm" onsubmit="return submitForm(event)" novalidate action="codes/contactus.jsp" method="post">
 
         <div class="sf-step active" data-step="1">
           <span class="sf-step-label">Step 1 of 3 — About You</span>
@@ -170,13 +301,13 @@
           <div class="sf-row">
             <div class="sf-field">
               <label>Destination</label>
-<select name="des" required>
-    <option value="">Select Destination</option>
-    <option>Rajasthan</option>
-    <option>Kerala</option>
-    <option>Ladakh</option>
-    <option>Goa</option>
-</select>
+              <select name="des" required>
+                <option value="">Select Destination</option>
+                <option>Rajasthan</option>
+                <option>Kerala</option>
+                <option>Ladakh</option>
+                <option>Goa</option>
+              </select>
             </div>
             <div class="sf-field">
               <label>Travelers</label>
@@ -184,13 +315,13 @@
             </div>
           </div>
           <div class="sf-field">
-         <label>Preferred Travel Month</label>
-<select name="month" required>
-    <option value="">Select Month</option>
-    <option>January</option>
-    <option>February</option>
-    <option>March</option>
-</select>
+            <label>Preferred Travel Month</label>
+            <select name="month" required>
+              <option value="">Select Month</option>
+              <option>January</option>
+              <option>February</option>
+              <option>March</option>
+            </select>
           </div>
           <div class="sf-btn-row">
             <button type="button" class="sf-back">← Back</button>
@@ -198,11 +329,11 @@
           </div>
         </div>
 
-        <div class="sf-step " data-step="3">
+        <div class="sf-step" data-step="3">
           <span class="sf-step-label">Step 3 of 3 — Tell Us More</span>
           <div class="sf-field">
             <label>Message *</label>
-            <textarea rows="4"name="msg" placeholder="Interests, budget, must-see places..." required></textarea>
+            <textarea rows="4" name="msg" placeholder="Interests, budget, must-see places..." required></textarea>
           </div>
           <div class="sf-btn-row">
             <button type="button" class="sf-back">← Back</button>
@@ -244,19 +375,19 @@
       <h3>Frequently Asked <span>Questions</span></h3>
       <div class="faq-list">
         <div class="faq-item">
-          <button class="faq-question">How quickly will I get a response?<span class="faq-icon">+</span></button>
+          <button type="button" class="faq-question">How quickly will I get a response?<span class="faq-icon">+</span></button>
           <div class="faq-answer"><p>Within 24 hours, often sooner during business hours. For urgent queries, WhatsApp or call us directly.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">Can you build a fully custom itinerary?<span class="faq-icon">+</span></button>
+          <button type="button" class="faq-question">Can you build a fully custom itinerary?<span class="faq-icon">+</span></button>
           <div class="faq-answer"><p>Yes — most of our trips are tailor-made. Share your interests and budget and we'll design a route around it.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">Do you help with visa applications?<span class="faq-icon">+</span></button>
+          <button type="button" class="faq-question">Do you help with visa applications?<span class="faq-icon">+</span></button>
           <div class="faq-answer"><p>Yes, our team can guide foreign travelers through India's e-Visa process — see our Visa Policy page.</p></div>
         </div>
         <div class="faq-item">
-          <button class="faq-question">What's your cancellation policy?<span class="faq-icon">+</span></button>
+          <button type="button" class="faq-question">What's your cancellation policy?<span class="faq-icon">+</span></button>
           <div class="faq-answer"><p>Terms vary by package and are shared clearly at booking confirmation — nothing hidden in fine print.</p></div>
         </div>
       </div>
@@ -265,12 +396,11 @@
   </div>
 </section>
 
-
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer" id="contact">
   <div class="footer-grid">
     <div class="footer-col brand-col">
-      <a href="#home" class="logo light">
+      <a href="index.html" class="logo light">
         <span class="logo-mark">स</span>
         <span class="logo-text">Sah<em>yatri</em></span>
       </a>
@@ -287,7 +417,7 @@
       <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
       <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
       <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
-      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+      <a href="https://en.wikipedia.org/wiki/Western_India">West India</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -307,49 +437,109 @@
     <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
   </div>
 </footer>
- <script>
-const steps = document.querySelectorAll(".sf-step");
-const nextBtns = document.querySelectorAll(".sf-next");
-const backBtns = document.querySelectorAll(".sf-back");
-const dots = document.querySelectorAll(".sf-dot");
 
-let currentStep = 0;
+<script>
+  // ================= Mobile nav (pehle is page par ye JS tha hi nahi) =================
+  const hamburger = document.getElementById('hamburger');
+  const mainNav = document.getElementById('mainNav');
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  });
 
-function showStep(index) {
+  // Dropdown wale links ko chhodkar baaki links par menu band hoga
+  mainNav.querySelectorAll('a').forEach(link => {
+    if (link.parentElement.classList.contains('nav-dropdown')) return;
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
+  });
+
+  // Mobile dropdown tap-to-toggle
+  document.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      if (window.innerWidth <= 860) {
+        e.preventDefault();
+        trigger.parentElement.classList.toggle('dropdown-open');
+      }
+    });
+  });
+
+  // ================= Multi-step form =================
+  const steps = document.querySelectorAll(".sf-step");
+  const nextBtns = document.querySelectorAll(".sf-next");
+  const backBtns = document.querySelectorAll(".sf-back");
+  const dots = document.querySelectorAll(".sf-dot");
+  let currentStep = 0;
+
+  function showStep(index) {
     steps.forEach((step, i) => {
-        step.style.display = i === index ? "block" : "none";
+      step.style.display = i === index ? "block" : "none";
     });
-
     dots.forEach((dot, i) => {
-        dot.classList.toggle("active", i === index);
+      dot.classList.toggle("active", i === index);
     });
-}
+  }
+  showStep(currentStep);
 
-showStep(currentStep);
+  // Current step ke required fields check karo (form novalidate hai, isliye khud karna padta hai)
+  function stepIsValid(stepIndex) {
+    const fields = steps[stepIndex].querySelectorAll("input, select, textarea");
+    for (const f of fields) {
+      if (!f.checkValidity()) {
+        f.reportValidity();
+        return false;
+      }
+    }
+    return true;
+  }
 
-nextBtns.forEach(btn => {
+  nextBtns.forEach(btn => {
     btn.addEventListener("click", () => {
-        if (currentStep < steps.length - 1) {
-            currentStep++;
-            showStep(currentStep);
-        }
+      if (!stepIsValid(currentStep)) return;
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
     });
-});
+  });
 
-backBtns.forEach(btn => {
+  backBtns.forEach(btn => {
     btn.addEventListener("click", () => {
-        if (currentStep > 0) {
-            currentStep--;
-            showStep(currentStep);
-        }
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
     });
-});
-function submitForm(event){
-   // event.preventDefault(); mat lagaiye
-   return true;
-}
+  });
+
+  // Submit: koi step adhoora ho to us step par wapas le jao, warna JSP par bhej do
+  function submitForm(event) {
+    for (let i = 0; i < steps.length; i++) {
+      if (!stepIsValid(i)) {
+        // reportValidity hidden field par kaam nahi karta, isliye pehle step dikhao
+        currentStep = i;
+        showStep(currentStep);
+        steps[i].querySelectorAll("input, select, textarea").forEach(f => {
+          if (!f.checkValidity()) f.reportValidity();
+        });
+        return false;
+      }
+    }
+    return true; // form codes/contactus.jsp par POST hoga
+  }
+
+  // ================= FAQ accordion (pehle JS nahi tha) =================
+  document.querySelectorAll(".faq-question").forEach(q => {
+    q.addEventListener("click", () => {
+      const item = q.parentElement;
+      const isOpen = item.classList.toggle("open");
+      const icon = q.querySelector(".faq-icon");
+      if (icon) icon.textContent = isOpen ? "−" : "+";
+    });
+  });
 </script>
-
 
 </body>
 </html>

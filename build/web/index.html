@@ -8,6 +8,148 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<!-- ================= RESPONSIVE FIXES (style.css ke BAAD, isliye override karega) ================= -->
+<style>
+  /* ===== Basic safety ===== */
+  html, body { overflow-x: hidden; }
+  img { max-width: 100%; height: auto; }
+
+  /* ===== Topbar ===== */
+  .topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .topbar-marquee { max-width: 220px; overflow: hidden; }
+  .btn-top {
+    background: blue;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-block;
+  }
+
+  /* ===== Hamburger desktop par hidden ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px; height: 42px;
+    background: none; border: 0; cursor: pointer;
+    z-index: 1100;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 3px;
+    background: #0B3D3A; border-radius: 3px;
+    transition: transform .3s, opacity .3s;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ===== TABLET + MOBILE (860px aur neeche) ===== */
+  @media (max-width: 860px) {
+    .hamburger { display: flex; }
+
+    /* backdrop-filter/transform fixed drawer ko todte hain, isliye hata diye */
+    .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
+
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; }
+    .header-cta { display: flex; align-items: center; gap: 10px; }
+
+    /* nav ab side drawer hai */
+    .site-header .main-nav {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 80%; max-width: 320px; height: 100vh;
+      background: #fff;
+      display: flex; flex-direction: column; align-items: stretch;
+      padding: 80px 20px 30px;
+      gap: 0;
+      overflow-y: auto;
+      box-shadow: -6px 0 24px rgba(0,0,0,.2);
+      transition: right .35s ease;
+      z-index: 1050;
+    }
+    .site-header .main-nav.open { right: 0; }
+
+    .main-nav a {
+      display: block;
+      padding: 14px 6px;
+      color: #0B3D3A;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* dropdown mobile par tap se khulega */
+    .nav-dropdown-menu {
+      display: none;
+      position: static;
+      box-shadow: none;
+      background: #faf6e8;
+      padding-left: 14px;
+      opacity: 1; visibility: visible; transform: none;
+    }
+    .nav-dropdown.dropdown-open .nav-dropdown-menu { display: block; }
+
+    /* Hero */
+    .hero-content { padding: 0 18px; }
+    .hero-content h1 { font-size: clamp(28px, 7vw, 40px); line-height: 1.25; }
+    .hero-search { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .hs-field, .hs-field select, .hs-submit { width: 100%; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* Grids */
+    .interest-grid,
+    .region-grid,
+    .package-grid,
+    .package-grid.wide,
+    .exp-grid,
+    .besttime-grid,
+    .why-grid,
+    .counter-grid,
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .counter-grid { gap: 20px; }
+
+    .map-signature-inner { display: flex; flex-direction: column; gap: 24px; }
+    .contact-grid { display: flex; flex-direction: column; gap: 28px; }
+    .cta-band-inner { display: flex; flex-direction: column; gap: 18px; text-align: center; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* Testimonials swipe */
+    .testi-track { overflow-x: auto; scroll-snap-type: x mandatory; }
+    .testi-card { min-width: 85%; scroll-snap-align: start; }
+  }
+
+  /* ===== CHOTE PHONE (520px aur neeche) ===== */
+  @media (max-width: 520px) {
+    .topbar-left { display: none; }
+    .topbar-marquee { display: none; }
+    .topbar-inner { justify-content: center; }
+    .header-cta .btn-plan { display: none; }
+
+    .interest-grid,
+    .region-grid,
+    .package-grid,
+    .package-grid.wide,
+    .exp-grid,
+    .besttime-grid,
+    .why-grid,
+    .footer-grid { grid-template-columns: 1fr; }
+
+    .cf-row { display: flex; flex-direction: column; gap: 12px; }
+    .section-head h2 { font-size: 26px; }
+    .filter-row { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; }
+    .filter-btn { white-space: nowrap; }
+    .fab-stack { right: 12px; bottom: 12px; }
+  }
+</style>
 </head>
 <body style="background-color:#FFF8DC;">
 
@@ -18,24 +160,12 @@
       <span>✉️ hello@sahyatri.in</span>
     </div>
     <div class="topbar-right">
-        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
-        <a href="login.html">
-        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-        </a>
-           <a href="Registration.html">
-          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-          <a href="Adminzone/dashboard.jsp">
-          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Adminzone</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-           </a>
+      <span class="topbar-marquee"><marquee>20+ Years Crafting India Journeys</marquee></span>
+      <!-- button ki jagah seedha link, koi extra hamburger nahi -->
+      <a href="login.html" class="btn-plan btn-top">Login</a>
+      <a href="Registration.html" class="btn-plan btn-top">Register</a>
+      <a href="Adminzone/dashboard.jsp" class="btn-plan btn-top">Adminzone</a>
+    </div>
   </div>
 </div>
 
@@ -45,14 +175,15 @@
       <span class="logo-mark">स</span>
       <span class="logo-text">Sah<em>yatri</em></span>
     </a>
+
     <nav class="main-nav" id="mainNav">
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="Contact.html">Contact Us</a>
       <a href="Visapolicy.html">Visa Policy</a>
       <div class="nav-dropdown">
         <a href="Howtoreach.html">How to Reach ▾</a>
         <div class="nav-dropdown-menu">
-         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="Byroade.html#road">By Road Ways</a>
           <a href="bytrain.html#train">By Train</a>
           <a href="Byflight.html#flight">By Flight</a>
         </div>
@@ -64,21 +195,23 @@
           <a href="Foreign.html">Foreign</a>
         </div>
       </div>
-      <a href="Besttime.html" class="active">Best Time</a>
-        <a href="team.html">Team Member</a>
-        <a href="enquiry.html">Enquiry page</a>
-         <a href="gallery.html">Gallery</a>
-          <a href="review.html">Review</a>
-
+      <a href="Besttime.html">Best Time</a>
+      <a href="team.html">Team Member</a>
+      <a href="enquiry.html">Enquiry page</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="review.html">Review</a>
     </nav>
+
     <div class="header-cta">
       <button class="btn-plan">Plan My Trip</button>
+      <!-- poore page mein sirf EK hamburger -->
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
+
 <!-- ============ HERO SLIDER ============ -->
 <section class="hero" id="home">
   <div class="hero-slider" id="heroSlider">
@@ -97,7 +230,7 @@
   </div>
 
   <div class="hero-content">
-      <p class="hero-eyebrow"><marquee>✦ Namaste, Traveler ✦</marquee></p>
+    <p class="hero-eyebrow"><marquee>✦ Namaste, Traveler ✦</marquee></p>
     <h1>Every road here <span>tells an epic.</span><br>Choose your chapter.</h1>
     <p class="hero-sub">Hand-crafted journeys through deserts, backwaters, snow passes &amp; temple towns — designed around how <em>you</em> want to travel, not a fixed itinerary.</p>
 
@@ -136,9 +269,9 @@
 
     <div class="hero-stats">
       <div><strong>18+</strong><span>Years on the Road</span></div>
-      <div><strong>420+</strong><span>Curated Itineraries</span></div>
-      <div><strong>36K+</strong><span>Happy Travelers</span></div>
-      <div><strong>4.9★</strong><span>Traveler Rating</span></div>
+      <div><strong id="heroItineraries">0</strong><span>Curated Itineraries</span></div>
+      <div><strong id="heroTravelers">0</strong><span>Happy Travelers</span></div>
+      <div><strong id="heroRating">—</strong><span>Traveler Rating</span></div>
     </div>
   </div>
 
@@ -280,19 +413,19 @@
   </div>
 </section>
 
-<!-- ============ ANIMATED COUNTER BAND ============ -->
+<!-- ============ ANIMATED COUNTER BAND (ab database se real data) ============ -->
 <section class="counter-band">
   <div class="counter-grid">
     <div class="counter-item">
-      <span class="counter-num" data-target="420">0</span><span class="counter-plus">+</span>
+      <span class="counter-num" id="counterItineraries" data-target="0">0</span>
       <p>Curated Itineraries</p>
     </div>
     <div class="counter-item">
-      <span class="counter-num" data-target="36" data-suffix="K">0</span><span class="counter-plus">+</span>
+      <span class="counter-num" id="counterTravelers" data-target="0">0</span>
       <p>Happy Travelers</p>
     </div>
     <div class="counter-item">
-      <span class="counter-num" data-target="28">0</span>
+      <span class="counter-num" id="counterStates" data-target="0">0</span>
       <p>States &amp; UTs Covered</p>
     </div>
     <div class="counter-item">
@@ -535,7 +668,7 @@
 <section class="gallery-section" id="gallery">
   <div class="section-head">
     <p class="eyebrow">Traveler Lens</p>
-    <h2 style="color:darkorange" >Moments from <span>the road</span></h2>
+    <h2 style="color:darkorange">Moments from <span>the road</span></h2>
   </div>
   <div class="gallery-grid">
     <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=600&q=80" alt="Taj Mahal">
@@ -617,7 +750,7 @@
       <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
       <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
       <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
-      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+      <a href="https://en.wikipedia.org/wiki/Western_India">West India</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -680,25 +813,52 @@
   });
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+  // ================= REAL DATA: itineraries = page ke package cards, baaki database se =================
+  const itinerariesCount = document.querySelectorAll('.package-card').length;
+  const itinerariesEl = document.getElementById('counterItineraries');
+  if (itinerariesEl) itinerariesEl.dataset.target = itinerariesCount;
+  const heroItinEl = document.getElementById('heroItineraries');
+  if (heroItinEl) heroItinEl.textContent = itinerariesCount;
+
+  // CounterServlet se Happy Travelers, States aur Rating aayegi.
+  // statsReady = jab tak data na aa jaye (ya fail ho jaye), counter animation start nahi hoga
+  const statsReady = fetch('CounterServlet')
+    .then(res => res.json())
+    .then(data => {
+      const travelersEl = document.getElementById('counterTravelers');
+      const statesEl = document.getElementById('counterStates');
+      const heroTravEl = document.getElementById('heroTravelers');
+      const heroRateEl = document.getElementById('heroRating');
+      if (data.travelers != null) {
+        if (travelersEl) travelersEl.dataset.target = data.travelers;
+        if (heroTravEl) heroTravEl.textContent = data.travelers;
+      }
+      if (data.states != null && statesEl) statesEl.dataset.target = data.states;
+      if (data.rating != null && heroRateEl) heroRateEl.textContent = Number(data.rating).toFixed(1) + '★';
+    })
+    .catch(err => console.error('Stats fetch failed:', err));
+
   // Animated counters
   const counters = document.querySelectorAll('.counter-num');
   let countersStarted = false;
   function animateCounters() {
     if (countersStarted) return;
     countersStarted = true;
-    counters.forEach(counter => {
-      const target = +counter.dataset.target;
-      const suffix = counter.dataset.suffix || '';
-      const duration = 1600;
-      const startTime = performance.now();
-      function tick(now) {
-        const progress = Math.min((now - startTime) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        counter.textContent = Math.floor(eased * target) + suffix;
-        if (progress < 1) requestAnimationFrame(tick);
-        else counter.textContent = target + suffix;
-      }
-      requestAnimationFrame(tick);
+    statsReady.then(() => {
+      counters.forEach(counter => {
+        const target = +counter.dataset.target;
+        const suffix = counter.dataset.suffix || '';
+        const duration = 1600;
+        const startTime = performance.now();
+        function tick(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counter.textContent = Math.floor(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+          else counter.textContent = target + suffix;
+        }
+        requestAnimationFrame(tick);
+      });
     });
   }
   const counterBand = document.querySelector('.counter-band');
@@ -747,14 +907,17 @@
     mainNav.classList.toggle('open');
     hamburger.classList.toggle('active');
   });
+
+  // Dropdown wale links ko chhodkar baaki links par menu band hoga
   mainNav.querySelectorAll('a').forEach(link => {
+    if (link.parentElement.classList.contains('nav-dropdown')) return; // dropdown trigger skip
     link.addEventListener('click', () => {
       mainNav.classList.remove('open');
       hamburger.classList.remove('active');
     });
   });
 
-  // Mobile dropdown tap-to-toggle (hover doesn't work on touch)
+  // Mobile dropdown tap-to-toggle (hover touch par kaam nahi karta)
   document.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
     trigger.addEventListener('click', (e) => {
       if (window.innerWidth <= 860) {
@@ -797,15 +960,13 @@
     const cardWidth = testiCards[0].offsetWidth + 24;
     track.scrollTo({ left: cardWidth * testiIndex, behavior: 'smooth' });
   }, 4500);
+
+  // Enquiry form submit (extra ids ki zarurat nahi)
   function submitForm(event) {
     event.preventDefault();
-
     alert("✅ Enquiry Submitted Successfully!");
-
-    document.getElementById("enquiryForm").reset();
-
-    document.getElementById("formStatus").style.display = "block";
-}
+    event.target.reset();
+  }
 </script>
 
 </body>

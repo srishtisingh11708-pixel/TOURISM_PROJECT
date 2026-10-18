@@ -3,46 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us | Sahyatri</title>
+<title>Best Time to Visit India | Sahyatri</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Fraunces + Inter add kiye, kyunki .bt-page ka CSS inhi fonts ko maangta hai (pehle load hi nahi ho rahe the) -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-    /* =========================================================
-   TOKENS (shared brand system)
+/* =========================================================
+   TOKENS (sirf .bt-page ke andar, taaki header/footer na bigde)
 ========================================================= */
-:root{
-  --ink:        #2A2622;
-  --ink-soft:   #5B564E;
-  --paper:      #FFF8DC;
-  --paper-dim:  #F2EBDB;
-  --night:      #1A1A2E;
-  --marigold:   #E8A23D;
-  --terracotta: #B5482E;
-  --line:       rgba(42,38,34,0.12);
+html{ scroll-behavior:smooth; }
+
+.bt-page{
+  --ink:        #1b2a2e;
+  --ink-soft:   #56686b;
+  --paper:      #f6f2ea;
+  --paper-dim:  #efe8d9;
+  --night:      #1c3d3b;
+  --sea:        #2e5d5a;
+  --marigold:   #c9a24b;
+  --terracotta: #c1571f;
+  --skin:       #fbeee2;               /* light skin colour */
+  --mint:       #cde7d8;               /* light green */
+  --line:       rgba(27,42,46,0.14);
 
   --font-display: "Fraunces", serif;
   --font-body: "Inter", sans-serif;
 
   --radius: 14px;
   --ease: cubic-bezier(.4,0,.2,1);
-}
 
-*{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; }
-body{
   font-family:var(--font-body);
   color:var(--ink);
   background:var(--paper);
   line-height:1.6;
   overflow-x:hidden;
 }
-img{ display:block; max-width:100%; }
-a{ color:inherit; text-decoration:none; }
-button{ font-family:inherit; cursor:pointer; border:none; background:none; }
-ul{ list-style:none; }
-h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; }
+:where(.bt-page) *{ box-sizing:border-box; margin:0; padding:0; }
+:where(.bt-page) img{ display:block; max-width:100%; }
+:where(.bt-page) a{ color:inherit; text-decoration:none; }
+:where(.bt-page) button{ font-family:inherit; cursor:pointer; border:none; background:none; }
+:where(.bt-page) ul{ list-style:none; }
+:where(.bt-page) h1, :where(.bt-page) h2, :where(.bt-page) h3, :where(.bt-page) h4{
+  font-family:var(--font-display); font-weight:600; line-height:1.1;
+}
 
 .section-eyebrow{
   display:inline-block;
@@ -55,25 +60,54 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
 }
 
 @media (prefers-reduced-motion: reduce){
-  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  .bt-page *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
 }
+
 /* =========================================================
-   PAGE HERO
+   PAGE HERO (Destination jaisa solid dark green)
 ========================================================= */
 .bt-hero{
   position:relative;
   height:64vh;
   min-height:440px;
   margin-top:0;
+  background:linear-gradient(120deg, #1c3d3b, #24504d, #1c3d3b, #173432, #1c3d3b);
+  background-size:300% 300%;
+  animation:btGradientShift 14s ease-in-out infinite;
   overflow:hidden;
 }
-.bt-hero img{
-  width:100%; height:100%;
-  object-fit:cover;
+.bt-hero::before{
+  content:"";
+  position:absolute;
+  top:-140px; right:-140px;
+  width:420px; height:420px;
+  border:1px solid rgba(246,242,234,0.12);
+  border-radius:50%;
+  animation:btFloatA 12s ease-in-out infinite;
 }
-.bt-hero-overlay{
-  position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(20,32,56,0.72) 0%, rgba(20,32,56,0.35) 50%, rgba(20,32,56,0.8) 100%);
+.bt-hero::after{
+  content:"";
+  position:absolute;
+  bottom:-260px; left:-100px;
+  width:380px; height:380px;
+  border:1px solid rgba(246,242,234,0.08);
+  border-radius:50%;
+  animation:btFloatB 16s ease-in-out infinite;
+}
+@keyframes btGradientShift{
+  0%,100%{ background-position:0% 50%; }
+  50%{ background-position:100% 50%; }
+}
+@keyframes btFloatA{
+  0%,100%{ transform:translate(0,0) scale(1); }
+  50%{ transform:translate(-40px,50px) scale(1.12); }
+}
+@keyframes btFloatB{
+  0%,100%{ transform:translate(0,0) scale(1); }
+  50%{ transform:translate(60px,-40px) scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce){
+  .bt-hero, .bt-hero::before, .bt-hero::after{ animation:none !important; }
 }
 .bt-hero-content{
   position:absolute;
@@ -102,7 +136,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
 .bt-hero-content p{
   max-width:52ch;
   font-size:1.05rem;
-  color:rgba(251,246,236,0.88);
+  color:rgba(246,242,234,0.88);
 }
 
 /* =========================================================
@@ -161,7 +195,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
 }
 .season-tag.winter{ background:var(--night); }
 .season-tag.summer{ background:var(--terracotta); }
-.season-tag.monsoon{ background:#2F6B4F; }
+.season-tag.monsoon{ background:var(--sea); }
 
 .season-label{
   font-size:0.75rem;
@@ -220,7 +254,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   font-size:1.1rem;
   font-weight:600;
   text-align:center;
-  border:1px solid rgba(251,246,236,0.14);
+  border:1px solid rgba(246,242,234,0.14);
 }
 .month-chip small{
   display:block;
@@ -230,14 +264,24 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   margin-top:0.35rem;
   opacity:0.75;
 }
-.month-chip.cold{ background:rgba(232,162,61,0.14); color:var(--marigold); }
-.month-chip.mild{ background:rgba(251,246,236,0.08); color:var(--paper); }
-.month-chip.hot{ background:rgba(181,72,46,0.22); color:#E8825F; }
-.month-chip.rain{ background:rgba(47,107,79,0.28); color:#7FCBA4; }
+.month-chip.cold{ background:rgba(201,162,75,0.14); color:var(--marigold); }
+.month-chip.mild{ background:rgba(246,242,234,0.08); color:var(--paper); }
+.month-chip.hot{ background:rgba(193,87,31,0.22); color:#E8825F; }
+.month-chip.rain{ background:rgba(46,93,90,0.45); color:#8fd0c4; }
 
 /* =========================================================
-   REGION TIMING TABLE
+   REGION TIMING TABLE (skin colour background, black text)
 ========================================================= */
+.bt-skin-band{ background:var(--skin); }
+.bt-mint-band{ background:var(--night) !important; padding-top:5rem; }
+
+/* dark background par text readable rakhne ke liye (sirf video section ke andar) */
+.bt-mint-band .section-head h2{ color:var(--paper); }
+.bt-mint-band .section-note{ color:rgba(246,242,234,0.85); }
+.bt-mint-band .section-eyebrow{ color:var(--marigold); }
+.bt-mint-band .video-card h4{ color:var(--paper); }
+.bt-mint-band .video-card p{ color:rgba(246,242,234,0.75); }
+
 .region-timing{
   max-width:1280px;
   margin:0 auto;
@@ -250,11 +294,11 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   gap:2rem;
   margin-bottom:3rem;
 }
-.section-head h2{ font-size:clamp(1.8rem, 3vw, 2.4rem); }
-.section-note{ max-width:32ch; color:var(--ink-soft); font-size:0.92rem; }
+.section-head h2{ font-size:clamp(1.8rem, 3vw, 2.4rem); color:#000; }
+.section-note{ max-width:32ch; color:#000; font-size:0.92rem; }
 
 .timing-table{
-  border:1px solid var(--line);
+  border:1px solid rgba(0,0,0,0.18);
   border-radius:var(--radius);
   overflow:hidden;
 }
@@ -263,21 +307,21 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   grid-template-columns:1.4fr 1fr 1.8fr;
   gap:1.5rem;
   padding:1.1rem 1.6rem;
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid rgba(0,0,0,0.15);
 }
 .timing-row:last-child{ border-bottom:none; }
 .timing-row.timing-header{
-  background:var(--paper-dim);
+  background:rgba(0,0,0,0.06);
   font-size:0.75rem;
   text-transform:uppercase;
   letter-spacing:0.08em;
   font-weight:700;
   color:var(--terracotta);
 }
-.timing-row:not(.timing-header):hover{ background:var(--paper-dim); }
-.timing-row span:first-child{ font-weight:600; }
+.timing-row:not(.timing-header):hover{ background:rgba(0,0,0,0.05); }
+.timing-row span:first-child{ font-weight:600; color:#000; }
 .timing-row span:nth-child(2){ color:var(--terracotta); font-weight:600; font-size:0.9rem; }
-.timing-row:not(.timing-header) span:last-child{ color:var(--ink-soft); font-size:0.9rem; }
+.timing-row:not(.timing-header) span:last-child{ color:#000; font-size:0.9rem; }
 
 /* =========================================================
    VIDEO SECTION
@@ -307,7 +351,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   border-radius:var(--radius);
   overflow:hidden;
   background:var(--ink);
-  box-shadow:0 12px 28px rgba(42,38,34,0.14);
+  box-shadow:0 12px 28px rgba(27,42,46,0.14);
 }
 .video-embed iframe{
   position:absolute;
@@ -318,11 +362,10 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
 }
 
 /* =========================================================
-   CTA STRIP
+   CTA STRIP (skin colour background, light red text)
 ========================================================= */
 .bt-cta{
-  background: #F7F3E8;   /* var(--night-2) ki jagah direct cream */
-  color: #1A1A2E;
+  background:var(--skin);
   padding:5rem 2rem;
   text-align:center;
 }
@@ -330,9 +373,10 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
 .bt-cta h2{
   font-size:clamp(1.7rem, 3vw, 2.3rem);
   margin-bottom:1rem;
+  color:var(--terracotta);
 }
 .bt-cta p{
-  color:rgba(251,246,236,0.75);
+  color:var(--terracotta);
   margin-bottom:1.8rem;
 }
 .bt-cta-btn{
@@ -345,8 +389,9 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   transition:background .25s;
 }
 .bt-cta-btn:hover{ background:var(--terracotta); color:var(--paper); }
+
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE (tumhara original)
 ========================================================= */
 @media (max-width: 1024px){
   .season-block{ grid-template-columns:1fr; }
@@ -354,31 +399,9 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   .season-block.reverse .season-body{ order:2; }
   .month-grid{ grid-template-columns:repeat(4, 1fr); }
   .video-grid{ grid-template-columns:1fr 1fr; }
-  .footer-grid{ grid-template-columns:1fr 1fr; }
 }
 
 @media (max-width: 768px){
-  .main-nav{
-    position:fixed;
-    top:0; right:0;
-    height:100vh;
-    width:min(78vw, 320px);
-    background:var(--night);
-    flex-direction:column;
-    align-items:flex-start;
-    padding:6rem 2rem 2rem;
-    gap:1.6rem;
-    transform:translateX(100%);
-    transition:transform .4s var(--ease);
-    z-index:99;
-  }
-  .main-nav.is-open{ transform:translateX(0); }
-  .main-nav a{ color:var(--paper) !important; font-size:1.05rem; opacity:1; }
-  .nav-toggle{ display:flex; }
-  .nav-toggle.is-open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-  .nav-toggle.is-open span:nth-child(2){ opacity:0; }
-  .nav-toggle.is-open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-
   .month-grid{ grid-template-columns:repeat(3, 1fr); }
   .video-grid{ grid-template-columns:1fr; }
   .timing-row{ grid-template-columns:1fr; gap:0.3rem; }
@@ -386,18 +409,142 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; line-height:1.1; 
   .timing-row span:first-child{ font-size:1rem; }
   .timing-row span::before{ content: attr(data-label) ": "; font-weight:700; color:var(--terracotta); }
   .timing-row span:first-child::before{ content:""; }
-  .footer-grid{ grid-template-columns:1fr; }
   .section-head{ flex-direction:column; align-items:flex-start; gap:0.8rem; }
 }
 
 /* Keyboard focus visibility */
-a:focus-visible, button:focus-visible{
+.bt-page a:focus-visible, .bt-page button:focus-visible{
   outline:2px solid var(--marigold);
   outline-offset:3px;
 }
 </style>
+
+<!-- ================= EXTRA RESPONSIVE FIXES: topbar + nav drawer + chhote phone ================= -->
+<style>
+  html, body { overflow-x: hidden; }
+  img { max-width: 100%; height: auto; }
+
+  /* ===== Topbar ===== */
+  .topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .topbar-marquee { max-width: 220px; overflow: hidden; }
+  .btn-top {
+    background: blue;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-block;
+  }
+
+  /* ===== Hamburger desktop par hidden ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px; height: 42px;
+    background: none; border: 0; cursor: pointer;
+    z-index: 1100;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 3px;
+    background: #0B3D3A; border-radius: 3px;
+    transition: transform .3s, opacity .3s;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* ===== TABLET + MOBILE (860px aur neeche) ===== */
+  @media (max-width: 860px) {
+    .hamburger { display: flex; }
+
+    /* backdrop-filter/transform fixed drawer ko todte hain */
+    .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
+
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; }
+    .header-cta { display: flex; align-items: center; gap: 10px; }
+
+    /* nav ab side drawer hai */
+    .site-header .main-nav {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 80%; max-width: 320px; height: 100vh;
+      background: #fff;
+      display: flex; flex-direction: column; align-items: stretch;
+      padding: 80px 20px 30px;
+      gap: 0;
+      overflow-y: auto;
+      box-shadow: -6px 0 24px rgba(0,0,0,.2);
+      transition: right .35s ease;
+      z-index: 1050;
+    }
+    .site-header .main-nav.open { right: 0; }
+
+    .main-nav a {
+      display: block;
+      padding: 14px 6px;
+      color: #0B3D3A;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* dropdown mobile par tap se khulega */
+    .nav-dropdown-menu {
+      display: none;
+      position: static;
+      box-shadow: none;
+      background: #faf6e8;
+      padding-left: 14px;
+      opacity: 1; visibility: visible; transform: none;
+    }
+    .nav-dropdown.dropdown-open .nav-dropdown-menu { display: block; }
+
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* Hero: absolute ki wajah se lamba text bahar nikal sakta tha */
+    .bt-hero { height: auto; min-height: 0; }
+    .bt-hero-content { position: relative; inset: auto; padding: 4rem 1.4rem; }
+
+    .bt-intro { padding: 2.5rem 1.4rem; }
+    .bt-intro p { font-size: 1.05rem; }
+
+    .seasons { padding: 1rem 1.4rem 3.5rem; gap: 3rem; }
+    .season-block { gap: 1.6rem; }
+    .season-media { height: 260px; }
+
+    .month-strip { padding: 3.5rem 0; }
+    .month-strip-inner { padding: 0 1.4rem; }
+
+    .region-timing { padding: 3.5rem 1.4rem; }
+    .trip-videos { padding: 1rem 1.4rem 3.5rem; }
+    .bt-mint-band { padding-top: 3.5rem; }
+    .bt-cta { padding: 3.5rem 1.4rem; }
+  }
+
+  /* ===== CHOTE PHONE (520px aur neeche) ===== */
+  @media (max-width: 520px) {
+    .topbar-left { display: none; }
+    .topbar-marquee { display: none; }
+    .topbar-inner { justify-content: center; }
+    .header-cta .btn-plan { display: none; }
+
+    .footer-grid { grid-template-columns: 1fr; }
+
+    .month-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+    .season-media { height: 220px; }
+    .bt-cta-btn { display: block; width: 100%; }
+  }
+</style>
 </head>
-<body style="background-color:#FFF8DC;">
+<body style="background-color:#f6f2ea;">
 
 <div class="topbar">
   <div class="topbar-inner">
@@ -406,19 +553,11 @@ a:focus-visible, button:focus-visible{
       <span>✉️ hello@sahyatri.in</span>
     </div>
     <div class="topbar-right">
-        <span><marquee>20+ Years Crafting India Journeys</marquee></span>
-        <a href="login.html">
-        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-        </a>
-           <a href="Registration.html">
-          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-           </a>
+      <span class="topbar-marquee"><marquee>20+ Years Crafting India Journeys</marquee></span>
+      <!-- button ki jagah seedha link, koi extra hamburger nahi -->
+      <a href="login.html" class="btn-plan btn-top">Login</a>
+      <a href="Registration.html" class="btn-plan btn-top">Register</a>
+    </div>
   </div>
 </div>
 
@@ -435,7 +574,7 @@ a:focus-visible, button:focus-visible{
       <div class="nav-dropdown">
         <a href="Howtoreach.html">How to Reach ▾</a>
         <div class="nav-dropdown-menu">
-         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="Byroade.html#road">By Road Ways</a>
           <a href="bytrain.html#train">By Train</a>
           <a href="Byflight.html#flight">By Flight</a>
         </div>
@@ -448,24 +587,25 @@ a:focus-visible, button:focus-visible{
         </div>
       </div>
       <a href="Besttime.html" class="active">Best Time</a>
-        <a href="team.html">Team Member</a>
-        <a href="enquiry.html">Enquiry page</a>
-         <a href="gallery.html">Gallery</a>
-          <a href="review.html">Review</a>
-
+      <a href="team.html">Team Member</a>
+      <a href="enquiry.html">Enquiry page</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="review.html">Review</a>
     </nav>
     <div class="header-cta">
       <button class="btn-plan">Plan My Trip</button>
+      <!-- poore page mein sirf EK hamburger -->
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
+
+<div class="bt-page">
+
 <!-- ===== PAGE HERO ===== -->
 <section class="bt-hero">
-  <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=1800&q=80" alt="Desert landscape in Rajasthan under a clear winter sky">
-  <div class="bt-hero-overlay"></div>
   <div class="bt-hero-content">
     <span class="bt-eyebrow">Trip Planning Guide</span>
     <h1>The Best Time to<br>Visit India</h1>
@@ -479,7 +619,7 @@ a:focus-visible, button:focus-visible{
 </section>
 
 <!-- ===== SEASON CARDS ===== -->
-<div style="background-color:FFF8DC">
+<div style="background-color:#f6f2ea">
 <section class="seasons" id="seasons">
 
   <article class="season-block">
@@ -558,55 +698,58 @@ a:focus-visible, button:focus-visible{
   </div>
 </section>
 
-<!-- ===== REGION TIMING TABLE ===== -->
-<section class="region-timing" id="regions">
-  <div class="section-head">
-    <div>
-      <span class="section-eyebrow">Region by region</span>
-      <h2>When to go where</h2>
+<!-- ===== REGION TIMING TABLE (skin background) ===== -->
+<div class="bt-skin-band">
+  <section class="region-timing" id="regions">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">Region by region</span>
+        <h2>When to go where</h2>
+      </div>
     </div>
-  </div>
 
-  <div class="timing-table">
-    <div class="timing-row timing-header">
-      <span>Region</span>
-      <span>Best months</span>
-      <span>Why</span>
+    <div class="timing-table">
+      <div class="timing-row timing-header">
+        <span>Region</span>
+        <span>Best months</span>
+        <span>Why</span>
+      </div>
+      <div class="timing-row">
+        <span data-label="Region">Rajasthan &amp; Delhi</span>
+        <span data-label="Best months">Oct – Mar</span>
+        <span data-label="Why">Desert heat is brutal outside winter</span>
+      </div>
+      <div class="timing-row">
+        <span data-label="Region">Kerala &amp; Tamil Nadu</span>
+        <span data-label="Best months">Sep – Mar</span>
+        <span data-label="Why">Cooler, drier after the monsoon retreats</span>
+      </div>
+      <div class="timing-row">
+        <span data-label="Region">Ladakh &amp; Spiti</span>
+        <span data-label="Best months">May – Sep</span>
+        <span data-label="Why">Only window when high passes are open</span>
+      </div>
+      <div class="timing-row">
+        <span data-label="Region">Goa</span>
+        <span data-label="Best months">Nov – Feb</span>
+        <span data-label="Why">Dry, sunny beach weather</span>
+      </div>
+      <div class="timing-row">
+        <span data-label="Region">Northeast (Meghalaya, Sikkim)</span>
+        <span data-label="Best months">Oct – Apr</span>
+        <span data-label="Why">Clear skies after heavy monsoon rains</span>
+      </div>
+      <div class="timing-row">
+        <span data-label="Region">Wildlife parks (Ranthambore, Bandhavgarh)</span>
+        <span data-label="Best months">Mar – Jun</span>
+        <span data-label="Why">Dry heat pushes animals to waterholes</span>
+      </div>
     </div>
-    <div class="timing-row">
-      <span data-label="Region">Rajasthan &amp; Delhi</span>
-      <span data-label="Best months">Oct – Mar</span>
-      <span data-label="Why">Desert heat is brutal outside winter</span>
-    </div>
-    <div class="timing-row">
-      <span data-label="Region">Kerala &amp; Tamil Nadu</span>
-      <span data-label="Best months">Sep – Mar</span>
-      <span data-label="Why">Cooler, drier after the monsoon retreats</span>
-    </div>
-    <div class="timing-row">
-      <span data-label="Region">Ladakh &amp; Spiti</span>
-      <span data-label="Best months">May – Sep</span>
-      <span data-label="Why">Only window when high passes are open</span>
-    </div>
-    <div class="timing-row">
-      <span data-label="Region">Goa</span>
-      <span data-label="Best months">Nov – Feb</span>
-      <span data-label="Why">Dry, sunny beach weather</span>
-    </div>
-    <div class="timing-row">
-      <span data-label="Region">Northeast (Meghalaya, Sikkim)</span>
-      <span data-label="Best months">Oct – Apr</span>
-      <span data-label="Why">Clear skies after heavy monsoon rains</span>
-    </div>
-    <div class="timing-row">
-      <span data-label="Region">Wildlife parks (Ranthambore, Bandhavgarh)</span>
-      <span data-label="Best months">Mar – Jun</span>
-      <span data-label="Why">Dry heat pushes animals to waterholes</span>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <!-- ===== VIDEO SECTION ===== -->
+<div class="bt-mint-band">
 <section class="trip-videos" id="videos">
   <div class="section-head">
     <div>
@@ -660,20 +803,25 @@ a:focus-visible, button:focus-visible{
     </div>
   </div>
 </section>
+</div>
 
 <!-- ===== CTA STRIP ===== -->
 <section class="bt-cta">
   <div class="bt-cta-inner">
     <h2>Not sure which season fits your trip?</h2>
     <p>Tell us your dates and where you're hoping to go — we'll tell you honestly if it's the right time, or a better one.</p>
-    <a href="index.html#plan" class="bt-cta-btn">Ask us directly</a>
+    <!-- #plan ki id kahin thi hi nahi, isliye index ke enquiry form (#contact-form) par bheja -->
+    <a href="index.html#contact-form" class="bt-cta-btn">Ask us directly</a>
   </div>
 </section>
+
+</div><!-- /bt-page -->
+
 <!-- ============ FOOTER ============ -->
 <footer class="site-footer" id="contact">
   <div class="footer-grid">
     <div class="footer-col brand-col">
-      <a href="#home" class="logo light">
+      <a href="index.html" class="logo light">
         <span class="logo-mark">स</span>
         <span class="logo-text">Sah<em>yatri</em></span>
       </a>
@@ -690,7 +838,7 @@ a:focus-visible, button:focus-visible{
       <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
       <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
       <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
-      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+      <a href="https://en.wikipedia.org/wiki/Western_India">West India</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -710,24 +858,41 @@ a:focus-visible, button:focus-visible{
     <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
   </div>
 </footer>
-<script>
-    // =========================================================
-// MOBILE NAV TOGGLE
-// =========================================================
-const navToggle = document.getElementById('navToggle');
-const mainNav = document.getElementById('mainNav');
 
-navToggle.addEventListener('click', () => {
-  const isOpen = mainNav.classList.toggle('is-open');
-  navToggle.classList.toggle('is-open', isOpen);
-  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+<script>
+// =========================================================
+// HEADER BEHAVIOUR
+// =========================================================
+window.addEventListener('scroll', () => {
+  const h = document.getElementById('header');
+  if (h) h.classList.toggle('scrolled', window.scrollY > 40);
 });
 
-mainNav.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mainNav.classList.remove('is-open');
-    navToggle.classList.remove('is-open');
-    navToggle.setAttribute('aria-expanded', 'false');
+const hamburger = document.getElementById('hamburger');
+const mainNav = document.getElementById('mainNav');
+if (hamburger && mainNav) {
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  });
+
+  // Dropdown wale trigger links par menu band nahi hoga, baaki sab par hoga
+  mainNav.querySelectorAll('a').forEach(link => {
+    if (link.parentElement.classList.contains('nav-dropdown')) return;
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
+  });
+}
+
+// Mobile dropdown tap-to-toggle
+document.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
+  trigger.addEventListener('click', (e) => {
+    if (window.innerWidth <= 860) {
+      e.preventDefault();
+      trigger.parentElement.classList.toggle('dropdown-open');
+    }
   });
 });
 
@@ -752,6 +917,6 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 revealTargets.forEach(el => observer.observe(el));
-    </script>
+</script>
 </body>
 </html>

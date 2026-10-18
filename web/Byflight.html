@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Us | Sahyatri</title>
+<title>By Flight | Sahyatri</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Fraunces, Space Grotesk, Inter add kiye, kyunki is page ka CSS inhi ko maangta hai (pehle load nahi ho rahe the) -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Fraunces:ital,wght@0,500;0,600;0,700;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
   :root{
@@ -358,6 +359,139 @@
     .reveal{ opacity:1; transform:none; }
   }
 </style>
+
+<!-- ================= EXTRA RESPONSIVE FIXES: topbar + nav drawer + hero + chhote phone ================= -->
+<style>
+  html, body { overflow-x: hidden; }
+  img { max-width: 100%; height: auto; }
+
+  /* ===== Topbar ===== */
+  .topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .topbar-left, .topbar-right { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .btn-top {
+    background: blue;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    display: inline-block;
+  }
+
+  /* ===== Hamburger desktop par hidden ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px; height: 42px;
+    background: none; border: 0; cursor: pointer;
+    z-index: 1100;
+  }
+  .hamburger span {
+    display: block; width: 26px; height: 3px;
+    background: #0B3D3A; border-radius: 3px;
+    transition: transform .3s, opacity .3s;
+  }
+  .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  .region-block { scroll-margin-top: 90px; }
+
+  /* ===== TABLET + MOBILE (860px aur neeche) ===== */
+  @media (max-width: 860px) {
+    .hamburger { display: flex; }
+
+    /* backdrop-filter/transform fixed drawer ko todte hain */
+    .site-header { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
+
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; }
+    .header-cta { display: flex; align-items: center; gap: 10px; }
+
+    /* nav ab side drawer hai */
+    .site-header .main-nav {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 80%; max-width: 320px; height: 100vh;
+      background: #fff;
+      display: flex; flex-direction: column; align-items: stretch;
+      padding: 80px 20px 30px;
+      gap: 0;
+      overflow-y: auto;
+      box-shadow: -6px 0 24px rgba(0,0,0,.2);
+      transition: right .35s ease;
+      z-index: 1050;
+    }
+    .site-header .main-nav.open { right: 0; }
+
+    .main-nav a {
+      display: block;
+      padding: 14px 6px;
+      color: #0B3D3A;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* dropdown mobile par tap se khulega */
+    .nav-dropdown-menu {
+      display: none;
+      position: static;
+      box-shadow: none;
+      background: #faf6e8;
+      padding-left: 14px;
+      opacity: 1; visibility: visible; transform: none;
+    }
+    .nav-dropdown.dropdown-open .nav-dropdown-menu { display: block; }
+
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    /* Hero */
+    .rail-hero { padding: 44px 6vw 0; }
+    .rail-hero p.lede { margin-bottom: 28px; }
+    .board-strip { margin-bottom: 36px; }
+
+    /* Plane wali SVG: narrow screen par stretch hoke emoji pichak jata tha.
+       Isliye SVG ki min width 900px rakhi, aur beech ka hissa dikhta hai */
+    .flight-path-svg {
+      width: 900px;
+      max-width: none;
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+    }
+    .sky-wrap { height: 110px; }
+
+    .region-nav { padding: 14px 6vw; gap: 8px; }
+    .region-nav a { padding: 8px 16px; }
+    .region-block { padding: 64px 6vw 10px; }
+    .region-block-head { margin-bottom: 28px; }
+  }
+
+  /* ===== CHOTE PHONE (520px aur neeche) ===== */
+  @media (max-width: 520px) {
+    .topbar-left { display: none; }
+    .topbar-inner { justify-content: center; }
+    .header-cta .btn-plan { display: none; }
+
+    .footer-grid { grid-template-columns: 1fr; }
+
+    /* 4 stats ko 2x2 grid mein, border bhi theek */
+    .board-strip { display: grid; grid-template-columns: 1fr 1fr; }
+    .board-cell { padding: 14px 16px; border-right: 1px solid rgba(253,248,236,0.18); }
+    .board-cell:nth-child(2n) { border-right: none; }
+    .board-cell:nth-child(-n+2) { border-bottom: 1px solid rgba(253,248,236,0.18); }
+
+    .region-nav a { flex: 1 1 40%; text-align: center; }
+    .region-block-head h2 { font-size: 1.5rem; }
+    .ticket-photo { height: 180px; }
+  }
+</style>
 </head>
 <body>
 
@@ -367,19 +501,12 @@
       <span>📞 +91-98765-43210</span>
       <span>✉️ hello@sahyatri.in</span>
     </div>
-    <div class="topbar-right"><span>20+ Years Crafting India Journeys</span></div>
-      <a href="login.html">
-        <button  style="background-color: blue;margin-left: 20px;float:right;" class="btn-plan">Login</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-        </a>
-           <a href="Registration.html">
-          <button  style="background-color: blue ; margin-left: 25px;float:right;" class="btn-plan">Register</button>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-           </a>
+    <div class="topbar-right">
+      <span>20+ Years Crafting India Journeys</span>
+      <!-- button ki jagah seedha link, koi extra hamburger nahi -->
+      <a href="login.html" class="btn-plan btn-top">Login</a>
+      <a href="Registration.html" class="btn-plan btn-top">Register</a>
+    </div>
   </div>
 </div>
 
@@ -391,12 +518,12 @@
     </a>
     <nav class="main-nav" id="mainNav">
       <a href="index.html">Home</a>
-      <a href="Contact.html" >Contact Us</a>
+      <a href="Contact.html">Contact Us</a>
       <a href="Visapolicy.html">Visa Policy</a>
       <div class="nav-dropdown">
         <a href="Howtoreach.html">How to Reach ▾</a>
         <div class="nav-dropdown-menu">
-         <a href="Byroade.html#road">By Road Ways</a>
+          <a href="Byroade.html#road">By Road Ways</a>
           <a href="bytrain.html#train">By Train</a>
           <a href="Byflight.html#flight" class="active">By Flight</a>
         </div>
@@ -409,22 +536,22 @@
         </div>
       </div>
       <a href="Besttime.html">Best Time</a>
-        <a href="team.html">Team Member</a>
-        <a href="enquiry.html">Enquiry page</a>
-         <a href="gallery.html">Gallery</a>
-                         <a href="review.html">Review</a>
-
-
+      <a href="team.html">Team Member</a>
+      <a href="enquiry.html">Enquiry page</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="review.html">Review</a>
     </nav>
     <div class="header-cta">
       <button class="btn-plan">Plan My Trip</button>
+      <!-- poore page mein sirf EK hamburger -->
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
 </header>
-    <!-- ============ ANIMATED FLIGHT HERO ============ -->
+
+<!-- ============ ANIMATED FLIGHT HERO ============ -->
 <section class="rail-hero" id="flight">
   <div class="rail-hero-top">
     <p class="rail-eyebrow">Getting Here · By Flight</p>
@@ -609,12 +736,13 @@
 
   </div>
 </section>
+
 <!-- ============ EAST ============ -->
 <section class="region-block" id="region-east">
   <div class="region-block-head">
     <div>
       <h2>East India</h2>
-      <p>Ganga-side cities and the northeastern gateway, reached in half a day by rail — or a couple of hours by air.</p>
+      <p>Ganga-side cities and the northeastern gateway, reached in a couple of hours by air.</p>
     </div>
     <span class="region-tag">4 Routes</span>
   </div>
@@ -756,11 +884,12 @@
 
   </div>
 </section>
-   <!-- ============ FOOTER ============ -->
+
+<!-- ============ FOOTER ============ -->
 <footer class="site-footer" id="contact">
   <div class="footer-grid">
     <div class="footer-col brand-col">
-      <a href="#home" class="logo light">
+      <a href="index.html" class="logo light">
         <span class="logo-mark">स</span>
         <span class="logo-text">Sah<em>yatri</em></span>
       </a>
@@ -777,7 +906,7 @@
       <a href="https://en.wikipedia.org/wiki/North_India">North India</a>
       <a href="https://en.wikipedia.org/wiki/South_India">South India</a>
       <a href="https://en.wikipedia.org/wiki/Northeast_India">East &amp; Northeast</a>
-      <a href="https://en.wikipedia.org/wiki/West_Indies">West India</a>
+      <a href="https://en.wikipedia.org/wiki/Western_India">West India</a>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
@@ -797,7 +926,40 @@
     <p>© 2026 Sahyatri. Crafted as an academic project — all imagery for demonstration purposes only.</p>
   </div>
 </footer>
-    <script>
+
+<script>
+  // ================= Mobile nav (pehle is page par ye JS tha hi nahi) =================
+  const hamburger = document.getElementById('hamburger');
+  const mainNav = document.getElementById('mainNav');
+  hamburger.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+    hamburger.classList.toggle('active');
+  });
+
+  // Dropdown wale trigger links par menu band nahi hoga, baaki sab par hoga
+  mainNav.querySelectorAll('a').forEach(link => {
+    if (link.parentElement.classList.contains('nav-dropdown')) return;
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      hamburger.classList.remove('active');
+    });
+  });
+
+  // Mobile dropdown tap-to-toggle
+  document.querySelectorAll('.nav-dropdown > a').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      if (window.innerWidth <= 860) {
+        e.preventDefault();
+        trigger.parentElement.classList.toggle('dropdown-open');
+      }
+    });
+  });
+
+  // Header shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
   /* Scroll-reveal for ticket cards */
   const revealItems = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries) => {
@@ -810,7 +972,7 @@
   }, { threshold: 0.15 });
   revealItems.forEach(el => revealObserver.observe(el));
 
-  /* Region-nav: clicking North/South/East/West moves the cursor/view straight to that section */
+  /* Region-nav: North/South/East/West par click se seedha us section tak scroll */
   const regionLinks = document.querySelectorAll('#regionNav a');
   regionLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -822,7 +984,7 @@
     });
   });
 
-  /* Scroll-spy: highlight whichever region is currently in view */
+  /* Scroll-spy: jo region screen par hai wo highlight hoga */
   const regionSections = document.querySelectorAll('.region-block');
   const spyObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
